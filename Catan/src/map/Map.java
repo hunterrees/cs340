@@ -226,7 +226,21 @@ public class Map {
 	public void setVerticies(HashMap<VertexLocation, Vertex> verticies) {
 		this.verticies = verticies;
 	}
-	
+
+
+	// Can build methods
+	public boolean canBuildRoad() {
+		return false;
+	}
+
+	public boolean canBuildSettlement() {
+		return false;
+	}
+
+	public boolean canBuildCity() {
+		return false;
+	}
+
 	
 	
 	
