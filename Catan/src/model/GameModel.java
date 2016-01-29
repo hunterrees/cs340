@@ -124,7 +124,7 @@ public class GameModel {
      */
 	public boolean buildRoad(boolean free, EdgeLocation loc) {
 		boolean canBuild;
-		if(map.canBuildRoad(free, loc)) {
+		if(map.canBuildRoad(playerIndex, free, loc)) {
 			canBuild = true;
 		} else {
 			canBuild = false;
@@ -152,7 +152,7 @@ public class GameModel {
 	public boolean buildSettlement(boolean free, VertexLocation loc) {
 
 		boolean canBuild;
-		if(map.canBuildSettlement(free, loc)) {
+		if(map.canBuildSettlement(playerIndex, free, loc)) {
 			canBuild = true;
 		} else {
 			canBuild = false;
@@ -179,7 +179,7 @@ public class GameModel {
      */
 	public boolean buildCity(boolean free, VertexLocation loc) {
 		boolean canBuild;
-		if(map.canBuildCity(loc)) {
+		if(map.canBuildCity(playerIndex, loc)) {
 			canBuild = true;
 		} else {
 			canBuild = false;
