@@ -105,7 +105,30 @@ public class Map {
 		Vertex left = corners.get(new VertexLocation(loc.getHexLoc(), VertexDirection.West));
 		Vertex right = corners.get(new VertexLocation(loc.getHexLoc(), VertexDirection.East));
 
-		if(left.getPiece().getPl)
+		boolean cornerValid = false;
+
+		if(left.getPiece() != null) {
+			if (left.getPiece().getPlayerID() == p.getPlayerID) {
+				cornerValid = true;
+			}
+		}
+		if(right.getPiece() != null) {
+			if (right.getPiece().getPlayerID() == p.getPlayerID) {
+				cornerValid = true;
+			}
+		}
+		if(left.getPiece() != null) {
+			if (left.getPiece().getPlayerID() != p.getPlayerID) {
+				cornerValid = false;
+			}
+		}
+		if(right.getPiece() != null) {
+			if (right.getPiece().getPlayerID() != p.getPlayerID) {
+				cornerValid = false;
+			}
+		}
+
+
 
 		// See if it's valid overall
 
