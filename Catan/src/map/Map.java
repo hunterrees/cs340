@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 
 import player.Player;
+import shared.definitions.CatanColor;
 import shared.definitions.HexType;
 import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
@@ -46,6 +47,11 @@ public class Map {
 		 * @return true if you can build a city here (settlement already here)j
 		 */
 		public boolean canBuildCity(int playerID, VertexLocation loc) {
+			Player p = players.get(playerID);
+			CatanColor color = p.getColor();
+
+
+
 			return false;
 		}
 		
