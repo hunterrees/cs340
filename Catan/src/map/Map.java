@@ -228,18 +228,6 @@ public class Map {
 	}
 
 
-	// Can build methods
-	public boolean canBuildRoad() {
-		return false;
-	}
-
-	public boolean canBuildSettlement() {
-		return false;
-	}
-
-	public boolean canBuildCity() {
-		return false;
-	}
 
 	
 	
