@@ -61,6 +61,10 @@ public class Piece
 	{
 		return type;
 	}
+
+	public int getPlayerID() {
+		return playerID;
+	}
 	
 	
 }

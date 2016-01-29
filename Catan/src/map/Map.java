@@ -8,10 +8,7 @@ import java.util.Map.Entry;
 import player.Player;
 import shared.definitions.CatanColor;
 import shared.definitions.HexType;
-import shared.locations.EdgeDirection;
-import shared.locations.EdgeLocation;
-import shared.locations.HexLocation;
-import shared.locations.VertexLocation;
+import shared.locations.*;
 
 /*
  * 
@@ -74,7 +71,7 @@ public class Map {
 
 			switch(loc.getDir()) {
 				case NorthWest: break;
-				case North: break;
+				case North: edgeNCase(p, free, loc); break;
 				case NorthEast: break;
 				case SouthEast: break;
 				case South: break;
@@ -92,10 +89,23 @@ public class Map {
 		return false;
 	}
 
-	private boolean edgeNCase() {
+	private boolean edgeNCase(Player p, boolean free, EdgeLocation loc) {
+		TerrainHex hex = hexes.get(loc.getHexLoc());
+		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
+		HashMap<VertexLocation, Vertex> corners = hex.getVerticies();
+
+
 		// Check if the surrounding edges make this case valid
+		Edge upperLeft);
+		Edge upperRight;
+		Edge lowerLeft;
+		Edge lowerRight;
 
 		// Check if the surrounding corners make this case valid
+		Vertex left = corners.get(new VertexLocation(loc.getHexLoc(), VertexDirection.West));
+		Vertex right = corners.get(new VertexLocation(loc.getHexLoc(), VertexDirection.East));
+
+		if(left.getPiece().getPl)
 
 		// See if it's valid overall
 
