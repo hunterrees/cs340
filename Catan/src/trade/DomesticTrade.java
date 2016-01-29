@@ -1,6 +1,5 @@
 package trade;
 
-import player.Player;
 import shared.definitions.ResourceType;
 
 public class DomesticTrade 
