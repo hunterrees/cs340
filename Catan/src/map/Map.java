@@ -1,9 +1,11 @@
 package map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 
+import player.Player;
 import shared.definitions.HexType;
 import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
@@ -27,8 +29,10 @@ public class Map {
 	private HashMap<HexLocation, TerrainHex> hexes;
 	private HashMap<EdgeLocation, Edge> edges;
 	private HashMap<VertexLocation, Vertex> verticies;
+	private ArrayList<Player> players;
 	
-	public Map(){
+	public Map(ArrayList<Player> players) {
+		this.players = players;
 		hexes = new HashMap<HexLocation, TerrainHex>();
 		
 		buildHexes();
@@ -41,14 +45,14 @@ public class Map {
 		/**
 		 * @return true if you can build a city here (settlement already here)j
 		 */
-		public boolean canBuildCity(VertexLocation loc) {
+		public boolean canBuildCity(int playerID, VertexLocation loc) {
 			return false;
 		}
 		
 		/**
 		 * @return true if you can build a settlement here (no adjacent buildings and a road connecting)
 		 */
-		public boolean canBuildSettlement(boolean free, VertexLocation loc) {
+		public boolean canBuildSettlement(int playerID, boolean free, VertexLocation loc) {
 			return false;
 		}
 	
@@ -57,7 +61,7 @@ public class Map {
 		 * 
 		 * @return true if this is a valid location for a road (no road currently at this location)
 		 */
-		public boolean canBuildRoad(boolean free, EdgeLocation loc){
+		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc){
 			return false;
 		}
 	

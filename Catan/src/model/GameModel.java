@@ -25,7 +25,7 @@ public class GameModel {
 	private String type;
 //This a test
 // Constructor
-	public GameModel(Map map, int playerIndex, HexLocation robberLoc) {
+	public GameModel(Map map, int playerIndex, ArrayList<Player> players HexLocation robberLoc) {
 		players = new ArrayList<Player>();
 
 		this.map = map;
@@ -33,10 +33,11 @@ public class GameModel {
 		this.playerIndex = playerIndex;
 		this.robberLoc = robberLoc;
 
-		players.add(new Player(0, CatanColor.RED , "Player1"));
-		players.add(new Player(1, CatanColor.GREEN, "Player2"));
-		players.add(new Player(2, CatanColor.ORANGE, "Player3"));
-		players.add(new Player(3, CatanColor.BLUE, "Player4"));
+		this.players = players;
+		//players.add(new Player(0, CatanColor.RED , "Player1"));
+		//players.add(new Player(1, CatanColor.GREEN, "Player2"));
+		//players.add(new Player(2, CatanColor.ORANGE, "Player3"));
+		//players.add(new Player(3, CatanColor.BLUE, "Player4"));
 	}
 
 // Public methods
