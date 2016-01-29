@@ -67,9 +67,61 @@ public class Map {
 		 * 
 		 * @return true if this is a valid location for a road (no road currently at this location)
 		 */
-		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc){
+		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
+			Player p = players.get(playerID);
+			CatanColor color = p.getColor();
+
+
+			switch(loc.getDir()) {
+				case NorthWest: break;
+				case North: break;
+				case NorthEast: break;
+				case SouthEast: break;
+				case South: break;
+				case SouthWest: break;
+
+
+				default: System.out.println("Error! The EdgeLocation doesn't exist!");
+			}
+
 			return false;
 		}
+
+
+	private boolean edgeNWCase() {
+		return false;
+	}
+
+	private boolean edgeNCase() {
+		// Check if the surrounding edges make this case valid
+
+		// Check if the surrounding corners make this case valid
+
+		// See if it's valid overall
+
+
+
+		return false;
+	}
+
+	private boolean edgeNECase() {
+		return false;
+	}
+
+	private boolean edgeSECase() {
+		return false;
+	}
+
+	private boolean edgeSCase() {
+		return false;
+	}
+
+	private boolean edgeSWCase() {
+		return false;
+	}
+
+
+
 	
 	/**
 	 * 
