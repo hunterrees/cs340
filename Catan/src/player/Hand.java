@@ -45,16 +45,38 @@ public class Hand
 	 */
 	public void addResources(int amount, ResourceType type)
 	{
-		
+		for (int i = 0; i < amount; i++)
+		{
+			resourceCards.add(new ResourceCard(type));
+		}
 	}
 	/**
 	 * Remove resources of type and amount from player hand
 	 * @param amount
 	 * @param type
 	 */
-	public void removeResources(int amount, ResourceType type)
+	public boolean removeResources(int amount, ResourceType type)
 	{
+		if (amount > numResourceOfType(type))
+		{
+			return false;
+		}
 		
+		for (int i = 0; i < amount; i++)
+		{
+			boolean found = false;
+			int j = 0;
+			while (!found)
+			{
+				if (resourceCards.get(j).getType().equals(type))
+				{
+					resourceCards.remove(j);
+					found = true;
+				}
+				j++;
+			}
+		}
+		return true;
 	}
 	/**
 	 * returns number of resources of specified type in player hand
@@ -63,7 +85,15 @@ public class Hand
 	 */
 	public int numResourceOfType(ResourceType type)
 	{
-		return 0;
+		int numRemaining = 0;
+		for (int i = 0; i < resourceCards.size(); i++)
+		{
+			if (resourceCards.get(i).getType().equals(type))
+			{
+				numRemaining++;
+			}
+		}
+		return numRemaining;
 	}
 	/**
 	 * Add development card of type to player hand
@@ -71,15 +101,42 @@ public class Hand
 	 */
 	public void addDevelopmentCard(DevCardType type)
 	{
-		
+		developmentCards.add(new DevelopmentCard(type));
 	}
 	/**
 	 * remove development card of specified type from player hand
 	 * @param type
 	 */
-	public void removeDevelopmentCard(DevCardType type)
+	boolean removeDevelopmentCard(DevCardType type)
 	{
-		
+		if (numDevCardRemaining(type) < 1)
+		{
+			return false;
+		}
+		boolean cardRemoved = false;
+		int i = 0;
+		while (!cardRemoved)
+		{
+			if (developmentCards.get(i).equals(type))
+			{
+				developmentCards.remove(i);
+				cardRemoved = true;
+			}
+			i++;
+		}
+		return true;
+	}
+	public int numDevCardRemaining(DevCardType type)
+	{
+		int numRemaining = 0;
+		for (int i = 0; i < developmentCards.size(); i++)
+		{
+			if (developmentCards.get(i).equals(type))
+			{
+				i++;
+			}
+		}
+		return numRemaining;
 	}
 	/**
 	 * returns number of knights owned by player

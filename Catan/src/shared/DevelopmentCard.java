@@ -9,9 +9,9 @@ public class DevelopmentCard
 	 */
 	private DevCardType type;
 	
-	public DevelopmentCard()
+	public DevelopmentCard(DevCardType type)
 	{
-		
+		this.type = type;
 	}
 	/**
 	 * returns enum type of development card

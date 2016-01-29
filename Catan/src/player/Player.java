@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import map.Port;
 import shared.Piece;
 import shared.definitions.CatanColor;
+import shared.definitions.PortType;
+import shared.definitions.ResourceType;
 
 //testing stuff
 
@@ -61,7 +63,7 @@ public class Player
 	 */
 	public int getVictoryPoints()
 	{
-		return 0;
+		return victoryPoints;
 	}
 	/**
 	 * calculate longest chain of unbroken roads
@@ -77,7 +79,11 @@ public class Player
 	 */
 	public boolean canBuildRoad()
 	{
-		return true;
+		if (playerHand.numResourceOfType(ResourceType.BRICK) > 0 && playerHand.numResourceOfType(ResourceType.WOOD) > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * check resources required for building settlement
@@ -85,7 +91,14 @@ public class Player
 	 */
 	public boolean canBuildSettlement()
 	{
-		return true;
+		if 		(playerHand.numResourceOfType(ResourceType.BRICK) > 0 
+				&& playerHand.numResourceOfType(ResourceType.WOOD) > 0
+				&& playerHand.numResourceOfType(ResourceType.WHEAT) > 0
+				&& playerHand.numResourceOfType(ResourceType.SHEEP) > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * check resources required for building city
@@ -93,7 +106,11 @@ public class Player
 	 */
 	public boolean canBuildCity()
 	{
-		return true;
+		if (playerHand.numResourceOfType(ResourceType.WHEAT) > 1 && playerHand.numResourceOfType(ResourceType.ORE) > 2)
+		{
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * check resources required for buying development card
@@ -101,7 +118,24 @@ public class Player
 	 */
 	public boolean canBuyDevCard()
 	{
-		return true;
+		if (playerHand.numResourceOfType(ResourceType.SHEEP) > 0 
+				&& playerHand.numResourceOfType(ResourceType.WHEAT) > 0
+				&& playerHand.numResourceOfType(ResourceType.ORE) > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	public boolean hasPort(PortType type)
+	{
+		for (int i = 0; i < playerPorts.size(); i++)
+		{
+			if (playerPorts.get(i).equals(type))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	/**
 	 * return all pieces owned by player
@@ -127,5 +161,12 @@ public class Player
 	{
 		return name;
 	}
-	
+	public int getPlayerID()
+	{
+		return playerID;
+	}
+	public CatanColor getPlayerColor()
+	{
+		return playerColor;
+	}
 }
