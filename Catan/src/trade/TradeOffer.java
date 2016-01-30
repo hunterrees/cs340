@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import shared.definitions.ResourceType;
 
-public class tradeOffer 
+public class TradeOffer 
 {
 	//A player attempts to make a domestic Trade. The resource that they are trying to 
 	//trade is checked by the game model. Then, the request is called on the server.
@@ -17,7 +17,7 @@ public class tradeOffer
 	private ArrayList<ResourceType> resourceOffered;
 	private ArrayList<ResourceType> resourceDesired;
 	
-	public tradeOffer(int requestingPlayerID, int acceptingPlayerID, ArrayList<ResourceType> resourceOffered,
+	public TradeOffer(int requestingPlayerID, int acceptingPlayerID, ArrayList<ResourceType> resourceOffered,
 	ArrayList<ResourceType> resourceDesired)
 	{
 		this.requestingPlayerID = requestingPlayerID;
@@ -57,3 +57,4 @@ public class tradeOffer
 	public void setResourceDesired(ArrayList<ResourceType> resourceDesired) {
 		this.resourceDesired = resourceDesired;
 	}
+}

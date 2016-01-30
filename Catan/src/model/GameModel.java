@@ -15,7 +15,7 @@ import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
-import trade.tradeOffer;
+import trade.TradeOffer;
 
 public class GameModel {
 	private Map map;
@@ -25,11 +25,11 @@ public class GameModel {
 	private HexLocation robberLoc;
 	private String type;
 	private int version;
-	private tradeOffer theTrade;
+	private TradeOffer theTrade;
 	private TurnTracker tracker;
 
 // Constructor
-	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc, tradeOffer theTrade,
+	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
 						TurnTracker tracker) {
 		this.tracker = tracker;
 		players = new ArrayList<Player>();
