@@ -29,7 +29,7 @@ public class GameModel {
 	private TurnTracker tracker;
 
 // Constructor
-	public GameModel(Map map, ArrayList<Player> players, HexLocation robberLoc, tradeOffer theTrade,
+	public GameModel(Map map, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
 						TurnTracker tracker) {
 		this.tracker = tracker;
 		players = new ArrayList<Player>();
