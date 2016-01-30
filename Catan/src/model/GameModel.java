@@ -254,8 +254,8 @@ public class GameModel {
 		return false;
 	}
 
-	public int maritimeTrade(int playerID, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
-		return(players.get(playerID).maritimeTradeRatio(giving.get(0).getType()));
+	public int maritimeTrade(int playerID, ResourceType inputType) {
+		return(players.get(playerID).maritimeTradeRatio(type));
 	}
 
 
