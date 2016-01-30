@@ -45,7 +45,7 @@ public class Map {
 		 */
 		public boolean canBuildCity(int playerID, VertexLocation loc) {
 			Player p = players.get(playerID);
-			CatanColor color = p.getColor();
+
 
 
 
@@ -66,7 +66,6 @@ public class Map {
 		 */
 		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
 			Player p = players.get(playerID);
-			CatanColor color = p.getColor();
 
 
 			switch(loc.getDir()) {
@@ -136,22 +135,22 @@ public class Map {
 		boolean cornerValid = false;
 
 		if(left.getPiece() != null) {
-			if (left.getPiece().getPlayerID() == p.getPlayerID) {
+			if (left.getPiece().getPlayerID() == p.getPlayerID()) {
 				cornerValid = true;
 			}
 		}
 		if(right.getPiece() != null) {
-			if (right.getPiece().getPlayerID() == p.getPlayerID) {
+			if (right.getPiece().getPlayerID() == p.getPlayerID()) {
 				cornerValid = true;
 			}
 		}
 		if(left.getPiece() != null) {
-			if (left.getPiece().getPlayerID() != p.getPlayerID) {
+			if (left.getPiece().getPlayerID() != p.getPlayerID()) {
 				cornerValid = false;
 			}
 		}
 		if(right.getPiece() != null) {
-			if (right.getPiece().getPlayerID() != p.getPlayerID) {
+			if (right.getPiece().getPlayerID() != p.getPlayerID()) {
 				cornerValid = false;
 			}
 		}
