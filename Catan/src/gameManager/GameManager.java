@@ -341,6 +341,7 @@ public class GameManager {
 			throw new GameException();
 		}
 	}
+
 	/**
 	 * Used to discard cards
 	 * @param playerID ID of player discarding cards
