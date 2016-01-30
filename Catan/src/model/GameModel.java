@@ -58,8 +58,8 @@ public class GameModel {
 	}
 
 	/**
-	 * Returns a boolean whether or not the players accepted the trade
-	 * @param accept
+	 *
+	 * @param playerID
 	 * @return
      */
 	public boolean acceptTrade(int playerID) {
@@ -153,7 +153,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean rollNumber(int playerID) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 		return false;
@@ -166,7 +166,7 @@ public class GameModel {
      * @return
      */
 	public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
@@ -197,7 +197,7 @@ public class GameModel {
      * @return
      */
 	public boolean canBuildSettlement(int playerID, boolean free, VertexLocation loc) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 		boolean canBuild;
@@ -221,13 +221,13 @@ public class GameModel {
 	}
 
 	/**
-	 * Returns a boolean whether or not the player can build a city at the given location
-	 * @param free
+	 *
+	 * @param playerID
 	 * @param loc
      * @return
      */
 	public boolean canBuildCity(int playerID, VertexLocation loc) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 		boolean canBuild;
@@ -241,20 +241,21 @@ public class GameModel {
 			return false;
 		}
 
-		if(free) {
-			if (!players.get(playerID).canBuildCity()) {
-				return false;
-			}
+
+		if (!players.get(playerID).canBuildCity()) {
+			return false;
 		}
 
-		return true;	}
+
+		return true;
+	}
 
 	public boolean offerTrade(int playerID, ArrayList<ResourceType> resourceTypes) {
 		return false;
 	}
 
 	public int maritimeTrade(int playerID, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
-		return(players.get(playerID.canMaritimeTrade(playerID)));
+		return(players.get(playerID).maritimeTradeRatio(giving.get(0).getType()));
 	}
 
 
@@ -284,7 +285,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean finishTurn(int playerID) {
-		if(tracker.getTurn() == playerID) {
+		if(tracker.getCurrentTurnPlayerID() == playerID) {
 			return true;
 		}
 
@@ -296,7 +297,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean buyDevCard(int playerID) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
@@ -315,11 +316,11 @@ public class GameModel {
      * @return
      */
 	public boolean soldier(int playerID, HexLocation loc, int victimID) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
-		if(players.get(playerID).numDevCardRemaining(DevCardType.SOLDIER) == 0) {
+		if(players.get(playerID).numOldDevCardRemaining(DevCardType.SOLDIER) == 0) {
 			return false;
 		}
 
@@ -333,11 +334,11 @@ public class GameModel {
      * @return
      */
 	public boolean yearOfPlenty(int playerID, ResourceType type1, ResourceType type2) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
-		if(players.get(playerID).numDevCardRemaining(DevCardType.YEAR_OF_PLENTY) == 0) {
+		if(players.get(playerID).numOldDevCardRemaining(DevCardType.YEAR_OF_PLENTY) == 0) {
 			return false;
 		}
 
@@ -375,11 +376,11 @@ public class GameModel {
      * @return
      */
 	public boolean roadBuilding(int playerID, EdgeLocation spot1, EdgeLocation spot2) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
-		if(players.get(playerID).numDevCardRemaining(DevCardType.ROAD_BUILD) == 0) {
+		if(players.get(playerID).numOldDevCardRemaining(DevCardType.ROAD_BUILD) == 0) {
 			return false;
 		}
 
@@ -388,42 +389,38 @@ public class GameModel {
 	}
 
 	/**
-	 * Returns a boolean whether or not the monopoly is valid
-	 * @param type
+	 *
+	 * @param playerID
 	 * @return
      */
 	public boolean monopoly(int playerID) {
-		if (tracker.getTurn() != playerID) {
+		if (tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
-		if (players.get(playerID).numDevCardRemaining(DevCardType.MONOPOLY) == 0) {
+		if (players.get(playerID).numOldDevCardRemaining(DevCardType.MONOPOLY) == 0) {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Returns a boolean whether or not the victory points can be played or not
 	 * @return
      */
 	public boolean monument(int playerID) {
-		if(tracker.getTurn() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
 			return false;
 		}
 
-		if(players.get(playerID).numDevCardRemaining(DevCardType.MONUMENT) == 0) {
+		if(players.get(playerID).numOldDevCardRemaining(DevCardType.MONUMENT)+players.get(playerID).numNewDevCardRemaining(DevCardType.MONUMENT) == 0) {
 			return false;
 		}
 
-		ArrayList<DevelopmentCard> cards = players.get(playerID).getPlayerHand().getDevelopmentCards();
-		int count = 0;
 
-		for(DevelopmentCard dc : cards) {
-			if(dc.getType() == DevCardType.MONUMENT) {
-				count++;
-			}
-		}
-		int difference = 10 - count;
+
+
+		int difference = 10 - (players.get(playerID).numNewDevCardRemaining(DevCardType.MONOPOLY)+players.get(playerID).numOldDevCardRemaining(DevCardType.MONOPOLY));
 
 		if(difference >= players.get(playerID).getVictoryPoints()) {
 			return true;
