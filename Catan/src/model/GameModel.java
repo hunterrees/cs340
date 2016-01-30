@@ -278,6 +278,15 @@ public class GameModel {
 
 	}
 
+	
+	public boolean domesticTradeOffer(ResourceType type, int numOf)
+	{
+		if (players.get(playerIndex).numResourceRemaining(type) < numOf)
+		{
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * Returns a boolean indicating whether robbing a player with givin location and victimID is valid
 	 * @param loc
@@ -315,25 +324,9 @@ public class GameModel {
 		if(bank.getDevelopmentCards().size() == 0) {
 			return false;
 		}
-
-		ArrayList<ResourceCard> tempHand = players.get(playerIndex).getPlayerHand().getResourceCards();
-		int sheep = 0;
-		int wheat = 0;
-		int ore = 0;
-
-		for(ResourceCard rc : tempHand) {
-			switch(rc.getType()) {
-				case SHEEP: sheep++; break;
-				case WHEAT: wheat++; break;
-				case ORE: ore++; break;
-			}
-		}
-
-		if(sheep == 0|| wheat == 0 || ore == 0) {
-			return false;
-		}
-
-		return true;
+		
+		return players.get(playerIndex).canBuyDevCard();
+	
 	}
 
 	/**

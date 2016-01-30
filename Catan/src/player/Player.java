@@ -3,7 +3,9 @@ import java.util.ArrayList;
 
 import map.Port;
 import shared.Piece;
+import shared.ResourceCard;
 import shared.definitions.CatanColor;
+import shared.definitions.DevCardType;
 import shared.definitions.PortType;
 import shared.definitions.ResourceType;
 
@@ -73,6 +75,14 @@ public class Player
 	{
 		return 0;
 	}
+	public int numResourceRemaining(ResourceType type)
+	{
+		return playerHand.numResourceOfType(type);
+	}
+	public int numDevCardRemaining(DevCardType type)
+	{
+		return playerHand.numDevCardRemaining(type);
+	}
 	/**
 	 * check resources required for building road
 	 * @return
@@ -126,11 +136,11 @@ public class Player
 		}
 		return false;
 	}
-	public boolean hasPort(PortType type)
+	public boolean hasPortType(ResourceCard card)
 	{
 		for (int i = 0; i < playerPorts.size(); i++)
 		{
-			if (playerPorts.get(i).equals(type))
+			if (playerPorts.get(i).equals(card.getType()))
 			{
 				return true;
 			}
