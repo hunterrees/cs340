@@ -401,6 +401,7 @@ public class GameModel {
 		if (players.get(playerID).numOldDevCardRemaining(DevCardType.MONOPOLY) == 0) {
 			return false;
 		}
+		return true;
 	}
 
 
