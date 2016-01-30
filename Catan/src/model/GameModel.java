@@ -26,9 +26,12 @@ public class GameModel {
 	private String type;
 	private int version;
 	private tradeOffer theTrade;
+	private TurnTracker tracker;
 
 // Constructor
-	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc, tradeOffer theTrade) {
+	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc, tradeOffer theTrade,
+						TurnTracker tracker) {
+		this.tracker = tracker;
 		players = new ArrayList<Player>();
 
 		this.map = map;
@@ -102,6 +105,9 @@ public class GameModel {
 	 * @return
      */
 	public boolean discardCards(int playerID, ArrayList<ResourceCard> toDiscard) {
+		// Check whose turn it is now
+
+
 		ArrayList<ResourceCard> currentHand = players.get(playerID).getPlayerHand().getResourceCards();
 
 		if(currentHand.size() <= 7) {
@@ -142,16 +148,15 @@ public class GameModel {
 	}
 
 	/**
-	 * Returns a boolean whether or not the roll was valid
-	 * @param number
+	 *
+	 * @param playerID
 	 * @return
      */
-	public boolean rollNumber(int number) {
-		if(2 <= number && number <= 12) {
-			return true;
-		} else {
+	public boolean rollNumber(int playerID) {
+		if(tracker.getTurn() != playerID) {
 			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -160,7 +165,11 @@ public class GameModel {
 	 * @param loc
      * @return
      */
-	public boolean buildRoad(int playerID, boolean free, EdgeLocation loc) {
+	public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
+
 		boolean canBuild;
 		if(map.canBuildRoad(playerID, free, loc)) {
 			canBuild = true;
@@ -188,7 +197,9 @@ public class GameModel {
      * @return
      */
 	public boolean buildSettlement(int playerID, boolean free, VertexLocation loc) {
-
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
 		boolean canBuild;
 		if(map.canBuildSettlement(playerID, free, loc)) {
 			canBuild = true;
@@ -216,6 +227,9 @@ public class GameModel {
      * @return
      */
 	public boolean buildCity(int playerID, boolean free, VertexLocation loc) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
 		boolean canBuild;
 		if(map.canBuildCity(playerID, loc)) {
 			canBuild = true;
