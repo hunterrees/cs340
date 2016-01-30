@@ -330,7 +330,7 @@ public class GameManager {
 	 * @param outputResource Resource player receives
 	 */
 	public void maritimeTrade(int playerID, ResourceType inputResource, ResourceType outputResource)throws GameException{
-		int ratio = model.maritimeTrade(playerID, inputResource, outputResource);
+		int ratio = model.maritimeTrade(playerID, inputResource);
 		if(ratio != -1){
 			try{
 				server.maritimeTrade(playerID, ratio, inputResource, outputResource);
