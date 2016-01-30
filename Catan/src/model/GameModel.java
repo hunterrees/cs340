@@ -101,10 +101,10 @@ public class GameModel {
 
 	/**
 	 * Returns a boolean indicating whether or not you can discard the given cards
-	 * @param toDiscard
+	 * @param resources
 	 * @return
      */
-	public boolean discardCards(int playerID, ArrayList<ResourceCard> toDiscard) {
+	public boolean discardCards(int playerID, ArrayList<ResourceType> resources) {
 		// Check whose turn it is now
 
 
@@ -127,7 +127,7 @@ public class GameModel {
 		int oreD = 0;
 
 
-		for(ResourceCard rc : toDiscard) {
+		for(ResourceCard rc : resources) {
 			switch(rc.getType()) {
 				case WOOD: woodD++; break;
 				case BRICK: brickD++; break;
@@ -253,7 +253,7 @@ public class GameModel {
 		return false;
 	}
 
-	public int maritimeTrade(int playerID, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
+	public int maritimeTrade(int playerID, ResourceType inputResource, ResourceType outputResource) {
 		return(players.get(playerID.canMaritimeTrade(playerID)));
 	}
 

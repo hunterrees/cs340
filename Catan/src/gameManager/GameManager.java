@@ -136,7 +136,7 @@ public class GameManager {
 	 * @param playerID ID of player finished their turn
 	 */
 	public void finishTurn(int playerID)throws GameException{
-		if(model.finishTurn(playerID){
+		if(model.finishTurn(playerID)){
 			try{
 				server.finishTurn(playerID);
 			}catch(ServerException e){
@@ -153,7 +153,7 @@ public class GameManager {
 	public void buyDevCard(int playerID)throws GameException{
 		if(model.buyDevCard(playerID)){
 			try{
-				server.buyDevCard(playerID););
+				server.buyDevCard(playerID);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -250,7 +250,7 @@ public class GameManager {
 	 * @param setUp True if road is being built during initial set up
 	 */
 	public void buildRoad(int playerID, EdgeLocation roadLocation, boolean setUp)throws GameException{
-		if(model.buildRoad(playerID, setUp, roadLocation)){
+		if(model.canBuildRoad(playerID, setUp, roadLocation)){
 			try{
 				server.buildRoad(playerID, roadLocation, setUp);
 			}catch(ServerException e){
@@ -267,7 +267,7 @@ public class GameManager {
 	 * @param setUp True if settlement is being built during initial set up
 	 */
 	public void buildSettlment(int playerID, VertexLocation vertexLocation, boolean setUp)throws GameException{
-		if(model.buildSettlement(playerID, setUp, vertexLocation)){
+		if(model.canBuildSettlement(playerID, setUp, vertexLocation)){
 			try{
 				server.buildSettlment(playerID, vertexLocation, setUp);
 			}catch(ServerException e){
@@ -283,7 +283,7 @@ public class GameManager {
 	 * @param vertexLocation Location to build city
 	 */
 	public void buildCity(int playerID, VertexLocation vertexLocation)throws GameException{
-		if(model.buildCity(playerID, vertexLocation)){
+		if(model.canBuildCity(playerID, vertexLocation)){
 			try{
 				server.buildCity(playerID, vertexLocation);
 			}catch(ServerException e){
@@ -331,7 +331,7 @@ public class GameManager {
 	 * @param outputResource Resource player receives
 	 */
 	public void maritimeTrade(int playerID, ResourceType inputResource, ResourceType outputResource)throws GameException{
-		int ratio = model.maritimeTrade(playerIndex, inputResoruce, outputResource);
+		int ratio = model.maritimeTrade(playerID, inputResource, outputResource);
 		if(ratio != -1){
 			try{
 				server.maritimeTrade(playerID, ratio, inputResource, outputResource);
@@ -348,7 +348,7 @@ public class GameManager {
 	 * @param resources Resources to discard
 	 */
 	public void discardCards(int playerID, ArrayList<ResourceType> resources)throws GameException{
-		if(model.discardCards(playerID, toDiscard)){
+		if(model.discardCards(playerID, resources)){
 			try{
 				server.discardCards(playerID, resources);
 			}catch(ServerException e){
