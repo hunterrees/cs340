@@ -5,7 +5,7 @@ import shared.definitions.GameState;
 public class TurnTracker 
 {
 	int longestRoadplayerID;
-	int largestRoadPlayerID;
+	int largestArmyPlayerID;
 	//Create enum for game Statuses
 	//
 	GameState gameStatus;
@@ -18,10 +18,10 @@ public class TurnTracker
 		this.longestRoadplayerID = longestRoadplayerID;
 	}
 	public int getLargestRoadPlayerID() {
-		return largestRoadPlayerID;
+		return largestArmyPlayerID;
 	}
 	public void setLargestRoadPlayerID(int largestRoadPlayerID) {
-		this.largestRoadPlayerID = largestRoadPlayerID;
+		this.largestArmyPlayerID = largestRoadPlayerID;
 	}
 	public GameState getGameStatus() {
 		return gameStatus;
