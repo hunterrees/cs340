@@ -104,9 +104,10 @@ public class GameModel {
 	 * @param toDiscard
 	 * @return
      */
-	public boolean discardCards(int playerID, ArrayList<ResourceCard> toDiscard) {
-		// Check whose turn it is now
-
+	public boolean discardCards(int playerID, ArrayList<ResourceType> toDiscard) {
+		if(tracker.getCurrentTurnPlayerID() != playerID) {
+			return false;
+		}
 
 		ArrayList<ResourceCard> currentHand = players.get(playerID).getPlayerHand().getResourceCards();
 
@@ -127,8 +128,8 @@ public class GameModel {
 		int oreD = 0;
 
 
-		for(ResourceCard rc : toDiscard) {
-			switch(rc.getType()) {
+		for(ResourceType rt : toDiscard) {
+			switch(rt) {
 				case WOOD: woodD++; break;
 				case BRICK: brickD++; break;
 				case SHEEP: woolD++; break;
