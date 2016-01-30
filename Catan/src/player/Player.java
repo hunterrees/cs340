@@ -140,6 +140,7 @@ public class Player
 		}
 		return false;
 	}
+	
 	public int maritimeTradeRatio(ResourceType type)
 	{
 		//return -1 for unable
