@@ -23,6 +23,8 @@ import shared.locations.VertexLocation;
  */
 public class ServerProxy implements ServerInterface {
 
+	private String userCookie;
+	private int gameID;
 	private static String SERVER_HOST;
 	private static int SERVER_PORT;
 	private static String URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
@@ -48,12 +50,16 @@ public class ServerProxy implements ServerInterface {
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
 			connection.connect();
-			//send object receive response
+			//add cookie to all of the subsequent server calls
+			//send object receive response (only to get cookie on login and id on join game)
 		}catch(Exception e){
 			throw new ServerException(String.format("doPost failed: %s", e.getMessage()), e);
 		}
 		return null;
 	}
+	
+	//add a get method like the one from ClientCommunicator for 240
+	//returns a byte array, turn into an object, then pass that object to the translator
 
 	@Override
 	public void userRegister(String username, String password) {
@@ -83,7 +89,7 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public GameModel getModel(int versionID) {
+	public GameModel getModel() {
 		return null;
 		// TODO Auto-generated method stub
 

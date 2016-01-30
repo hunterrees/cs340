@@ -11,5 +11,6 @@ public class ModelTranslator {
 	
 	};
 	
+	//takes in an object, casts it a JsonObject then parses through it
 	public GameModel getModelfromJSON(int versionID){return null;};
 }

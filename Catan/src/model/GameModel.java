@@ -23,9 +23,10 @@ public class GameModel {
 	private int playerIndex;
 	private HexLocation robberLoc;
 	private String type;
-//This a test
+	private int version;
+
 // Constructor
-	public GameModel(Map map, int playerIndex, ArrayList<Player> players HexLocation robberLoc) {
+	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc) {
 		players = new ArrayList<Player>();
 
 		this.map = map;
@@ -41,6 +42,14 @@ public class GameModel {
 	}
 
 // Public methods
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	/**
 	 *	Returns true if the chat was successful

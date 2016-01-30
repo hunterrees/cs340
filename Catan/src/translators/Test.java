@@ -2,6 +2,7 @@ package translators;
 
 import translators.games.*;
 import translators.user.*;
+import server.ServerPoller;
 import shared.locations.HexLocation;
 import translators.game.*;
 import translators.moves.*;
@@ -13,9 +14,7 @@ public class Test {
 	public Test(){};
 	
 	public static void main(String[] args){
-		GenericTranslator test = new MovesAcceptTradeTranslator(1, false);
-		String output = test.translate();
-		System.out.println(output);
+		ServerPoller poller = new ServerPoller(null, null);
 	}
 }
 	
