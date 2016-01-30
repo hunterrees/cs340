@@ -226,7 +226,7 @@ public class GameModel {
 	 * @param loc
      * @return
      */
-	public boolean canBuildCity(int playerID, boolean free, VertexLocation loc) {
+	public boolean canBuildCity(int playerID, VertexLocation loc) {
 		if(tracker.getTurn() != playerID) {
 			return false;
 		}
