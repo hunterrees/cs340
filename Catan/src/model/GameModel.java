@@ -255,7 +255,7 @@ public class GameModel {
 	}
 
 	public int maritimeTrade(int playerID, ResourceType inputType) {
-		return(players.get(playerID).maritimeTradeRatio(type));
+		return(players.get(playerID).maritimeTradeRatio(inputType));
 	}
 
 
