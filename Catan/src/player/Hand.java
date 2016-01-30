@@ -12,7 +12,8 @@ public class Hand
 	/**
 	 * Development cards owned by player
 	 */
-	private ArrayList<DevelopmentCard> developmentCards;
+	private ArrayList<DevelopmentCard> oldDevelopmentCards;
+	private ArrayList<DevelopmentCard> newDevelopmentCards;
 	/**
 	 * Resource cards owned by player
 	 */
@@ -35,7 +36,7 @@ public class Hand
 	 */
 	public int getNumDevCards()
 	{
-		return developmentCards.size();
+		return oldDevelopmentCards.size();
 	}
 	
 	/**
@@ -99,17 +100,21 @@ public class Hand
 	 * Add development card of type to player hand
 	 * @param type
 	 */
-	public void addDevelopmentCard(DevCardType type)
+	public void addNewDevelopmentCard(DevCardType type)
 	{
-		developmentCards.add(new DevelopmentCard(type));
+		newDevelopmentCards.add(new DevelopmentCard(type));
+	}
+	public void addOldDevelopmentCard(DevCardType type)
+	{
+		oldDevelopmentCards.add(new DevelopmentCard(type));
 	}
 	/**
 	 * remove development card of specified type from player hand
 	 * @param type
 	 */
-	boolean removeDevelopmentCard(DevCardType type)
+	boolean removeOldDevelopmentCard(DevCardType type)
 	{
-		if (numDevCardRemaining(type) < 1)
+		if (numOldDevCardRemaining(type) < 1)
 		{
 			return false;
 		}
@@ -117,21 +122,52 @@ public class Hand
 		int i = 0;
 		while (!cardRemoved)
 		{
-			if (developmentCards.get(i).equals(type))
+			if (oldDevelopmentCards.get(i).equals(type))
 			{
-				developmentCards.remove(i);
+				oldDevelopmentCards.remove(i);
 				cardRemoved = true;
 			}
 			i++;
 		}
 		return true;
 	}
-	public int numDevCardRemaining(DevCardType type)
+	boolean removeNewDevelopmentCard(DevCardType type)
+	{
+		if (numNewDevCardRemaining(type) < 1)
+		{
+			return false;
+		}
+		boolean cardRemoved = false;
+		int i = 0;
+		while (!cardRemoved)
+		{
+			if (newDevelopmentCards.get(i).equals(type))
+			{
+				newDevelopmentCards.remove(i);
+				cardRemoved = true;
+			}
+			i++;
+		}
+		return true;
+	}
+	public int numOldDevCardRemaining(DevCardType type)
 	{
 		int numRemaining = 0;
-		for (int i = 0; i < developmentCards.size(); i++)
+		for (int i = 0; i < oldDevelopmentCards.size(); i++)
 		{
-			if (developmentCards.get(i).equals(type))
+			if (oldDevelopmentCards.get(i).equals(type))
+			{
+				i++;
+			}
+		}
+		return numRemaining;
+	}
+	public int numNewDevCardRemaining(DevCardType type)
+	{
+		int numRemaining = 0;
+		for (int i = 0; i < newDevelopmentCards.size(); i++)
+		{
+			if (newDevelopmentCards.get(i).equals(type))
 			{
 				i++;
 			}
@@ -150,9 +186,13 @@ public class Hand
 	 * returns development cards owned by player
 	 * @return
 	 */
-	public ArrayList<DevelopmentCard> getDevelopmentCards()
+	public ArrayList<DevelopmentCard> getOldDevelopmentCards()
 	{
-		return developmentCards;
+		return oldDevelopmentCards;
+	}
+	public ArrayList<DevelopmentCard> getNewDevelopmentCards()
+	{
+		return newDevelopmentCards;
 	}
 	/**
 	 * returns resource cards owned by player
