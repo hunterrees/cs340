@@ -79,9 +79,13 @@ public class Player
 	{
 		return playerHand.numResourceOfType(type);
 	}
-	public int numDevCardRemaining(DevCardType type)
+	public int numOldDevCardRemaining(DevCardType type)
 	{
-		return playerHand.numDevCardRemaining(type);
+		return playerHand.numOldDevCardRemaining(type);
+	}
+	public int numNewDevCardRemaining(DevCardType type)
+	{
+		return playerHand.numNewDevCardRemaining(type);
 	}
 	/**
 	 * check resources required for building road
@@ -136,11 +140,48 @@ public class Player
 		}
 		return false;
 	}
-	public boolean hasPortType(ResourceCard card)
+	public int maritimeTradeRatio(ResourceType type)
+	{
+		//return -1 for unable
+		if (hasPortType(type))
+		{
+			if (playerHand.numResourceOfType(type) >= 2)
+			{
+				return 2;
+			}
+		}
+		else if (hasThreePort())
+		{
+			if (playerHand.numResourceOfType(type) >= 3)
+			{
+				return 3;
+			}
+		}
+		else
+		{
+			if (playerHand.numResourceOfType(type) >= 4)
+			{
+				return 4;
+			}
+		}
+		return -1;
+	}
+	public boolean hasThreePort()
 	{
 		for (int i = 0; i < playerPorts.size(); i++)
 		{
-			if (playerPorts.get(i).equals(card.getType()))
+			if (playerPorts.get(i).equals("THREE"))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean hasPortType(ResourceType type)
+	{
+		for (int i = 0; i < playerPorts.size(); i++)
+		{
+			if (playerPorts.get(i).equals(type))
 			{
 				return true;
 			}

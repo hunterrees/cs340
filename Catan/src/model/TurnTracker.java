@@ -1,48 +1,39 @@
 package model;
 
+import shared.definitions.GameState;
 
 public class TurnTracker 
 {
-	private GameModel myGameModel;
+	int longestRoadplayerID;
+	int largestRoadPlayerID;
+	//Create enum for game Statuses
+	//
+	GameState gameStatus;
+	int currentTurnPlayerID;
 	
-	/**
-	 * has access to the game model
-	 * @param gameModel
-	 */
-	public TurnTracker(GameModel gameModel)
-	{
-		myGameModel = gameModel;
+	public int getLongestRoadplayerID() {
+		return longestRoadplayerID;
+	}
+	public void setLongestRoadplayerID(int longestRoadplayerID) {
+		this.longestRoadplayerID = longestRoadplayerID;
+	}
+	public int getLargestRoadPlayerID() {
+		return largestRoadPlayerID;
+	}
+	public void setLargestRoadPlayerID(int largestRoadPlayerID) {
+		this.largestRoadPlayerID = largestRoadPlayerID;
+	}
+	public GameState getGameStatus() {
+		return gameStatus;
+	}
+	public void setGameStatus(GameState gameStatus) {
+		this.gameStatus = gameStatus;
+	}
+	public int getCurrentTurnPlayerID() {
+		return currentTurnPlayerID;
+	}
+	public void setCurrentTurnPlayerID(int currentTurnPlayerID) {
+		this.currentTurnPlayerID = currentTurnPlayerID;
 	}
 	
-	/**
-	 * initializes the player with ID, name, and color
-	 */
-	public void initializePlayer()
-	{
-		
-	}
-	
-	/**
-	 * updates player information
-	 */
-	public void updatePlayer()
-	{
-		
-	}
-	
-	/**
-	 * updates the current state of the game
-	 */
-	public void updateGameState()
-	{
-		
-	}
-	
-	/**
-	 * ends the current active player's turn
-	 */
-	public void endturn()
-	{
-		
-	}
 }
