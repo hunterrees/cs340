@@ -26,7 +26,7 @@ public class ServerProxy implements ServerInterface {
 	private String userCookie;
 	private int gameID;
 	private static String SERVER_HOST;
-	private static int SERVER_PORT;
+	private static int SERVER_PORT; //given server runs on port 8081
 	private static String URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
 	
 	public ServerProxy(String host, int port){
