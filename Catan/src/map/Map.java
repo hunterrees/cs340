@@ -68,7 +68,14 @@ public class Map {
 			Player p = players.get(playerID);
 
 
-			switch(loc.getDir()) {
+
+
+
+
+
+
+
+	/*		switch(loc.getDir()) {
 				case NorthWest: break;
 				case North: edgeNCase(p, free, loc); break;
 				case NorthEast: break;
@@ -78,7 +85,7 @@ public class Map {
 
 
 				default: System.out.println("Error! The EdgeLocation doesn't exist!");
-			}
+			}*/
 
 			return false;
 		}
