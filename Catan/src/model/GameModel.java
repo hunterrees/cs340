@@ -15,6 +15,7 @@ import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
+import trade.tradeOffer;
 
 public class GameModel {
 	private Map map;
@@ -24,15 +25,17 @@ public class GameModel {
 	private HexLocation robberLoc;
 	private String type;
 	private int version;
+	private tradeOffer theTrade;
 
 // Constructor
-	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc) {
+	public GameModel(Map map, int playerIndex, ArrayList<Player> players, HexLocation robberLoc, tradeOffer theTrade) {
 		players = new ArrayList<Player>();
 
 		this.map = map;
 		this.bank = Bank.BANK;
 		this.playerIndex = playerIndex;
 		this.robberLoc = robberLoc;
+		this.theTrade = theTrade;
 
 		this.players = players;
 		//players.add(new Player(0, CatanColor.RED , "Player1"));
@@ -56,7 +59,26 @@ public class GameModel {
 	 * @param accept
 	 * @return
      */
-	public boolean acceptTrade(boolean accept) {
+	public boolean acceptTrade(int playerID) {
+		Player p = players.get((playerID));
+
+		ArrayList<ResourceCard> hand = p.getPlayerHand().getResourceCards();
+
+		ArrayList<ResourceType> desired = theTrade.getResourceDesired();
+
+		int wood = 0;
+		int brick = 0;
+		int sheep = 0;
+		int wheat = 0;
+		int ore = 0;
+
+		for(ResourceType rt : desired) {
+
+		}
+
+
+		// Hunter will finish
+
 		return accept;
 	}
 
