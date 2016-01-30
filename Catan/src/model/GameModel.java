@@ -21,7 +21,7 @@ public class GameModel {
 	private Map map;
 	private Bank bank;
 	private ArrayList<Player> players;
-	private int playerIndex;
+	//private int playerIndex;
 	private HexLocation robberLoc;
 	private String type;
 	private int version;
@@ -33,7 +33,7 @@ public class GameModel {
 
 		this.map = map;
 		this.bank = Bank.BANK;
-		this.playerIndex = playerIndex;
+		//this.playerIndex = playerIndex;
 		this.robberLoc = robberLoc;
 		this.theTrade = theTrade;
 
@@ -73,13 +73,27 @@ public class GameModel {
 		int ore = 0;
 
 		for(ResourceType rt : desired) {
-
+			switch(rt) {
+				case WOOD: wood++; break;
+				case BRICK: brick++; break;
+				case SHEEP: sheep++; break;
+				case WHEAT: wheat++; break;
+				case ORE: ore++; break;
+				default: System.out.println("Error! ResourceType doesn't exist!");
+			}
 		}
 
+		if(p.numResourceRemaining(ResourceType.WOOD) <= wood &&
+				p.numResourceRemaining(ResourceType.BRICK) <= brick &&
+				p.numResourceRemaining(ResourceType.SHEEP) <= sheep &&
+				p.numResourceRemaining(ResourceType.WHEAT) <= wheat &&
+				p.numResourceRemaining( ResourceType.ORE) <= ore) {
+			return true;
+		}
 
 		// Hunter will finish
 
-		return accept;
+		return false;
 	}
 
 	/**
@@ -87,8 +101,8 @@ public class GameModel {
 	 * @param toDiscard
 	 * @return
      */
-	public boolean discardCards(ArrayList<ResourceCard> toDiscard) {
-		ArrayList<ResourceCard> currentHand = players.get(playerIndex).getPlayerHand().getResourceCards();
+	public boolean discardCards(int playerID, ArrayList<ResourceCard> toDiscard) {
+		ArrayList<ResourceCard> currentHand = players.get(playerID).getPlayerHand().getResourceCards();
 
 		if(currentHand.size() <= 7) {
 			return false;
@@ -146,9 +160,9 @@ public class GameModel {
 	 * @param loc
      * @return
      */
-	public boolean buildRoad(boolean free, EdgeLocation loc) {
+	public boolean buildRoad(int playerID, boolean free, EdgeLocation loc) {
 		boolean canBuild;
-		if(map.canBuildRoad(playerIndex, free, loc)) {
+		if(map.canBuildRoad(playerID, free, loc)) {
 			canBuild = true;
 		} else {
 			canBuild = false;
@@ -159,7 +173,7 @@ public class GameModel {
 		}
 
 		if(free) {
-			if (!players.get(playerIndex).canBuildRoad()) {
+			if (!players.get(playerID).canBuildRoad()) {
 				return false;
 			}
 		}
@@ -173,10 +187,10 @@ public class GameModel {
 	 * @param loc
      * @return
      */
-	public boolean buildSettlement(boolean free, VertexLocation loc) {
+	public boolean buildSettlement(int playerID, boolean free, VertexLocation loc) {
 
 		boolean canBuild;
-		if(map.canBuildSettlement(playerIndex, free, loc)) {
+		if(map.canBuildSettlement(playerID, free, loc)) {
 			canBuild = true;
 		} else {
 			canBuild = false;
@@ -187,7 +201,7 @@ public class GameModel {
 		}
 
 		if(free) {
-			if (!players.get(playerIndex).canBuildSettlement()) {
+			if (!players.get(playerID).canBuildSettlement()) {
 				return false;
 			}
 		}
@@ -201,9 +215,9 @@ public class GameModel {
 	 * @param loc
      * @return
      */
-	public boolean buildCity(boolean free, VertexLocation loc) {
+	public boolean buildCity(int playerID, boolean free, VertexLocation loc) {
 		boolean canBuild;
-		if(map.canBuildCity(playerIndex, loc)) {
+		if(map.canBuildCity(playerID, loc)) {
 			canBuild = true;
 		} else {
 			canBuild = false;
@@ -214,7 +228,7 @@ public class GameModel {
 		}
 
 		if(free) {
-			if (!players.get(playerIndex).canBuildCity()) {
+			if (!players.get(playerID).canBuildCity()) {
 				return false;
 			}
 		}
@@ -225,7 +239,7 @@ public class GameModel {
 		return false;
 	}
 
-	public boolean maritimeTrade(int ratio, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
+	public boolean maritimeTrade(int playerID, int ratio, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
 		// Determine if the player has enough resources or not
 		if(giving.size() != ratio) {
 			return false;
@@ -236,7 +250,7 @@ public class GameModel {
 		int woolH = 0;
 		int wheatH = 0;
 		int oreH = 0;
-		for(ResourceCard rc : players.get(playerIndex).getPlayerHand().getResourceCards()) {
+		for(ResourceCard rc : players.get(playerID).getPlayerHand().getResourceCards()) {
 			switch(rc.getType()) {
 				case WOOD: woodH++; break;
 				case BRICK: brickH++; break;
@@ -272,13 +286,13 @@ public class GameModel {
 		// Check if the right number of resources is correct based on the ports the user has
 		switch(ratio) {
 			case 2:
-				if(players.get(playerIndex).hasPortType(giving.get(0))) {
+				if(players.get(playerID).hasPortType(giving.get(0))) {
 					return true;
 				} else {
 					return false;
 				}
 			case 3:
-				if(players.get(playerIndex).hasPortType(giving.get(0))) {
+				if(players.get(playerID).hasPortType(giving.get(0))) {
 					return true;
 				} else {
 					return false;
@@ -293,9 +307,9 @@ public class GameModel {
 	}
 
 	
-	public boolean domesticTradeOffer(ResourceType type, int numOf)
+	public boolean domesticTradeOffer(int playerID, ResourceType type, int numOf)
 	{
-		if (players.get(playerIndex).numResourceRemaining(type) < numOf)
+		if (players.get(playerID).numResourceRemaining(type) < numOf)
 		{
 			return false;
 		}
@@ -334,12 +348,12 @@ public class GameModel {
 	 * Returns a boolean whether or not the player can buy a development card
 	 * @return
      */
-	public boolean buyDevCard() {
+	public boolean buyDevCard(int playerID) {
 		if(bank.getDevelopmentCards().size() == 0) {
 			return false;
 		}
 		
-		return players.get(playerIndex).canBuyDevCard();
+		return players.get(playerID).canBuyDevCard();
 	
 	}
 
@@ -411,8 +425,8 @@ public class GameModel {
 	 * Returns a boolean whether or not the victory points can be played or not
 	 * @return
      */
-	public boolean monument() {
-		ArrayList<DevelopmentCard> cards = players.get(playerIndex).getPlayerHand().getDevelopmentCards();
+	public boolean monument(int playerID) {
+		ArrayList<DevelopmentCard> cards = players.get(playerID).getPlayerHand().getDevelopmentCards();
 		int count = 0;
 
 		for(DevelopmentCard dc : cards) {
@@ -422,7 +436,7 @@ public class GameModel {
 		}
 		int difference = 10 - count;
 
-		if(difference >= players.get(playerIndex).getVictoryPoints()) {
+		if(difference >= players.get(playerID).getVictoryPoints()) {
 			return true;
 		} else {
 			return false;
