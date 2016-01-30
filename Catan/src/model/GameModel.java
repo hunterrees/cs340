@@ -249,86 +249,15 @@ public class GameModel {
 
 		return true;	}
 
-	public boolean offerTrade() {
+	public boolean offerTrade(int playerID, ArrayList<ResourceType> resourceTypes) {
 		return false;
 	}
 
-	public boolean maritimeTrade(int playerID, int ratio, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
-		// Determine if the player has enough resources or not
-		if(giving.size() != ratio) {
-			return false;
-		}
-
-		int woodH = 0;
-		int brickH = 0;
-		int woolH = 0;
-		int wheatH = 0;
-		int oreH = 0;
-		for(ResourceCard rc : players.get(playerID).getPlayerHand().getResourceCards()) {
-			switch(rc.getType()) {
-				case WOOD: woodH++; break;
-				case BRICK: brickH++; break;
-				case SHEEP: woolH++; break;
-				case WHEAT: wheatH++; break;
-				case ORE: oreH++; break;
-				default: System.out.println("Error! The resource type doesn't exist!");
-			}
-		}
-
-		int woodG = 0;
-		int brickG = 0;
-		int woolG = 0;
-		int wheatG = 0;
-		int oreG = 0;;
-		for(ResourceCard rc : giving) {
-			switch(rc.getType()) {
-				case WOOD: woodG++; break;
-				case BRICK: brickG++; break;
-				case SHEEP: woolG++; break;
-				case WHEAT: wheatG++; break;
-				case ORE: oreG++; break;
-				default: System.out.println("Error! The resource type doesn't exist!");
-			}
-		}
-
-		if(woodH < woodG || brickH < brickG ||
-				woolH < woolG || wheatH < wheatG ||
-				oreH < oreG) {
-			return false;
-		}
-
-		// Check if the right number of resources is correct based on the ports the user has
-		switch(ratio) {
-			case 2:
-				if(players.get(playerID).hasPortType(giving.get(0))) {
-					return true;
-				} else {
-					return false;
-				}
-			case 3:
-				if(players.get(playerID).hasPortType(giving.get(0))) {
-					return true;
-				} else {
-					return false;
-				}
-			case 4: return true;
-			default: return false;
-		}
-
-		// Make the trade
-		// Don't know if this code goes here or not
-
+	public int maritimeTrade(int playerID, ArrayList<ResourceCard> giving, ArrayList<ResourceCard> getting) {
+		return(players.get(playerID.canMaritimeTrade(playerID)));
 	}
 
-	
-	public boolean domesticTradeOffer(int playerID, ResourceType type, int numOf)
-	{
-		if (players.get(playerID).numResourceRemaining(type) < numOf)
-		{
-			return false;
-		}
-		return true;
-	}
+
 	/**
 	 * Returns a boolean indicating whether robbing a player with givin location and victimID is valid
 	 * @param loc
@@ -354,8 +283,12 @@ public class GameModel {
 	 * Returns a boolean indicating if the turn finished or not
 	 * @return
      */
-	public boolean finishTurn() {
-		return true;
+	public boolean finishTurn(int playerID) {
+		if(tracker.getTurn() == playerID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -363,6 +296,10 @@ public class GameModel {
 	 * @return
      */
 	public boolean buyDevCard(int playerID) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
+
 		if(bank.getDevelopmentCards().size() == 0) {
 			return false;
 		}
@@ -377,7 +314,15 @@ public class GameModel {
 	 * @param victimID
      * @return
      */
-	public boolean soldier(HexLocation loc, int victimID) {
+	public boolean soldier(int playerID, HexLocation loc, int victimID) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
+
+		if(players.get(playerID).numDevCardRemaining(DevCardType.SOLDIER) == 0) {
+			return false;
+		}
+
 		return robPlayer(loc,victimID);
 	}
 
@@ -387,7 +332,15 @@ public class GameModel {
 	 * @param type2
      * @return
      */
-	public boolean yearOfPlenty(ResourceType type1, ResourceType type2) {
+	public boolean yearOfPlenty(int playerID, ResourceType type1, ResourceType type2) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
+
+		if(players.get(playerID).numDevCardRemaining(DevCardType.YEAR_OF_PLENTY) == 0) {
+			return false;
+		}
+
 		ArrayList<ResourceCard> temp = bank.getResourceCards();
 
 		int one = 0;
@@ -421,7 +374,16 @@ public class GameModel {
 	 * @param spot2
      * @return
      */
-	public boolean roadBuilding(EdgeLocation spot1, EdgeLocation spot2) {
+	public boolean roadBuilding(int playerID, EdgeLocation spot1, EdgeLocation spot2) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
+
+		if(players.get(playerID).numDevCardRemaining(DevCardType.ROAD_BUILD) == 0) {
+			return false;
+		}
+
+
 		return map.roadBuilding(spot1, spot2);
 	}
 
@@ -430,9 +392,14 @@ public class GameModel {
 	 * @param type
 	 * @return
      */
-	public boolean monopoly(ResourceType type) {
+	public boolean monopoly(int playerID) {
+		if (tracker.getTurn() != playerID) {
+			return false;
+		}
 
-		return true;
+		if (players.get(playerID).numDevCardRemaining(DevCardType.MONOPOLY) == 0) {
+			return false;
+		}
 	}
 
 	/**
@@ -440,6 +407,14 @@ public class GameModel {
 	 * @return
      */
 	public boolean monument(int playerID) {
+		if(tracker.getTurn() != playerID) {
+			return false;
+		}
+
+		if(players.get(playerID).numDevCardRemaining(DevCardType.MONUMENT) == 0) {
+			return false;
+		}
+
 		ArrayList<DevelopmentCard> cards = players.get(playerID).getPlayerHand().getDevelopmentCards();
 		int count = 0;
 
