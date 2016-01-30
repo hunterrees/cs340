@@ -358,8 +358,7 @@ public class Map {
 	}
 
 
-
-	
-	
-	
+	public boolean canRoadBuild(EdgeLocation spot1, EdgeLocation spot2) {
+		return false;
+	}
 }
