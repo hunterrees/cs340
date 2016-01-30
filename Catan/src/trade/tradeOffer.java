@@ -1,5 +1,9 @@
 package trade;
 
+import java.util.ArrayList;
+
+import shared.definitions.ResourceType;
+
 public class tradeOffer 
 {
 	//A player attempts to make a domestic Trade. The resource that they are trying to 
@@ -10,10 +14,11 @@ public class tradeOffer
 
 	private int requestingPlayerID;
 	private int acceptingPlayerID;
-	private int resourceOffered;
-	private int resourceDesired;
+	private ArrayList<ResourceType> resourceOffered;
+	private ArrayList<ResourceType> resourceDesired;
 	
-	public tradeOffer(int requestingPlayerID, int acceptingPlayerID, int resourceOffered, int resourceDesired)
+	public tradeOffer(int requestingPlayerID, int acceptingPlayerID, ArrayList<ResourceType> resourceOffered,
+	ArrayList<ResourceType> resourceDesired)
 	{
 		this.requestingPlayerID = requestingPlayerID;
 		this.acceptingPlayerID = acceptingPlayerID;
@@ -37,19 +42,18 @@ public class tradeOffer
 		this.acceptingPlayerID = acceptingPlayerID;
 	}
 
-	public int getResourceOffered() {
+	public ArrayList<ResourceType> getResourceOffered() {
 		return resourceOffered;
 	}
 
-	public void setResourceOffered(int resourceOffered) {
+	public void setResourceOffered(ArrayList<ResourceType> resourceOffered) {
 		this.resourceOffered = resourceOffered;
 	}
 
-	public int getResourceDesired() {
+	public ArrayList<ResourceType> getResourceDesired() {
 		return resourceDesired;
 	}
 
-	public void setResourceDesired(int resourceDesired) {
+	public void setResourceDesired(ArrayList<ResourceType> resourceDesired) {
 		this.resourceDesired = resourceDesired;
 	}
-}
