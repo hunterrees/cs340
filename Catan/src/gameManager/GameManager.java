@@ -1,6 +1,6 @@
 package gameManager;
 
-//THIS is a test to see if a committ works
+//THIS is a test to see if a commit works
 import java.util.ArrayList;
 
 import model.GameException;
