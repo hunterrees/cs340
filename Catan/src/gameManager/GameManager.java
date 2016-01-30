@@ -326,7 +326,6 @@ public class GameManager {
 	/**
 	 * Used to execute trades involving ports
 	 * @param playerID ID of player trading
-	 * @param ratio Ratio of trade(ie for 3:1 the value of ratio would be 3)
 	 * @param inputResource Resource player gives
 	 * @param outputResource Resource player receives
 	 */
