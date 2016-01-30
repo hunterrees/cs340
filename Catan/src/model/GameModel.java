@@ -52,14 +52,6 @@ public class GameModel {
 	}
 
 	/**
-	 *	Returns true if the chat was successful
-	 * @return
-     */
-	public boolean sendChat(String message) {
-		return true;
-	}
-
-	/**
 	 * Returns a boolean whether or not the players accepted the trade
 	 * @param accept
 	 * @return

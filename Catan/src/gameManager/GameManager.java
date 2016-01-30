@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.GameException;
 import model.GameModel;
+import server.ServerException;
 import server.ServerInterface;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
@@ -90,7 +91,13 @@ public class GameManager {
 	 * @param playerID ID of player sending the message
 	 * @param content Content of the message
 	 */
-	public void sendChat(int playerID, String content)throws GameException{}
+	public void sendChat(int playerID, String content)throws GameException{
+		try {
+			server.sendChat(playerID, content);
+		} catch (ServerException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Rolls the dice at the beginning of the turn
 	 * @param playerID ID of player rolling
