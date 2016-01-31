@@ -60,15 +60,87 @@ public class Map {
 		 * @return true if you can build a settlement here (no adjacent buildings and a road connecting)
 		 */
 		public boolean canBuildSettlement(int playerID, boolean free, VertexLocation loc) {
+			if(verticies.get(loc).getPiece() != null) {
+				return false;
+			}
+
+			Player p = players.get(playerID);
+
+			switch(loc.getDir()) {
+				case East: vertexECase(p, free, loc); break;
+				case West: break;
+				case NorthEast: break;
+				case SouthEast: break;
+				case NorthWest: break;
+				case SouthWest: break;
+				default: System.out.println("Error! VertexLocation doesn't exist!");
+			}
+
+			System.out.println("Error! It should never come here!");
 			return false;
 		}
-	
-		
+
+
 		/**
+		 *
+		 * @param p
+		 * @param free
+		 * @param loc
+		 * @return
+		 */
+		public boolean vertexECase(Player p, boolean free, VertexLocation loc) {
+			TerrainHex currentHex = hexes.get(loc.getHexLoc());
+			TerrainHex upperRightHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthEast));
+
+			// Check if the edges are valid
+			Edge leftEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North));
+			Edge upEdge = upperRightHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest));
+			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast));
+
+			boolean edgeValid = true;
+			if(leftEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+				return false;
+			}
+
+			// Check if the corners are valid
+			Vertex leftCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest));
+			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.NorthWest));
+			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.East));
+
+			boolean cornerValid = false;
+			if(leftCorner.getPiece().getPlayerID() == p.getPlayerID() ||
+					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
+					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
+				cornerValid = true;
+			}
+
+
+
+			// Check if it's valid
+			boolean canBuild = edgeValid && cornerValid;
+
+			return canBuild;
+		}
+		public boolean vertexWCase(Player p, boolean free, VertexLocation loc) {
+			return false;
+		}
+
+		public boolean vertexNECase() {return false;}
+		public boolean vertexSECase() {return false;}
+		public boolean vertexNWCase() {return false;}
+		public boolean vertexSWCase() {return false;}
+
+
+
+	/**
 		 * 
 		 * @return true if this is a valid location for a road (no road currently at this location)
 		 */
 		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
+			if(edges.get(loc).getPiece() != null) {
+				return false;
+			}
+
 			Player p = players.get(playerID);
 
 			TerrainHex hex = hexes.get(loc.getHexLoc());
@@ -90,6 +162,15 @@ public class Map {
 		}
 
 
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+	 * @param lowerRightHex
+	 * @param upperLeftHex
+     * @return
+     */
 	private boolean edgeNWCase(Player p, boolean free, EdgeLocation loc, TerrainHex lowerRightHex, TerrainHex upperLeftHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
@@ -162,6 +243,15 @@ public class Map {
 		return canBuildRoad;
 	}
 
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+	 * @param lowerHex
+	 * @param upperHex
+     * @return
+     */
 	private boolean edgeNCase(Player p, boolean free, EdgeLocation loc, TerrainHex lowerHex, TerrainHex upperHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
@@ -234,6 +324,15 @@ public class Map {
 		return canBuildRoad;
 	}
 
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+	 * @param lowerLeftHex
+	 * @param upperRightHex
+     * @return
+     */
 	private boolean edgeNECase(Player p, boolean free, EdgeLocation loc, TerrainHex lowerLeftHex, TerrainHex upperRightHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
@@ -306,6 +405,15 @@ public class Map {
 		return canBuildRoad;
 	}
 
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+	 * @param upperLeftHex
+	 * @param lowerRightHex
+     * @return
+     */
 	private boolean edgeSECase(Player p, boolean free, EdgeLocation loc, TerrainHex upperLeftHex, TerrainHex lowerRightHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
@@ -375,8 +483,18 @@ public class Map {
 
 
 
-		return canBuildRoad;	}
+		return canBuildRoad;
+	}
 
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+	 * @param upperRightHex
+	 * @param lowerLeftHex
+     * @return
+     */
 	private boolean edgeSWCase(Player p, boolean free, EdgeLocation loc, TerrainHex upperRightHex, TerrainHex lowerLeftHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
@@ -446,8 +564,18 @@ public class Map {
 
 
 
-		return canBuildRoad;	}
+		return canBuildRoad;
+	}
 
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+	 * @param upperHex
+	 * @param lowerHex
+     * @return
+     */
 	private boolean edgeSCase(Player p, Boolean free, EdgeLocation loc, TerrainHex upperHex, TerrainHex lowerHex) {
 
 		TerrainHex hex = hexes.get(loc.getHexLoc());
