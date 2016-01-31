@@ -12,18 +12,6 @@ import shared.definitions.HexType;
 import shared.definitions.PieceType;
 import shared.locations.*;
 
-/*
- * 
- * I'm making the game model now and I think that the map class should have a method updateRobberPosition/setRobberPosition
- * This way I can update it easily from the Game model class
- * The robber should be kept in the hexes themselves but it i think it should be update from the gamemodel to
- * the map then to the hexes. let me know what you guys think
- * 
- * Brian
- *
- *
- */
-
 public class Map {
 
 	private HashMap<HexLocation, TerrainHex> hexes;
@@ -46,8 +34,6 @@ public class Map {
 		 * @return true if you can build a city here (settlement already here)j
 		 */
 		public boolean canBuildCity(int playerID, VertexLocation loc) {
-			Player p = players.get(playerID);
-
 			Piece tempPiece = verticies.get(loc).getPiece();
 
 			// Not valid if there's no piece there already
@@ -185,10 +171,6 @@ public class Map {
 	}
 
 	private boolean edgeSECase() {
-		return false;
-	}
-
-	private boolean edgeSCase() {
 		return false;
 	}
 
