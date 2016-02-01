@@ -136,8 +136,8 @@ public class Map {
 
 	/**
 	 *
-	 * @param p
-	 * @param free
+	 * @param playerID
+	 * @param setup
 	 * @param loc
      * @return
      */
@@ -187,8 +187,8 @@ public class Map {
 
 	/**
 	 *
-	 * @param p
-	 * @param free
+	 * @param playerID
+	 * @param setup
 	 * @param loc
      * @return
      */
@@ -239,8 +239,8 @@ public class Map {
 
 	/**
 	 *
-	 * @param p
-	 * @param free
+	 * @param playerID
+	 * @param setup
 	 * @param loc
      * @return
      */
@@ -290,8 +290,8 @@ public class Map {
 
 	/**
 	 *
-	 * @param p
-	 * @param free
+	 * @param playerID
+	 * @param setup
 	 * @param loc
      * @return
      */
