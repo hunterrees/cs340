@@ -10,8 +10,7 @@ import shared.locations.VertexLocation;
 
 public class TerrainHex {
 
-	private HashMap<EdgeLocation, Edge> edges;
-	private HashMap<VertexLocation, Vertex> verticies;
+	
 	
 	private HexLocation location;
 	

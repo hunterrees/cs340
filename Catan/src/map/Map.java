@@ -59,67 +59,79 @@ public class Map {
 		/**
 		 * @return true if you can build a settlement here (no adjacent buildings and a road connecting)
 		 */
-		public boolean canBuildSettlement(int playerID, boolean free, VertexLocation loc) {
+		
+		public boolean canBuildSettlement(int playerID, boolean setUp, VertexLocation loc) {
 			if(verticies.get(loc).getPiece() != null) {
 				return false;
 			}
 
-			Player p = players.get(playerID);
+			
 
 			switch(loc.getDir()) {
-				case East: vertexECase(p, free, loc); break;
-				case West: vertexWCase(p, free, loc); break;
-				case NorthEast: vertexNECase(p, free, loc); break;
-				case SouthEast: vertexSECase(p, free, loc); break;
-				case NorthWest: vertexNWCase(p, free, loc); break;
-				case SouthWest: vertexSWCase(p, free, loc); break;
+				case East: vertexECase(playerID, setUp, loc); break;
+				case West: vertexWCase(playerID, setUp, loc); break;
+				case NorthEast: vertexNECase(playerID, setUp, loc); break;
+				case SouthEast: vertexSECase(playerID, setUp, loc); break;
+				case NorthWest: vertexNWCase(playerID, setUp, loc); break;
+				case SouthWest: vertexSWCase(playerID, setUp, loc); break;
 				default: System.out.println("Error! VertexLocation doesn't exist!");
 			}
 
 			System.out.println("Error! It should never come here!");
 			return false;
 		}
+		
+		
+		
+		
 
+		
+		
+		
 
 		/**
 		 *
-		 * @param p
-		 * @param free
+		 * @param playerID
+		 * @param setUp
 		 * @param loc
 		 * @return
 		 */
-		public boolean vertexECase(Player p, boolean free, VertexLocation loc) {
+		public boolean vertexECase(int playerID, boolean setUp, VertexLocation loc) {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperRightHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthEast));
+			
+			// Check if the corners are valid
+			Vertex rightCorner = verticies.get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
+			Vertex upCorner = verticies.get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
+			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
 
-			// Check if the edges are valid
-			Edge rightEdge = upperRightHex.getEdges().get(new EdgeLocation(upperRightHex.getLocation(), EdgeDirection.South));
-			Edge upEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast));
-			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthEast));
-
-			boolean edgeValid = true;
-			if(rightEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+			
+			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
-
-			// Check if the corners are valid
-			Vertex rightCorner = upperRightHex.getVerticies().get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.SouthEast));
-			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.NorthEast));
-			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast));
-
-			boolean cornerValid = false;
-			if(rightCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
-				cornerValid = true;
+			
+			if(!setUp){
+				// Check if the edges are valid 
+				Edge rightEdge = edges.get(new EdgeLocation(upperRightHex.getLocation(), EdgeDirection.South).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthEast).getNormalizedLocation());
+			
+				
+			
+				if(rightEdge.getPiece() != null && rightEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(upEdge.getPiece() != null && upEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(downEdge.getPiece() != null && downEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-
-
-
-			// Check if it's valid
-			boolean canBuild = edgeValid && cornerValid;
-
-			return canBuild;
+			return true;
 		}
 
 	/**
@@ -129,38 +141,48 @@ public class Map {
 	 * @param loc
      * @return
      */
-		public boolean vertexWCase(Player p, boolean free, VertexLocation loc) {
+		public boolean vertexWCase(int playerID, boolean setup, VertexLocation loc) {
+			
+			
+			
+			
+			
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperLeftHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthWest));
+			
+			// Check if the corners are valid
+			Vertex upCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest).getNormalizedLocation());
+			Vertex leftCorner = verticies.get(new VertexLocation(upperLeftHex.getLocation(), VertexDirection.SouthWest).getNormalizedLocation());
+			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest).getNormalizedLocation());
 
-			// Check if the edges are valid
-			Edge leftEdge = upperLeftHex.getEdges().get(new EdgeLocation(upperLeftHex.getLocation(), EdgeDirection.South));
-			Edge upEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest));
-			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest));
-
-			boolean edgeValid = true;
-			if(leftEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+			
+			if(leftCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
-
-			// Check if the corners are valid
-			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest));
-			Vertex leftCorner = upperLeftHex.getVerticies().get(new VertexLocation(upperLeftHex.getLocation(), VertexDirection.SouthWest));
-			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest));
-
-			boolean cornerValid = false;
-			if(leftCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
-				cornerValid = true;
+			
+			if(!setup){
+				// Check if the edges are valid 
+				Edge leftEdge = edges.get(new EdgeLocation(upperLeftHex.getLocation(), EdgeDirection.South).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest).getNormalizedLocation());
+			
+				
+			
+				if(leftEdge.getPiece() != null && leftEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(upEdge.getPiece() != null && upEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(downEdge.getPiece() != null && downEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-
-
-
-			// Check if it's valid
-			boolean canBuild = edgeValid && cornerValid;
-
-			return canBuild;
+			return true;
+			
 		}
 
 	/**
@@ -170,38 +192,49 @@ public class Map {
 	 * @param loc
      * @return
      */
-		public boolean vertexNECase(Player p, boolean free, VertexLocation loc) {
+		public boolean vertexNECase(int playerID, boolean setup, VertexLocation loc) {
+			
+			
+			
+			
+			
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
+			
+			// Check if the corners are valid
+			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.East).getNormalizedLocation());
+			Vertex leftCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest).getNormalizedLocation());
+			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.East).getNormalizedLocation());
 
-			// Check if the edges are valid
-			Edge leftEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North));
-			Edge upEdge = upperHex.getEdges().get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.SouthEast));
-			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast));
-
-			boolean edgeValid = true;
-			if(leftEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+			
+			if(leftCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
-
-			// Check if the corners are valid
-			Vertex upCorner = upperHex.getVerticies().get(new VertexLocation(upperHex.getLocation(), VertexDirection.East));
-			Vertex leftCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest));
-			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.East));
-
-			boolean cornerValid = false;
-			if(leftCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
-				cornerValid = true;
+			
+			if(!setup){
+				// Check if the edges are valid 
+				Edge leftEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.SouthEast).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
+			
+				
+			
+				if(leftEdge.getPiece() != null && leftEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(upEdge.getPiece() != null && upEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(downEdge.getPiece() != null && downEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-
-
-
-			// Check if it's valid
-			boolean canBuild = edgeValid && cornerValid;
-
-			return canBuild;
+			return true;
+			
+		
 		}
 
 	/**
@@ -211,38 +244,47 @@ public class Map {
 	 * @param loc
      * @return
      */
-		public boolean vertexSECase(Player p, boolean free, VertexLocation loc) {
+		public boolean vertexSECase(int playerID, boolean setup, VertexLocation loc) {
+			
+			
+			
+			
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex lowerHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.South));
+			
+			// Check if the corners are valid
+			Vertex upCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.East).getNormalizedLocation());
+			Vertex leftCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest).getNormalizedLocation());
+			Vertex downCorner = verticies.get(new VertexLocation(lowerHex.getLocation(), VertexDirection.East).getNormalizedLocation());
 
-			// Check if the edges are valid
-			Edge leftEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.South));
-			Edge upEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthEast));
-			Edge downEdge = lowerHex.getEdges().get(new EdgeLocation(lowerHex.getLocation(), EdgeDirection.NorthEast));
-
-			boolean edgeValid = true;
-			if(leftEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+			
+			if(leftCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
-
-			// Check if the corners are valid
-			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.East));
-			Vertex leftCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest));
-			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.East));
-
-			boolean cornerValid = false;
-			if(leftCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
-				cornerValid = true;
+			
+			if(!setup){
+				// Check if the edges are valid 
+				Edge leftEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.South).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthEast).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(lowerHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
+			
+				
+			
+				if(leftEdge.getPiece() != null && leftEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(upEdge.getPiece() != null && upEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(downEdge.getPiece() != null && downEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-
-
-
-			// Check if it's valid
-			boolean canBuild = edgeValid && cornerValid;
-
-			return canBuild;
+			return true;
+			
 
 		}
 
@@ -253,72 +295,89 @@ public class Map {
 	 * @param loc
      * @return
      */
-		public boolean vertexNWCase(Player p, boolean free, VertexLocation loc) {
+		public boolean vertexNWCase(int playerID, boolean setup, VertexLocation loc) {
+		
+			
+			
+			
+			
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
+			
+			// Check if the corners are valid
+			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
+			Vertex rightCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
+			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 
-			// Check if the edges are valid
-			Edge rightEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North));
-			Edge upEdge = upperHex.getEdges().get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.NorthEast));
-			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest));
-
-			boolean edgeValid = true;
-			if(rightEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+			
+			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
-
-			// Check if the corners are valid
-			Vertex upCorner = upperHex.getVerticies().get(new VertexLocation(upperHex.getLocation(), VertexDirection.NorthEast));
-			Vertex rightCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthEast));
-			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.West));
-
-			boolean cornerValid = false;
-			if(rightCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
-				cornerValid = true;
+			
+			if(!setup){
+				// Check if the edges are valid 
+				Edge rightEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest).getNormalizedLocation());
+			
+				
+			
+				if(rightEdge.getPiece() != null && rightEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(upEdge.getPiece() != null && upEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(downEdge.getPiece() != null && downEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-
-
-
-			// Check if it's valid
-			boolean canBuild = edgeValid && cornerValid;
-
-			return canBuild;
+			return true;
 		}
 
-		public boolean vertexSWCase(Player p, boolean free, VertexLocation loc) { // Not done fix this
+		public boolean vertexSWCase(int playerID, boolean setup, VertexLocation loc) { // Not done fix this
+			
+			
+			
+			
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex lowerHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.South));
+			
+			// Check if the corners are valid
+			Vertex upCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.West).getNormalizedLocation());
+			Vertex rightCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
+			Vertex downCorner = verticies.get(new VertexLocation(lowerHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 
-			// Check if the edges are valid
-			Edge rightEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.South));
-			Edge upEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest));
-			Edge downEdge = lowerHex.getEdges().get(new EdgeLocation(lowerHex.getLocation(), EdgeDirection.NorthWest));
-
-			boolean edgeValid = true;
-			if(rightEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+			
+			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
-
-			// Check if the corners are valid
-			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.West));
-			Vertex rightCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast));
-			Vertex downCorner = lowerHex.getVerticies().get(new VertexLocation(lowerHex.getLocation(), VertexDirection.West));
-
-			boolean cornerValid = false;
-			if(rightCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
-					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
-				cornerValid = true;
+			
+			if(!setup){
+				// Check if the edges are valid 
+				Edge rightEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.South).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(lowerHex.getLocation(), EdgeDirection.NorthWest).getNormalizedLocation());
+			
+				
+			
+				if(rightEdge.getPiece() != null && rightEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(upEdge.getPiece() != null && upEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else if(downEdge.getPiece() != null && downEdge.getPiece().getPlayerID() == playerID){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
-
-
-
-			// Check if it's valid
-			boolean canBuild = edgeValid && cornerValid;
-
-			return canBuild;
+			return true;
 		}
 
 
@@ -364,8 +423,7 @@ public class Map {
      */
 	private boolean edgeNWCase(Player p, boolean free, EdgeLocation loc, TerrainHex lowerRightHex, TerrainHex upperLeftHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
-		HashMap<EdgeLocation, Edge> edges = hex.getEdges();
-		HashMap<VertexLocation, Vertex> corners = hex.getVerticies();
+		
 
 
 		// Check if the surrounding edges make this case valid
@@ -400,7 +458,7 @@ public class Map {
 
 
 		// Check if the surrounding corners make this case valid
-		Vertex left = corners.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthWest));
+		Vertex left = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthWest).getNormalizedLocation());
 		Vertex right = corners.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthEast));
 
 		boolean cornerValid = false;
@@ -415,19 +473,10 @@ public class Map {
 				cornerValid = true;
 			}
 		}
-		if(left.getPiece() != null) {
-			if (left.getPiece().getPlayerID() != p.getPlayerID()) {
-				cornerValid = false;
-			}
-		}
-		if(right.getPiece() != null) {
-			if (right.getPiece().getPlayerID() != p.getPlayerID()) {
-				cornerValid = false;
-			}
-		}
+		
 
 		// See if it's valid overall
-		boolean canBuildRoad = edgeValid && cornerValid;
+		boolean canBuildRoad = edgeValid || cornerValid;
 
 
 
