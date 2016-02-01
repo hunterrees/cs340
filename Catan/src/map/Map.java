@@ -29,7 +29,7 @@ public class Map {
 	
 	
 	
-	//functions i wrote
+	//functions i wrotedsf
 		/**
 		 * @return true if you can build a city here (settlement already here)j
 		 */
