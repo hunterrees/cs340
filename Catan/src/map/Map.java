@@ -391,18 +391,18 @@ public class Map {
 				return false;
 			}
 
-			Player p = players.get(playerID);
+
 
 			TerrainHex hex = hexes.get(loc.getHexLoc());
 			TerrainHex neighbor = hexes.get(hex.getLocation().getNeighborLoc(loc.getDir()));
 
 			switch(loc.getDir()) {
-				case NorthWest: edgeNWCase(p, free, loc, hex, neighbor); break;
-				case North: edgeNCase(p, free, loc, hex, neighbor); break;
-				case NorthEast: edgeNECase(p, free, loc, hex, neighbor); break;
-				case SouthEast: edgeSECase(p, free, loc, hex, neighbor); break;
-				case South: edgeSCase(p, free, loc, hex, neighbor); break;
-				case SouthWest: edgeSWCase(p, free, loc, hex, neighbor); break;
+				case NorthWest: edgeNWCase(playerID, free, loc, hex, neighbor); break;
+				case North: edgeNCase(playerID, free, loc, hex, neighbor); break;
+				case NorthEast: edgeNECase(playerID, free, loc, hex, neighbor); break;
+				case SouthEast: edgeSECase(playerID, free, loc, hex, neighbor); break;
+				case South: edgeSCase(playerID, free, loc, hex, neighbor); break;
+				case SouthWest: edgeSWCase(playerID, free, loc, hex, neighbor); break;
 
 
 				default: System.out.println("Error! The EdgeLocation doesn't exist!");
