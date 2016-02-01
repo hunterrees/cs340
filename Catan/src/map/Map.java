@@ -68,7 +68,7 @@ public class Map {
 
 			switch(loc.getDir()) {
 				case East: vertexECase(p, free, loc); break;
-				case West: break;
+				case West: vertexWCase(p, free, loc); break;
 				case NorthEast: break;
 				case SouthEast: break;
 				case NorthWest: break;
@@ -93,9 +93,50 @@ public class Map {
 			TerrainHex upperRightHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthEast));
 
 			// Check if the edges are valid
-			Edge leftEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North));
-			Edge upEdge = upperRightHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest));
-			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast));
+			Edge rightEdge = upperRightHex.getEdges().get(new EdgeLocation(upperRightHex.getLocation(), EdgeDirection.South));
+			Edge upEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthEast));
+			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthEast));
+
+			boolean edgeValid = true;
+			if(rightEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
+				return false;
+			}
+
+			// Check if the corners are valid
+			Vertex rightCorner = upperRightHex.getVerticies().get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.SouthEast));
+			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.NorthEast));
+			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast));
+
+			boolean cornerValid = false;
+			if(rightCorner.getPiece().getPlayerID() == p.getPlayerID() ||
+					upCorner.getPiece().getPlayerID() == p.getPlayerID() ||
+					downCorner.getPiece().getPlayerID() == p.getPlayerID()) {
+				cornerValid = true;
+			}
+
+
+
+			// Check if it's valid
+			boolean canBuild = edgeValid && cornerValid;
+
+			return canBuild;
+		}
+
+	/**
+	 *
+	 * @param p
+	 * @param free
+	 * @param loc
+     * @return
+     */
+		public boolean vertexWCase(Player p, boolean free, VertexLocation loc) {
+			TerrainHex currentHex = hexes.get(loc.getHexLoc());
+			TerrainHex upperLeftHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthWest));
+
+			// Check if the edges are valid
+			Edge leftEdge = upperLeftHex.getEdges().get(new EdgeLocation(upperLeftHex.getLocation(), EdgeDirection.South));
+			Edge upEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest));
+			Edge downEdge = currentHex.getEdges().get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest));
 
 			boolean edgeValid = true;
 			if(leftEdge.getPiece() != null || upEdge.getPiece() != null || downEdge.getPiece() != null) {
@@ -103,9 +144,9 @@ public class Map {
 			}
 
 			// Check if the corners are valid
-			Vertex leftCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest));
-			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.NorthWest));
-			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.East));
+			Vertex upCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest));
+			Vertex leftCorner = upperLeftHex.getVerticies().get(new VertexLocation(upperLeftHex.getLocation(), VertexDirection.SouthWest));
+			Vertex downCorner = currentHex.getVerticies().get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest));
 
 			boolean cornerValid = false;
 			if(leftCorner.getPiece().getPlayerID() == p.getPlayerID() ||
@@ -120,9 +161,6 @@ public class Map {
 			boolean canBuild = edgeValid && cornerValid;
 
 			return canBuild;
-		}
-		public boolean vertexWCase(Player p, boolean free, VertexLocation loc) {
-			return false;
 		}
 
 		public boolean vertexNECase() {return false;}
