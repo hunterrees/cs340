@@ -14,7 +14,8 @@ public class Test {
 	public Test(){};
 	
 	public static void main(String[] args){
-		ServerPoller poller = new ServerPoller(null, null);
+		GenericTranslator translate = new GamesCreateTranslator(true, true, true, "test9pm");
+		System.out.println(translate.translate());
 	}
 }
 	

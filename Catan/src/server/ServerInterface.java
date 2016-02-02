@@ -27,7 +27,7 @@ public interface ServerInterface {
 	/**
 	 * Lists all the games in progress
 	 */
-	public void listGames()throws ServerException;
+	public String listGames()throws ServerException;
 	/**
 	 * Creates a new game based on given rules
 	 * @param name Name of Game
@@ -46,7 +46,7 @@ public interface ServerInterface {
 	 * Gets the model from the server, compares to versionID
 	 * @param versionID Current versionID of the client
 	 */
-	public String getModel()throws ServerException;
+	public GameModel getModel(int versionID)throws ServerException;
 	/**
 	 * Adds a new AI to the game
 	 * @param AIname Name of AI to add
@@ -55,7 +55,7 @@ public interface ServerInterface {
 	/**
 	 * Lists the possible AIs to add
 	 */
-	public void listAIs()throws ServerException;
+	public String listAIs()throws ServerException;
 	/**
 	 * Sends chat message
 	 * @param playerID ID of player sending the message

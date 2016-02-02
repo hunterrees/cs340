@@ -23,9 +23,6 @@ public class GameManager {
 	private GameManager(){
 	}
 	
-	public GameModel getModel() {
-		return model;
-	}
 	public void setModel(GameModel model) {
 		this.model = model;
 	}
@@ -35,29 +32,55 @@ public class GameManager {
 	public void setServer(ServerInterface server) {
 		this.server = server;
 	}
+	public GameModel getModel(){
+		return model;
+	}
 	/**
 	 * Updates game model based on new info from Game
 	 * @param model New model to update the game
 	 */
 	public void setGameModel(GameModel model){
 		this.model = model;
-	}{}
+	}
 	/**
 	 * Validates users credentials and logs them into the Game
 	 * @param username
 	 * @param password
 	 */
-	public void userLogin(String username, String password)throws GameException{}
+	public void userLogin(String username, String password)throws GameException{
+		if(username != null && password != null){
+			try{
+				server.userLogin(username, password);
+			}catch(ServerException e){
+				e.printStackTrace();
+			}
+		}
+	}
 	/**
 	 * Creates new player account and logs them into the Game
 	 * @param username
 	 * @param password
 	 */
-	public void userRegister(String username, String password)throws GameException{}
+	public void userRegister(String username, String password)throws GameException{
+		if(username != null && password != null){
+			try{
+				server.userRegister(username, password);
+			}catch(ServerException e){
+				e.printStackTrace();
+			}
+		}
+	}
 	/**
 	 * Lists all the games in progress
 	 */
-	public void listGames()throws GameException{}
+	public String listGames()throws GameException{
+		try{
+			return server.listGames();
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	/**
 	 * Creates a new game based on given rules
 	 * @param name Name of Game
@@ -65,27 +88,61 @@ public class GameManager {
 	 * @param randomNumbers Random numbering of tiles
 	 * @param randomPorts Random placement of ports
 	 */
-	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{}
+	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{
+		if(name != null){
+			try{
+				server.createGame(name, randomTiles, randomNumbers, randomPorts);
+			}catch(ServerException e){
+				e.printStackTrace();
+			}
+		}
+	}
 	/**
 	 * 	Adds a player to game
 	 * @param gameID ID of game to join
 	 * @param color Desired color of player
 	 */
-	public void joinGame(int gameID, String color)throws GameException{}
+	public void joinGame(int gameID, String color)throws GameException{
+		try{
+			server.joinGame(gameID, color);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Gets the model from the Game, compares to versionID
 	 * @param versionID Current versionID of the client
 	 */
-	public GameModel getModel(int versionID)throws GameException{return null;}
+	public GameModel getNewModel()throws GameException{
+		try{
+			return server.getModel(model.getVersion());
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	/**
 	 * Adds a new AI to the game
 	 * @param AIname Name of AI to add
 	 */
-	public void addAI(String AIname)throws GameException{}
+	public void addAI(String AIname)throws GameException{
+		try{
+			server.addAI(AIname);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Lists the possible AIs to add
 	 */
-	public void listAIs()throws GameException{}
+	public String listAIs()throws GameException{
+		try{
+			return server.listAIs();
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	/**
 	 * Sends chat message
 	 * @param playerID ID of player sending the message

@@ -2,16 +2,14 @@ package server;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import translators.user.*;
 import translators.games.*;
+import translators.ModelTranslator;
 import translators.game.*;
 import translators.moves.*;
 import model.GameModel;
@@ -30,6 +28,7 @@ public class ServerProxy implements ServerInterface {
 	private String userCookie;
 	private String gameCookie;
 	private String fullCookie;
+	private ModelTranslator translator;
 	private static String SERVER_HOST;
 	private static int SERVER_PORT; //given server runs on port 8081
 	private static String URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
@@ -39,7 +38,7 @@ public class ServerProxy implements ServerInterface {
 		SERVER_PORT = port;
 		URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
 	}
-	
+	//check the response code?
 	private void post(String urlPath, String json) throws ServerException{
 		try{
 			URL url = new URL(URL_PREFIX + urlPath);
@@ -121,29 +120,45 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void listGames() {
-		
-
+	public String listGames() {
+		try{
+			return get("/games/list");
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) {
 		GamesCreateTranslator create = new GamesCreateTranslator(randomTiles, randomNumbers, randomPorts, name);
 		String json = create.translate();
-
+		try{
+			post("/games/create", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void joinGame(int playerID, String color) {
 		GamesJoinTranslator join = new GamesJoinTranslator(playerID, color);
 		String json = join.translate();
-
+		try{
+			post("/games/join", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public String getModel() {
+	public GameModel getModel(int versionID) {
 		try{
-			return get("/game/model");
+			StringBuilder result = new StringBuilder();
+			result.append("/game/model?version=");
+			result.append(versionID);
+			String json = get(result.toString());
+			return translator.getModelfromJSON(json);
 		}catch(ServerException e){
 			e.printStackTrace();
 		}
@@ -154,55 +169,87 @@ public class ServerProxy implements ServerInterface {
 	public void addAI(String AIname) {
 		GameAddAITranslator ai = new GameAddAITranslator(AIname);
 		String json = ai.translate();
-
+		try{
+			post("/game/addAI", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void listAIs() {
-		// TODO Auto-generated method stub
-
+	public String listAIs() {
+		try{
+			return get("/game/listAI");
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public void sendChat(int playerID, String content) {
 		MovesSendChatTranslator chat = new MovesSendChatTranslator(playerID, content);
 		String json = chat.translate();
-
+		try{
+			post("/moves/sendChat", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void rollNumber(int playerID, int numberRolled) {
 		MovesRollNumberTranslator roll = new MovesRollNumberTranslator(playerID, numberRolled);
 		String json = roll.translate();
-
+		try{
+			post("/moves/rollNumber", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void robPlayer(int playerID, int victimID, HexLocation newRobberLocation) {
 		MovesRobPlayerTranslator rob = new MovesRobPlayerTranslator(playerID, victimID, newRobberLocation);
 		String json = rob.translate();
-
+		try{
+			post("/moves/robPlayer", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void finishTurn(int playerID) {
 		MovesFinishTurnTranslator finish = new MovesFinishTurnTranslator(playerID);
 		String json = finish.translate();
-
+		try{
+			post("/moves/finishTurn", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void buyDevCard(int playerID) {
 		MovesBuyDevCardTranslator dev = new MovesBuyDevCardTranslator(playerID);
 		String json = dev.translate();
-
+		try{
+			post("/moves/buyDevCard", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void yearOfPlenty(int playerID, ResourceType resource1, ResourceType resource2) {
 		MovesYearOfPlentyTranslator year = new MovesYearOfPlentyTranslator(playerID, resource1, resource2);
 		String json = year.translate();
-
+		try{
+			post("/moves/Year_Of_Plenty", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -210,34 +257,55 @@ public class ServerProxy implements ServerInterface {
 		MovesRoadBuildingTranslator roadBuilding = new MovesRoadBuildingTranslator(playerID, roadLocation1.getHexLoc(), roadLocation1.getDir(),
 				roadLocation2.getHexLoc(), roadLocation2.getDir());
 		String json = roadBuilding.translate();
-
+		try{
+			post("/moves/Road_Building", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void knight(int playerID, int victimID, HexLocation newRobberLocation) {
 		MovesSoldierTranslator soldier = new MovesSoldierTranslator(playerID, victimID, newRobberLocation);
 		String json = soldier.translate();
-
+		try{
+			post("/moves/Soldier", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void monopoly(int playerID, ResourceType resource) {
 		MovesMonopolyTranslator monopoly = new MovesMonopolyTranslator(playerID, resource);
 		String json = monopoly.translate();
+		try{
+			post("/moves/Monopoly", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void monument(int playerID) {
 		MovesMonumentTranslator monument = new MovesMonumentTranslator(playerID);
 		String json = monument.translate();
-		
+		try{
+			post("/moves/Monument", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void buildRoad(int playerID, EdgeLocation roadLocation, boolean setUp) {
 		MovesBuildRoadTranslator road = new MovesBuildRoadTranslator(playerID, roadLocation.getHexLoc(), roadLocation.getDir(), setUp);
 		String json = road.translate();
-
+		try{
+			post("/moves/buildRoad", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -245,35 +313,55 @@ public class ServerProxy implements ServerInterface {
 		MovesBuildSettlementTranslator settlement = new MovesBuildSettlementTranslator(playerID, vertexLocation.getHexLoc(), 
 				vertexLocation.getDir(), setUp);
 		String json = settlement.translate();
-		
+		try{
+			post("/moves/buildSettlement", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void buildCity(int playerID, VertexLocation vertexLocation) {
 		MovesBuildCityTranslator city = new MovesBuildCityTranslator(playerID, vertexLocation.getHexLoc(), vertexLocation.getDir());
 		String json = city.translate();
-
+		try{
+			post("/moves/buildCity", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void acceptTrade(int playerID, boolean accept) {
 		MovesAcceptTradeTranslator acceptTrade = new MovesAcceptTradeTranslator(playerID, accept);
 		String json = acceptTrade.translate();
-
+		try{
+			post("/moves/acceptTrade", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void maritimeTrade(int playerID, int ratio, ResourceType inputResource, ResourceType outputResource) {
 		MovesMaritimeTradeTranslator maritime = new MovesMaritimeTradeTranslator(playerID, ratio, inputResource, outputResource);
 		String json = maritime.translate();
-
+		try{
+			post("/moves/maritimeTrade", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void discardCards(int playerID, ArrayList<ResourceType> resources) {
 		MovesDiscardCardsTranslator discard = new MovesDiscardCardsTranslator(playerID, resources);
 		String json = discard.translate();
-
+		try{
+			post("/moves/discardCards", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -281,7 +369,11 @@ public class ServerProxy implements ServerInterface {
 			int receiverID) {
 		MovesOfferTradeTranslator offer = new MovesOfferTradeTranslator(playerID, resourceGive, resourceReceive, receiverID);
 		String json = offer.translate();
-		
+		try{
+			post("/moves/offerTrade", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 }

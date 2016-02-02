@@ -65,8 +65,6 @@ public class GameModel {
 	public boolean acceptTrade(int playerID) {
 		Player p = players.get((playerID));
 
-		ArrayList<ResourceCard> hand = p.getPlayerHand().getResourceCards();
-
 		ArrayList<ResourceType> desired = theTrade.getResourceDesired();
 
 		int wood = 0;
@@ -84,8 +82,8 @@ public class GameModel {
 				case ORE: ore++; break;
 				default: System.out.println("Error! ResourceType doesn't exist!");
 			}
-		}
-
+		}	
+		
 		if(p.numResourceRemaining(ResourceType.WOOD) <= wood &&
 				p.numResourceRemaining(ResourceType.BRICK) <= brick &&
 				p.numResourceRemaining(ResourceType.SHEEP) <= sheep &&
@@ -93,9 +91,6 @@ public class GameModel {
 				p.numResourceRemaining( ResourceType.ORE) <= ore) {
 			return true;
 		}
-
-		// Hunter will finish
-
 		return false;
 	}
 

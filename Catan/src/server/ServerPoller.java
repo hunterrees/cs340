@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 import gameManager.GameManager;
 import model.GameModel;
-import translators.ModelTranslator;
 
 /**
  * 
@@ -19,7 +18,6 @@ public class ServerPoller {
 	private ServerInterface server;
 	private Timer timer;
 	private GameManager gameManager;
-	private ModelTranslator translator;
 	
 	public ServerPoller(ServerInterface server, GameManager gameManager){
 		this.server = server;
@@ -43,8 +41,7 @@ public class ServerPoller {
 		@Override
 		public void run() {
 			try {
-				String json = server.getModel();
-				GameModel newModel = translator.getModelfromJSON(json);
+				GameModel newModel = server.getModel(gameManager.getModel().getVersion());
 				if(gameManager.getModel().getVersion() != newModel.getVersion()){
 					gameManager.setGameModel(newModel);
 				}

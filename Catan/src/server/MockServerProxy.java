@@ -28,8 +28,8 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void listGames() {
-		// TODO Auto-generated method stub
+	public String listGames() {
+		return null;
 
 	}
 
@@ -46,7 +46,7 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public String getModel() {
+	public GameModel getModel(int versionID) {
 		return null;
 		// TODO Auto-generated method stub
 
@@ -59,8 +59,8 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void listAIs() {
-		// TODO Auto-generated method stub
+	public String listAIs() {
+		return null;
 
 	}
 
