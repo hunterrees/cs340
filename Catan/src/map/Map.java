@@ -1058,7 +1058,38 @@ public class Map {
 	}
 
 
-	public boolean canRoadBuild(EdgeLocation spot1, EdgeLocation spot2) {
-		return false;
+	public boolean canRoadBuild(int playerID, EdgeLocation spot1, EdgeLocation spot2) {
+		boolean firstPossible = false;
+		boolean secondPossible = false;
+
+		// First case
+		if(canBuildRoad(playerID, false, spot1)) {
+			Edge tempEdge = edges.get(spot1);
+			Piece temp = new Piece(PieceType.ROAD, tempEdge, null, playerID);
+			edges.get(spot1).setPiece(temp);
+			if(canBuildRoad(playerID, false, spot2)) {
+				firstPossible = true;
+			}
+			edges.get(spot1).setPiece(null);
+		}
+
+
+
+
+
+		// Second case
+		if(canBuildRoad(playerID, false, spot2)) {
+			Edge tempEdge = edges.get(spot2);
+			Piece temp = new Piece(PieceType.ROAD, tempEdge, null, playerID);
+			edges.get(spot1).setPiece(temp);
+			if(canBuildRoad(playerID, false, spot1)) {
+				secondPossible = true;
+			}
+			edges.get(spot2).setPiece(null);
+		}
+
+
+
+		return firstPossible || secondPossible;
 	}
 }
