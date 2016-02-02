@@ -386,7 +386,7 @@ public class GameModel {
 		}
 
 
-		return map.canRoadBuild(spot1, spot2);
+		return map.canRoadBuild(playerID, spot1, spot2);
 	}
 
 	/**
