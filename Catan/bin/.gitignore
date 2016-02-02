@@ -1,6 +1,4 @@
+/client/
+/phase1tests/
+/mapTests/
 /map/
-/model/
-/player/
-/shared/
-/trade/
-/gameManager/

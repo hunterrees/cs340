@@ -154,6 +154,17 @@
     <target name="make-tester-zip" depends="package" description="makes a zip file for your testing team">
         <zip destfile="./tester.zip" basedir="${java.dist}" />
     </target>
+	
+	<target name="test" depends="compile" description= "runs JUnits for Phase 1">
+		<java classname = "phase1tests.Phase1Tests" fork="yes">
+			<classpath>
+				<path refid="all-classpath"/>
+			</classpath>
+			<assertions>
+				<enable/>
+			</assertions>
+		</java>
+	</target>
   
 </project>
 

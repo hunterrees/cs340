@@ -1,10 +1,10 @@
-package mapTests;
+package map;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class Map {
+public class MapTests {
 
 	@Test
 	public void test() {
