@@ -32,7 +32,7 @@ public class ServerProxy implements ServerInterface {
 	private static String SERVER_HOST;
 	private static int SERVER_PORT; //given server runs on port 8081
 	private static String URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
-	
+	//how do I get the server running for JUnits?
 	public ServerProxy(String host, int port){
 		SERVER_HOST = host;
 		SERVER_PORT = port;
