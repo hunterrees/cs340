@@ -17,14 +17,24 @@ public class Map {
 	private HashMap<HexLocation, TerrainHex> hexes;
 	private HashMap<EdgeLocation, Edge> edges;
 	private HashMap<VertexLocation, Vertex> verticies;
-	private ArrayList<Player> players;
 	
-	public Map(ArrayList<Player> players) {
-		this.players = players;
-		hexes = new HashMap<HexLocation, TerrainHex>();
+	
+	public Map() {
+		
 		
 		buildHexes();
+		buildEdges();
+		buildVerticies();
 	}
+	
+	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<EdgeLocation, Edge> edges,
+			HashMap<VertexLocation, Vertex> verticies){
+		
+		this.hexes = hexes;
+		this.edges = edges;
+		this.verticies = verticies;
+	}
+	
 	
 	
 	
@@ -980,14 +990,41 @@ public class Map {
 	/**
 	 * adds Vertex objects to the correct TerrainHex (multiple Hexes can and will share a Vertex)
 	 */
-	public void addCorners(){
-		
+	public void buildVerticies(){
+		for(Entry<HexLocation, TerrainHex> entry : hexes.entrySet()){
+			
+			VertexLocation vertLoc1 = new VertexLocation(entry.getKey(), VertexDirection.NorthWest);
+			Vertex v1 = new Vertex(vertLoc1);
+			verticies.put(vertLoc1, v1);
+			
+			VertexLocation vertLoc2 = new VertexLocation(entry.getKey(), VertexDirection.NorthEast);
+			Vertex v2 = new Vertex(vertLoc2);
+			verticies.put(vertLoc2, v2);
+			
+			VertexLocation vertLoc3 = new VertexLocation(entry.getKey(), VertexDirection.East);
+			Vertex v3 = new Vertex(vertLoc3);
+			verticies.put(vertLoc3, v3);
+			
+			VertexLocation vertLoc4 = new VertexLocation(entry.getKey(), VertexDirection.SouthEast);
+			Vertex v4 = new Vertex(vertLoc4);
+			verticies.put(vertLoc4, v4);
+			
+			VertexLocation vertLoc5 = new VertexLocation(entry.getKey(), VertexDirection.SouthWest);
+			Vertex v5 = new Vertex(vertLoc5);
+			verticies.put(vertLoc5, v5);
+			
+			VertexLocation vertLoc6 = new VertexLocation(entry.getKey(), VertexDirection.West);
+			Vertex v6 = new Vertex(vertLoc6);
+			verticies.put(vertLoc6, v6);
+			
+			
+		}
 	}
 	
 	/**
 	 * adds Edge objects to the correct TerrainHex (multiple hexes can and will share an edge)
 	 */
-	public void addEdges(){
+	public void buildEdges(){
 		for(Entry<HexLocation, TerrainHex> entry : hexes.entrySet()){
 			
 			EdgeLocation edgeLoc1 = new EdgeLocation(entry.getKey(), EdgeDirection.NorthWest);
