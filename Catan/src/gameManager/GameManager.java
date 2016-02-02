@@ -1,6 +1,5 @@
 package gameManager;
 
-//THIS is a test to see if a commit works
 import java.util.ArrayList;
 
 import model.GameException;
@@ -14,13 +13,12 @@ import shared.locations.VertexLocation;
 
 public class GameManager {
 	/**
-	 * Singleton class that controls calls to the model and server
+	 * Controls calls to the model and server
 	 */
-	public GameManager MANAGER = new GameManager();
 	private GameModel model;
 	private ServerInterface server;
 	
-	private GameManager(){
+	public GameManager(){
 	}
 	
 	public void setModel(GameModel model) {
@@ -370,7 +368,7 @@ public class GameManager {
 	 * @param accept True if player accepted trade
 	 */
 	public void acceptTrade(int playerID, boolean accept)throws GameException{
-		if(model.acceptTrade(playerID)){
+		if(!accept || model.acceptTrade(playerID)){
 			try{
 				server.acceptTrade(playerID, accept);
 			}catch(ServerException e){
@@ -422,14 +420,18 @@ public class GameManager {
 	 * @param setUp True if during set-up
 	 * @throws GameException Throws when you can't build
 	 */
-	public void canBuildSettlement(int playerID, VertexLocation location, boolean setUp)throws GameException{}
+	public boolean canBuildSettlement(int playerID, VertexLocation location, boolean setUp){
+		return model.canBuildSettlement(playerID, setUp, location);
+	}
 	/**
 	 * Checks if you can build a city
 	 * @param playerID ID of player
 	 * @param location Location to build
 	 * @throws GameException Throws when you can't build
 	 */
-	public void canBuildCity(int playerID, VertexLocation location) throws GameException{}
+	public boolean canBuildCity(int playerID, VertexLocation location){
+		return model.canBuildCity(playerID, location);
+	}
 	/**
 	 * Checks if you can build a road
 	 * @param playerID ID of player
@@ -437,5 +439,7 @@ public class GameManager {
 	 * @param setUp True if set-up
 	 * @throws GameException Throws when you can't build
 	 */
-	public void canBuildRoad(int playerID, EdgeLocation location, boolean setUp) throws GameException{}
+	public boolean canBuildRoad(int playerID, EdgeLocation location, boolean setUp){
+		return model.canBuildRoad(playerID, setUp, location);
+	}
 }

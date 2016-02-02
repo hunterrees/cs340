@@ -11,6 +11,7 @@ import shared.DevelopmentCard;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
+import shared.definitions.GameState;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -21,9 +22,7 @@ public class GameModel {
 	private Map map;
 	private Bank bank;
 	private ArrayList<Player> players;
-	//private int playerIndex;
 	private HexLocation robberLoc;
-	private String type;
 	private int version;
 	private TradeOffer theTrade;
 	private TurnTracker tracker;
@@ -32,19 +31,13 @@ public class GameModel {
 	public GameModel(Map map, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
 						TurnTracker tracker) {
 		this.tracker = tracker;
-		players = new ArrayList<Player>();
 
 		this.map = map;
 		this.bank = Bank.BANK;
-		//this.playerIndex = playerIndex;
 		this.robberLoc = robberLoc;
 		this.theTrade = theTrade;
 
 		this.players = players;
-		//players.add(new Player(0, CatanColor.RED , "Player1"));
-		//players.add(new Player(1, CatanColor.GREEN, "Player2"));
-		//players.add(new Player(2, CatanColor.ORANGE, "Player3"));
-		//players.add(new Player(3, CatanColor.BLUE, "Player4"));
 	}
 
 // Public methods
@@ -65,6 +58,10 @@ public class GameModel {
 	public boolean acceptTrade(int playerID) {
 		Player p = players.get((playerID));
 
+		if(theTrade == null){
+			return false;
+		}
+		
 		ArrayList<ResourceType> desired = theTrade.getResourceDesired();
 
 		int wood = 0;
@@ -84,11 +81,11 @@ public class GameModel {
 			}
 		}	
 		
-		if(p.numResourceRemaining(ResourceType.WOOD) <= wood &&
-				p.numResourceRemaining(ResourceType.BRICK) <= brick &&
-				p.numResourceRemaining(ResourceType.SHEEP) <= sheep &&
-				p.numResourceRemaining(ResourceType.WHEAT) <= wheat &&
-				p.numResourceRemaining( ResourceType.ORE) <= ore) {
+		if(p.numResourceRemaining(ResourceType.WOOD) >= wood &&
+				p.numResourceRemaining(ResourceType.BRICK) >= brick &&
+				p.numResourceRemaining(ResourceType.SHEEP) >= sheep &&
+				p.numResourceRemaining(ResourceType.WHEAT) >= wheat &&
+				p.numResourceRemaining( ResourceType.ORE) >= ore) {
 			return true;
 		}
 		return false;
@@ -100,7 +97,8 @@ public class GameModel {
 	 * @return
      */
 	public boolean discardCards(int playerID, ArrayList<ResourceType> toDiscard) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		Player p = players.get((playerID));
+		if(tracker.getCurrentTurnPlayerID() != playerID || tracker.getGameStatus() != GameState.discarding) {
 			return false;
 		}
 
@@ -109,12 +107,6 @@ public class GameModel {
 		if(currentHand.size() <= 7) {
 			return false;
 		}
-
-		int woodH = 0;
-		int brickH = 0;
-		int woolH = 0;
-		int wheatH = 0;
-		int oreH = 0;
 
 		int woodD = 0;
 		int brickD = 0;
@@ -134,9 +126,11 @@ public class GameModel {
 			}
 		}
 
-		if(woodH < woodD || brickH < brickD ||
-				woolH < woolD || wheatH < wheatD ||
-				oreH < oreD) {
+		if(p.numResourceRemaining(ResourceType.WOOD) < woodD ||
+				p.numResourceRemaining(ResourceType.BRICK) < brickD ||
+				p.numResourceRemaining(ResourceType.SHEEP) < woolD ||
+				p.numResourceRemaining(ResourceType.WHEAT) < wheatD ||
+				p.numResourceRemaining( ResourceType.ORE) < oreD) {
 			return false;
 		}
 
@@ -149,7 +143,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean rollNumber(int playerID) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(tracker.getCurrentTurnPlayerID() != playerID || tracker.getGameStatus() != GameState.rolling) {
 			return false;
 		}
 		return false;

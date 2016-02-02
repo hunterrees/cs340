@@ -47,7 +47,7 @@ public class ServerProxy implements ServerInterface {
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
 			
-			if(urlPath == "/user/login"){
+			if(urlPath == "/user/login" || urlPath == "/user/register"){
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
@@ -70,6 +70,9 @@ public class ServerProxy implements ServerInterface {
 				gameCookie = gameCookie.replace("Path=/", "");
 				fullCookie = userCookie + gameCookie;
 			}else{
+				if(fullCookie == null){
+					throw new ServerException("Haven't logged in/and or joined game");
+				}
 				connection.setRequestProperty("Cookie:", fullCookie);
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
@@ -171,6 +174,9 @@ public class ServerProxy implements ServerInterface {
 			result.append("/game/model?version=");
 			result.append(versionID);
 			String json = get(result.toString());
+			if(json == "true"){
+				return null;
+			}
 			return translator.getModelfromJSON(json);
 		}catch(ServerException e){
 			e.printStackTrace();
