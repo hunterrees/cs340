@@ -32,13 +32,13 @@ public class ServerProxy implements ServerInterface {
 	private static String SERVER_HOST;
 	private static int SERVER_PORT; //given server runs on port 8081
 	private static String URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
-	//how do I get the server running for JUnits?
+	
 	public ServerProxy(String host, int port){
 		SERVER_HOST = host;
 		SERVER_PORT = port;
 		URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
 	}
-	//check the response code?
+	
 	private void post(String urlPath, String json) throws ServerException{
 		try{
 			URL url = new URL(URL_PREFIX + urlPath);
@@ -51,13 +51,21 @@ public class ServerProxy implements ServerInterface {
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
+				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new ServerException(String.format("doPost failed: %s (http code %d)",
+							urlPath, connection.getResponseCode()));
+				}
 				userCookie = connection.getHeaderField("Set-cookie:");
 				userCookie = userCookie.replace("Path=/", "");
-			}else if(urlPath == "games/join"){
+			}else if(urlPath == "/games/join"){
 				connection.setRequestProperty("Cookie:", userCookie);
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
+				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new ServerException(String.format("doPost failed: %s (http code %d)",
+							urlPath, connection.getResponseCode()));
+				}
 				gameCookie = connection.getHeaderField("Set-cookie:");
 				gameCookie = gameCookie.replace("Path=/", "");
 				fullCookie = userCookie + gameCookie;
@@ -66,6 +74,10 @@ public class ServerProxy implements ServerInterface {
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
+				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new ServerException(String.format("doPost failed: %s (http code %d)",
+							urlPath, connection.getResponseCode()));
+				}
 			}
 		}catch(Exception e){
 			throw new ServerException(String.format("doPost failed: %s", e.getMessage()), e);
@@ -89,7 +101,8 @@ public class ServerProxy implements ServerInterface {
 				}
 				in.close();
 			}else{
-				throw new Exception();
+				throw new ServerException(String.format("doGet failed: %s (http code %d)",
+						urlPath, connection.getResponseCode()));
 			}
 		}catch(Exception e){
 			throw new ServerException(String.format("doGet failed: %s", e.getMessage()), e);
