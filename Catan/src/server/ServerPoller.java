@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import gameManager.GameManager;
 import model.GameModel;
+import translators.ModelTranslator;
 
 /**
  * 
@@ -18,6 +19,7 @@ public class ServerPoller {
 	private ServerInterface server;
 	private Timer timer;
 	private GameManager gameManager;
+	private ModelTranslator translator;
 	
 	public ServerPoller(ServerInterface server, GameManager gameManager){
 		this.server = server;
@@ -35,14 +37,14 @@ public class ServerPoller {
 	};
 	/**
 	 * Polls the server for updates in game model, if update is found, poller will update game model
-	 * @parm versionID ID of current version of client game model
 	 */
 	public class Poll extends TimerTask{
 
 		@Override
 		public void run() {
 			try {
-				GameModel newModel = server.getModel();
+				String json = server.getModel();
+				GameModel newModel = translator.getModelfromJSON(json);
 				if(gameManager.getModel().getVersion() != newModel.getVersion()){
 					gameManager.setGameModel(newModel);
 				}

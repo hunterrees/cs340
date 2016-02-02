@@ -46,7 +46,7 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public GameModel getModel() {
+	public String getModel() {
 		return null;
 		// TODO Auto-generated method stub
 

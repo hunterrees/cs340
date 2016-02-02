@@ -1,6 +1,10 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,7 +28,8 @@ import shared.locations.VertexLocation;
 public class ServerProxy implements ServerInterface {
 
 	private String userCookie;
-	private int gameID;
+	private String gameCookie;
+	private String fullCookie;
 	private static String SERVER_HOST;
 	private static int SERVER_PORT; //given server runs on port 8081
 	private static String URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
@@ -35,37 +40,84 @@ public class ServerProxy implements ServerInterface {
 		URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
 	}
 	
-	@Override
-	public void userLogin(String username, String password) {
-		UserTranslator user = new UserTranslator(username, password);
-		String json = user.translate();
-
-	}
-	
-	private Object post(String urlPath, String json) throws ServerException{
+	private void post(String urlPath, String json) throws ServerException{
 		try{
 			URL url = new URL(URL_PREFIX + urlPath);
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("POST");
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
-			connection.connect();
-			//add cookie to all of the subsequent server calls
-			//send object receive response (only to get cookie on login and id on join game)
+			
+			if(urlPath == "/user/login"){
+				connection.connect();
+				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
+				output.writeBytes(json);
+				userCookie = connection.getHeaderField("Set-cookie:");
+				userCookie = userCookie.replace("Path=/", "");
+			}else if(urlPath == "games/join"){
+				connection.setRequestProperty("Cookie:", userCookie);
+				connection.connect();
+				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
+				output.writeBytes(json);
+				gameCookie = connection.getHeaderField("Set-cookie:");
+				gameCookie = gameCookie.replace("Path=/", "");
+				fullCookie = userCookie + gameCookie;
+			}else{
+				connection.setRequestProperty("Cookie:", fullCookie);
+				connection.connect();
+				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
+				output.writeBytes(json);
+			}
 		}catch(Exception e){
 			throw new ServerException(String.format("doPost failed: %s", e.getMessage()), e);
 		}
-		return null;
 	}
 	
-	//add a get method like the one from ClientCommunicator for 240
-	//returns a byte array, turn into an object, then pass that object to the translator
-
+	private String get(String urlPath) throws ServerException{
+		StringBuffer result = new StringBuffer();
+		try{
+			URL url = new URL(URL_PREFIX + urlPath);
+			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Cookie:", fullCookie);
+			connection.connect();
+			if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				String inputLine;
+				while((inputLine = in.readLine()) != null){
+					result.append(inputLine);
+				}
+				in.close();
+			}else{
+				throw new Exception();
+			}
+		}catch(Exception e){
+			throw new ServerException(String.format("doGet failed: %s", e.getMessage()), e);
+		}
+		return result.toString();
+	}
+	
+	@Override
+	public void userLogin(String username, String password) {
+		UserTranslator user = new UserTranslator(username, password);
+		String json = user.translate();
+		try{
+			post("/user/login", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void userRegister(String username, String password) {
 		UserTranslator user = new UserTranslator(username, password);
 		String json = user.translate();
-		
+		try{
+			post("/user/register", json);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -89,10 +141,13 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public GameModel getModel() {
+	public String getModel() {
+		try{
+			return get("/game/model");
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 		return null;
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

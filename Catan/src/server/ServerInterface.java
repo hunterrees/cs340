@@ -46,7 +46,7 @@ public interface ServerInterface {
 	 * Gets the model from the server, compares to versionID
 	 * @param versionID Current versionID of the client
 	 */
-	public GameModel getModel()throws ServerException;
+	public String getModel()throws ServerException;
 	/**
 	 * Adds a new AI to the game
 	 * @param AIname Name of AI to add
