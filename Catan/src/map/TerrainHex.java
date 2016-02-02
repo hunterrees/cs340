@@ -18,7 +18,8 @@ public class TerrainHex {
 	private Piece piece;
 	private int number;
 	
-	
+	HashMap<EdgeLocation, Edge> edges;
+	HashMap<VertexLocation, Vertex> verticies;
 
 
 
