@@ -1074,9 +1074,6 @@ public class Map {
 		}
 
 
-
-
-
 		// Second case
 		if(canBuildRoad(playerID, false, spot2)) {
 			Edge tempEdge = edges.get(spot2);
