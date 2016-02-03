@@ -3,6 +3,7 @@ package translators;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
@@ -10,6 +11,7 @@ import map.Map;
 import model.Bank;
 import model.Chat;
 import model.GameModel;
+import model.Line;
 import model.Log;
 import model.TurnTracker;
 import player.Player;
@@ -177,15 +179,80 @@ public class ModelTranslator {
 	}
 	
 	public TradeOffer buildTradeOffer(JsonObject tradeOfferJson){
-		return null;
+		JsonPrimitive senderJson = tradeOfferJson.getAsJsonPrimitive("sender");
+		int sender = senderJson.getAsInt();
+		
+		JsonPrimitive receiverJson = tradeOfferJson.getAsJsonPrimitive("receiver");
+		int receiver = receiverJson.getAsInt();
+		
+		JsonObject offerJson = tradeOfferJson.getAsJsonObject("offer");
+		JsonPrimitive brickJson = offerJson.getAsJsonPrimitive("brick");
+		int brick = brickJson.getAsInt();
+		
+		JsonPrimitive woodJson = offerJson.getAsJsonPrimitive("wood");
+		int wood = woodJson.getAsInt();
+		
+		JsonPrimitive sheepJson = offerJson.getAsJsonPrimitive("sheep");
+		int sheep = sheepJson.getAsInt();
+		
+		JsonPrimitive wheatJson = offerJson.getAsJsonPrimitive("wheat");
+		int wheat = wheatJson.getAsInt();
+		
+		JsonPrimitive oreJson = offerJson.getAsJsonPrimitive("ore");
+		int ore = oreJson.getAsInt();
+		
+		ArrayList<ResourceType> resourcesOffered = new ArrayList<ResourceType>();
+		ArrayList<ResourceType> resourcesDesired = new ArrayList<ResourceType>();
+		addTradeResources(resourcesOffered, resourcesDesired, ResourceType.BRICK, brick);
+		addTradeResources(resourcesOffered, resourcesDesired, ResourceType.WOOD, wood);
+		addTradeResources(resourcesOffered, resourcesDesired, ResourceType.SHEEP, sheep);
+		addTradeResources(resourcesOffered, resourcesDesired, ResourceType.WHEAT, wheat);
+		addTradeResources(resourcesOffered, resourcesDesired, ResourceType.ORE, ore);
+		
+		TradeOffer tradeOffer = new TradeOffer(sender, receiver, resourcesOffered, resourcesDesired);
+		return tradeOffer;
+	}
+	
+	private void addTradeResources(ArrayList<ResourceType> offer, ArrayList<ResourceType> receive, ResourceType type, int amount){
+		if(amount > 0){
+			for(int i = 0; i < amount; i++){
+				offer.add(type);
+			}
+		}else if(amount < 0){
+			amount = -1 * amount;
+			for(int i = 0; i < amount; i++){
+				receive.add(type);
+			}
+		}
 	}
 	
 	public Log buildLog(JsonObject logJson){
-		return null;
+		ArrayList<Line> lines = new ArrayList<Line>();
+		JsonArray linesJson = logJson.getAsJsonArray("lines");
+		for(int i = 0; i < linesJson.size(); i++){
+			JsonObject lineJson = (JsonObject) linesJson.get(i);
+			JsonPrimitive sourceJson = lineJson.getAsJsonPrimitive("source");
+			String source = sourceJson.getAsString();
+			JsonPrimitive messageJson = lineJson.getAsJsonPrimitive("message");
+			String message = messageJson.getAsString();
+			lines.add(new Line(source, message));
+		}
+		Log log = new Log(lines);
+		return log;
 	}
 	
 	public Chat buildChat(JsonObject chatJson){
-		
-		return null;
+		ArrayList<Line> lines = new ArrayList<Line>();
+		JsonArray linesJson = chatJson.getAsJsonArray("lines");
+		for(int i = 0; i < linesJson.size(); i++){
+			JsonObject lineJson = (JsonObject) linesJson.get(i);
+			JsonPrimitive sourceJson = lineJson.getAsJsonPrimitive("source");
+			String source = sourceJson.getAsString();
+			JsonPrimitive messageJson = lineJson.getAsJsonPrimitive("message");
+			String message = messageJson.getAsString();
+			lines.add(new Line(source, message));
+		}
+		Chat chat = new Chat(lines);
+		return chat;
 	}
 }
