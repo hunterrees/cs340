@@ -41,7 +41,6 @@ public class CanBuildSettlement {
         assertFalse(map.canBuildSettlement(1, true, el));
 
         // Building it next to own road on non setup mode
-        // This test case is failing
         Piece road = new Piece(PieceType.ROAD, null, null, 1);
         Edge spot1 = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.South).getNormalizedLocation());
         spot1.setPiece(road);
@@ -49,7 +48,6 @@ public class CanBuildSettlement {
         assertTrue(map.canBuildSettlement(1, true, el));
 
         // Building it next to another player's road on non setup mode
-        // This test case is failing
         road = new Piece(PieceType.ROAD, null, null, 2);
         //Edge spot2 = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), VertexDirection.SouthWest).getNormalizedLocation());
         spot1.setPiece(road);
