@@ -14,8 +14,8 @@ public class Port {
 	
 	
 	
-	public Port() {
-		
+	public Port(PortType type) {
+		this.type = type;
 	}
 
 	/**

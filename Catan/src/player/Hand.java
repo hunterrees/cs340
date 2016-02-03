@@ -22,6 +22,12 @@ public class Hand
 	 * Knights owned by player
 	 */
 	private int knights;
+	public Hand()
+	{
+		oldDevelopmentCards = new ArrayList<DevelopmentCard>();
+		newDevelopmentCards = new ArrayList<DevelopmentCard>();
+		resourceCards = new ArrayList<ResourceCard>();
+	}
 	/**
 	 * returns number of total resources owned by player
 	 * @return
@@ -122,7 +128,7 @@ public class Hand
 		int i = 0;
 		while (!cardRemoved)
 		{
-			if (oldDevelopmentCards.get(i).equals(type))
+			if (oldDevelopmentCards.get(i).getType().equals(type))
 			{
 				oldDevelopmentCards.remove(i);
 				cardRemoved = true;
@@ -141,7 +147,7 @@ public class Hand
 		int i = 0;
 		while (!cardRemoved)
 		{
-			if (newDevelopmentCards.get(i).equals(type))
+			if (newDevelopmentCards.get(i).getType().equals(type))
 			{
 				newDevelopmentCards.remove(i);
 				cardRemoved = true;
@@ -155,9 +161,9 @@ public class Hand
 		int numRemaining = 0;
 		for (int i = 0; i < oldDevelopmentCards.size(); i++)
 		{
-			if (oldDevelopmentCards.get(i).equals(type))
+			if (oldDevelopmentCards.get(i).getType() == type)
 			{
-				i++;
+				numRemaining++;
 			}
 		}
 		return numRemaining;
@@ -167,9 +173,9 @@ public class Hand
 		int numRemaining = 0;
 		for (int i = 0; i < newDevelopmentCards.size(); i++)
 		{
-			if (newDevelopmentCards.get(i).equals(type))
+			if (newDevelopmentCards.get(i).getType() == type)
 			{
-				i++;
+				numRemaining++;
 			}
 		}
 		return numRemaining;
@@ -202,5 +208,8 @@ public class Hand
 	{
 		return resourceCards;
 	}
-	
+	public void setResourceCards(ArrayList<ResourceCard> cardsToSet)
+	{
+		resourceCards = cardsToSet;
+	}
 }

@@ -54,9 +54,12 @@ public class Player
 	public Player(int playerID, CatanColor playerColor, String name)
 	{
 		playerPieces = new ArrayList<Piece>();
+		playerPorts = new ArrayList<Port>();
 		this.playerID = playerID;
 		this.playerColor = playerColor;
 		this.name = name;
+		playerHand = new Hand();
+		victoryPoints = 0;
 	}
 
 	/**
@@ -171,7 +174,7 @@ public class Player
 	{
 		for (int i = 0; i < playerPorts.size(); i++)
 		{
-			if (playerPorts.get(i).equals("THREE"))
+			if (playerPorts.get(i).getType().equals(PortType.THREE))
 			{
 				return true;
 			}
@@ -180,14 +183,56 @@ public class Player
 	}
 	public boolean hasPortType(ResourceType type)
 	{
+		PortType assignPort = null;
+		if (type == ResourceType.BRICK)
+		{
+			assignPort = PortType.BRICK;
+		}
+		else if (type == ResourceType.ORE)
+		{
+			assignPort = PortType.ORE;
+		}
+		else if (type == ResourceType.SHEEP)
+		{
+			assignPort = PortType.SHEEP;
+		}
+		else if (type == ResourceType.WHEAT)
+		{
+			assignPort = PortType.WHEAT;
+		}
+		else if (type == ResourceType.WOOD)
+		{
+			assignPort = PortType.WOOD;
+		}
+	
+		
 		for (int i = 0; i < playerPorts.size(); i++)
 		{
-			if (playerPorts.get(i).equals(type))
+			if (playerPorts.get(i).getType().equals(assignPort))
 			{
 				return true;
 			}
 		}
 		return false;
+	}
+	public void addPort(PortType type)
+	{
+		playerPorts.add(new Port(type));
+	}
+	public void removePort(PortType type)
+	{
+		for (int i = 0; i < playerPorts.size(); i++)
+		{
+			if (playerPorts.get(i).getType() == type)
+			{
+				playerPorts.remove(i);
+				break;
+			}
+		}
+	}
+	public void addVictoryPoint()
+	{
+		victoryPoints++;
 	}
 	/**
 	 * return all pieces owned by player
