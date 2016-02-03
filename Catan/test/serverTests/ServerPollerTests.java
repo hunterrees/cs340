@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ServerProxy {
+public class ServerPollerTests {
 
 	@Test
 	public void test() {

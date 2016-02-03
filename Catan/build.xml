@@ -11,7 +11,9 @@
     <!-- Input folders -->
     <property name="java.dir" value="java"/>
     <property name="java.src.dir" value="${java.dir}/src"/>
+	<property name="java.test.dir" value="/test"/>
     <property name="java.lib.dir" value="${java.dir}/lib"/>
+	
     <!-- JavaScript source folder -->
     <property name="javascript.dir" value="gameplay/js"/>
     
@@ -33,6 +35,18 @@
 		<fileset dir="${java.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
+	</path>
+	
+	<path id="lib-classpath">
+			<fileset dir="test">
+				<include name="**/*.jar" />
+			</fileset>
+	</path>
+	
+	<path id="all-classpath">
+		<path refid="lib-classpath"/>
+			<pathelement location="${build}"/>
+			<pathelement location="java/lib/junit-4.8.2.jar"/>
 	</path>
 
 	<!-- TARGETS -->
@@ -81,7 +95,7 @@
     -->
 
   	<property name="java.dir" location="java"/>
-	<property name="java.src" location="${java.dir}/src"/>
+	<property name="java.src" location="src"/>
 	<property name="java.images" location="${java.dir}/images"/>
 	<property name="java.build" location="${java.dir}/build"/>
 	<property name="java.dist" location="${java.dir}/dist"/>
@@ -101,6 +115,9 @@
 	<target name="compile" depends="init" description="compile the source " >
 		<javac srcdir="${java.src}" destdir="${java.build}" debug="true" includeantruntime="true">
 			<classpath refid="java.lib.classpath" />
+		</javac>
+		<javac srcdir ="test" classpathref="java.lib.classpath" destdir="${java.build}" includeantruntime="true">
+		 	<classpath refid="test"/>
 		</javac>
 	</target>
 	
@@ -158,7 +175,7 @@
 	<target name="test" depends="compile" description= "runs JUnits for Phase 1">
 		<java classname = "phase1tests.Phase1Tests" fork="yes">
 			<classpath>
-				<path refid="all-classpath"/>
+						<path refid="all-classpath"/>
 			</classpath>
 			<assertions>
 				<enable/>

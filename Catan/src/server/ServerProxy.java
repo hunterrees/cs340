@@ -52,34 +52,35 @@ public class ServerProxy implements ServerInterface {
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
 				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
-					throw new ServerException(String.format("doPost failed: %s (http code %d)",
-							urlPath, connection.getResponseCode()));
+					throw new ServerException(String.format("doPost failed: %s (http code %d) %s",
+							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
 				}
-				userCookie = connection.getHeaderField("Set-cookie:");
-				userCookie = userCookie.replace("Path=/", "");
+				userCookie = connection.getHeaderField("Set-cookie");
+				userCookie = userCookie.replace(";Path=/;", "");
 			}else if(urlPath == "/games/join"){
-				connection.setRequestProperty("Cookie:", userCookie);
+				connection.setRequestProperty("Cookie", userCookie);
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
 				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
-					throw new ServerException(String.format("doPost failed: %s (http code %d)",
-							urlPath, connection.getResponseCode()));
+					throw new ServerException(String.format("doPost failed: %s (http code %d) %s",
+							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
 				}
-				gameCookie = connection.getHeaderField("Set-cookie:");
-				gameCookie = gameCookie.replace("Path=/", "");
-				fullCookie = userCookie + gameCookie;
+				gameCookie = connection.getHeaderField("Set-cookie");
+				gameCookie = gameCookie.replace(";Path=/;", "");
+				fullCookie = userCookie + "; " + gameCookie;
+				System.out.println(fullCookie);
 			}else{
 				if(fullCookie == null){
 					throw new ServerException("Haven't logged in/and or joined game");
 				}
-				connection.setRequestProperty("Cookie:", fullCookie);
+				connection.setRequestProperty("Cookie", fullCookie);
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
 				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
-					throw new ServerException(String.format("doPost failed: %s (http code %d)",
-							urlPath, connection.getResponseCode()));
+					throw new ServerException(String.format("doPost failed: %s (http code %d) %s",
+							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
 				}
 			}
 		}catch(Exception e){

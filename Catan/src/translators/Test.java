@@ -14,7 +14,7 @@ public class Test {
 	public Test(){};
 	
 	public static void main(String[] args){
-		GenericTranslator translate = new GamesCreateTranslator(true, true, true, "test9pm");
+		GenericTranslator translate = new MovesRollNumberTranslator(0, 10);
 		System.out.println(translate.translate());
 	}
 }

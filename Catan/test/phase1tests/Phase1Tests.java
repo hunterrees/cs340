@@ -21,7 +21,7 @@ public class Phase1Tests{
 	}
 
 	public static void main(String[] args) {
-		//add new JUnit files to run here
+		
 		String[] testClasses = new String[] {
 				"canDoTests.CanAcceptTrade", "canDoTests.CanBuildRoad", "canDoTests.CanBuildCity", "canDoTests.CanBuildSettlement", 
 				"canDoTests.CanBuyDevCard", "canDoTests.CanDiscardCards", "canDoTests.CanFinishTurn", "canDoTests.CanMaritimeTrade",
