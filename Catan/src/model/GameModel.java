@@ -145,7 +145,7 @@ public class GameModel {
 		if(tracker.getCurrentTurnPlayerID() != playerID || tracker.getGameStatus() != GameState.rolling) {
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -240,6 +240,35 @@ public class GameModel {
 	}
 
 	public boolean offerTrade(int playerID, ArrayList<ResourceType> resourceTypes) {
+		if (playerID != tracker.currentTurnPlayerID)
+		{
+			return false;
+		}
+		//Get how many of each resource being offered
+		int wood = 0;
+		int brick = 0;
+		int sheep = 0;
+		int wheat = 0;
+		int ore = 0;
+
+		for(ResourceType rt : resourceTypes) {
+			switch(rt) {
+				case WOOD: wood++; break;
+				case BRICK: brick++; break;
+				case SHEEP: sheep++; break;
+				case WHEAT: wheat++; break;
+				case ORE: ore++; break;
+				default: System.out.println("Error! ResourceType doesn't exist!");
+			}
+		}	
+		Player p = players.get(playerID);
+		if(p.numResourceRemaining(ResourceType.WOOD) >= wood &&
+				p.numResourceRemaining(ResourceType.BRICK) >= brick &&
+				p.numResourceRemaining(ResourceType.SHEEP) >= sheep &&
+				p.numResourceRemaining(ResourceType.WHEAT) >= wheat &&
+				p.numResourceRemaining( ResourceType.ORE) >= ore) {
+			return true;
+		}
 		return false;
 	}
 
@@ -410,7 +439,7 @@ public class GameModel {
 
 
 
-		int difference = 10 - (players.get(playerID).numNewDevCardRemaining(DevCardType.MONOPOLY)+players.get(playerID).numOldDevCardRemaining(DevCardType.MONOPOLY));
+		int difference = 10 - (players.get(playerID).numNewDevCardRemaining(DevCardType.MONUMENT)+players.get(playerID).numOldDevCardRemaining(DevCardType.MONOPOLY));
 
 		if(difference >= players.get(playerID).getVictoryPoints()) {
 			return true;

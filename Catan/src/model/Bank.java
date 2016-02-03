@@ -3,6 +3,7 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import shared.*;
+import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 
 public class Bank 
@@ -20,6 +21,7 @@ public class Bank
 		bankResourceCards = new ArrayList<ResourceCard>();
 		bankDevelopmentCards = new ArrayList<DevelopmentCard>();
 		generateStartingResources();
+		generateStartingDevelopmentCards();
 	}
 	/**
 	 * Populate deck of development cards and maximum number of resource cards
@@ -40,6 +42,10 @@ public class Bank
 			bankResourceCards.add(new ResourceCard(ResourceType.ORE));
 
 		}
+	}
+	public void generateStartingDevelopmentCards()
+	{
+		bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONOPOLY));
 	}
 	/**
 	 * add amount of type resources to the bank
@@ -108,5 +114,9 @@ public class Bank
 	 */
 	public ArrayList<ResourceCard> getResourceCards() {
 		return bankResourceCards;
+	}
+	public void setResources(ArrayList<ResourceCard> resourceDeck)
+	{
+		bankResourceCards = resourceDeck;
 	}
 }
