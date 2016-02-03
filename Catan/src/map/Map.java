@@ -13,7 +13,7 @@ import shared.definitions.PieceType;
 import shared.locations.*;
 
 public class Map {
-
+	int test;
 	private HashMap<HexLocation, TerrainHex> hexes;
 	private HashMap<EdgeLocation, Edge> edges;
 	private HashMap<VertexLocation, Vertex> verticies;
