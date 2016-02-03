@@ -24,7 +24,7 @@ public class CanFinishTurn {
 		players.add(new Player(1, CatanColor.RED, "player1"));
 		players.add(new Player(2, CatanColor.RED, "player1"));
 		players.add(new Player(3, CatanColor.RED, "player1"));
-		GameModel testGameModel = new GameModel(null, players, null, null, myTurnTracker);
+		GameModel testGameModel = new GameModel(null, null, players, null, null, myTurnTracker);
 		assertTrue(testGameModel.finishTurn(0));
 		assertFalse(testGameModel.finishTurn(1));
 		myTurnTracker.setCurrentTurnPlayerID(1);
