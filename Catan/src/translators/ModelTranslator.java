@@ -13,6 +13,11 @@ import model.GameModel;
 import model.Log;
 import model.TurnTracker;
 import player.Player;
+import shared.DevelopmentCard;
+import shared.ResourceCard;
+import shared.definitions.DevCardType;
+import shared.definitions.GameState;
+import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import trade.TradeOffer;
 
@@ -69,7 +74,72 @@ public class ModelTranslator {
 	};
 	
 	public Bank buildBank(JsonObject deckJson, JsonObject bankJson){
-		return null;
+		ArrayList<DevelopmentCard> devCards = buildDevCards(deckJson);
+		ArrayList<ResourceCard> resources = buildResources(bankJson);
+		Bank bank = new Bank(resources, devCards);
+		return bank;
+	}
+	
+	public ArrayList<ResourceCard> buildResources(JsonObject bankJson){
+		JsonPrimitive brickJson = bankJson.getAsJsonPrimitive("brick");
+		int brick = brickJson.getAsInt();
+		
+		JsonPrimitive woodJson = bankJson.getAsJsonPrimitive("wood");
+		int wood = woodJson.getAsInt();
+		
+		JsonPrimitive sheepJson = bankJson.getAsJsonPrimitive("sheep");
+		int sheep = sheepJson.getAsInt();
+		
+		JsonPrimitive wheatJson = bankJson.getAsJsonPrimitive("wheat");
+		int wheat = wheatJson.getAsInt();
+		
+		JsonPrimitive oreJson = bankJson.getAsJsonPrimitive("ore");
+		int ore = oreJson.getAsInt();
+		
+		ArrayList<ResourceCard> resources = new ArrayList<ResourceCard>();
+		addResources(resources, new ResourceCard(ResourceType.BRICK), brick);
+		addResources(resources, new ResourceCard(ResourceType.WOOD), wood);
+		addResources(resources, new ResourceCard(ResourceType.SHEEP), sheep);
+		addResources(resources, new ResourceCard(ResourceType.WHEAT), wheat);
+		addResources(resources, new ResourceCard(ResourceType.ORE), ore);
+		return resources;
+	}
+	
+	public ArrayList<DevelopmentCard> buildDevCards(JsonObject deckJson){
+		JsonPrimitive yearOfPlentyJson = deckJson.getAsJsonPrimitive("yearOfPlenty");
+		int yearOfPlenty = yearOfPlentyJson.getAsInt();
+		
+		JsonPrimitive monopolyJson = deckJson.getAsJsonPrimitive("monopoly");
+		int monopoly = monopolyJson.getAsInt();
+		
+		JsonPrimitive soldierJson = deckJson.getAsJsonPrimitive("soldier");
+		int soldier = soldierJson.getAsInt();
+		
+		JsonPrimitive roadBldgJson = deckJson.getAsJsonPrimitive("roadBuilding");
+		int roadBuilding = roadBldgJson.getAsInt();
+		
+		JsonPrimitive monumentJson = deckJson.getAsJsonPrimitive("monument");
+		int monument = monumentJson.getAsInt();
+		
+		ArrayList<DevelopmentCard> devCards = new ArrayList<DevelopmentCard>();
+		addDevCards(devCards, new DevelopmentCard(DevCardType.YEAR_OF_PLENTY), yearOfPlenty);
+		addDevCards(devCards, new DevelopmentCard(DevCardType.MONOPOLY), monopoly);
+		addDevCards(devCards, new DevelopmentCard(DevCardType.SOLDIER), soldier);
+		addDevCards(devCards, new DevelopmentCard(DevCardType.ROAD_BUILD), roadBuilding);
+		addDevCards(devCards, new DevelopmentCard(DevCardType.MONUMENT), monument);
+		return devCards;
+	}
+	
+	private void addResources(ArrayList<ResourceCard> resources, ResourceCard resourceToAdd, int amount){
+		for(int i = 0; i < amount; i++){
+			resources.add(resourceToAdd);
+		}
+	}
+	
+	private void addDevCards(ArrayList<DevelopmentCard> devCards, DevelopmentCard devToAdd, int amount){
+		for(int i = 0; i < amount; i++){
+			devCards.add(devToAdd);
+		}
 	}
 	
 	public Map buildMap(JsonObject mapJson){
@@ -81,7 +151,29 @@ public class ModelTranslator {
 	}
 	
 	public TurnTracker buildTurnTracker(JsonObject turnTrackerJson){
-		return null;
+		JsonPrimitive statusJson = turnTrackerJson.getAsJsonPrimitive("status");
+		String statusString = statusJson.getAsString();
+		GameState status;
+		if(statusString.equals("Playing")){
+			status = GameState.playing;
+		}else if(statusString.equals("Rolling")){
+			status = GameState.rolling;
+		}else if(statusString.equals("Robbing")){
+			status = GameState.robbing;
+		}else{
+			status = GameState.discarding;
+		}
+		
+		JsonPrimitive currentTurnJson = turnTrackerJson.getAsJsonPrimitive("currentTurn");
+		int currentTurn = currentTurnJson.getAsInt();
+		
+		JsonPrimitive longestRoadJson = turnTrackerJson.getAsJsonPrimitive("longestRoad");
+		int longestRoad = longestRoadJson.getAsInt();
+		
+		JsonPrimitive largestArmyJson = turnTrackerJson.getAsJsonPrimitive("largestArmy");
+		int largestArmy = largestArmyJson.getAsInt();
+		TurnTracker turnTracker = new TurnTracker(longestRoad, largestArmy, status, currentTurn);
+		return turnTracker;
 	}
 	
 	public TradeOffer buildTradeOffer(JsonObject tradeOfferJson){
@@ -93,6 +185,7 @@ public class ModelTranslator {
 	}
 	
 	public Chat buildChat(JsonObject chatJson){
+		
 		return null;
 	}
 }

@@ -23,6 +23,11 @@ public class Bank
 		generateStartingResources();
 		generateStartingDevelopmentCards();
 	}
+	
+	public Bank(ArrayList<ResourceCard> resources, ArrayList<DevelopmentCard> devCards){
+		bankResourceCards = resources;
+		bankDevelopmentCards = devCards;
+	}
 	/**
 	 * Populate deck of development cards and maximum number of resource cards
 	 */
@@ -43,6 +48,8 @@ public class Bank
 
 		}
 	}
+	
+	//Needs to generate all the development cards
 	public void generateStartingDevelopmentCards()
 	{
 		bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONOPOLY));
