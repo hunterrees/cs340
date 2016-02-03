@@ -28,12 +28,11 @@ public class GameModel {
 	private TurnTracker tracker;
 
 // Constructor
-	public GameModel(Map map, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
+	public GameModel(Map map, Bank bank, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
 						TurnTracker tracker) {
 		this.tracker = tracker;
 
 		this.map = map;
-		this.bank = Bank.BANK;
 		this.robberLoc = robberLoc;
 		this.theTrade = theTrade;
 
