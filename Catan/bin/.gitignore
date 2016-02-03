@@ -1,2 +1,12 @@
-/translators/
+/canDoTests/
+/client/
+/gameManager/
+/map/
 /model/
+/phase1tests/
+/player/
+/server/
+/serverTests/
+/shared/
+/trade/
+/translators/
