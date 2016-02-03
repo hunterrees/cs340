@@ -34,7 +34,8 @@ public class TerrainHex {
 	 * @param x, x coordinate for the hex position
 	 * @param y, y coordinate for the hex position
 	 */
-	public TerrainHex(HexType wheat, int num){
+	public TerrainHex(HexLocation loc, HexType wheat, int num){
+		location = loc;
 		this.type = wheat;
 		number = num;
 		piece = null;

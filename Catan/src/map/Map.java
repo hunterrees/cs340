@@ -78,12 +78,12 @@ public class Map {
 
 
 			switch(loc.getDir()) {
-				case East: vertexECase(playerID, setUp, loc); break;
-				case West: vertexWCase(playerID, setUp, loc); break;
-				case NorthEast: vertexNECase(playerID, setUp, loc); break;
-				case SouthEast: vertexSECase(playerID, setUp, loc); break;
-				case NorthWest: vertexNWCase(playerID, setUp, loc); break;
-				case SouthWest: vertexSWCase(playerID, setUp, loc); break;
+				case East: return vertexECase(playerID, setUp, loc);
+				case West: return vertexWCase(playerID, setUp, loc);
+				case NorthEast: return vertexNECase(playerID, setUp, loc);
+				case SouthEast: return vertexSECase(playerID, setUp, loc);
+				case NorthWest: return vertexNWCase(playerID, setUp, loc);
+				case SouthWest: return vertexSWCase(playerID, setUp, loc);
 				default: System.out.println("Error! VertexLocation doesn't exist!");
 			}
 
@@ -314,13 +314,14 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
 
+			System.out.println(upperHex.getLocation());
 			// Check if the corners are valid
-			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
+			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 			Vertex rightCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
 			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 
 
-			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
+			if(rightCorner != null && rightCorner.getPiece() != null || upCorner != null && upCorner.getPiece() != null || rightCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
@@ -328,7 +329,7 @@ public class Map {
 				// Check if the edges are valid
 				Edge rightEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North).getNormalizedLocation());
 				Edge upEdge = edges.get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
-				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest).getNormalizedLocation());
 
 
 
@@ -407,12 +408,12 @@ public class Map {
 			TerrainHex neighbor = hexes.get(hex.getLocation().getNeighborLoc(loc.getDir()));
 
 			switch(loc.getDir()) {
-				case NorthWest: edgeNWCase(playerID, free, loc, hex, neighbor); break;
-				case North: edgeNCase(playerID, free, loc, hex, neighbor); break;
-				case NorthEast: edgeNECase(playerID, free, loc, hex, neighbor); break;
-				case SouthEast: edgeSECase(playerID, free, loc, hex, neighbor); break;
-				case South: edgeSCase(playerID, free, loc, hex, neighbor); break;
-				case SouthWest: edgeSWCase(playerID, free, loc, hex, neighbor); break;
+				case NorthWest: return edgeNWCase(playerID, free, loc, hex, neighbor);
+				case North: return edgeNCase(playerID, free, loc, hex, neighbor);
+				case NorthEast: return edgeNECase(playerID, free, loc, hex, neighbor);
+				case SouthEast: return edgeSECase(playerID, free, loc, hex, neighbor);
+				case South: return edgeSCase(playerID, free, loc, hex, neighbor);
+				case SouthWest: return edgeSWCase(playerID, free, loc, hex, neighbor);
 
 
 				default: System.out.println("Error! The EdgeLocation doesn't exist!");
@@ -907,80 +908,80 @@ public class Map {
 	 * 
 	 **/
 	public void buildHexes(){
-		TerrainHex hex1 = new TerrainHex(HexType.WOOD, 11);
 		HexLocation loc1 = new HexLocation(0, -2);
+		TerrainHex hex1 = new TerrainHex(loc1, HexType.WOOD, 11);
 		hexes.put(loc1, hex1);
 
-		TerrainHex hex2 = new TerrainHex(HexType.SHEEP, 12);
 		HexLocation loc2 = new HexLocation(1, -2);
+		TerrainHex hex2 = new TerrainHex(loc2, HexType.SHEEP, 12);
 		hexes.put(loc2, hex2);
 		
-		TerrainHex hex3 = new TerrainHex(HexType.WHEAT, 9);
 		HexLocation loc3 = new HexLocation(2, -2);
+		TerrainHex hex3 = new TerrainHex(loc3, HexType.WHEAT, 9);
 		hexes.put(loc3, hex3);
 		
-		TerrainHex hex4 = new TerrainHex(HexType.BRICK, 4);
 		HexLocation loc4 = new HexLocation(-1, -1);
+		TerrainHex hex4 = new TerrainHex(loc4, HexType.BRICK, 4);
 		hexes.put(loc4, hex4);
 		
-		TerrainHex hex5 = new TerrainHex(HexType.ORE, 6);
 		HexLocation loc5 = new HexLocation(0, -1);
+		TerrainHex hex5 = new TerrainHex(loc5, HexType.ORE, 6);
 		hexes.put(loc5, hex5);
 		
-		TerrainHex hex6 = new TerrainHex(HexType.BRICK, 5);
 		HexLocation loc6 = new HexLocation(1, -1);
+		TerrainHex hex6 = new TerrainHex(loc6, HexType.BRICK, 5);
 		hexes.put(loc6, hex6);
 		
-		TerrainHex hex7 = new TerrainHex(HexType.SHEEP, 10);
 		HexLocation loc7 = new HexLocation(2, -1);
+		TerrainHex hex7 = new TerrainHex(loc7,HexType.SHEEP, 10);
 		hexes.put(loc7, hex7);
 		
-		TerrainHex hex8 = new TerrainHex(HexType.DESERT, 0);
 		HexLocation loc8 = new HexLocation(-2, 0);
+		TerrainHex hex8 = new TerrainHex(loc8, HexType.DESERT, 0);
 		hexes.put(loc8, hex8);
 		
-		TerrainHex hex9 = new TerrainHex(HexType.WOOD, 3);
 		HexLocation loc9 = new HexLocation(-1, 0);
+		TerrainHex hex9 = new TerrainHex(loc9, HexType.WOOD, 3);
 		hexes.put(loc9, hex9);
 		
-		TerrainHex hex10 = new TerrainHex(HexType.WHEAT, 11);
 		HexLocation loc10 = new HexLocation(0, 0);
+		TerrainHex hex10 = new TerrainHex(loc10, HexType.WHEAT, 11);
 		hexes.put(loc10, hex10);
 		
-		TerrainHex hex11 = new TerrainHex(HexType.WOOD, 4);
 		HexLocation loc11 = new HexLocation(1, 0);
+		TerrainHex hex11 = new TerrainHex(loc11, HexType.WOOD, 4);
 		hexes.put(loc11, hex11);
 		
-		TerrainHex hex12 = new TerrainHex(HexType.WHEAT, 8);
 		HexLocation loc12 = new HexLocation(2, 0);
+		TerrainHex hex12 = new TerrainHex(loc12, HexType.WHEAT, 8);
 		hexes.put(loc12, hex12);
 		
-		TerrainHex hex13 = new TerrainHex(HexType.BRICK, 8);
 		HexLocation loc13 = new HexLocation(-2, 1);
+		TerrainHex hex13 = new TerrainHex(loc13, HexType.BRICK, 8);
 		hexes.put(loc13, hex13);
 		
-		TerrainHex hex14 = new TerrainHex(HexType.SHEEP, 10);
 		HexLocation loc14 = new HexLocation(-1, 1);
+		TerrainHex hex14 = new TerrainHex(loc14, HexType.SHEEP, 10);
 		hexes.put(loc14, hex14);
 		
-		TerrainHex hex15 = new TerrainHex(HexType.SHEEP, 9);
 		HexLocation loc15 = new HexLocation(0, 1);
+		TerrainHex hex15 = new TerrainHex(loc15, HexType.SHEEP, 9);
 		hexes.put(loc15, hex15);
 		
-		TerrainHex hex16 = new TerrainHex(HexType.ORE, 3);
 		HexLocation loc16 = new HexLocation(1, 1);
+		TerrainHex hex16 = new TerrainHex(loc16, HexType.ORE, 3);
 		hexes.put(loc16, hex16);
 		
-		TerrainHex hex17 = new TerrainHex(HexType.ORE, 5);
 		HexLocation loc17 = new HexLocation(-2, 2);
+		TerrainHex hex17 = new TerrainHex(loc17, HexType.ORE, 5);
 		hexes.put(loc17, hex17);
 		
-		TerrainHex hex18 = new TerrainHex(HexType.WHEAT, 2);
 		HexLocation loc18 = new HexLocation(-1, 2);
+		TerrainHex hex18 = new TerrainHex(loc18, HexType.WHEAT, 2);
 		hexes.put(loc18, hex18);
 		
-		TerrainHex hex19 = new TerrainHex(HexType.WOOD, 6);
 		HexLocation loc19 = new HexLocation(0, 2);
+		TerrainHex hex19 = new TerrainHex(loc19, HexType.WOOD, 6);
 		hexes.put(loc19, hex19);
 		
 		

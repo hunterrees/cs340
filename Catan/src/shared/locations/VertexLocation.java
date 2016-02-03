@@ -11,7 +11,8 @@ public class VertexLocation
 	
 	public VertexLocation(HexLocation hexLoc, VertexDirection dir)
 	{
-		setHexLoc(hexLoc);
+		//setHexLoc(hexLoc);
+		this.hexLoc = hexLoc;
 		setDir(dir);
 	}
 	
