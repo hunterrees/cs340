@@ -14,14 +14,13 @@ import shared.locations.*;
 
 public class Map {
 	int test;
-	private HashMap<HexLocation, TerrainHex> hexes;
-	private HashMap<EdgeLocation, Edge> edges;
-	private HashMap<VertexLocation, Vertex> verticies;
+	private HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
+	private HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
+	private HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
 	
 	// change
-	// change
+	// changedf
 	public Map() {
-		
 		
 		buildHexes();
 		buildEdges();
@@ -908,11 +907,10 @@ public class Map {
 	 * 
 	 **/
 	public void buildHexes(){
-		
 		TerrainHex hex1 = new TerrainHex(HexType.WOOD, 11);
 		HexLocation loc1 = new HexLocation(0, -2);
 		hexes.put(loc1, hex1);
-		
+
 		TerrainHex hex2 = new TerrainHex(HexType.SHEEP, 12);
 		HexLocation loc2 = new HexLocation(1, -2);
 		hexes.put(loc2, hex2);
