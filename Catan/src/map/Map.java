@@ -19,6 +19,7 @@ public class Map {
 	private HashMap<VertexLocation, Vertex> verticies;
 	
 	// change
+	// change
 	public Map() {
 		
 		
