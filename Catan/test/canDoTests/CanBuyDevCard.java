@@ -20,7 +20,7 @@ public class CanBuyDevCard {
 	@Test
 	public void test() {
 		
-		
+		//testing
 		TurnTracker myTracker = new TurnTracker();
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
