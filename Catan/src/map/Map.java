@@ -18,7 +18,7 @@ public class Map {
 	private HashMap<EdgeLocation, Edge> edges;
 	private HashMap<VertexLocation, Vertex> verticies;
 	
-	
+	// change
 	public Map() {
 		
 		
