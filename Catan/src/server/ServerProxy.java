@@ -69,7 +69,6 @@ public class ServerProxy implements ServerInterface {
 				gameCookie = connection.getHeaderField("Set-cookie");
 				gameCookie = gameCookie.replace(";Path=/;", "");
 				fullCookie = userCookie + "; " + gameCookie;
-				System.out.println(fullCookie);
 			}else{
 				if(fullCookie == null){
 					throw new ServerException("Haven't logged in/and or joined game");
@@ -266,7 +265,7 @@ public class ServerProxy implements ServerInterface {
 		MovesYearOfPlentyTranslator year = new MovesYearOfPlentyTranslator(playerID, resource1, resource2);
 		String json = year.translate();
 		try{
-			post("/moves/Year_Of_Plenty", json);
+			post("/moves/Year_of_Plenty", json);
 		}catch(ServerException e){
 			e.printStackTrace();
 		}

@@ -18,11 +18,11 @@ public class MovesMonopolyTranslator extends GenericTranslator {
 	
 	private String resourceTranslate(ResourceType type){
 		switch(type){
-			case WOOD: return "Wood";
-			case BRICK: return "Brick";
-			case ORE: return "Ore";
-			case WHEAT: return "Wheat";
-			case SHEEP: return "Sheep";
+			case WOOD: return "wood";
+			case BRICK: return "brick";
+			case ORE: return "ore";
+			case WHEAT: return "wheat";
+			case SHEEP: return "sheep";
 		}
 		return "";
 	}
