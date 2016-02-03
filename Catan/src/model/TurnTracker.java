@@ -6,11 +6,16 @@ public class TurnTracker
 {
 	int longestRoadplayerID;
 	int largestArmyPlayerID;
-	//Create enum for game Statuses
-	//
 	GameState gameStatus;
 	int currentTurnPlayerID;
 	
+	public TurnTracker(int longestRoadplayerID, int largestArmyPlayerID, GameState gameStatus,
+			int currentTurnPlayerID) {
+		this.longestRoadplayerID = longestRoadplayerID;
+		this.largestArmyPlayerID = largestArmyPlayerID;
+		this.gameStatus = gameStatus;
+		this.currentTurnPlayerID = currentTurnPlayerID;
+	}
 	public int getLongestRoadplayerID() {
 		return longestRoadplayerID;
 	}
