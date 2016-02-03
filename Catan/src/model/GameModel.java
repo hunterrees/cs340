@@ -26,6 +26,8 @@ public class GameModel {
 	private int version;
 	private TradeOffer theTrade;
 	private TurnTracker tracker;
+	private Chat chat;
+	private Log log;
 
 // Constructor
 	public GameModel(Map map, Bank bank, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
@@ -47,6 +49,22 @@ public class GameModel {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public Chat getChat() {
+		return chat;
+	}
+
+	public void setChat(Chat chat) {
+		this.chat = chat;
+	}
+
+	public Log getLog() {
+		return log;
+	}
+
+	public void setLog(Log log) {
+		this.log = log;
 	}
 
 	/**
