@@ -28,16 +28,19 @@ public class GameModel {
 	private TurnTracker tracker;
 	private Chat chat;
 	private Log log;
+	private int winner;
 
 // Constructor
 	public GameModel(Map map, Bank bank, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
-						TurnTracker tracker) {
+						TurnTracker tracker, Log log, Chat chat, int winner) {
 		this.tracker = tracker;
-
+		this.log = log;
+		this.chat = chat;
+		this.winner = winner;
 		this.map = map;
 		this.robberLoc = robberLoc;
 		this.theTrade = theTrade;
-
+		this.bank = bank;
 		this.players = players;
 	}
 

@@ -8,7 +8,9 @@ import com.google.gson.JsonPrimitive;
 
 import map.Map;
 import model.Bank;
+import model.Chat;
 import model.GameModel;
+import model.Log;
 import model.TurnTracker;
 import player.Player;
 import shared.locations.HexLocation;
@@ -29,26 +31,39 @@ public class ModelTranslator {
 		Gson gson = new Gson();
 		JsonObject root = gson.fromJson(json, JsonObject.class);
 		JsonObject deckJson = root.getAsJsonObject("deck");
+		
 		JsonObject chatJson = root.getAsJsonObject("chat");
+		Chat chat = buildChat(chatJson);
+		
 		JsonObject logJson = root.getAsJsonObject("log");
+		Log log = buildLog(logJson);
+		
 		JsonObject mapJson = root.getAsJsonObject("map");
-		JsonObject bankJson = root.getAsJsonObject("bank");
-		JsonObject playersJson = root.getAsJsonObject("players");
-		JsonObject turnTrackerJson = root.getAsJsonObject("turnTracker");
-		JsonObject tradeOfferJson = root.getAsJsonObject("tradeOffer");
-		JsonPrimitive winnerJson = root.getAsJsonPrimitive("winner");
-		JsonPrimitive versionJson = root.getAsJsonPrimitive("version");
-		int version = versionJson.getAsInt();
-		Bank bank = buildBank(deckJson, bankJson);
 		Map map = buildMap(mapJson);
+		
+		JsonObject bankJson = root.getAsJsonObject("bank");
+		Bank bank = buildBank(deckJson, bankJson);
+		
+		JsonObject playersJson = root.getAsJsonObject("players");
 		ArrayList<Player> players = buildPlayers(playersJson);
+		
+		JsonObject turnTrackerJson = root.getAsJsonObject("turnTracker");
 		TurnTracker turnTracker = buildTurnTracker(turnTrackerJson);
+		
+		JsonObject tradeOfferJson = root.getAsJsonObject("tradeOffer");
 		TradeOffer tradeOffer = null;
 		if(tradeOfferJson != null){
 			tradeOffer = buildTradeOffer(tradeOfferJson);
 		}
+		
+		JsonPrimitive winnerJson = root.getAsJsonPrimitive("winner");
+		int winner = winnerJson.getAsInt();
+		JsonPrimitive versionJson = root.getAsJsonPrimitive("version");
+		int version = versionJson.getAsInt();
+		
 		HexLocation robber = null; //how to get the robber location?
-		GameModel model = new GameModel(map, bank, players, robber, tradeOffer, turnTracker);
+		
+		GameModel model = new GameModel(map, bank, players, robber, tradeOffer, turnTracker, log, chat, winner);
 		model.setVersion(version);
 		return model;
 	};
@@ -70,6 +85,14 @@ public class ModelTranslator {
 	}
 	
 	public TradeOffer buildTradeOffer(JsonObject tradeOfferJson){
+		return null;
+	}
+	
+	public Log buildLog(JsonObject logJson){
+		return null;
+	}
+	
+	public Chat buildChat(JsonObject chatJson){
 		return null;
 	}
 }
