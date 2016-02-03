@@ -1,5 +1,6 @@
 package canDoTests;
 
+import map.Edge;
 import map.Map;
 import map.Vertex;
 import org.junit.Test;
@@ -42,24 +43,18 @@ public class CanBuildSettlement {
         // Building it next to own road on non setup mode
         // This test case is failing
         Piece road = new Piece(PieceType.ROAD, null, null, 1);
-        spot = map.getVerticies().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.South).getNormalizedLocation());
-        spot.setPiece(road);
+        Edge spot1 = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.South).getNormalizedLocation());
+        spot1.setPiece(road);
         el = new VertexLocation(new HexLocation(0, 0), VertexDirection.SouthWest).getNormalizedLocation();
         assertTrue(map.canBuildSettlement(1, true, el));
 
         // Building it next to another player's road on non setup mode
         // This test case is failing
         road = new Piece(PieceType.ROAD, null, null, 2);
-        spot = map.getVerticies().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.South).getNormalizedLocation());
-        spot.setPiece(road);
+        //Edge spot2 = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), VertexDirection.SouthWest).getNormalizedLocation());
+        spot1.setPiece(road);
         el = new VertexLocation(new HexLocation(0, 0), VertexDirection.SouthWest).getNormalizedLocation();
         assertTrue(map.canBuildSettlement(1, true, el));
-
-
-
-
-
-
 
 
         // Building it at the side of the board
