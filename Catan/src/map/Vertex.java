@@ -15,7 +15,9 @@ public class Vertex {
 	 * @param location, the VertexLocation of this Vertex
 	 */
 	public Vertex(VertexLocation location) {
-		
+		piece = null;
+		this.location = location;
+		port = null;
 	}
 	
 	//functions

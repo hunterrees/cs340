@@ -47,7 +47,7 @@ public class Map {
 			Piece tempPiece = verticies.get(loc).getPiece();
 
 			// Not valid if there's no piece there already
-			if(tempPiece != null) {
+			if(tempPiece == null) {
 				return false;
 			}
 
