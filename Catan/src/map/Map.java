@@ -26,7 +26,7 @@ public class Map {
 		buildHexes();
 		buildEdges();
 		buildVerticies();
-		//placePorts(createPorts());
+		placePorts(createPorts());
 	}
 	
 	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<EdgeLocation, Edge> edges,
@@ -151,14 +151,10 @@ public class Map {
 		 */
 
 		public boolean canBuildSettlement(int playerID, boolean setUp, VertexLocation loc) {
-			if(hexes.get(loc.getNormalizedLocation().getHexLoc()) == null){
-				return false;
-			}
 			if(verticies.get(loc.getNormalizedLocation()).getPiece() != null) {
 				return false;
 			}
 
-			
 
 
 			switch(loc.getDir()) {
@@ -193,22 +189,14 @@ public class Map {
 		public boolean vertexECase(int playerID, boolean setUp, VertexLocation loc) {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperRightHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthEast));
-			if (upperRightHex == null){
-				return false;
-			}
 
 			// Check if the corners are valid
 			Vertex rightCorner = verticies.get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
 			Vertex upCorner = verticies.get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
 			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
 
-			/*if(hexes.get(rightCorner.getLocation().getHexLoc()) == null || hexes.get(upCorner.getLocation().getHexLoc()) == null || hexes.get(downCorner.getLocation().getHexLoc()) == null){
-				return false;
-			}*/
-			
-			if(rightCorner != null && rightCorner.getPiece() != null 
-					|| upCorner != null && upCorner.getPiece() != null 
-					|| downCorner != null && downCorner.getPiece() != null) {
+
+			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
 				return false;
 			}
 
@@ -485,7 +473,6 @@ public class Map {
 		 * @return true if this is a valid location for a road (no road currently at this location)
 		 */
 		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
-			
 			if(edges.get(loc.getNormalizedLocation()).getPiece() != null) {
 				return false;
 			}

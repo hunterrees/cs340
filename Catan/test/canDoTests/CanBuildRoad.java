@@ -1,5 +1,6 @@
 package canDoTests;
 
+import map.Edge;
 import map.Map;
 import map.Vertex;
 import org.junit.Test;
@@ -40,7 +41,18 @@ public class CanBuildRoad {
         // Blank map with road next to settlement on setup mode
         assertTrue(map.canBuildRoad(playerID, false, el));
 
+        // Building roads on illegal vertices on water hexes
+        EdgeLocation spot2 = new EdgeLocation(new HexLocation(0,3), EdgeDirection.South).getNormalizedLocation();
+        assertFalse(map.canBuildRoad(playerID, false, spot2));
 
+        spot2 = new EdgeLocation(new HexLocation(-2,3), EdgeDirection.SouthWest).getNormalizedLocation();
+        assertFalse(map.canBuildRoad(playerID, false, spot2));
+
+        spot2 = new EdgeLocation(new HexLocation(2,1), EdgeDirection.SouthEast).getNormalizedLocation();
+        assertFalse(map.canBuildRoad(playerID, false, spot2));
+
+        spot2 = new EdgeLocation(new HexLocation(0,-3), EdgeDirection.North).getNormalizedLocation();
+        assertFalse(map.canBuildRoad(playerID, false, spot2));
 
     }
 
