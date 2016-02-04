@@ -247,6 +247,9 @@ public class Map {
 
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperLeftHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthWest));
+			if(upperLeftHex == null) {
+				return false;
+			}
 
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthWest).getNormalizedLocation());
@@ -254,7 +257,9 @@ public class Map {
 			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest).getNormalizedLocation());
 
 
-			if(leftCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
+			if(leftCorner != null && leftCorner.getPiece() != null ||
+					upCorner != null && upCorner.getPiece() != null ||
+					downCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
@@ -293,6 +298,9 @@ public class Map {
 		public boolean vertexNECase(int playerID, boolean setup, VertexLocation loc) {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
+			if(upperHex != null) {
+				return false;
+			}
 
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.East).getNormalizedLocation());
@@ -300,7 +308,9 @@ public class Map {
 			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.East).getNormalizedLocation());
 
 
-			if(leftCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
+			if(leftCorner != null && leftCorner.getPiece() != null ||
+					upCorner != null && upCorner.getPiece() != null ||
+					downCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
@@ -345,13 +355,19 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex lowerHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.South));
 
+			if(lowerHex != null) {
+				return false;
+			}
+
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.East).getNormalizedLocation());
 			Vertex leftCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthWest).getNormalizedLocation());
 			Vertex downCorner = verticies.get(new VertexLocation(lowerHex.getLocation(), VertexDirection.East).getNormalizedLocation());
 
 
-			if(leftCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
+			if(leftCorner != null && leftCorner.getPiece() != null ||
+					upCorner != null && upCorner.getPiece() != null ||
+					downCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
@@ -397,6 +413,10 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
 
+			if(upperHex != null) {
+				return false;
+			}
+
 			System.out.println(upperHex.getLocation());
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.West).getNormalizedLocation());
@@ -440,13 +460,19 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex lowerHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.South));
 
+			if(lowerHex != null) {
+				return false;
+			}
+
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 			Vertex rightCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
 			Vertex downCorner = verticies.get(new VertexLocation(lowerHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 
 
-			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
+			if(rightCorner != null && rightCorner.getPiece() != null ||
+					upCorner != null && upCorner.getPiece() != null ||
+					downCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
