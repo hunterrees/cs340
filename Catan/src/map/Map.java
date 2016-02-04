@@ -26,7 +26,7 @@ public class Map {
 		buildHexes();
 		buildEdges();
 		buildVerticies();
-		placePorts(createPorts());
+		//placePorts(createPorts());
 	}
 	
 	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<EdgeLocation, Edge> edges,
