@@ -72,7 +72,7 @@ public class Map {
 		 */
 
 		public boolean canBuildSettlement(int playerID, boolean setUp, VertexLocation loc) {
-			if(verticies.get(loc).getPiece() != null) {
+			if(verticies.get(loc.getNormalizedLocation()).getPiece() != null) {
 				return false;
 			}
 
@@ -394,7 +394,7 @@ public class Map {
 		 * @return true if this is a valid location for a road (no road currently at this location)
 		 */
 		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
-			if(edges.get(loc).getPiece() != null) {
+			if(edges.get(loc.getNormalizedLocation()).getPiece() != null) {
 				return false;
 			}
 
@@ -402,6 +402,9 @@ public class Map {
 
 			TerrainHex hex = hexes.get(loc.getHexLoc());
 			TerrainHex neighbor = hexes.get(hex.getLocation().getNeighborLoc(loc.getDir()));
+			if (hex.getType().equals(HexType.WATER) && neighbor.getType().equals(HexType.WATER)){
+				return false;
+			}
 
 			switch(loc.getDir()) {
 				case NorthWest: return edgeNWCase(playerID, free, loc, hex, neighbor);
