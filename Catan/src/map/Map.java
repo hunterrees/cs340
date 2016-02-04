@@ -481,6 +481,10 @@ public class Map {
 		 * @return true if this is a valid location for a road (no road currently at this location)
 		 */
 		public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
+			if(hexes.get(loc.getNormalizedLocation().getHexLoc()) == null) {
+				return false;
+			}
+
 			if(edges.get(loc.getNormalizedLocation()).getPiece() != null) {
 				return false;
 			}
@@ -489,6 +493,10 @@ public class Map {
 
 			TerrainHex hex = hexes.get(loc.getHexLoc());
 			TerrainHex neighbor = hexes.get(hex.getLocation().getNeighborLoc(loc.getDir()));
+			if(neighbor == null) {
+				return false;
+			}
+
 			if (hex.getType().equals(HexType.WATER) && neighbor.getType().equals(HexType.WATER)){
 				return false;
 			}
