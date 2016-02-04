@@ -29,16 +29,21 @@ public class Map {
 	}
 	
 	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<EdgeLocation, Edge> edges,
-			HashMap<VertexLocation, Vertex> verticies){
+			HashMap<VertexLocation, Vertex> verticies, HashMap<VertexLocation, Port> ports){
 		
 		this.hexes = hexes;
 		this.edges = edges;
 		this.verticies = verticies;
+		placePorts(ports);
 	}
 	
 	
-	
-	
+
+	private void placePorts(HashMap<VertexLocation, Port> ports) {
+		for(Entry<VertexLocation, Port> entry : ports.entrySet()) {
+			verticies.get(entry.getKey().getNormalizedLocation()).setPort(ports.get(entry));
+		}
+	}
 	
 	//functions i wrotedsf
 		/**
