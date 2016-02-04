@@ -22,7 +22,7 @@ public class CanBuildCity {
 		System.out.println("2");
 		Vertex vert = map.getVerticies().get(new VertexLocation(new HexLocation(0, 0), VertexDirection.NorthWest));
 		vert.setPiece(p1Settlement);
-		//map.getVerticies().get(vert.getLocation()).setPiece(p1Settlement);
+		//map.getVerticies().get(vert.getLocation()).setPiece(p1Settlement);s
 		System.out.println("3");
 		
 		//can build on valid location
