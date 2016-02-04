@@ -426,7 +426,6 @@ public class Map {
 				return false;
 			}
 
-			System.out.println(upperHex.getLocation());
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 			Vertex rightCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.NorthEast).getNormalizedLocation());
