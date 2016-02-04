@@ -151,6 +151,9 @@ public class Map {
 		 */
 
 		public boolean canBuildSettlement(int playerID, boolean setUp, VertexLocation loc) {
+			if(hexes.get(loc.getNormalizedLocation().getHexLoc()) == null){
+				return false;
+			}
 			if(verticies.get(loc.getNormalizedLocation()).getPiece() != null) {
 				return false;
 			}
@@ -189,6 +192,9 @@ public class Map {
 		public boolean vertexECase(int playerID, boolean setUp, VertexLocation loc) {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperRightHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthEast));
+			if (upperRightHex == null){
+				return false;
+			}
 
 			// Check if the corners are valid
 			Vertex rightCorner = verticies.get(new VertexLocation(upperRightHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
@@ -196,7 +202,9 @@ public class Map {
 			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.SouthEast).getNormalizedLocation());
 
 
-			if(rightCorner.getPiece() != null || upCorner.getPiece() != null || downCorner.getPiece() != null) {
+			if(rightCorner != null && rightCorner.getPiece() != null 
+					|| upCorner != null && upCorner.getPiece() != null 
+					|| downCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
