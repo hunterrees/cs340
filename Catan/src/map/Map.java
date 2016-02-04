@@ -35,7 +35,7 @@ public class Map {
 		this.hexes = hexes;
 		this.edges = edges;
 		this.verticies = verticies;
-		placePorts(ports);
+		//placePorts(ports);
 	}
 
 
