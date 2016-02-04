@@ -20,6 +20,7 @@ public class CanBuildSettlement {
 
         // Testing building a settlement on an open map on setup mode
         Map map = new Map();
+        
         int playerID = 1;
         VertexLocation el = new VertexLocation(new HexLocation(0, 0), VertexDirection.East).getNormalizedLocation();
         assertTrue(map.canBuildSettlement(playerID, true, el));
@@ -56,7 +57,11 @@ public class CanBuildSettlement {
 
 
         // Building it at the side of the board
-
+        VertexLocation loc1 = new VertexLocation(new HexLocation(0, 3), VertexDirection.East);
+        assertFalse(map.canBuildSettlement(1, true, loc1));
+        
+        VertexLocation loc2 = new VertexLocation(new HexLocation(-1, 3), VertexDirection.East);
+        assertTrue(map.canBuildSettlement(1, true, loc2));
 
     }
 
