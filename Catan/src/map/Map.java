@@ -298,7 +298,7 @@ public class Map {
 		public boolean vertexNECase(int playerID, boolean setup, VertexLocation loc) {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
-			if(upperHex != null) {
+			if(upperHex == null) {
 				return false;
 			}
 
@@ -355,7 +355,7 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex lowerHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.South));
 
-			if(lowerHex != null) {
+			if(lowerHex == null) {
 				return false;
 			}
 
@@ -413,7 +413,7 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
 
-			if(upperHex != null) {
+			if(upperHex == null) {
 				return false;
 			}
 
@@ -460,7 +460,7 @@ public class Map {
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex lowerHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.South));
 
-			if(lowerHex != null) {
+			if(lowerHex == null) {
 				return false;
 			}
 
