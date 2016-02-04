@@ -17,6 +17,7 @@ public class Map {
 	private HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
 	private HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
 	private HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
+	private HashMap<VertexLocation, Port> ports = new HashMap<>();
 	
 	// change
 	// changedf
@@ -203,11 +204,6 @@ public class Map {
      * @return
      */
 		public boolean vertexNECase(int playerID, boolean setup, VertexLocation loc) {
-
-
-
-
-
 			TerrainHex currentHex = hexes.get(loc.getHexLoc());
 			TerrainHex upperHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.North));
 
@@ -908,6 +904,7 @@ public class Map {
 	 * 
 	 **/
 	public void buildHexes(){
+		// Normal hexes
 		HexLocation loc1 = new HexLocation(0, -2);
 		TerrainHex hex1 = new TerrainHex(loc1, HexType.WOOD, 11);
 		hexes.put(loc1, hex1);
@@ -983,7 +980,83 @@ public class Map {
 		HexLocation loc19 = new HexLocation(0, 2);
 		TerrainHex hex19 = new TerrainHex(loc19, HexType.WOOD, 6);
 		hexes.put(loc19, hex19);
-		
+
+		// Water hexes
+		HexLocation loc20 = new HexLocation(0, -3);
+		TerrainHex hex20 = new TerrainHex(loc20, HexType.WATER, -1);
+		hexes.put(loc20, hex20);
+
+		HexLocation loc21 = new HexLocation(1, -3);
+		TerrainHex hex21 = new TerrainHex(loc21, HexType.WATER, -1);
+		hexes.put(loc21, hex21);
+
+		HexLocation loc22 = new HexLocation(2, -2);
+		TerrainHex hex22 = new TerrainHex(loc22, HexType.WATER, -1);
+		hexes.put(loc22, hex22);
+
+		HexLocation loc23 = new HexLocation(3, -3);
+		TerrainHex hex23 = new TerrainHex(loc23, HexType.WATER, -1);
+		hexes.put(loc23, hex23);
+
+		HexLocation loc24 = new HexLocation(3, -2);
+		TerrainHex hex24 = new TerrainHex(loc24, HexType.WATER, -1);
+		hexes.put(loc24, hex24);
+
+		HexLocation loc25 = new HexLocation(3, -1);
+		TerrainHex hex25 = new TerrainHex(loc25, HexType.WATER, -1);
+		hexes.put(loc25, hex25);
+
+		HexLocation loc26 = new HexLocation(3, -1);
+		TerrainHex hex26 = new TerrainHex(loc26, HexType.WATER, -1);
+		hexes.put(loc26, hex26);
+
+		HexLocation loc27 = new HexLocation(3, 0);
+		TerrainHex hex27 = new TerrainHex(loc27, HexType.WATER, -1);
+		hexes.put(loc27, hex27);
+
+		HexLocation loc28 = new HexLocation(2, 1);
+		TerrainHex hex28 = new TerrainHex(loc28, HexType.WATER, -1);
+		hexes.put(loc28, hex28);
+
+		HexLocation loc29 = new HexLocation(1, 2);
+		TerrainHex hex29 = new TerrainHex(loc29, HexType.WATER, -1);
+		hexes.put(loc29, hex29);
+
+		HexLocation loc30 = new HexLocation(0, 3);
+		TerrainHex hex30 = new TerrainHex(loc30, HexType.WATER, -1);
+		hexes.put(loc30, hex30);
+
+		HexLocation loc31 = new HexLocation(-1, 3);
+		TerrainHex hex31 = new TerrainHex(loc31, HexType.WATER, -1);
+		hexes.put(loc31, hex31);
+
+		HexLocation loc32 = new HexLocation(-2, 3);
+		TerrainHex hex32 = new TerrainHex(loc32, HexType.WATER, -1);
+		hexes.put(loc32, hex32);
+
+		HexLocation loc33 = new HexLocation(-3, 2);
+		TerrainHex hex33 = new TerrainHex(loc33, HexType.WATER, -1);
+		hexes.put(loc33, hex33);
+
+		HexLocation loc34 = new HexLocation(-3, 1);
+		TerrainHex hex34 = new TerrainHex(loc34, HexType.WATER, -1);
+		hexes.put(loc34, hex34);
+
+		HexLocation loc35 = new HexLocation(-3, 0);
+		TerrainHex hex35 = new TerrainHex(loc35, HexType.WATER, -1);
+		hexes.put(loc35, hex35);
+
+		HexLocation loc36 = new HexLocation(-3, -1);
+		TerrainHex hex36 = new TerrainHex(loc36, HexType.WATER, -1);
+		hexes.put(loc36, hex36);
+
+		HexLocation loc37 = new HexLocation(-2, -1);
+		TerrainHex hex37 = new TerrainHex(loc37, HexType.WATER, -1);
+		hexes.put(loc37, hex37);
+
+		HexLocation loc38 = new HexLocation(-1, -2);
+		TerrainHex hex38 = new TerrainHex(loc38, HexType.WATER, -1);
+		hexes.put(loc38, hex38);
 		
 	}
 	
