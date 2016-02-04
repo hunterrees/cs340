@@ -17,6 +17,7 @@ public class Map {
 	private HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
 	private HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
 	private HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
+	private HashMap<VertexLocation, Port> ports = new HashMap<>();
 	
 	// change
 	// changedf
