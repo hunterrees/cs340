@@ -96,6 +96,25 @@ public class CanBuildSettlement {
         VertexLocation loc11 = new VertexLocation(new HexLocation(3, 0), VertexDirection.NorthWest);
         assertTrue(map.canBuildSettlement(1, false, loc11));
 
+        spot.setPiece(null);
+        // Test every direction
+        VertexLocation loc12 = new VertexLocation(new HexLocation(0, 0), VertexDirection.NorthEast);
+        assertTrue(map.canBuildSettlement(1, true, loc12));
+
+        VertexLocation loc13 = new VertexLocation(new HexLocation(0, 0), VertexDirection.East);
+        assertTrue(map.canBuildSettlement(1, true, loc13));
+
+        VertexLocation loc14 = new VertexLocation(new HexLocation(0, 0), VertexDirection.SouthEast);
+        assertTrue(map.canBuildSettlement(1, true, loc14));
+
+        VertexLocation loc15 = new VertexLocation(new HexLocation(0, 0), VertexDirection.SouthWest);
+        assertTrue(map.canBuildSettlement(1, true, loc15));
+
+        VertexLocation loc16 = new VertexLocation(new HexLocation(0, 0), VertexDirection.West);
+        assertTrue(map.canBuildSettlement(1, true, loc16));
+
+        VertexLocation loc17 = new VertexLocation(new HexLocation(0, 0), VertexDirection.NorthWest);
+        assertTrue(map.canBuildSettlement(1, true, loc17));
 
 
     }
