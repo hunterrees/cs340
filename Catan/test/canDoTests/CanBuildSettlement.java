@@ -66,6 +66,38 @@ public class CanBuildSettlement {
         VertexLocation loc3 = new VertexLocation(new HexLocation(3, 0), VertexDirection.NorthEast);
         assertFalse(map.canBuildSettlement(1, true, loc3));
 
+        VertexLocation loc4 = new VertexLocation(new HexLocation(-3, 3), VertexDirection.NorthWest);
+        assertFalse(map.canBuildSettlement(1, true, loc4));
+
+        VertexLocation loc5 = new VertexLocation(new HexLocation(3, 0), VertexDirection.NorthWest);
+        assertTrue(map.canBuildSettlement(1, true, loc5));
+
+        VertexLocation loc6 = new VertexLocation(new HexLocation(3, -1), VertexDirection.SouthEast);
+        assertFalse(map.canBuildSettlement(1, true, loc6));
+
+        VertexLocation loc7 = new VertexLocation(new HexLocation(0, -3), VertexDirection.NorthEast);
+        assertFalse(map.canBuildSettlement(1, true, loc7));
+
+        // Building it on the side of the board not on set up mode
+        VertexLocation loc8 = new VertexLocation(new HexLocation(3, 0), VertexDirection.NorthWest);
+        assertFalse(map.canBuildSettlement(1, false, loc8));
+
+        VertexLocation loc9 = new VertexLocation(new HexLocation(3, -1), VertexDirection.SouthEast);
+        assertFalse(map.canBuildSettlement(1, false, loc9));
+
+        VertexLocation loc10 = new VertexLocation(new HexLocation(0, -3), VertexDirection.NorthEast);
+        assertFalse(map.canBuildSettlement(1, false, loc10));
+
+        // Build it next to own road
+        Piece road1 = new Piece(PieceType.ROAD, null, null, 1);
+        EdgeLocation spot4 = new EdgeLocation(new HexLocation(3,0),EdgeDirection.NorthWest).getNormalizedLocation();
+        map.getEdges().get(spot4).setPiece(road1);
+
+        VertexLocation loc11 = new VertexLocation(new HexLocation(3, 0), VertexDirection.NorthWest);
+        assertTrue(map.canBuildSettlement(1, false, loc11));
+
+
+
     }
 
 

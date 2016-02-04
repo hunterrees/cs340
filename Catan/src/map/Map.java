@@ -160,13 +160,13 @@ public class Map {
 
 
 
-			switch(loc.getDir()) {
-				case East: return vertexECase(playerID, setUp, loc);
-				case West: return vertexWCase(playerID, setUp, loc);
-				case NorthEast: return vertexNECase(playerID, setUp, loc);
-				case SouthEast: return vertexSECase(playerID, setUp, loc);
-				case NorthWest: return vertexNWCase(playerID, setUp, loc);
-				case SouthWest: return vertexSWCase(playerID, setUp, loc);
+			switch(loc.getNormalizedLocation().getDir()) {
+				case East: return vertexECase(playerID, setUp, loc.getNormalizedLocation());
+				case West: return vertexWCase(playerID, setUp, loc.getNormalizedLocation());
+				case NorthEast: return vertexNECase(playerID, setUp, loc.getNormalizedLocation());
+				case SouthEast: return vertexSECase(playerID, setUp, loc.getNormalizedLocation());
+				case NorthWest: return vertexNWCase(playerID, setUp, loc.getNormalizedLocation());
+				case SouthWest: return vertexSWCase(playerID, setUp, loc.getNormalizedLocation());
 				default: System.out.println("Error! VertexLocation doesn't exist!");
 			}
 
@@ -421,6 +421,11 @@ public class Map {
 				return false;
 			}
 
+			TerrainHex upperLeftHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthWest));
+			if(upperLeftHex == null) {
+				return false;
+			}
+
 			System.out.println(upperHex.getLocation());
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.West).getNormalizedLocation());
@@ -428,7 +433,7 @@ public class Map {
 			Vertex downCorner = verticies.get(new VertexLocation(currentHex.getLocation(), VertexDirection.West).getNormalizedLocation());
 
 
-			if(rightCorner != null && rightCorner.getPiece() != null || upCorner != null && upCorner.getPiece() != null || rightCorner != null && downCorner.getPiece() != null) {
+			if(rightCorner != null && rightCorner.getPiece() != null || upCorner != null && upCorner.getPiece() != null || downCorner != null && downCorner.getPiece() != null) {
 				return false;
 			}
 
@@ -436,7 +441,7 @@ public class Map {
 				// Check if the edges are valid
 				Edge rightEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North).getNormalizedLocation());
 				Edge upEdge = edges.get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
-				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.SouthWest).getNormalizedLocation());
+				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest).getNormalizedLocation());
 
 
 
