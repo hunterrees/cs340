@@ -301,6 +301,10 @@ public class Map {
 			if(upperHex == null) {
 				return false;
 			}
+			TerrainHex upperRightHex = hexes.get(loc.getHexLoc().getNeighborLoc(EdgeDirection.NorthEast));
+			if (upperRightHex == null){
+				return false;
+			}
 
 			// Check if the corners are valid
 			Vertex upCorner = verticies.get(new VertexLocation(upperHex.getLocation(), VertexDirection.East).getNormalizedLocation());

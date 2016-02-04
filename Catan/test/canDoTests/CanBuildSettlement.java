@@ -62,6 +62,9 @@ public class CanBuildSettlement {
         
         VertexLocation loc2 = new VertexLocation(new HexLocation(-1, 3), VertexDirection.East);
         assertTrue(map.canBuildSettlement(1, true, loc2));
+        
+        VertexLocation loc3 = new VertexLocation(new HexLocation(3, 0), VertexDirection.NorthEast);
+        assertFalse(map.canBuildSettlement(1, true, loc3));
 
     }
 
