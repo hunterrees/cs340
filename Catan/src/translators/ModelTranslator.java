@@ -278,7 +278,7 @@ public class ModelTranslator {
 
 		return port;
 	}
-	public void parseAndAddRoad(JsonObject jsonRoad){
+	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
 		JsonObject myID= jsonRoad.getAsJsonObject("owner");
 		JsonObject location = jsonRoad.getAsJsonObject("location");
 
@@ -303,7 +303,10 @@ public class ModelTranslator {
 			default: System.out.println("Error! EdgeDirection doesn't exist");
 		}
 
-		//Piece road = new Piece(PieceType.ROAD,new Edge())
+
+		Piece road = new Piece(PieceType.ROAD,null,null,playerID);
+		Edge edge = map.getEdges().get(new EdgeLocation(new HexLocation(x,y),ed).getNormalizedLocation());
+		edge.setPiece(road);
 
 
 
@@ -457,12 +460,12 @@ public class ModelTranslator {
 	private void addTradeResources(ArrayList<ResourceType> offer, ArrayList<ResourceType> receive, ResourceType type, int amount){
 		if(amount > 0){
 			for(int i = 0; i < amount; i++){
-				offer.add(type);
+				receive.add(type);
 			}
 		}else if(amount < 0){
 			amount = -1 * amount;
 			for(int i = 0; i < amount; i++){
-				receive.add(type);
+				offer.add(type);
 			}
 		}
 	}

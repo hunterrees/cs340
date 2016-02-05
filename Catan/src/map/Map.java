@@ -17,6 +17,7 @@ public class Map {
 	private HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
 	private HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
 	private HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
+	private HexLocation robberLocation;
 
 	// change
 	// changedf
@@ -32,6 +33,7 @@ public class Map {
 	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<VertexLocation, Port> ports){
 		
 		this.hexes = hexes;
+		robberLocation = null;
 		createWaterHexes();
 		buildEdges();
 		buildVerticies();
@@ -1345,5 +1347,13 @@ public class Map {
 
 	public void setHexes(HashMap<HexLocation, TerrainHex> hexes) {
 		this.hexes = hexes;
+	}
+
+	public HexLocation getRobberLocation() {
+		return robberLocation;
+	}
+
+	public void setRobberLocation(HexLocation robberLocation) {
+		this.robberLocation = robberLocation;
 	}
 }
