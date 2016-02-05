@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import map.Map;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class InitializeModel {
 		JsonObject bankJson = json.getAsJsonObject("bank");
 		JsonObject deckJson = json.getAsJsonObject("deck");
 		Bank bank = translator.buildBank(deckJson, bankJson);
-		
+
 		int brick = bank.numResourceRemaining(ResourceType.BRICK);
 		assertTrue(brick == 24);
 		int wood = bank.numResourceRemaining(ResourceType.WOOD);
@@ -43,7 +44,7 @@ public class InitializeModel {
 		assertTrue(wheat == 27);
 		int ore = bank.numResourceRemaining(ResourceType.ORE);
 		assertTrue(ore == 25);
-		
+
 		int yearOfPlenty = bank.numDevCardsRemaining(DevCardType.YEAR_OF_PLENTY);
 		assertTrue(yearOfPlenty == 2);
 		int monopoly = bank.numDevCardsRemaining(DevCardType.MONOPOLY);
@@ -55,26 +56,36 @@ public class InitializeModel {
 		int monument = bank.numDevCardsRemaining(DevCardType.MONUMENT);
 		assertTrue(monument == 4);
 	}
-	
+
+	@Test
+	public void mapTest() throws IOException {
+		JsonObject json = toJson("translatorTests/mapJson.txt");
+		JsonObject mapJson = json.getAsJsonObject("map");
+		Map map = translator.buildMap(mapJson);
+
+		int numHexes = map.getHexes().size();
+		assertTrue(numHexes == 37);
+	}
+
 	@Test
 	public void chatTest() throws IOException{
 		JsonObject json = toJson("translatorTests/chatJson.txt");
 		JsonObject chatJson = json.getAsJsonObject("chat");
 		Chat chat = translator.buildChat(chatJson);
-		
+
 		assertTrue(chat.getLines().size() == 1);
 		String source = chat.getLines().get(0).getSource();
 		String message = chat.getLines().get(0).getMessage();
 		assertTrue(message.equals("test"));
 		assertTrue(source.equals("Sam"));
 	}
-	
+
 	@Test
 	public void logTest() throws IOException{
 		JsonObject json = toJson("translatorTests/logJson.txt");
 		JsonObject logJson = json.getAsJsonObject("log");
 		Log log = translator.buildLog(logJson);
-		
+
 		assertTrue(log.getLines().size() == 4);
 		for(int i = 0; i < log.getLines().size(); i++){
 			String source = log.getLines().get(i).getSource();
@@ -83,13 +94,13 @@ public class InitializeModel {
 		String message = log.getLines().get(0).getMessage();
 		assertTrue(message.equals("Mark built a settlement"));
 	}
-	
+
 	@Test
 	public void tradeOfferTest() throws IOException{
 		JsonObject json = toJson("translatorTests/tradeOfferJson.txt");
 		JsonObject tradeOfferJson = json.getAsJsonObject("tradeOffer");
 		TradeOffer tradeOffer = translator.buildTradeOffer(tradeOfferJson);
-		
+
 		int receiver = tradeOffer.getAcceptingPlayerID();
 		assertTrue(receiver == 1);
 		int sender = tradeOffer.getRequestingPlayerID();
@@ -99,13 +110,13 @@ public class InitializeModel {
 		ArrayList<ResourceType> resourcesDesired = tradeOffer.getResourceDesired();
 		assertTrue(resourcesDesired.size() == 2);
 	}
-	
+
 	@Test
 	public void turnTrackerTest() throws IOException{
 		JsonObject json = toJson("translatorTests/turnTrackerJson.txt");
 		JsonObject turnTrackerJson = json.getAsJsonObject("turnTracker");
 		TurnTracker turnTracker = translator.buildTurnTracker(turnTrackerJson);
-		
+
 		int currentTurn = turnTracker.getCurrentTurnPlayerID();
 		assertTrue(currentTurn == 1);
 		int longestRoad = turnTracker.getLongestRoadplayerID();
@@ -115,7 +126,7 @@ public class InitializeModel {
 		GameState state = turnTracker.getGameStatus();
 		assertTrue(state == GameState.rolling);
 	}
-	
+
 	private JsonObject toJson(String fileName) throws IOException{
 		File file = new File(fileName);
 		String jsonText = FileUtils.readFileToString(file);

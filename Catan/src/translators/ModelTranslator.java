@@ -206,12 +206,16 @@ public class ModelTranslator {
 		y = myY.getAsInt();
 
 		JsonPrimitive myResource = jsonHex.getAsJsonPrimitive("resource");
-		resource = myResource.getAsString();
-		JsonPrimitive myNum = jsonHex.getAsJsonPrimitive("number");
-		num = myNum.getAsInt();
-		if (resource == null){
+		if(myResource != null) {
+			resource = myResource.getAsString();
+		} else {
 			resource = "desert";
 		}
+		JsonPrimitive myNum = jsonHex.getAsJsonPrimitive("number");
+		if(!resource.equals("desert")) {
+			num = myNum.getAsInt();
+		} else num = -1;
+
 		switch(resource){
 			case "brick": type = HexType.BRICK; break;
 			case "wood" : type = HexType.WOOD; break;
@@ -237,12 +241,17 @@ public class ModelTranslator {
 		int ratio = myRatio.getAsInt();
 
 		JsonPrimitive myResource = null;
+		String resource = null;
+
 		if(ratio != 3) {
-			myResource = jsonPort.getAsJsonPrimitive();
+			myResource = jsonPort.getAsJsonPrimitive("resource");
+			resource = myResource.getAsString();
+
+		} else {
+			resource = "blah";
 		}
 
 
-		String resource = myResource.getAsString();
 		int x = myX.getAsInt();
 		int y = myY.getAsInt();
 		String direction = myDirection.getAsString();
