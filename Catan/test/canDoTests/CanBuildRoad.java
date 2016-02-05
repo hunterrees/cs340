@@ -54,6 +54,8 @@ public class CanBuildRoad {
         spot2 = new EdgeLocation(new HexLocation(0,-3), EdgeDirection.North).getNormalizedLocation();
         assertFalse(map.canBuildRoad(playerID, false, spot2));
 
+        // Test every direction
+
     }
 
 
