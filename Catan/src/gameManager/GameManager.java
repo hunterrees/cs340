@@ -333,7 +333,7 @@ public class GameManager {
 		}
 	}
 	/**
-	 * Builds a city at given locaiton
+	 * Builds a city at given location
 	 * @param playerID ID of player building city
 	 * @param vertexLocation Location to build city
 	 */

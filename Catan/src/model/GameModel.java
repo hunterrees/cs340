@@ -179,7 +179,7 @@ public class GameModel {
      * @return
      */
 	public boolean canBuildRoad(int playerID, boolean free, EdgeLocation loc) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID)){
 			return false;
 		}
 
@@ -210,7 +210,7 @@ public class GameModel {
      * @return
      */
 	public boolean canBuildSettlement(int playerID, boolean free, VertexLocation loc) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID)) {
 			return false;
 		}
 		boolean canBuild;
@@ -240,7 +240,7 @@ public class GameModel {
      * @return
      */
 	public boolean canBuildCity(int playerID, VertexLocation loc) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID)) {
 			return false;
 		}
 		boolean canBuild;
@@ -264,7 +264,7 @@ public class GameModel {
 	}
 
 	public boolean offerTrade(int playerID, ArrayList<ResourceType> resourceTypes) {
-		if (playerID != tracker.currentTurnPlayerID)
+		if (!okToPlay(playerID))
 		{
 			return false;
 		}
@@ -297,6 +297,9 @@ public class GameModel {
 	}
 
 	public int maritimeTrade(int playerID, ResourceType inputType) {
+		if(!okToPlay(playerID)){
+			return -1;
+		}
 		return(players.get(playerID).maritimeTradeRatio(inputType));
 	}
 
@@ -315,8 +318,6 @@ public class GameModel {
 			if(players.get(victimID).getPlayerHand().getResourceCards().size() == 0) {
 				return false;
 			}
-		} else {
-			return false;
 		}
 
 		return true;
@@ -327,10 +328,9 @@ public class GameModel {
 	 * @return
      */
 	public boolean finishTurn(int playerID) {
-		if(tracker.getCurrentTurnPlayerID() == playerID) {
+		if(okToPlay(playerID)) {
 			return true;
 		}
-
 		return false;
 	}
 
@@ -339,7 +339,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean buyDevCard(int playerID) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID)) {
 			return false;
 		}
 
@@ -358,7 +358,7 @@ public class GameModel {
      * @return
      */
 	public boolean soldier(int playerID, HexLocation loc, int victimID) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID) || players.get(playerID).isHasPlayedDevCard()) {
 			return false;
 		}
 
@@ -376,7 +376,7 @@ public class GameModel {
      * @return
      */
 	public boolean yearOfPlenty(int playerID, ResourceType type1, ResourceType type2) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID) || players.get(playerID).isHasPlayedDevCard()) {
 			return false;
 		}
 
@@ -418,7 +418,7 @@ public class GameModel {
      * @return
      */
 	public boolean roadBuilding(int playerID, EdgeLocation spot1, EdgeLocation spot2) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID) || players.get(playerID).isHasPlayedDevCard()) {
 			return false;
 		}
 
@@ -436,7 +436,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean monopoly(int playerID) {
-		if (tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID) || players.get(playerID).isHasPlayedDevCard()) {
 			return false;
 		}
 
@@ -474,6 +474,14 @@ public class GameModel {
 
 	public Bank getBank() {
 		return bank;
+	}
+	
+	public boolean okToPlay(int playerID){
+		if(playerID == tracker.getCurrentTurnPlayerID() && tracker.getGameStatus() == GameState.playing){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 // Private methods

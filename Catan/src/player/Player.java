@@ -50,6 +50,10 @@ public class Player
 	/**
 	 * initialize pieces arraylist
 	 */
+	private boolean hasPlayedDevCard;
+	
+	private boolean hasDiscarded;
+	
 	public Player(int playerID, CatanColor playerColor, String name)
 	{
 		playerPieces = new ArrayList<Piece>();
@@ -264,5 +268,21 @@ public class Player
 	public CatanColor getPlayerColor()
 	{
 		return playerColor;
+	}
+
+	public boolean isHasPlayedDevCard() {
+		return hasPlayedDevCard;
+	}
+
+	public void setHasPlayedDevCard(boolean hasPlayedDevCard) {
+		this.hasPlayedDevCard = hasPlayedDevCard;
+	}
+
+	public boolean isHasDiscarded() {
+		return hasDiscarded;
+	}
+
+	public void setHasDiscarded(boolean hasDiscarded) {
+		this.hasDiscarded = hasDiscarded;
 	}
 }
