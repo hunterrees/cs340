@@ -23,6 +23,9 @@ public class CanUseMonument {
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));
+		players.get(0).addVictoryPoint();
+		players.get(0).addVictoryPoint();
+		players.get(0).addVictoryPoint();
 		
 		for (int i = 0; i < 4; i++)
 		{
@@ -35,7 +38,13 @@ public class CanUseMonument {
 		HexLocation robberLocation = new HexLocation(2,3);
 		GameModel testGameModel = new GameModel(null, null, players, robberLocation, null, myTracker, null, null, 0);
 		//5 old and 5 new
+		
 		assertTrue(testGameModel.monument(0));
+		 players = new ArrayList<Player>();
+			players.add(new Player(1, CatanColor.RED, "player1"));
+			players.get(0).addVictoryPoint();
+		testGameModel = new GameModel(null, null, players, robberLocation, null, myTracker, null, null, 0);
+		assertFalse(testGameModel.monument(0));
 	}
 
 }

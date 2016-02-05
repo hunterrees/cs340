@@ -461,11 +461,9 @@ public class GameModel {
 		}
 
 
+		int numMonument = (players.get(playerID).numNewDevCardRemaining(DevCardType.MONUMENT)+players.get(playerID).numOldDevCardRemaining(DevCardType.MONUMENT));
 
-
-		int difference = 10 - (players.get(playerID).numNewDevCardRemaining(DevCardType.MONUMENT)+players.get(playerID).numOldDevCardRemaining(DevCardType.MONOPOLY));
-
-		if(difference >= players.get(playerID).getVictoryPoints()) {
+		if(numMonument + players.get(playerID).getVictoryPoints() >= 10) {
 			return true;
 		} else {
 			return false;
