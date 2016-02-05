@@ -26,7 +26,7 @@ public class ServerPollerTests {
 		manager.setServer(server);
 		GameModel model = null;
 		try{
-			File file = new File("translateTests/pollerTest1.txt");
+			File file = new File("translatorTests/pollerTest1.txt");
 			String jsonText = FileUtils.readFileToString(file);
 			ModelTranslator translator = new ModelTranslator();
 			model = translator.getModelfromJSON(jsonText);
@@ -66,7 +66,7 @@ public class ServerPollerTests {
 		manager.setServer(server);
 		GameModel model = null;
 		try{
-			File file = new File("translateTests/pollerTest2.txt");
+			File file = new File("translatorTests/pollerTest2.txt");
 			String jsonText = FileUtils.readFileToString(file);
 			ModelTranslator translator = new ModelTranslator();
 			model = translator.getModelfromJSON(jsonText);

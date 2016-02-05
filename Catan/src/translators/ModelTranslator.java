@@ -73,7 +73,12 @@ public class ModelTranslator {
 		JsonPrimitive versionJson = root.getAsJsonPrimitive("version");
 		int version = versionJson.getAsInt();
 		
-		HexLocation robber = null; //how to get the robber location?
+		for(int i = 0; i < players.size(); i++){
+			ArrayList<Port> ports = map.listPorts(i);
+			players.get(i).setPlayerPorts(ports);
+		}
+		
+		HexLocation robber = map.getRobberLocation();
 		
 		GameModel model = new GameModel(map, bank, players, robber, tradeOffer, turnTracker, log, chat, winner);
 		model.setVersion(version);
@@ -543,6 +548,20 @@ public class ModelTranslator {
 		player.setSoldiers(numSoldiers);
 		
 		return player;
+	}
+	
+	private ArrayList<Piece> buildPieces(int roads, int cities, int settlements, int index){
+		ArrayList<Piece> pieces = new ArrayList<Piece>();
+		addPieces(pieces, PieceType.ROAD, roads, index);
+		addPieces(pieces, PieceType.SETTLEMENT, settlements, index);
+		addPieces(pieces, PieceType.CITY, cities, index);
+		return pieces;
+	}
+	
+	private void addPieces(ArrayList<Piece> pieces, PieceType type, int amount, int index){
+		for(int i = 0; i < amount; i++){
+			pieces.add(new Piece(type, null, null, index));
+		}
 	}
 	
 	private CatanColor getColor(String type){
