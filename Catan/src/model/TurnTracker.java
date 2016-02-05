@@ -22,10 +22,10 @@ public class TurnTracker
 	public void setLongestRoadplayerID(int longestRoadplayerID) {
 		this.longestRoadplayerID = longestRoadplayerID;
 	}
-	public int getLargestRoadPlayerID() {
+	public int getLargestArmyPlayerID() {
 		return largestArmyPlayerID;
 	}
-	public void setLargestRoadPlayerID(int largestRoadPlayerID) {
+	public void setLargestArmyPlayerID(int largestRoadPlayerID) {
 		this.largestArmyPlayerID = largestRoadPlayerID;
 	}
 	public GameState getGameStatus() {

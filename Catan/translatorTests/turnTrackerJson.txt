@@ -1,0 +1,8 @@
+{
+"turnTracker": {
+    "status": "Rolling",
+    "currentTurn": 1,
+    "longestRoad": -1,
+    "largestArmy": -1
+  }
+}
