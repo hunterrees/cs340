@@ -9,7 +9,7 @@ public class Edge {
 	private EdgeLocation location;
 	
 	
-	
+	// comment to zach
 	/**
 	 * 
 	 * @param location, the EdgeLocation for this Edge
