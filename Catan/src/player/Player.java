@@ -305,4 +305,36 @@ public class Player
 	public void setMonuments(int monuments) {
 		this.monuments = monuments;
 	}
+
+	public ArrayList<Port> getPlayerPorts() {
+		return playerPorts;
+	}
+
+	public void setPlayerPorts(ArrayList<Port> playerPorts) {
+		this.playerPorts = playerPorts;
+	}
+
+	public void setPlayerPieces(ArrayList<Piece> playerPieces) {
+		this.playerPieces = playerPieces;
+	}
+
+	public void setPlayerHand(Hand playerHand) {
+		this.playerHand = playerHand;
+	}
+
+	public void setVictoryPoints(int victoryPoints) {
+		this.victoryPoints = victoryPoints;
+	}
+
+	public void setPlayerID(int playerID) {
+		this.playerID = playerID;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPlayerColor(CatanColor playerColor) {
+		this.playerColor = playerColor;
+	}
 }
