@@ -54,6 +54,10 @@ public class Player
 	
 	private boolean hasDiscarded;
 	
+	private int soldiers;
+	
+	private int monuments;
+	
 	public Player(int playerID, CatanColor playerColor, String name)
 	{
 		playerPieces = new ArrayList<Piece>();
@@ -284,5 +288,21 @@ public class Player
 
 	public void setHasDiscarded(boolean hasDiscarded) {
 		this.hasDiscarded = hasDiscarded;
+	}
+
+	public int getSoldiers() {
+		return soldiers;
+	}
+
+	public void setSoldiers(int soldiers) {
+		this.soldiers = soldiers;
+	}
+
+	public int getMonuments() {
+		return monuments;
+	}
+
+	public void setMonuments(int monuments) {
+		this.monuments = monuments;
 	}
 }
