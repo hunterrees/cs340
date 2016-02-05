@@ -31,8 +31,8 @@ public class Map {
 	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<VertexLocation, Port> ports){
 		
 		this.hexes = hexes;
-		this.edges = edges;
-		this.verticies = verticies;
+		buildEdges();
+		buildVerticies();
 		placePorts(ports);
 	}
 
