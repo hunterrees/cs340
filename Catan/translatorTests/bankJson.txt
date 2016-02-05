@@ -1,0 +1,16 @@
+{
+	"bank": {
+   		"brick": 24,
+    	"wood": 20,
+    	"sheep": 21,
+    	"wheat": 27,
+    	"ore": 25
+  	},
+  	"deck": {
+    	"yearOfPlenty": 2,
+    	"monopoly": 2,
+    	"soldier": 14,
+    	"roadBuilding": 2,
+    	"monument": 4
+  	}
+ }

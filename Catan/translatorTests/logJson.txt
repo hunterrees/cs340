@@ -1,0 +1,22 @@
+{
+	"log": {
+    "lines": [
+      {
+        "source": "Mark",
+        "message": "Mark built a settlement"
+      },
+      {
+        "source": "Mark",
+        "message": "Mark's turn just ended"
+      },
+      {
+        "source": "Mark",
+        "message": "Mark built a road"
+      },
+      {
+        "source": "Mark",
+        "message": "Mark built a settlement"
+      }
+   ]
+}
+}

@@ -1,0 +1,13 @@
+{
+ "tradeOffer": {
+    "sender": 0,
+    "receiver": 1,
+    "offer": {
+      "brick": 1,
+      "wood": 1,
+      "sheep": 0,
+      "wheat": 0,
+      "ore": -1
+    }
+  }
+}
