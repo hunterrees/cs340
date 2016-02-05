@@ -153,8 +153,8 @@ public class ModelTranslator {
 	
 	public Map buildMap(JsonObject mapJson){
 		 HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
-		 HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
-		 HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
+		 //HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
+		// HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
 		 HashMap<VertexLocation, Port> ports = new HashMap<VertexLocation, Port>();
 		 
 		 JsonArray hexArray = mapJson.getAsJsonArray("hexes");
@@ -175,17 +175,17 @@ public class ModelTranslator {
 		 
 		 JsonArray roadArray = mapJson.getAsJsonArray("roads");
 		 for (int i = 0; i < roadArray.size(); i++){
-			 parseAndAddRoad((JsonObject)roadArray.get(i));
+			 parseAndAddRoad((JsonObject)roadArray.get(i), map);
 		 }
 		 
 		 JsonArray settlementArray = mapJson.getAsJsonArray("settlements");
 		 for (int i = 0; i < settlementArray.size(); i++){
-			 parseAndAddSettlement((JsonObject)settlementArray.get(i));
+			 parseAndAddSettlement((JsonObject)settlementArray.get(i), map);
 		 }
 		 
 		 JsonArray cityArray = mapJson.getAsJsonArray("cities");
 		 for (int i = 0; i < cityArray.size(); i++){
-			 parseAndAddCity((JsonObject)cityArray.get(i));
+			 parseAndAddCity((JsonObject)cityArray.get(i), map);
 		 }
 		
 		
@@ -202,13 +202,13 @@ public class ModelTranslator {
 	public Port parsePort(JsonObject jsonPort){
 		return null;
 	}
-	public void parseAndAddRoad(JsonObject jsonRoad){
+	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
 		
 	}
-	public void parseAndAddSettlement(JsonObject jsonSettlement){
+	public void parseAndAddSettlement(JsonObject jsonSettlement, Map map){
 		
 	}
-	public void parseAndAddCity(JsonObject jsonCity){
+	public void parseAndAddCity(JsonObject jsonCity, Map map){
 		
 	}
 	
