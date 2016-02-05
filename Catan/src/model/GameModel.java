@@ -452,7 +452,7 @@ public class GameModel {
 	 * @return
      */
 	public boolean monument(int playerID) {
-		if(tracker.getCurrentTurnPlayerID() != playerID) {
+		if(!okToPlay(playerID) || players.get(playerID).isHasPlayedDevCard()) {
 			return false;
 		}
 
