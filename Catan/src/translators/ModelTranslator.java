@@ -309,15 +309,79 @@ public class ModelTranslator {
 
 	}
 	public void parseAndAddSettlement(JsonObject jsonSettlement, Map map){
+		int playerID;
+		int x; 
+		int y;
+		String direction;
+		VertexDirection dir;
+		PieceType type = PieceType.SETTLEMENT;
 		
+		
+		JsonPrimitive pID = jsonSettlement.getAsJsonPrimitive("owner");
+		playerID = pID.getAsInt();
+		
+		JsonObject location = jsonSettlement.getAsJsonObject("location");
+		JsonPrimitive myX = location.getAsJsonPrimitive("x");
+		x = myX.getAsInt();
+		JsonPrimitive myY = location.getAsJsonPrimitive("y");
+		y = myY.getAsInt();
+		
+		JsonPrimitive myDirection = jsonSettlement.getAsJsonPrimitive("direction");
+		direction = myDirection.getAsString();
+		
+		switch (direction){
+		case "NW": dir = VertexDirection.NorthWest; break;
+		case "NE": dir = VertexDirection.NorthEast; break;
+		case "W": dir = VertexDirection.West; break;
+		case "E": dir = VertexDirection.East; break;
+		case "SW": dir = VertexDirection.SouthWest; break;
+		case "SE": dir = VertexDirection.SouthEast; break;
+		default: dir = null;
+		}
+		
+		HexLocation hexLoc = new HexLocation(x, y);
+		VertexLocation vertLoc = new VertexLocation(hexLoc, dir).getNormalizedLocation();
+		map.getVerticies().get(vertLoc).setPiece(new Piece(type, null, null, playerID));
 
-
+		
 
 
 
 	}
 	public void parseAndAddCity(JsonObject jsonCity, Map map){
+		int playerID;
+		int x; 
+		int y;
+		String direction;
+		VertexDirection dir;
+		PieceType type = PieceType.CITY;
 		
+		
+		JsonPrimitive pID = jsonCity.getAsJsonPrimitive("owner");
+		playerID = pID.getAsInt();
+		
+		JsonObject location = jsonCity.getAsJsonObject("location");
+		JsonPrimitive myX = location.getAsJsonPrimitive("x");
+		x = myX.getAsInt();
+		JsonPrimitive myY = location.getAsJsonPrimitive("y");
+		y = myY.getAsInt();
+		
+		JsonPrimitive myDirection = jsonCity.getAsJsonPrimitive("direction");
+		direction = myDirection.getAsString();
+		
+		switch (direction){
+		case "NW": dir = VertexDirection.NorthWest; break;
+		case "NE": dir = VertexDirection.NorthEast; break;
+		case "W": dir = VertexDirection.West; break;
+		case "E": dir = VertexDirection.East; break;
+		case "SW": dir = VertexDirection.SouthWest; break;
+		case "SE": dir = VertexDirection.SouthEast; break;
+		default: dir = null;
+		}
+		
+		HexLocation hexLoc = new HexLocation(x, y);
+		VertexLocation vertLoc = new VertexLocation(hexLoc, dir).getNormalizedLocation();
+		map.getVerticies().get(vertLoc).setPiece(new Piece(type, null, null, playerID));
 	}
 	
 	
