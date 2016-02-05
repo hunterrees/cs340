@@ -21,6 +21,8 @@ import model.Bank;
 import model.Chat;
 import model.Log;
 import model.TurnTracker;
+import player.Player;
+import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.PieceType;
@@ -63,6 +65,17 @@ public class InitializeModel {
 		assertTrue(monument == 4);
 	}
 
+	@Test
+	public void playerTest() throws IOException{
+		JsonObject json = toJson("translatorTests/playerJson.txt");
+		Player player = translator.parsePlayer(json);
+		assertTrue(player.getName().equals("Sam"));
+		assertTrue(player.getPlayerColor() == CatanColor.ORANGE);
+		assertTrue(player.getMonuments() == 0);
+		assertTrue(player.getVictoryPoints() == 5);
+		assertTrue(player.getPlayerHand().getNumResources() == 11);
+	}
+	
 	@Test
 	public void mapTest() throws IOException {
 		JsonObject json = toJson("translatorTests/mapJson.txt");

@@ -19,6 +19,7 @@ import model.GameModel;
 import model.Line;
 import model.Log;
 import model.TurnTracker;
+import player.Hand;
 import player.Player;
 import shared.DevelopmentCard;
 import shared.Piece;
@@ -55,7 +56,7 @@ public class ModelTranslator {
 		JsonObject bankJson = root.getAsJsonObject("bank");
 		Bank bank = buildBank(deckJson, bankJson);
 		
-		JsonObject playersJson = root.getAsJsonObject("players");
+		JsonArray playersJson = root.getAsJsonArray("players");
 		ArrayList<Player> players = buildPlayers(playersJson);
 		
 		JsonObject turnTrackerJson = root.getAsJsonObject("turnTracker");
@@ -450,12 +451,110 @@ public class ModelTranslator {
 		VertexLocation vertLoc = new VertexLocation(hexLoc, dir).getNormalizedLocation();
 		map.getVerticies().get(vertLoc).setPiece(new Piece(type, null, null, playerID));
 	}
+
+	public ArrayList<Player> buildPlayers(JsonArray playersJson){
+		ArrayList<Player> players = new ArrayList<Player>();
+		for(int i = 0; i < playersJson.size(); i++){
+			Player player = parsePlayer((JsonObject)playersJson.get(i));
+			players.add(player);
+		}
+		return players;
+	}
 	
+	public Player parsePlayer(JsonObject jsonPlayer){
+		int numCities;
+		String color;
+		boolean discarded;
+		int numMonuments;
+		String name;
+		
+		int playerIndex;
+		boolean playedDevCard;
+		int playerID;
+		
+		int numRoads;
+		int numSettlements;
+		int numSoldiers;
+		int numVictoryPoints;
+		
+		JsonPrimitive cities = jsonPlayer.getAsJsonPrimitive("cities");
+		numCities = cities.getAsInt();
+		
+		JsonPrimitive primColor = jsonPlayer.getAsJsonPrimitive("color");
+		color = primColor.getAsString();
+		
+		JsonPrimitive primDiscarded = jsonPlayer.getAsJsonPrimitive("discarded");
+		discarded = primDiscarded.getAsBoolean();
+		
+		JsonPrimitive monuments = jsonPlayer.getAsJsonPrimitive("monuments");
+		numMonuments = monuments.getAsInt();
+		
+		JsonPrimitive primName = jsonPlayer.getAsJsonPrimitive("name");
+		name = primName.getAsString();
+		
+		JsonObject oldDevCardsObj = jsonPlayer.getAsJsonObject("oldDevCards");
+		JsonObject newDevCardsObj = jsonPlayer.getAsJsonObject("newDevCards");
+		JsonObject resourcesObj = jsonPlayer.getAsJsonObject("resources");
+		
+		JsonPrimitive pIndex = jsonPlayer.getAsJsonPrimitive("playerIndex");
+		playerIndex = pIndex.getAsInt();
+		
+		JsonPrimitive primPlayedDevCard = jsonPlayer.getAsJsonPrimitive("playedDevCard");
+		playedDevCard = primPlayedDevCard.getAsBoolean();
+		
+		JsonPrimitive primPlayerID = jsonPlayer.getAsJsonPrimitive("playerID");
+		playerID = primPlayerID.getAsInt();
+		
+		JsonPrimitive primRoads = jsonPlayer.getAsJsonPrimitive("roads");
+		numRoads = primRoads.getAsInt();
+		
+		JsonPrimitive primSettlements = jsonPlayer.getAsJsonPrimitive("settlements");
+		numSettlements = primSettlements.getAsInt();
+		
+		JsonPrimitive primSoldiers = jsonPlayer.getAsJsonPrimitive("soldiers");
+		numSoldiers = primSoldiers.getAsInt();
+		
+		JsonPrimitive primVP = jsonPlayer.getAsJsonPrimitive("victoryPoints");
+		numVictoryPoints = primVP.getAsInt();
+		
+		
+		ArrayList<ResourceCard> resourceList = buildResources(resourcesObj);
+		
+		ArrayList<DevelopmentCard> oldDevCards = buildDevCards(oldDevCardsObj);
+		
+		ArrayList<DevelopmentCard> newDevCards = buildDevCards(newDevCardsObj);
+		CatanColor catanColor = getColor(color);
+		
+		Player player = new Player(playerIndex, catanColor, name);
+		
+		Hand hand = new Hand();
+		hand.setResourceCards(resourceList);
+		hand.setNewDevelopmentCards(newDevCards);
+		hand.setOldDevelopmentCards(oldDevCards);
+		
+		ArrayList<Piece> pieces = buildPieces(numRoads, numCities, numSettlements, playerIndex);
+		player.setPlayerPieces(pieces);
+		player.setPlayerHand(hand);
+		player.setHasDiscarded(discarded);
+		player.setHasPlayedDevCard(playedDevCard);
+		player.setPlayerID(playerID);
+		player.setVictoryPoints(numVictoryPoints);
+		player.setMonuments(numMonuments);
+		player.setSoldiers(numSoldiers);
+		
+		return player;
+	}
 	
-	
-	
-	
-	public ArrayList<Player> buildPlayers(JsonObject playersJson){
+	private CatanColor getColor(String type){
+		if(type.equals("red")){return CatanColor.RED;};
+		if(type.equals("orange")){return CatanColor.ORANGE;};
+		if(type.equals("yellow")){return CatanColor.YELLOW;};
+		if(type.equals("green")){return CatanColor.GREEN;};
+		if(type.equals("blue")){return CatanColor.BLUE;};
+		if(type.equals("purple")){return CatanColor.PURPLE;};
+		if(type.equals("puce")){return CatanColor.PUCE;};
+		if(type.equals("white")){return CatanColor.WHITE;};
+		if(type.equals("brown")){return CatanColor.BROWN;};
 		return null;
 	}
 	
