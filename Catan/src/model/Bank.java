@@ -108,6 +108,16 @@ public class Bank
 		}
 		return num;
 	}
+	
+	public int numDevCardsRemaining(DevCardType type){
+		int num = 0;
+		for(DevelopmentCard dc : bankDevelopmentCards){
+			if(dc.getType() == type){
+				num++;
+			}
+		}
+		return num;
+	}
 	/**
 	 * returns development cards
 	 * @return

@@ -5,7 +5,7 @@ public class Line {
 	private String message;
 	private String source;
 	
-	public Line(String message, String source) {
+	public Line(String source, String message) {
 		this.message = message;
 		this.source = source;
 	}

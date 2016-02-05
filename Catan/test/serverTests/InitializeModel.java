@@ -12,9 +12,11 @@ import org.junit.Test;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import model.Bank;
 import model.Chat;
 import model.Log;
 import model.TurnTracker;
+import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
 import trade.TradeOffer;
@@ -24,9 +26,9 @@ public class InitializeModel {
 
 	ModelTranslator translator = new ModelTranslator();
 
-	/*@Test
+	@Test
 	public void bankTest() throws IOException {
-		JsonObject json = toJson("bankJson.txt");
+		JsonObject json = toJson("translatorTests/bankJson.txt");
 		JsonObject bankJson = json.getAsJsonObject("bank");
 		JsonObject deckJson = json.getAsJsonObject("deck");
 		Bank bank = translator.buildBank(deckJson, bankJson);
@@ -52,7 +54,7 @@ public class InitializeModel {
 		assertTrue(roadBuilding == 2);
 		int monument = bank.numDevCardsRemaining(DevCardType.MONUMENT);
 		assertTrue(monument == 4);
-	}*/
+	}
 	
 	@Test
 	public void chatTest() throws IOException{
