@@ -7,6 +7,7 @@ import player.Player;
 import shared.ResourceCard;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
+import shared.definitions.HexType;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -361,8 +362,13 @@ public class GameModel {
 		if(!okToPlay(playerID) || players.get(playerID).isHasPlayedDevCard()) {
 			return false;
 		}
-
+		
 		if(players.get(playerID).numOldDevCardRemaining(DevCardType.SOLDIER) == 0) {
+			return false;
+		}
+		
+		if (map.getHexes().get(loc).getType() == HexType.WATER)
+		{
 			return false;
 		}
 
