@@ -322,7 +322,7 @@ public class ModelTranslator {
 		//return port;
 	}
 	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
-		JsonObject myID= jsonRoad.getAsJsonObject("owner");
+		JsonObject myID = jsonRoad.getAsJsonObject("owner");
 		JsonObject location = jsonRoad.getAsJsonObject("location");
 
 		JsonObject myX = location.getAsJsonObject("x");
