@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import map.Edge;
 import map.Map;
 import map.TerrainHex;
+import map.Vertex;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -21,6 +23,7 @@ import model.Log;
 import model.TurnTracker;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
+import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import trade.TradeOffer;
@@ -66,14 +69,9 @@ public class InitializeModel {
 		JsonObject mapJson = json.getAsJsonObject("map");
 		Map map = translator.buildMap(mapJson);
 
+		// Testing hexes
 		int numHexes = map.getHexes().size();
 		assertTrue(numHexes == 37);
-
-		int numRoads;
-
-		int numSettlements;
-
-		int numCities;
 
 		int numWater = 0;
 
@@ -86,6 +84,8 @@ public class InitializeModel {
 		int numWheat = 0;
 
 		int numOre = 0;
+
+		int numDesert = 0;
 
 		for (TerrainHex hex : map.getHexes().values()) {
 			switch (hex.getType()) {
@@ -107,6 +107,9 @@ public class InitializeModel {
 				case WATER:
 					numWater++;
 					break;
+				case DESERT:
+					numDesert++;
+					break;
 				default:
 					System.out.println("Error! The hex type doesn't exist!");
 			}
@@ -117,16 +120,40 @@ public class InitializeModel {
 		assertTrue(numWheat == 4);
 		assertTrue(numOre == 3);
 		assertTrue(numWater == 18);
+		assertTrue(numDesert == 1);
 
 
 
+		// Testing settlements and cities
+		int numSettlements = 0;
+
+		int numCities = 0;
+
+		for (Vertex v : map.getVerticies().values()) {
+			if(v.getPiece() != null) {
+				if(v.getPiece().getPieceType() == PieceType.SETTLEMENT) {
+					numSettlements++;
+				} else if(v.getPiece().getPieceType() == PieceType.CITY) {
+					numCities++;
+				} else {
+					System.out.println("Error! Building type doesn't exist");
+				}
+			}
+		}
+
+		assertTrue(numSettlements == 9);
+		assertTrue(numCities == 0);
 
 
+		// Testing roads
+		int numRoads = 0;
 
-
-
-
-
+		for (Edge e : map.getEdges().values()) {
+			if(e.getPiece() != null) {
+				numRoads++;
+			}
+		}
+		assertTrue(numRoads == 9);
 	}
 
 	@Test
