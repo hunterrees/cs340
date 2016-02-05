@@ -1,4 +1,4 @@
-/*
+
 package canDoTests;
 
 import static org.junit.Assert.*;
@@ -22,7 +22,7 @@ public class CanBuyDevCard {
 	public void test() {
 		
 		//testing
-		TurnTracker myTracker = new TurnTracker();
+		TurnTracker myTracker = new TurnTracker(0, 0, null, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));
@@ -35,8 +35,9 @@ public class CanBuyDevCard {
 		players.add(new Player(3, CatanColor.RED, "player1"));
 		players.add(new Player(4, CatanColor.RED, "player1"));
 		HexLocation robberLocation = new HexLocation(2,3);
-		
-		GameModel testGameModel = new GameModel(null, players, robberLocation, null, myTracker);
+		Bank myBank = new Bank();
+		myBank.generateStartingDevelopmentCards();
+		GameModel testGameModel = new GameModel(null, myBank, players, robberLocation, null, myTracker, null, null, 0);
 		
 		//Test with appropriate Resources
 		//
@@ -59,4 +60,3 @@ public class CanBuyDevCard {
 	}
 
 }
-*/

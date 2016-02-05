@@ -1,4 +1,3 @@
-/*
 package canDoTests;
 
 import static org.junit.Assert.*;
@@ -20,7 +19,7 @@ public class CanDiscardCards {
 
 	@Test
 	public void test() {
-		TurnTracker myTurnTracker = new TurnTracker();
+		TurnTracker myTurnTracker = new TurnTracker(0, 0, null, 0);
 		myTurnTracker.setGameStatus(GameState.discarding);
 		myTurnTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -31,13 +30,16 @@ public class CanDiscardCards {
 		deckToSet.add(new ResourceCard(ResourceType.SHEEP));
 		deckToSet.add(new ResourceCard(ResourceType.WHEAT));
 		deckToSet.add(new ResourceCard(ResourceType.ORE));
+		deckToSet.add(new ResourceCard(ResourceType.WHEAT));
+		deckToSet.add(new ResourceCard(ResourceType.ORE));
+		deckToSet.add(new ResourceCard(ResourceType.ORE));
 		players.get(0).getPlayerHand().setResourceCards(deckToSet);
 		players.add(new Player(2, CatanColor.RED, "player1"));
 		players.add(new Player(3, CatanColor.RED, "player1"));
 		players.add(new Player(4, CatanColor.RED, "player1"));
 		HexLocation robberLocation = new HexLocation(2,3);
 		
-		GameModel testGameModel = new GameModel(null, players, robberLocation, null, myTurnTracker);
+		GameModel testGameModel = new GameModel(null, null, players, robberLocation, null, myTurnTracker, null, null, 0);
 		
 		//cards to discard
 		ArrayList<ResourceType> cardsToDiscard = new ArrayList<ResourceType>();
@@ -45,17 +47,19 @@ public class CanDiscardCards {
 		cardsToDiscard.add((ResourceType.SHEEP));
 		//trying to discard to out of 3 sheep
 		assertTrue(testGameModel.discardCards(0,cardsToDiscard));
-		cardsToDiscard.add((ResourceType.SHEEP));
-		cardsToDiscard.add((ResourceType.SHEEP));
+		cardsToDiscard.add((ResourceType.ORE));
+		cardsToDiscard.add((ResourceType.ORE));
+		cardsToDiscard.add((ResourceType.ORE));
+		cardsToDiscard.add((ResourceType.ORE));
 		//trying to discard 4 out of 3 sheep
 		assertFalse(testGameModel.discardCards(0,cardsToDiscard));
 		cardsToDiscard = new ArrayList<ResourceType>();
 		cardsToDiscard.add((ResourceType.BRICK));
 		cardsToDiscard.add((ResourceType.SHEEP));
-		players.get(0).getPlayerHand().addResources(1, ResourceType.BRICK);
-		players.get(0).getPlayerHand().addResources(1, ResourceType.SHEEP);
-		assertTrue(testGameModel.discardCards(0, cardsToDiscard));
+		players.get(0).getPlayerHand().removeResources(1, ResourceType.BRICK);
+		//less than 7 cards in hand
+		assertFalse(testGameModel.discardCards(0, cardsToDiscard));
 	}
 
 }
-*/
+

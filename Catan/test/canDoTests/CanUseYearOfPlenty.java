@@ -1,4 +1,4 @@
-/*
+
 package canDoTests;
 
 import static org.junit.Assert.*;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import model.Bank;
 import model.GameModel;
 import model.TurnTracker;
 import player.Player;
@@ -21,14 +20,14 @@ public class CanUseYearOfPlenty {
 
 	@Test
 	public void test() {
-		TurnTracker myTracker = new TurnTracker();
+		TurnTracker myTracker = new TurnTracker(0, 0, null, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));
 		players.get(0).getPlayerHand().addOldDevelopmentCard(DevCardType.YEAR_OF_PLENTY);
 		HexLocation robberLocation = new HexLocation(2,3);
 		
-		GameModel testGameModel = new GameModel(null, players, robberLocation, null, myTracker);
+		GameModel testGameModel = new GameModel(null, null, players, robberLocation, null, myTracker, null, null, 0);
 		
 		//testing with same resourcetype
 		assertTrue(testGameModel.yearOfPlenty(0, ResourceType.ORE, ResourceType.ORE));
@@ -41,7 +40,8 @@ public class CanUseYearOfPlenty {
 		resourceDeck.add(new ResourceCard(ResourceType.ORE));
 		resourceDeck.add(new ResourceCard(ResourceType.WOOD));
 		resourceDeck.add(new ResourceCard(ResourceType.WHEAT));
-		Bank.BANK.setResources(resourceDeck);
+		testGameModel.getBank().setResources(resourceDeck);
+
 		assertTrue(testGameModel.yearOfPlenty(0, ResourceType.ORE, ResourceType.ORE));
 		assertTrue(testGameModel.yearOfPlenty(0, ResourceType.ORE, ResourceType.WOOD));
 		assertFalse(testGameModel.yearOfPlenty(0, ResourceType.WOOD, ResourceType.WOOD));
@@ -49,4 +49,4 @@ public class CanUseYearOfPlenty {
 	}
 
 }
-*/
+

@@ -1,4 +1,4 @@
-/*
+
 package canDoTests;
 
 import static org.junit.Assert.*;
@@ -19,7 +19,7 @@ public class CanOfferTrade {
 
 	@Test
 	public void test() {
-		TurnTracker myTurnTracker = new TurnTracker();
+		TurnTracker myTurnTracker = new TurnTracker(0, 0, null, 0);
 		myTurnTracker.setGameStatus(GameState.playing);
 		myTurnTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -33,7 +33,7 @@ public class CanOfferTrade {
 		deckToSet.add(new ResourceCard(ResourceType.ORE));
 		players.get(0).getPlayerHand().setResourceCards(deckToSet);
 		
-		GameModel testGameModel = new GameModel(null, players, null, null, myTurnTracker);
+		GameModel testGameModel = new GameModel(null, null, players, null, null, myTurnTracker, null, null, 0);
 		ArrayList<ResourceType> resourceTypes = new ArrayList<ResourceType>();
 		resourceTypes.add(ResourceType.SHEEP);
 		resourceTypes.add(ResourceType.SHEEP);
@@ -50,4 +50,4 @@ public class CanOfferTrade {
 	}
 
 }
-*/
+

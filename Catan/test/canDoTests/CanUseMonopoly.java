@@ -1,4 +1,4 @@
-/*
+
 package canDoTests;
 
 import static org.junit.Assert.*;
@@ -18,7 +18,7 @@ public class CanUseMonopoly {
 
 	@Test
 	public void test() {
-		TurnTracker myTracker = new TurnTracker();
+		TurnTracker myTracker = new TurnTracker(0, 0, null, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));
@@ -26,14 +26,14 @@ public class CanUseMonopoly {
 		
 		players.get(0).getPlayerHand().addOldDevelopmentCard(DevCardType.MONOPOLY);
 		HexLocation robberLocation = new HexLocation(2,3);
-		GameModel testGameModel = new GameModel(null, players, robberLocation, null, myTracker);
+		GameModel testGameModel = new GameModel(null, null, players, robberLocation, null, myTracker, null, null, 0);
 		//5 old and 5 new
 		assertTrue(testGameModel.monopoly(0));
 		players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));
-		testGameModel = new GameModel(null, players, robberLocation, null, myTracker);
+		testGameModel = new GameModel(null, null, players, robberLocation, null, myTracker, null, null, 0);
 		assertFalse(testGameModel.monopoly(0));
 	}
 
 }
-*/
+

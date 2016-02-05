@@ -469,5 +469,9 @@ public class GameModel {
 		}
 	}
 
+	public Bank getBank() {
+		return bank;
+	}
+
 // Private methods
 }
