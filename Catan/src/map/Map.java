@@ -14,7 +14,6 @@ import shared.definitions.PortType;
 import shared.locations.*;
 
 public class Map {
-	int test;
 	private HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
 	private HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
 	private HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
