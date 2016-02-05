@@ -522,6 +522,7 @@ public class Map {
 			}
 
 			if(edges.get(loc.getNormalizedLocation()).getPiece() != null) {
+				//System.out.println(edges.get(loc.getNormalizedLocation()).getPiece());
 				return false;
 			}
 
@@ -677,8 +678,8 @@ public class Map {
 
 
 		// Check if the surrounding corners make this case valid
-		Vertex left = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.West).getNormalizedLocation());
-		Vertex right = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.East).getNormalizedLocation());
+		Vertex left = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthEast).getNormalizedLocation());
+		Vertex right = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthWest).getNormalizedLocation());
 
 		boolean cornerValid = false;
 
@@ -1307,26 +1308,26 @@ public class Map {
 		boolean secondPossible = false;
 
 		// First case
-		if(canBuildRoad(playerID, false, spot1)) {
+		if(canBuildRoad(playerID, false, spot1.getNormalizedLocation())) {
 			Edge tempEdge = edges.get(spot1);
 			Piece temp = new Piece(PieceType.ROAD, tempEdge, null, playerID);
-			edges.get(spot1).setPiece(temp);
-			if(canBuildRoad(playerID, false, spot2)) {
+			edges.get(spot1.getNormalizedLocation()).setPiece(temp);
+			if(canBuildRoad(playerID, false, spot2.getNormalizedLocation())) {
 				firstPossible = true;
 			}
-			edges.get(spot1).setPiece(null);
+			edges.get(spot1.getNormalizedLocation()).setPiece(null);
 		}
 
 
 		// Second case
-		if(canBuildRoad(playerID, false, spot2)) {
-			Edge tempEdge = edges.get(spot2);
+		if(canBuildRoad(playerID, false, spot2.getNormalizedLocation())) {
+			Edge tempEdge = edges.get(spot2.getNormalizedLocation());
 			Piece temp = new Piece(PieceType.ROAD, tempEdge, null, playerID);
-			edges.get(spot1).setPiece(temp);
-			if(canBuildRoad(playerID, false, spot1)) {
+			edges.get(spot2.getNormalizedLocation()).setPiece(temp);
+			if(canBuildRoad(playerID, false, spot1.getNormalizedLocation())) {
 				secondPossible = true;
 			}
-			edges.get(spot2).setPiece(null);
+			edges.get(spot2.getNormalizedLocation()).setPiece(null);
 		}
 
 
