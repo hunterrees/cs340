@@ -1334,4 +1334,12 @@ public class Map {
 
 		return firstPossible || secondPossible;
 	}
+
+	public HashMap<HexLocation, TerrainHex> getHexes() {
+		return hexes;
+	}
+
+	public void setHexes(HashMap<HexLocation, TerrainHex> hexes) {
+		this.hexes = hexes;
+	}
 }
