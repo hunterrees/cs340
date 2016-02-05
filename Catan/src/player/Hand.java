@@ -212,4 +212,16 @@ public class Hand
 	{
 		resourceCards = cardsToSet;
 	}
+	public int getKnights() {
+		return knights;
+	}
+	public void setKnights(int knights) {
+		this.knights = knights;
+	}
+	public void setOldDevelopmentCards(ArrayList<DevelopmentCard> oldDevelopmentCards) {
+		this.oldDevelopmentCards = oldDevelopmentCards;
+	}
+	public void setNewDevelopmentCards(ArrayList<DevelopmentCard> newDevelopmentCards) {
+		this.newDevelopmentCards = newDevelopmentCards;
+	}
 }

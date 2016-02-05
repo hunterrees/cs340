@@ -45,7 +45,7 @@ public class ServerPoller {
 				if(newModel != null){
 					gameManager.setGameModel(newModel);
 				}
-			} catch (ServerException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

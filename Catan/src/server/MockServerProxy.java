@@ -1,12 +1,16 @@
 package server;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import org.apache.commons.io.FileUtils;
 
 import model.GameModel;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
+import translators.ModelTranslator;
 
 /**
  * 
@@ -46,10 +50,19 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public GameModel getModel(int versionID) {
-		return null;
-		// TODO Auto-generated method stub
-
+	public GameModel getModel(int versionID){
+		GameModel model = null;
+		if(versionID != 1){
+			try{
+				File file = new File("translateTests/pollerTest2.txt");
+				String jsonText = FileUtils.readFileToString(file);
+				ModelTranslator translator = new ModelTranslator();
+				model = translator.getModelfromJSON(jsonText);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return model;
 	}
 
 	@Override

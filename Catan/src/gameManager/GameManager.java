@@ -21,6 +21,11 @@ public class GameManager {
 	public GameManager(){
 	}
 	
+	public GameManager(GameModel model, ServerInterface server){
+		this.model = model;
+		this.server = server;
+	}
+	
 	public void setModel(GameModel model) {
 		this.model = model;
 	}
