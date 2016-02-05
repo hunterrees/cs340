@@ -1,4 +1,3 @@
-/*
 package canDoTests;
 
 import static org.junit.Assert.*;
@@ -15,14 +14,13 @@ import shared.definitions.CatanColor;
 import shared.definitions.GameState;
 import shared.definitions.PortType;
 import shared.definitions.ResourceType;
-import shared.locations.HexLocation;
 
 public class CanMaritimeTrade {
 
 	@Test
 	public void test() {
 		//ummm...should we be checking for incorrect turn stuff?
-		TurnTracker myTurnTracker = new TurnTracker();
+		TurnTracker myTurnTracker = new TurnTracker(0, 0, null, 0);
 		myTurnTracker.setGameStatus(GameState.playing);
 		myTurnTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -36,7 +34,7 @@ public class CanMaritimeTrade {
 		deckToSet.add(new ResourceCard(ResourceType.ORE));
 		players.get(0).getPlayerHand().setResourceCards(deckToSet);
 		
-		GameModel testGameModel = new GameModel(null, players, null, null, myTurnTracker);
+		GameModel testGameModel = new GameModel(null, null, players, null, null, myTurnTracker, null, null, 0);
 		
 		assertTrue(testGameModel.maritimeTrade(0, ResourceType.SHEEP) == 4);
 		players.get(0).addPort(PortType.SHEEP);
@@ -50,4 +48,4 @@ public class CanMaritimeTrade {
 	}
 
 }
-*/
+
