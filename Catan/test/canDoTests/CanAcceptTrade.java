@@ -50,6 +50,7 @@ public class CanAcceptTrade {
 		cardsToTrade = new ArrayList<ResourceType>();
 		cardsToTrade.add(ResourceType.SHEEP);
 		cardsToTrade.add(ResourceType.BRICK);
+		myTradeOffer.setResourceOffered(cardsToTrade);
 		testGameModel = new GameModel(null, myBank, players, robberLocation, myTradeOffer, myTracker, null, null, 0);
 		assertFalse(testGameModel.acceptTrade(0));
 	}

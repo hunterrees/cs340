@@ -86,7 +86,7 @@ public class GameModel {
 			return false;
 		}
 		
-		ArrayList<ResourceType> desired = theTrade.getResourceDesired();
+		ArrayList<ResourceType> desired = theTrade.getResourceOffered();
 
 		int wood = 0;
 		int brick = 0;

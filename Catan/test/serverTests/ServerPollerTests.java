@@ -97,6 +97,16 @@ public class ServerPollerTests {
 			}
 			
 		}, 5500);
+		
+		new Timer().schedule(new TimerTask(){
+
+			@Override
+			public void run() {
+				assertTrue(manager.getModel().getVersion() == 1);
+				assertTrue(manager.getModel().getLog().getLines().size() == 24);
+			}
+			
+		}, 7750);
 	}
 
 }
