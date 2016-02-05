@@ -21,12 +21,10 @@ import model.Log;
 import model.TurnTracker;
 import player.Player;
 import shared.DevelopmentCard;
+import shared.Piece;
 import shared.ResourceCard;
 import shared.definitions.*;
-import shared.locations.EdgeLocation;
-import shared.locations.HexLocation;
-import shared.locations.VertexDirection;
-import shared.locations.VertexLocation;
+import shared.locations.*;
 import trade.TradeOffer;
 
 /**
@@ -251,11 +249,32 @@ public class ModelTranslator {
 
 		return port;
 	}
-	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
-		int playerID;
-		int x;
-		int y;
-		String direction;
+	public void parseAndAddRoad(JsonObject jsonRoad){
+		JsonObject myID= jsonRoad.getAsJsonObject("owner");
+		JsonObject location = jsonRoad.getAsJsonObject("location");
+
+		JsonObject myX = location.getAsJsonObject("x");
+		JsonObject myY = location.getAsJsonObject("y");
+		JsonObject myDirection = location.getAsJsonObject("direction");
+
+
+		int playerID = myID.getAsInt();
+		int x = myX.getAsInt();
+		int y = myY.getAsInt();
+		String direction = myDirection.getAsString();
+
+		EdgeDirection ed = null;
+		switch(direction) {
+			case "N": ed = EdgeDirection.North; break;
+			case "NE": ed = EdgeDirection.North; break;
+			case "SE": ed = EdgeDirection.North; break;
+			case "S": ed = EdgeDirection.North; break;
+			case "SW": ed = EdgeDirection.North; break;
+			case "NW": ed = EdgeDirection.North; break;
+			default: System.out.println("Error! EdgeDirection doesn't exist");
+		}
+
+		//Piece road = new Piece(PieceType.ROAD,new Edge())
 
 
 
