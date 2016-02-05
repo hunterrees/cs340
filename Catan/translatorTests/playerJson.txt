@@ -3,14 +3,14 @@
         "brick": 1,
         "wood": 2,
         "sheep": 0,
-        "wheat": -6,
-        "ore": -2
+        "wheat": 6,
+        "ore": 2
       },
       "oldDevCards": {
-        "yearOfPlenty": -1,
-        "monopoly": -1,
-        "soldier": -1,
-        "roadBuilding": -1,
+        "yearOfPlenty": 1,
+        "monopoly": 1,
+        "soldier": 1,
+        "roadBuilding": 1,
         "monument": 0
       },
       "newDevCards": {
