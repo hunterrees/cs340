@@ -1,6 +1,5 @@
 package canDoTests;
 
-import map.Edge;
 import map.Map;
 import map.Vertex;
 import org.junit.Test;
@@ -17,8 +16,6 @@ public class CanBuildRoad {
     public void testMap() {
         Map map = new Map();
 
-        //
-        boolean possible;
         int playerID = 1;
         EdgeLocation el = new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthEast).getNormalizedLocation();
 

@@ -17,17 +17,13 @@ public class CanBuildCity {
 	@Test
 	public void test() {
 		Map map = new Map();
-		System.out.println("1");
 		Piece p1Settlement = new Piece(PieceType.SETTLEMENT, null, null, 1);
-		System.out.println("2");
 		Vertex vert = map.getVerticies().get(new VertexLocation(new HexLocation(0, 0), VertexDirection.NorthWest));
 		vert.setPiece(p1Settlement);
 		//map.getVerticies().get(vert.getLocation()).setPiece(p1Settlement);
-		System.out.println("3");
 		
 		//can build on valid location
 		boolean can = map.canBuildCity(1, vert.getLocation());
-		System.out.println("4");
 		assertTrue(can);
 		
 		//valid location but wrong player

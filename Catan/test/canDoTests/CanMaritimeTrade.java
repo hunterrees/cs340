@@ -19,9 +19,7 @@ public class CanMaritimeTrade {
 
 	@Test
 	public void test() {
-		//ummm...should we be checking for incorrect turn stuff?
-		TurnTracker myTurnTracker = new TurnTracker(0, 0, null, 0);
-		myTurnTracker.setGameStatus(GameState.playing);
+		TurnTracker myTurnTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		myTurnTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));

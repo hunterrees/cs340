@@ -16,7 +16,6 @@ public class CanUseRoadBuilder {
 	@Test
 	public void test() {
 		Map map = new Map();
-		int playerID = 1;
 
 		// Tesing it building the roads next to own settlements
 		Vertex spot = map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.East).getNormalizedLocation());

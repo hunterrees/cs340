@@ -14,6 +14,7 @@ import player.Player;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
+import shared.definitions.GameState;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 
@@ -21,7 +22,7 @@ public class CanUseYearOfPlenty {
 
 	@Test
 	public void test() {
-		TurnTracker myTracker = new TurnTracker(0, 0, null, 0);
+		TurnTracker myTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));
