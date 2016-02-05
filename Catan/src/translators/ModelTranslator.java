@@ -163,8 +163,8 @@ public class ModelTranslator {
 		 
 		 JsonArray portArray = mapJson.getAsJsonArray("ports");
 		 for (int i = 0; i < portArray.size(); i++){
-			Port port = parsePort((JsonObject) portArray.get(i));
-			 ports.put(port.getLoc(), port);
+			parsePort((JsonObject) portArray.get(i), ports);
+			// ports.put(port.getLoc(), port);
 			
 		 }
 		 Map map = new Map(hexes, ports);
@@ -229,7 +229,7 @@ public class ModelTranslator {
 		return hex;
 	}
 
-	public Port parsePort(JsonObject jsonPort){
+	public void parsePort(JsonObject jsonPort, HashMap<VertexLocation,Port> ports){
 		// Get the information out
 
 		JsonObject location= jsonPort.getAsJsonObject("location");
@@ -268,7 +268,7 @@ public class ModelTranslator {
 			default: type = PortType.THREE;
 		}
 
-		VertexDirection vl = null;
+/*		VertexDirection vl = null;
 		switch(direction) {
 			case "NW": vl = VertexDirection.NorthWest; break;
 			case "NE": vl = VertexDirection.NorthEast; break;
@@ -277,15 +277,49 @@ public class ModelTranslator {
 			case "SW": vl = VertexDirection.SouthWest; break;
 			case "W": vl = VertexDirection.West; break;
 			default: System.out.println("Error! The EdgeLocation doesn't exist!");
+		}*/
+
+		VertexDirection vd1 = null;
+		VertexDirection vd2 = null;
+
+		switch(direction) {
+			case "N": vd1 = VertexDirection.NorthWest;
+					vd2 = VertexDirection.NorthEast;
+					break;
+			case "NE": vd1 = VertexDirection.NorthEast;
+					vd2 = VertexDirection.East;
+					break;
+			case "SE": vd1 = VertexDirection.East;
+					vd2 = VertexDirection.SouthEast;
+					break;
+			case "S": vd1 = VertexDirection.SouthEast;
+					vd2 = VertexDirection.SouthWest;
+					break;
+			case "SW": vd1 = VertexDirection.SouthWest;
+					vd2 = VertexDirection.West;
+					break;
+			case "NW": vd1 = VertexDirection.West;
+					vd2 = VertexDirection.NorthWest;
+					break;
+			default: System.out.println("Error! The direction doesn't exist!");
 		}
 
-		Port port = new Port(type);
-		port.setLoc(new VertexLocation(new HexLocation(x,y),vl));
+
+		Port port1 = new Port(type);
+		port1.setLoc(new VertexLocation(new HexLocation(x,y), vd1));
+
+		Port port2 = new Port(type);
+		port2.setLoc(new VertexLocation(new HexLocation(x,y), vd2));
+
+		ports.put(port1.getLoc(), port1);
+		ports.put(port2.getLoc(), port2);
 
 
 
 
-		return port;
+
+
+		//return port;
 	}
 	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
 		JsonObject myID= jsonRoad.getAsJsonObject("owner");
