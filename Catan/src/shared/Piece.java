@@ -1,5 +1,4 @@
 package shared;
-import java.util.ArrayList;
 
 import map.Edge;
 import map.Vertex;

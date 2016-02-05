@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import model.Bank;
 import model.GameModel;
 import model.TurnTracker;
 import player.Player;
@@ -26,8 +27,9 @@ public class CanUseYearOfPlenty {
 		players.add(new Player(1, CatanColor.RED, "player1"));
 		players.get(0).getPlayerHand().addOldDevelopmentCard(DevCardType.YEAR_OF_PLENTY);
 		HexLocation robberLocation = new HexLocation(2,3);
+		Bank bank = new Bank();
 		
-		GameModel testGameModel = new GameModel(null, null, players, robberLocation, null, myTracker, null, null, 0);
+		GameModel testGameModel = new GameModel(null, bank, players, robberLocation, null, myTracker, null, null, 0);
 		
 		//testing with same resourcetype
 		assertTrue(testGameModel.yearOfPlenty(0, ResourceType.ORE, ResourceType.ORE));

@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import map.Port;
 import shared.Piece;
-import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.PortType;

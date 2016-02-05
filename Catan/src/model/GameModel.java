@@ -1,15 +1,10 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
 
 import map.Map;
-import map.Port;
 import player.Player;
-import shared.DevelopmentCard;
 import shared.ResourceCard;
-import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
@@ -52,6 +47,14 @@ public class GameModel {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public int getWinner() {
+		return winner;
+	}
+
+	public void setWinner(int winner) {
+		this.winner = winner;
 	}
 
 	public Chat getChat() {
