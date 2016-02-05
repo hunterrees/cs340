@@ -177,8 +177,8 @@ public class ModelTranslator {
 		 
 		 
 		 JsonArray roadArray = mapJson.getAsJsonArray("roads");
+
 		 for (int i = 0; i < roadArray.size(); i++){
-			 System.out.println(i);
 			 parseAndAddRoad((JsonObject)roadArray.get(i), map);
 
 		 }
@@ -350,11 +350,11 @@ public class ModelTranslator {
 		EdgeDirection ed = null;
 		switch(direction) {
 			case "N": ed = EdgeDirection.North; break;
-			case "NE": ed = EdgeDirection.North; break;
-			case "SE": ed = EdgeDirection.North; break;
-			case "S": ed = EdgeDirection.North; break;
-			case "SW": ed = EdgeDirection.North; break;
-			case "NW": ed = EdgeDirection.North; break;
+			case "NE": ed = EdgeDirection.NorthEast; break;
+			case "SE": ed = EdgeDirection.SouthEast; break;
+			case "S": ed = EdgeDirection.South; break;
+			case "SW": ed = EdgeDirection.SouthWest; break;
+			case "NW": ed = EdgeDirection.NorthWest; break;
 			default: System.out.println("Error! EdgeDirection doesn't exist");
 		}
 
@@ -366,19 +366,6 @@ public class ModelTranslator {
 
 
 
-//////////////////
-		if(edge.getPiece() == null) {
-			System.out.println("should never come here");
-		}
-
-		int numRoads = 0;
-
-		for (Edge e : map.getEdges().values()) {
-			if(e.getPiece() != null) {
-				numRoads++;
-			}
-		}System.out.println("numRoads = " + numRoads);
-///////////////
 	}
 	//here
 	public void parseAndAddSettlement(JsonObject jsonSettlement, Map map){
