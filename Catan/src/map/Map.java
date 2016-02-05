@@ -1142,13 +1142,19 @@ public class Map {
 		TerrainHex hex20 = new TerrainHex(loc20, HexType.WATER, -1);
 		hexes.put(loc20, hex20);
 
+		/*HexLocation loc22 = new HexLocation(2, -2);
+		TerrainHex hex22 = new TerrainHex(loc22, HexType.WATER, -1);
+		hexes.put(loc22, hex22);*/
+
 		HexLocation loc21 = new HexLocation(1, -3);
 		TerrainHex hex21 = new TerrainHex(loc21, HexType.WATER, -1);
 		hexes.put(loc21, hex21);
 
-		HexLocation loc22 = new HexLocation(2, -2);
+		HexLocation loc22 = new HexLocation(2,-3);
 		TerrainHex hex22 = new TerrainHex(loc22, HexType.WATER, -1);
-		hexes.put(loc22, hex22);
+		hexes.put(loc22,hex22);
+
+
 
 		HexLocation loc23 = new HexLocation(3, -3);
 		TerrainHex hex23 = new TerrainHex(loc23, HexType.WATER, -1);
@@ -1158,9 +1164,9 @@ public class Map {
 		TerrainHex hex24 = new TerrainHex(loc24, HexType.WATER, -1);
 		hexes.put(loc24, hex24);
 
-		HexLocation loc25 = new HexLocation(3, -1);
+	/*	HexLocation loc25 = new HexLocation(3, -1);
 		TerrainHex hex25 = new TerrainHex(loc25, HexType.WATER, -1);
-		hexes.put(loc25, hex25);
+		hexes.put(loc25, hex25);*/
 
 		HexLocation loc26 = new HexLocation(3, -1);
 		TerrainHex hex26 = new TerrainHex(loc26, HexType.WATER, -1);
@@ -1370,4 +1376,5 @@ public class Map {
 	public void setRobberLocation(HexLocation robberLocation) {
 		this.robberLocation = robberLocation;
 	}
+
 }

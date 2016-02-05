@@ -189,7 +189,7 @@ public class ModelTranslator {
 		
 		
 		
-		return null;
+		return map;
 	}
 	
 	public TerrainHex parseHex(JsonObject jsonHex){
@@ -322,12 +322,12 @@ public class ModelTranslator {
 		//return port;
 	}
 	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
-		JsonObject myID = jsonRoad.getAsJsonObject("owner");
+		JsonPrimitive myID = jsonRoad.getAsJsonPrimitive("owner");
 		JsonObject location = jsonRoad.getAsJsonObject("location");
 
-		JsonObject myX = location.getAsJsonObject("x");
-		JsonObject myY = location.getAsJsonObject("y");
-		JsonObject myDirection = location.getAsJsonObject("direction");
+		JsonPrimitive myX = location.getAsJsonPrimitive("x");
+		JsonPrimitive myY = location.getAsJsonPrimitive("y");
+		JsonPrimitive myDirection = location.getAsJsonPrimitive("direction");
 
 
 		int playerID = myID.getAsInt();
@@ -373,7 +373,7 @@ public class ModelTranslator {
 		JsonPrimitive myY = location.getAsJsonPrimitive("y");
 		y = myY.getAsInt();
 		
-		JsonPrimitive myDirection = jsonSettlement.getAsJsonPrimitive("direction");
+		JsonPrimitive myDirection = location.getAsJsonPrimitive("direction");
 		direction = myDirection.getAsString();
 		
 		switch (direction){

@@ -5,8 +5,10 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import map.Map;
+import map.TerrainHex;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -20,6 +22,7 @@ import model.TurnTracker;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
+import shared.locations.HexLocation;
 import trade.TradeOffer;
 import translators.ModelTranslator;
 
@@ -65,6 +68,65 @@ public class InitializeModel {
 
 		int numHexes = map.getHexes().size();
 		assertTrue(numHexes == 37);
+
+		int numRoads;
+
+		int numSettlements;
+
+		int numCities;
+
+		int numWater = 0;
+
+		int numWood = 0;
+
+		int numBrick = 0;
+
+		int numWool = 0;
+
+		int numWheat = 0;
+
+		int numOre = 0;
+
+		for (TerrainHex hex : map.getHexes().values()) {
+			switch (hex.getType()) {
+				case WOOD:
+					numWood++;
+					break;
+				case BRICK:
+					numBrick++;
+					break;
+				case SHEEP:
+					numWool++;
+					break;
+				case WHEAT:
+					numWheat++;
+					break;
+				case ORE:
+					numOre++;
+					break;
+				case WATER:
+					numWater++;
+					break;
+				default:
+					System.out.println("Error! The hex type doesn't exist!");
+			}
+		}
+		assertTrue(numWood == 4);
+		assertTrue(numBrick == 3);
+		assertTrue(numWool == 4);
+		assertTrue(numWheat == 4);
+		assertTrue(numOre == 3);
+		assertTrue(numWater == 18);
+
+
+
+
+
+
+
+
+
+
 	}
 
 	@Test

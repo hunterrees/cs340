@@ -21,7 +21,9 @@ public class CanBuildCity {
 		Vertex vert = map.getVerticies().get(new VertexLocation(new HexLocation(0, 0), VertexDirection.NorthWest));
 		vert.setPiece(p1Settlement);
 		//map.getVerticies().get(vert.getLocation()).setPiece(p1Settlement);
-		
+
+		assertTrue(map.getHexes().size() == 37);
+
 		//can build on valid location
 		boolean can = map.canBuildCity(1, vert.getLocation());
 		assertTrue(can);
