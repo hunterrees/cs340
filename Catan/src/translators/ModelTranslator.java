@@ -308,6 +308,7 @@ public class ModelTranslator {
 
 
 	}
+	//here
 	public void parseAndAddSettlement(JsonObject jsonSettlement, Map map){
 		int playerID;
 		int x; 
