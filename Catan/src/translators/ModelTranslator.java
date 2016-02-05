@@ -1,13 +1,18 @@
 package translators;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import map.Edge;
 import map.Map;
+import map.Port;
+import map.TerrainHex;
+import map.Vertex;
 import model.Bank;
 import model.Chat;
 import model.GameModel;
@@ -20,7 +25,9 @@ import shared.ResourceCard;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
+import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
+import shared.locations.VertexLocation;
 import trade.TradeOffer;
 
 /**
@@ -145,8 +152,69 @@ public class ModelTranslator {
 	}
 	
 	public Map buildMap(JsonObject mapJson){
+		 HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
+		 HashMap<EdgeLocation, Edge> edges = new HashMap<EdgeLocation, Edge>();
+		 HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
+		 HashMap<VertexLocation, Port> ports = new HashMap<VertexLocation, Port>();
+		 
+		 JsonArray hexArray = mapJson.getAsJsonArray("hexes");
+		 for (int i = 0; i < hexArray.size(); i++){
+			 TerrainHex hex = parseHex((JsonObject)hexArray.get(i));
+			 hexes.put(hex.getLocation(), hex);
+		 }
+		 
+		 
+		 JsonArray portArray = mapJson.getAsJsonArray("ports");
+		 for (int i = 0; i < portArray.size(); i++){
+			 Port port = parsePort((JsonObject)portArray.get(i));
+			 ports.put(port.getLoc(), port);
+			
+		 }
+		 Map map = new Map();
+		 
+		 
+		 JsonArray roadArray = mapJson.getAsJsonArray("roads");
+		 for (int i = 0; i < roadArray.size(); i++){
+			 parseAndAddRoad((JsonObject)roadArray.get(i));
+		 }
+		 
+		 JsonArray settlementArray = mapJson.getAsJsonArray("settlements");
+		 for (int i = 0; i < settlementArray.size(); i++){
+			 parseAndAddSettlement((JsonObject)settlementArray.get(i));
+		 }
+		 
+		 JsonArray cityArray = mapJson.getAsJsonArray("cities");
+		 for (int i = 0; i < cityArray.size(); i++){
+			 parseAndAddCity((JsonObject)cityArray.get(i));
+		 }
+		
+		
+		
+		
+		
 		return null;
 	}
+	
+	public TerrainHex parseHex(JsonObject jsonHex){
+		return null;
+		
+	}
+	public Port parsePort(JsonObject jsonPort){
+		return null;
+	}
+	public void parseAndAddRoad(JsonObject jsonRoad){
+		
+	}
+	public void parseAndAddSettlement(JsonObject jsonSettlement){
+		
+	}
+	public void parseAndAddCity(JsonObject jsonCity){
+		
+	}
+	
+	
+	
+	
 	
 	public ArrayList<Player> buildPlayers(JsonObject playersJson){
 		return null;

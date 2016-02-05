@@ -3,13 +3,14 @@ package map;
 import java.util.HashSet;
 
 import shared.definitions.PortType;
+import shared.locations.VertexLocation;
 
 
 
 public class Port {
 
 	private PortType type;
-	
+	private VertexLocation loc;
 	
 	
 	
@@ -30,6 +31,20 @@ public class Port {
 	 */
 	public void setType(PortType type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the loc
+	 */
+	public VertexLocation getLoc() {
+		return loc;
+	}
+
+	/**
+	 * @param loc the loc to set
+	 */
+	public void setLoc(VertexLocation loc) {
+		this.loc = loc;
 	}
 	
 	
