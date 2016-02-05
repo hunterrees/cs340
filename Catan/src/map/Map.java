@@ -28,8 +28,7 @@ public class Map {
 		placePorts(createPorts());
 	}
 	
-	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<EdgeLocation, Edge> edges,
-			HashMap<VertexLocation, Vertex> verticies, HashMap<VertexLocation, Port> ports){
+	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<VertexLocation, Port> ports){
 		
 		this.hexes = hexes;
 		this.edges = edges;
