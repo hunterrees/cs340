@@ -315,6 +315,10 @@ public class GameModel {
 		if(robberLoc.equals(loc)) {
 			return false;
 		}
+		if (map.getHexes().get(loc).getType() == HexType.WATER)
+		{
+			return false;
+		}
 		if(victimID != -1) {
 			if(players.get(victimID).getPlayerHand().getResourceCards().size() == 0) {
 				return false;
@@ -367,10 +371,7 @@ public class GameModel {
 			return false;
 		}
 		
-		if (map.getHexes().get(loc).getType() == HexType.WATER)
-		{
-			return false;
-		}
+	
 
 		return robPlayer(loc,victimID);
 	}
