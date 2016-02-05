@@ -40,6 +40,20 @@ public class Map {
 		placePorts(ports);
 	}
 
+	public ArrayList<Port> listPorts(int pID){
+		
+		ArrayList<Port> portArray = new ArrayList<Port>();
+		for(Entry<VertexLocation, Vertex> entry : verticies.entrySet()) {
+		
+			if (entry.getValue().getPiece() != null
+					&& entry.getValue().getPort() != null
+					&& entry.getValue().getPiece().getPlayerID() == pID){
+				portArray.add(entry.getValue().getPort());
+			}
+		
+		}
+		return portArray;
+	}
 
 	private HashMap<VertexLocation, Port> createPorts() {
 		HashMap<VertexLocation,Port> ports =  new HashMap<>();
