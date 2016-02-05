@@ -193,9 +193,38 @@ public class ModelTranslator {
 	}
 	
 	public TerrainHex parseHex(JsonObject jsonHex){
-		return null;
-		
+		int x;
+		int y;
+		String resource;
+		int num;
+		HexType type;
+
+		JsonObject location = jsonHex.getAsJsonObject("location");
+		JsonPrimitive myX = location.getAsJsonPrimitive("x");
+		x = myX.getAsInt();
+		JsonPrimitive myY = location.getAsJsonPrimitive("y");
+		y = myY.getAsInt();
+
+		JsonPrimitive myResource = jsonHex.getAsJsonPrimitive("resource");
+		resource = myResource.getAsString();
+		JsonPrimitive myNum = jsonHex.getAsJsonPrimitive("number");
+		num = myNum.getAsInt();
+		if (resource == null){
+			resource = "desert";
+		}
+		switch(resource){
+			case "brick": type = HexType.BRICK; break;
+			case "wood" : type = HexType.WOOD; break;
+			case "wheat" : type = HexType.WHEAT; break;
+			case "sheep" : type = HexType.SHEEP; break;
+			case "ore" : type = HexType.ORE; break;
+			default : type = HexType.DESERT; break;
+		}
+		HexLocation loc = new HexLocation(x, y);
+		TerrainHex hex = new TerrainHex(loc, type, num);
+		return hex;
 	}
+
 	public Port parsePort(JsonObject jsonPort){
 		// Get the information out
 
