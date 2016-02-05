@@ -22,12 +22,10 @@ import model.TurnTracker;
 import player.Player;
 import shared.DevelopmentCard;
 import shared.ResourceCard;
-import shared.definitions.DevCardType;
-import shared.definitions.GameState;
-import shared.definitions.HexType;
-import shared.definitions.ResourceType;
+import shared.definitions.*;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
+import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import trade.TradeOffer;
 
@@ -167,7 +165,7 @@ public class ModelTranslator {
 		 
 		 JsonArray portArray = mapJson.getAsJsonArray("ports");
 		 for (int i = 0; i < portArray.size(); i++){
-			 Port port = parsePort((JsonObject)portArray.get(i));
+			Port port = parsePort((JsonObject) portArray.get(i));
 			 ports.put(port.getLoc(), port);
 			
 		 }
@@ -197,56 +195,78 @@ public class ModelTranslator {
 	}
 	
 	public TerrainHex parseHex(JsonObject jsonHex){
-		int x; 
-		int y;
-		String resource;
-		int num;
-		HexType type;
-		
-		JsonObject location = jsonHex.getAsJsonObject("location");
-		JsonPrimitive myX = location.getAsJsonPrimitive("x");
-		x = myX.getAsInt();
-		JsonPrimitive myY = location.getAsJsonPrimitive("y");
-		y = myY.getAsInt();
-		
-		JsonPrimitive myResource = jsonHex.getAsJsonPrimitive("resource");
-		resource = myResource.getAsString();
-		JsonPrimitive myNum = jsonHex.getAsJsonPrimitive("number");
-		num = myNum.getAsInt();
-		if (resource == null){
-			resource = "desert";
-		}
-		switch(resource){
-		
-		case "brick": type = HexType.BRICK; break;
-		case "wood" : type = HexType.WOOD; break;
-		case "wheat" : type = HexType.WHEAT; break;
-		case "sheep" : type = HexType.SHEEP; break;
-		case "ore" : type = HexType.ORE; break;
-		default : type = HexType.DESERT; break;
-		}
-		
-		HexLocation loc = new HexLocation(x, y);
-		TerrainHex hex = new TerrainHex(loc, type, num);
-		
-		
-		
-		return hex;
+		return null;
 		
 	}
 	public Port parsePort(JsonObject jsonPort){
-		return null;
+		// Get the information out
+
+		JsonObject location= jsonPort.getAsJsonObject("location");
+		JsonPrimitive myX = location.getAsJsonPrimitive("x");
+		JsonPrimitive myY = location.getAsJsonPrimitive("y");
+
+		JsonPrimitive myDirection = jsonPort.getAsJsonPrimitive("direction");
+		JsonPrimitive myRatio = jsonPort.getAsJsonPrimitive("ratio");
+		int ratio = myRatio.getAsInt();
+
+		JsonPrimitive myResource = null;
+		if(ratio != 3) {
+			myResource = jsonPort.getAsJsonPrimitive();
+		}
+
+
+		String resource = myResource.getAsString();
+		int x = myX.getAsInt();
+		int y = myY.getAsInt();
+		String direction = myDirection.getAsString();
+
+
+		// Create java objects from the values
+		PortType type = null;
+		switch(resource) {
+			case "wood": type = PortType.WOOD; break;
+			case "brick": type = PortType.BRICK; break;
+			case "sheep": type = PortType.SHEEP; break;
+			case "wheat": type = PortType.WHEAT; break;
+			case "ore": type = PortType.ORE; break;
+			default: type = PortType.THREE;
+		}
+
+		VertexDirection vl = null;
+		switch(direction) {
+			case "NW": vl = VertexDirection.NorthWest; break;
+			case "NE": vl = VertexDirection.NorthEast; break;
+			case "E": vl = VertexDirection.East; break;
+			case "SE": vl = VertexDirection.SouthEast; break;
+			case "SW": vl = VertexDirection.SouthWest; break;
+			case "W": vl = VertexDirection.West; break;
+			default: System.out.println("Error! The EdgeLocation doesn't exist!");
+		}
+
+		Port port = new Port(type);
+		port.setLoc(new VertexLocation(new HexLocation(x,y),vl));
+
+
+
+
+		return port;
 	}
 	public void parseAndAddRoad(JsonObject jsonRoad, Map map){
-		
+		int playerID;
+		int x;
+		int y;
+		String direction;
+
+
+
 	}
 	public void parseAndAddSettlement(JsonObject jsonSettlement, Map map){
 		
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
 	public void parseAndAddCity(JsonObject jsonCity, Map map){
 		

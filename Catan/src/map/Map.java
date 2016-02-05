@@ -23,6 +23,7 @@ public class Map {
 	public Map() {
 		
 		buildHexes();
+		createWaterHexes();
 		buildEdges();
 		buildVerticies();
 		placePorts(createPorts());
@@ -31,6 +32,7 @@ public class Map {
 	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<VertexLocation, Port> ports){
 		
 		this.hexes = hexes;
+		createWaterHexes();
 		buildEdges();
 		buildVerticies();
 		placePorts(ports);
@@ -1114,6 +1116,11 @@ public class Map {
 		TerrainHex hex19 = new TerrainHex(loc19, HexType.WOOD, 6);
 		hexes.put(loc19, hex19);
 
+
+		
+	}
+
+	public void createWaterHexes() {
 		// Water hexes
 		HexLocation loc20 = new HexLocation(0, -3);
 		TerrainHex hex20 = new TerrainHex(loc20, HexType.WATER, -1);
@@ -1190,7 +1197,6 @@ public class Map {
 		HexLocation loc38 = new HexLocation(-1, -2);
 		TerrainHex hex38 = new TerrainHex(loc38, HexType.WATER, -1);
 		hexes.put(loc38, hex38);
-		
 	}
 	
 	/**
