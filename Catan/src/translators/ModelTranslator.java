@@ -172,8 +172,14 @@ public class ModelTranslator {
 		 
 		 JsonArray roadArray = mapJson.getAsJsonArray("roads");
 		 for (int i = 0; i < roadArray.size(); i++){
+			 System.out.println(i);
 			 parseAndAddRoad((JsonObject)roadArray.get(i), map);
+
 		 }
+
+
+
+
 		 
 		 JsonArray settlementArray = mapJson.getAsJsonArray("settlements");
 		 for (int i = 0; i < settlementArray.size(); i++){
@@ -348,11 +354,25 @@ public class ModelTranslator {
 
 
 		Piece road = new Piece(PieceType.ROAD,null,null,playerID);
+
 		Edge edge = map.getEdges().get(new EdgeLocation(new HexLocation(x,y),ed).getNormalizedLocation());
 		edge.setPiece(road);
 
 
 
+//////////////////
+		if(edge.getPiece() == null) {
+			System.out.println("should never come here");
+		}
+
+		int numRoads = 0;
+
+		for (Edge e : map.getEdges().values()) {
+			if(e.getPiece() != null) {
+				numRoads++;
+			}
+		}System.out.println("numRoads = " + numRoads);
+///////////////
 	}
 	//here
 	public void parseAndAddSettlement(JsonObject jsonSettlement, Map map){

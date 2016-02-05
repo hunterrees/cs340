@@ -209,14 +209,7 @@
           "y": 1
         }
       },
-      {
-        "owner": 0,
-        "location": {
-          "direction": "SE",
-          "x": 0,
-          "y": 1
-        }
-      },
+
       {
         "owner": 0,
         "location": {
@@ -224,7 +217,15 @@
           "x": 2,
           "y": 0
         }
-      }
+      },
+       {
+         "owner": 0,
+         "location": {
+           "direction": "SE",
+           "x": 0,
+           "y": 1
+         }
+       }
     ],
     "cities": [],
     "settlements": [
