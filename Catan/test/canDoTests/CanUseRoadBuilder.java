@@ -37,12 +37,24 @@ public class CanUseRoadBuilder {
 		assertFalse(map.canRoadBuild(1, el4, el3));
 
 		// Building them next to own road
-		Edge edgeSpot = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthWest).getNormalizedLocation());
-		edgeSpot.setPiece(null);
+		EdgeLocation el5 = new EdgeLocation(new HexLocation(0,0), EdgeDirection.South).getNormalizedLocation();
+		EdgeLocation el6 = new EdgeLocation(new HexLocation(0,0), EdgeDirection.SouthWest).getNormalizedLocation();
 
-		// Building them next to another player's settlement
+		Edge edgeSpot = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthWest).getNormalizedLocation());
+		edgeSpot.setPiece(new Piece(PieceType.ROAD, null, null, 1));
+		assertTrue(map.canRoadBuild(1, el5, el6));
+		assertTrue(map.canRoadBuild(1, el6, el5));
+
+
 
 		// Building them next to another player's roads
+		assertFalse(map.canRoadBuild(2, el5, el6));
+		assertFalse(map.canRoadBuild(2, el6, el5));
+
+
+		// Building them next to another player's settlement
+		assertFalse(map.canRoadBuild(2, el1, el2));
+		assertFalse(map.canRoadBuild(2, el2, el1));
 	}
 
 }
