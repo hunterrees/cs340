@@ -1,0 +1,154 @@
+ {
+ "hexes": [
+      {
+        "location": {
+          "x": 0,
+          "y": -2
+        }
+      },
+      {
+        "resource": "brick",
+        "location": {
+          "x": 1,
+          "y": -2
+        },
+        "number": 4
+      },
+      {
+        "resource": "wood",
+        "location": {
+          "x": 2,
+          "y": -2
+        },
+        "number": 11
+      },
+      {
+        "resource": "brick",
+        "location": {
+          "x": -1,
+          "y": -1
+        },
+        "number": 8
+      },
+      {
+        "resource": "wood",
+        "location": {
+          "x": 0,
+          "y": -1
+        },
+        "number": 3
+      },
+      {
+        "resource": "ore",
+        "location": {
+          "x": 1,
+          "y": -1
+        },
+        "number": 9
+      },
+      {
+        "resource": "sheep",
+        "location": {
+          "x": 2,
+          "y": -1
+        },
+        "number": 12
+      },
+      {
+        "resource": "ore",
+        "location": {
+          "x": -2,
+          "y": 0
+        },
+        "number": 5
+      },
+      {
+        "resource": "sheep",
+        "location": {
+          "x": -1,
+          "y": 0
+        },
+        "number": 10
+      },
+      {
+        "resource": "wheat",
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "number": 11
+      },
+      {
+        "resource": "brick",
+        "location": {
+          "x": 1,
+          "y": 0
+        },
+        "number": 5
+      },
+      {
+        "resource": "wheat",
+        "location": {
+          "x": 2,
+          "y": 0
+        },
+        "number": 6
+      },
+      {
+        "resource": "wheat",
+        "location": {
+          "x": -2,
+          "y": 1
+        },
+        "number": 2
+      },
+      {
+        "resource": "sheep",
+        "location": {
+          "x": -1,
+          "y": 1
+        },
+        "number": 9
+      },
+      {
+        "resource": "wood",
+        "location": {
+          "x": 0,
+          "y": 1
+        },
+        "number": 4
+      },
+      {
+        "resource": "sheep",
+        "location": {
+          "x": 1,
+          "y": 1
+        },
+        "number": 10
+      },
+      {
+        "resource": "wood",
+        "location": {
+          "x": -2,
+          "y": 2
+        },
+        "number": 6
+      },
+      {
+        "resource": "ore",
+        "location": {
+          "x": -1,
+          "y": 2
+        },
+        "number": 3
+      },
+      {
+        "resource": "wheat",
+        "location": {
+          "x": 0,
+          "y": 2
+        },
+        "number": 8
+      }
+    ]
+}
