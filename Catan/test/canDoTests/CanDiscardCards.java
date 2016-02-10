@@ -19,6 +19,7 @@ public class CanDiscardCards {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can discard cards");
 		TurnTracker myTurnTracker = new TurnTracker(0, 0, GameState.discarding, 0);
 		myTurnTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();

@@ -21,6 +21,7 @@ public class ServerPollerTests {
 
 	@Test
 	public void pollerChange() throws IOException {
+		System.out.println("Testing Server Poller");
 		ServerInterface server = new MockServerProxy();
 		final GameManager manager = new GameManager();
 		manager.setServer(server);

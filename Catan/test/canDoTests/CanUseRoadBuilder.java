@@ -15,6 +15,7 @@ public class CanUseRoadBuilder {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can use road builder");
 		Map map = new Map();
 
 		// Tesing it building the roads next to own settlements

@@ -19,6 +19,7 @@ public class CanOfferTrade {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can offer trade");
 		TurnTracker myTurnTracker = new TurnTracker(0, 0, null, 0);
 		myTurnTracker.setGameStatus(GameState.playing);
 		myTurnTracker.setCurrentTurnPlayerID(0);

@@ -14,6 +14,7 @@ public class CanBuildRoad {
 
     @Test
     public void testMap() {
+    	System.out.println("Testing can build road");
         Map map = new Map();
 
         int playerID = 1;

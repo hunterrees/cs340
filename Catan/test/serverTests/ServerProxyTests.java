@@ -21,6 +21,7 @@ public class ServerProxyTests {
 	//if the response code isn't 200, the ServerProxy will throw an exception and thus fail the test
 	@Before
 	public void login() {
+		System.out.println("Testing Server Proxy");
 		
 		try{
 			server.userLogin("Sam", "sam");

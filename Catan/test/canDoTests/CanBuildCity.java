@@ -16,6 +16,7 @@ public class CanBuildCity {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can build city");
 		Map map = new Map();
 		Piece p1Settlement = new Piece(PieceType.SETTLEMENT, null, null, 1);
 		Vertex vert = map.getVerticies().get(new VertexLocation(new HexLocation(0, 0), VertexDirection.NorthWest));

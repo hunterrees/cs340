@@ -21,7 +21,7 @@ public class CanBuyDevCard {
 
 	@Test
 	public void test() {
-		
+		System.out.println("Testing can buy development card");
 		//testing
 		TurnTracker myTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		myTracker.setCurrentTurnPlayerID(0);

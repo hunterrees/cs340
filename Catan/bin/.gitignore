@@ -1,5 +1,3 @@
-/server/
-/translators/
-/serverTests/
 /canDoTests/
-/model/
+/phase1tests/
+/serverTests/

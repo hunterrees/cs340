@@ -35,6 +35,7 @@ public class InitializeModel {
 
 	@Test
 	public void bankTest() throws IOException {
+		System.out.println("Testing model initialization from JSON");
 		JsonObject json = toJson("translatorTests/bankJson.txt");
 		JsonObject bankJson = json.getAsJsonObject("bank");
 		JsonObject deckJson = json.getAsJsonObject("deck");

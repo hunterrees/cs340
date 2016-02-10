@@ -22,6 +22,7 @@ public class CanUseYearOfPlenty {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can use year of plenty");
 		TurnTracker myTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();

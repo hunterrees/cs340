@@ -16,6 +16,7 @@ public class CanRollNumber {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can roll number");
 		TurnTracker myTurnTracker = new TurnTracker(0, 0, null, 0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(1, CatanColor.RED, "player1"));

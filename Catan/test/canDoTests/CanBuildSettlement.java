@@ -15,7 +15,7 @@ public class CanBuildSettlement {
 
     @Test
     public void testMap() {
-        assertTrue(true);
+    	System.out.println("Testing can build settlement");
 
         // Testing building a settlement on an open map on setup mode
         Map map = new Map();

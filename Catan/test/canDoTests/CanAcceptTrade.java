@@ -21,7 +21,7 @@ public class CanAcceptTrade {
 	@Test
 	//testing
 	public void test() {
-		
+		System.out.println("Testing accept trade");
 		TurnTracker myTracker = new TurnTracker(0, 0, null, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();

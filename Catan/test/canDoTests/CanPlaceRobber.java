@@ -24,6 +24,7 @@ public class CanPlaceRobber {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can place robber");
 		TurnTracker myTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		HashMap<HexLocation, TerrainHex> hexes = new HashMap<HexLocation, TerrainHex>();
 		hexes.put(new HexLocation(10,10), new TerrainHex(new HexLocation(10,10), HexType.WATER, 6));

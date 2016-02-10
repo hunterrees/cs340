@@ -19,6 +19,7 @@ public class CanUseMonopoly {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can use monopoly");
 		TurnTracker myTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		myTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();

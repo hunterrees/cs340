@@ -17,6 +17,7 @@ public class CanFinishTurn {
 
 	@Test
 	public void test() {
+		System.out.println("Testing can finish turn");
 		TurnTracker myTurnTracker = new TurnTracker(0, 0, GameState.playing, 0);
 		myTurnTracker.setCurrentTurnPlayerID(0);
 		ArrayList<Player> players = new ArrayList<Player>();
