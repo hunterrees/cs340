@@ -1379,4 +1379,7 @@ public class Map {
 		this.robberLocation = robberLocation;
 	}
 
+	public HashMap<VertexLocation, Port> getPorts() {
+		return ports;
+	}
 }
