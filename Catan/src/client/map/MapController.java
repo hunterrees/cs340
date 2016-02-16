@@ -8,6 +8,7 @@ import shared.locations.*;
 import client.base.*;
 import client.data.*;
 import map.Map;
+import map.Port;
 import map.TerrainHex;
 
 
@@ -40,6 +41,12 @@ public class MapController extends Controller implements IMapController {
 		this.robView = robView;
 	}
 	
+	private HashMap<EdgeLocation, PortType> portConverter(HashMap<VertexLocation, PortType> original) {
+		HashMap<EdgeLocation, PortType> converted = new HashMap<>();
+		
+		return converted;
+	}
+	
 	protected void initFromModel() {
 		
 		//<temp>
@@ -50,10 +57,18 @@ public class MapController extends Controller implements IMapController {
 				getView().addNumber(entry.getKey(), entry.getValue().getNumber());
 				
 			}
+			if(entry.getValue().getType() == HexType.DESERT) {
+				getView().placeRobber(entry.getKey());
+			}
 			
 		}
 
+/*		for(Entry<VertexLocation, Port> entry : map.getPorts().entrySet() {
+			
+			getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDirection.North), entry.getValue().getType());
 
+		}
+*/
 		
 		
 		
@@ -104,8 +119,8 @@ public class MapController extends Controller implements IMapController {
 		getView().addPort(new EdgeLocation(new HexLocation(-3, 0), EdgeDirection.SouthEast), portType);
 		getView().addPort(new EdgeLocation(new HexLocation(3, -3), EdgeDirection.SouthWest), portType);
 		getView().addPort(new EdgeLocation(new HexLocation(3, 0), EdgeDirection.NorthWest), portType);
+
 		
-		getView().placeRobber(new HexLocation(0, 0));
 		
 		
 /*for(Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
