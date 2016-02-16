@@ -7,6 +7,7 @@ import shared.definitions.*;
 import shared.locations.*;
 import client.base.*;
 import client.data.*;
+import map.Edge;
 import map.Map;
 import map.Port;
 import map.TerrainHex;
@@ -40,16 +41,12 @@ public class MapController extends Controller implements IMapController {
 	private void setRobView(IRobView robView) {
 		this.robView = robView;
 	}
-/*	
-	private HashMap<EdgeLocation, PortType> portConverter(HashMap<VertexLocation, PortType> original) {
-		HashMap<EdgeLocation, PortType> converted = new HashMap<>();
-		
-		return converted;
-	}*/
+	
+
 	
 	protected void initFromModel() {
 		
-		//<temp>
+		// Place Hexes, numbers, robber
 		for(Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
 			
 			getView().addHex(entry.getKey(), entry.getValue().getType());
@@ -60,8 +57,20 @@ public class MapController extends Controller implements IMapController {
 			if(entry.getValue().getType() == HexType.DESERT) {
 				getView().placeRobber(entry.getKey());
 			}
-			
 		}
+		for(Entry<EdgeLocation, Edge> entry: map.getEdges().entrySet()){
+			if (entry.getValue().getPiece() != null){
+				getView().placeRoad(entry.getKey(),
+						CatanColor.RED);
+			}
+		}
+		
+		// Place roads
+/*		for()
+		getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.NorthWest),
+				CatanColor.RED);*/
+		
+		
 
 /*		for(Entry<VertexLocation, Port> entry : map.getPorts().entrySet() {
 			

@@ -293,16 +293,20 @@ public class ModelTranslator {
 
 		VertexDirection vd1 = null;
 		VertexDirection vd2 = null;
+		EdgeDirection ed = null;
 
 		switch(direction) {
 			case "N": vd1 = VertexDirection.NorthWest;
 					vd2 = VertexDirection.NorthEast;
+					ed = EdgeDirection.North;
 					break;
 			case "NE": vd1 = VertexDirection.NorthEast;
 					vd2 = VertexDirection.East;
+					ed = EdgeDirection.NorthEast;
 					break;
 			case "SE": vd1 = VertexDirection.East;
 					vd2 = VertexDirection.SouthEast;
+					ed = EdgeDirection.North;
 					break;
 			case "S": vd1 = VertexDirection.SouthEast;
 					vd2 = VertexDirection.SouthWest;
