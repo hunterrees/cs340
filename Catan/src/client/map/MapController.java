@@ -40,12 +40,12 @@ public class MapController extends Controller implements IMapController {
 	private void setRobView(IRobView robView) {
 		this.robView = robView;
 	}
-	
+/*	
 	private HashMap<EdgeLocation, PortType> portConverter(HashMap<VertexLocation, PortType> original) {
 		HashMap<EdgeLocation, PortType> converted = new HashMap<>();
 		
 		return converted;
-	}
+	}*/
 	
 	protected void initFromModel() {
 		
