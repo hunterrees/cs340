@@ -121,6 +121,46 @@ public class TerrainHex {
 		this.type = type;
 	}
 
+
+
+
+	/**
+	 * @return the piece
+	 */
+	public Piece getPiece() {
+		return piece;
+	}
+
+
+
+
+	/**
+	 * @param piece the piece to set
+	 */
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+	}
+
+
+
+
+	/**
+	 * @return the number
+	 */
+	public int getNumber() {
+		return number;
+	}
+
+
+
+
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 	
 
 }

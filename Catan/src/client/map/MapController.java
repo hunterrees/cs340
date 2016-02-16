@@ -1,11 +1,14 @@
 package client.map;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 import shared.definitions.*;
 import shared.locations.*;
 import client.base.*;
 import client.data.*;
+import map.Map;
+import map.TerrainHex;
 
 
 /**
@@ -13,6 +16,7 @@ import client.data.*;
  */
 public class MapController extends Controller implements IMapController {
 	
+	private Map map = new Map();
 	private IRobView robView;
 	
 	public MapController(IMapView view, IRobView robView) {
@@ -39,8 +43,22 @@ public class MapController extends Controller implements IMapController {
 	protected void initFromModel() {
 		
 		//<temp>
+		for(Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
+			
+			getView().addHex(entry.getKey(), entry.getValue().getType());
+			if(entry.getValue().getType() != HexType.WATER && entry.getValue().getType() != HexType.DESERT){
+				getView().addNumber(entry.getKey(), entry.getValue().getNumber());
+				
+			}
+			
+		}
+
+
 		
-		Random rand = new Random();
+		
+		
+		
+		/*Random rand = new Random();
 
 		for (int x = 0; x <= 3; ++x) {
 			
@@ -53,11 +71,11 @@ public class MapController extends Controller implements IMapController {
 				getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.NorthWest),
 						CatanColor.RED);
 				getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.SouthWest),
-						CatanColor.BLUE);
+						CatanColor.RED);
 				getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.South),
-						CatanColor.ORANGE);
-				getView().placeSettlement(new VertexLocation(hexLoc,  VertexDirection.NorthWest), CatanColor.GREEN);
-				getView().placeCity(new VertexLocation(hexLoc,  VertexDirection.NorthEast), CatanColor.PURPLE);
+						CatanColor.RED);
+				getView().placeSettlement(new VertexLocation(hexLoc,  VertexDirection.NorthWest), CatanColor.RED);
+				getView().placeCity(new VertexLocation(hexLoc,  VertexDirection.NorthEast), CatanColor.RED);
 			}
 			
 			if (x != 0) {
@@ -70,14 +88,14 @@ public class MapController extends Controller implements IMapController {
 					getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.NorthWest),
 							CatanColor.RED);
 					getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.SouthWest),
-							CatanColor.BLUE);
+							CatanColor.RED);
 					getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.South),
-							CatanColor.ORANGE);
-					getView().placeSettlement(new VertexLocation(hexLoc,  VertexDirection.NorthWest), CatanColor.GREEN);
-					getView().placeCity(new VertexLocation(hexLoc,  VertexDirection.NorthEast), CatanColor.PURPLE);
+							CatanColor.RED);
+					getView().placeSettlement(new VertexLocation(hexLoc,  VertexDirection.NorthWest), CatanColor.RED);
+					getView().placeCity(new VertexLocation(hexLoc,  VertexDirection.NorthEast), CatanColor.RED);
 				}
 			}
-		}
+		}*/
 		
 		PortType portType = PortType.BRICK;
 		getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDirection.North), portType);
@@ -89,16 +107,27 @@ public class MapController extends Controller implements IMapController {
 		
 		getView().placeRobber(new HexLocation(0, 0));
 		
-		getView().addNumber(new HexLocation(-2, 0), 2);
-		getView().addNumber(new HexLocation(-2, 1), 3);
-		getView().addNumber(new HexLocation(-2, 2), 4);
+		
+/*for(Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
+			
+			
+			if(entry.getValue().getType() != HexType.WATER && entry.getValue().getType() != HexType.DESERT){
+				getView().addNumber(entry.getKey(), entry.getValue().getNumber());
+				
+			}
+			
+		}*/
+		
+		/*getView().addNumber(new HexLocation(-2, 0), 5);
+		getView().addNumber(new HexLocation(-2, 1), 5);
+		getView().addNumber(new HexLocation(-2, 2), 5);
 		getView().addNumber(new HexLocation(-1, 0), 5);
-		getView().addNumber(new HexLocation(-1, 1), 6);
-		getView().addNumber(new HexLocation(1, -1), 8);
-		getView().addNumber(new HexLocation(1, 0), 9);
-		getView().addNumber(new HexLocation(2, -2), 10);
-		getView().addNumber(new HexLocation(2, -1), 11);
-		getView().addNumber(new HexLocation(2, 0), 12);
+		getView().addNumber(new HexLocation(-1, 1), 5);
+		getView().addNumber(new HexLocation(1, -1), 5);
+		getView().addNumber(new HexLocation(1, 0), 5);
+		getView().addNumber(new HexLocation(2, -2), 5);
+		getView().addNumber(new HexLocation(2, -1), 5);
+		getView().addNumber(new HexLocation(2, 0), 5);*/
 		
 		//</temp>
 	}

@@ -1,3 +1,9 @@
-/canDoTests/
-/phase1tests/
-/serverTests/
+/client/
+/gameManager/
+/map/
+/model/
+/player/
+/server/
+/shared/
+/trade/
+/translators/
