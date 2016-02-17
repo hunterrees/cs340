@@ -166,10 +166,10 @@ public class ModelTranslator {
 			 hexes.put(hex.getLocation(), hex);
 		 }
 		 
-		 
+		 HashMap<EdgeLocation,PortType> edgePorts = new HashMap<>();
 		 JsonArray portArray = mapJson.getAsJsonArray("ports");
 		 for (int i = 0; i < portArray.size(); i++){
-			parsePort((JsonObject) portArray.get(i), ports);
+			parsePort((JsonObject) portArray.get(i), ports, edgePorts);
 			// ports.put(port.getLoc(), port);
 			
 		 }
@@ -241,7 +241,7 @@ public class ModelTranslator {
 		return hex;
 	}
 
-	public void parsePort(JsonObject jsonPort, HashMap<VertexLocation,Port> ports){
+	public void parsePort(JsonObject jsonPort, HashMap<VertexLocation,Port> ports, HashMap<EdgeLocation, PortType> edgePorts){
 		// Get the information out
 
 		JsonObject location= jsonPort.getAsJsonObject("location");
@@ -306,21 +306,27 @@ public class ModelTranslator {
 					break;
 			case "SE": vd1 = VertexDirection.East;
 					vd2 = VertexDirection.SouthEast;
-					ed = EdgeDirection.North;
+					ed = EdgeDirection.SouthEast;
 					break;
 			case "S": vd1 = VertexDirection.SouthEast;
 					vd2 = VertexDirection.SouthWest;
-					break;
+					ed = EdgeDirection.South;
+
+				break;
 			case "SW": vd1 = VertexDirection.SouthWest;
 					vd2 = VertexDirection.West;
-					break;
+					ed = EdgeDirection.SouthWest;
+
+				break;
 			case "NW": vd1 = VertexDirection.West;
 					vd2 = VertexDirection.NorthWest;
-					break;
+					ed = EdgeDirection.NorthWest;
+
+				break;
 			default: System.out.println("Error! The direction doesn't exist!");
 		}
 
-
+		// Vertex ports
 		Port port1 = new Port(type);
 		port1.setLoc(new VertexLocation(new HexLocation(x,y), vd1));
 
@@ -329,6 +335,9 @@ public class ModelTranslator {
 
 		ports.put(port1.getLoc(), port1);
 		ports.put(port2.getLoc(), port2);
+
+		// Edge ports
+		edgePorts.put(new EdgeLocation(new HexLocation(x,y),ed), type);
 
 
 
