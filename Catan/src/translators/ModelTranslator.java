@@ -173,7 +173,7 @@ public class ModelTranslator {
 			// ports.put(port.getLoc(), port);
 			
 		 }
-		 Map map = new Map(hexes, ports);
+		 Map map = new Map(hexes, ports, edgePorts);
 		 
 		 
 		 JsonArray roadArray = mapJson.getAsJsonArray("roads");
