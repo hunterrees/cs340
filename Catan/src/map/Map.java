@@ -19,6 +19,7 @@ public class Map {
 	private HashMap<VertexLocation, Vertex> verticies = new HashMap<VertexLocation, Vertex>();
 	private HexLocation robberLocation;
 	private HashMap<VertexLocation, Port> ports;
+	HashMap<EdgeLocation,PortType> edgePorts = new HashMap<>();
 
 	// change
 	// changedf
@@ -32,14 +33,16 @@ public class Map {
 		placePorts(ports);
 	}
 	
-	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<VertexLocation, Port> ports){
+	public Map(HashMap<HexLocation, TerrainHex> hexes, HashMap<VertexLocation, Port> ports, HashMap<EdgeLocation,PortType> edgePorts){
 		this.ports = ports;
 		this.hexes = hexes;
+		this.edgePorts = edgePorts;
 		robberLocation = null;
 		createWaterHexes();
 		buildEdges();
 		buildVerticies();
 		placePorts(ports);
+
 	}
 
 	public ArrayList<Port> listPorts(int pID){
@@ -67,12 +70,17 @@ public class Map {
 		VertexLocation loc2 = new VertexLocation(new HexLocation(0,2), VertexDirection.NorthEast).getNormalizedLocation();
 		ports.put(loc2, new Port(PortType.THREE));
 
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.North),PortType.THREE);
+
 		// Port 2
 		VertexLocation loc3 = new VertexLocation(new HexLocation(2,-1), VertexDirection.NorthEast).getNormalizedLocation();
 		ports.put(loc3, new Port(PortType.THREE));
 
 		VertexLocation loc4 = new VertexLocation(new HexLocation(2,-1), VertexDirection.East).getNormalizedLocation();
 		ports.put(loc4, new Port(PortType.THREE));
+
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.NorthEast),PortType.THREE);
+
 
 		// Port 3
 		VertexLocation loc5 = new VertexLocation(new HexLocation(2,0), VertexDirection.East).getNormalizedLocation();
@@ -81,12 +89,18 @@ public class Map {
 		VertexLocation loc6 = new VertexLocation(new HexLocation(2,0), VertexDirection.SouthEast).getNormalizedLocation();
 		ports.put(loc6, new Port(PortType.THREE));
 
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.SouthEast),PortType.THREE);
+
+
 		// Port 4
 		VertexLocation loc7 = new VertexLocation(new HexLocation(-2,2), VertexDirection.West).getNormalizedLocation();
 		ports.put(loc7, new Port(PortType.THREE));
 
 		VertexLocation loc8 = new VertexLocation(new HexLocation(-2,2), VertexDirection.SouthWest).getNormalizedLocation();
 		ports.put(loc8, new Port(PortType.THREE));
+
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.SouthWest),PortType.THREE);
+
 
 		// Port 5
 		VertexLocation loc9 = new VertexLocation(new HexLocation(-1,2), VertexDirection.SouthWest).getNormalizedLocation();
@@ -95,12 +109,18 @@ public class Map {
 		VertexLocation loc10 = new VertexLocation(new HexLocation(-1,2), VertexDirection.SouthEast).getNormalizedLocation();
 		ports.put(loc10, new Port(PortType.WOOD));
 
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.South),PortType.WOOD);
+
+
 		// Port 6
 		VertexLocation loc11 = new VertexLocation(new HexLocation(1,1), VertexDirection.SouthWest).getNormalizedLocation();
 		ports.put(loc11, new Port(PortType.BRICK));
 
 		VertexLocation loc12 = new VertexLocation(new HexLocation(1,1), VertexDirection.SouthEast).getNormalizedLocation();
 		ports.put(loc12, new Port(PortType.BRICK));
+
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.South),PortType.BRICK);
+
 
 		// Port 7
 		VertexLocation loc13 = new VertexLocation(new HexLocation(1,2), VertexDirection.NorthEast).getNormalizedLocation();
@@ -109,6 +129,9 @@ public class Map {
 		VertexLocation loc14 = new VertexLocation(new HexLocation(1,2), VertexDirection.NorthWest).getNormalizedLocation();
 		ports.put(loc14, new Port(PortType.SHEEP));
 
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.North),PortType.SHEEP);
+
+
 		// Port 8
 		VertexLocation loc15 = new VertexLocation(new HexLocation(-2,2), VertexDirection.NorthWest).getNormalizedLocation();
 		ports.put(loc15, new Port(PortType.WHEAT));
@@ -116,12 +139,18 @@ public class Map {
 		VertexLocation loc16 = new VertexLocation(new HexLocation(-2,2), VertexDirection.West).getNormalizedLocation();
 		ports.put(loc16, new Port(PortType.WHEAT));
 
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.NorthWest),PortType.WHEAT);
+
+
 		// Port 9
 		VertexLocation loc17 = new VertexLocation(new HexLocation(-1,1), VertexDirection.NorthWest).getNormalizedLocation();
 		ports.put(loc17, new Port(PortType.ORE));
 
 		VertexLocation loc18 = new VertexLocation(new HexLocation(-1,1), VertexDirection.West).getNormalizedLocation();
 		ports.put(loc18, new Port(PortType.ORE));
+
+		edgePorts.put(new EdgeLocation(new HexLocation(0,2),EdgeDirection.NorthWest),PortType.ORE);
+
 
 
 		return ports;
