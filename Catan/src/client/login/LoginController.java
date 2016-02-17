@@ -15,11 +15,10 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Implementation for the login controller
  */
-public class LoginController extends Controller implements ILoginController, Observer{
+public class LoginController extends Controller implements ILoginController{
 
 	private IMessageView messageView;
 	private IAction loginAction;
-	private GameManager manager;
 	
 	/**
 	 * LoginController constructor
@@ -27,11 +26,9 @@ public class LoginController extends Controller implements ILoginController, Obs
 	 * @param view Login view
 	 * @param messageView Message view (used to display error messages that occur during the login process)
 	 */
-	public LoginController(ILoginView view, IMessageView messageView, GameManager manager) {
+	public LoginController(ILoginView view, IMessageView messageView) {
 
 		super(view);
-		this.manager = manager;
-		manager.addObserver(this);
 		this.messageView = messageView;
 	}
 	

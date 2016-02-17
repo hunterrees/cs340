@@ -1,5 +1,7 @@
 package client.join;
 
+import java.util.Observable;
+
 import client.base.*;
 
 
@@ -30,6 +32,12 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 
 		// TEMPORARY
 		getView().closeModal();
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

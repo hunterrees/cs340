@@ -1,5 +1,7 @@
 package client.roll;
 
+import java.util.Observable;
+
 import client.base.*;
 
 
@@ -38,6 +40,12 @@ public class RollController extends Controller implements IRollController {
 	public void rollDice() {
 
 		getResultView().showModal();
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -17,7 +17,6 @@ public class Catan extends JFrame
 {
 	
 	private CatanPanel catanPanel;
-	private static GameManager manager = new GameManager();
 	
 	public Catan()
 	{
@@ -89,7 +88,7 @@ public class Catan extends JFrame
 				MessageView loginMessageView = new MessageView();
 				LoginController loginController = new LoginController(
 																	  loginView,
-																	  loginMessageView, manager);
+																	  loginMessageView);
 				loginController.setLoginAction(new IAction() {
 					@Override
 					public void execute()

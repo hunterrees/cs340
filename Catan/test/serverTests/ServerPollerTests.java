@@ -23,7 +23,7 @@ public class ServerPollerTests {
 	public void pollerChange() throws IOException {
 		System.out.println("Testing Server Poller");
 		ServerInterface server = new MockServerProxy();
-		final GameManager manager = new GameManager();
+		final GameManager manager = GameManager.getInstance();
 		manager.setServer(server);
 		GameModel model = null;
 		try{
@@ -63,7 +63,7 @@ public class ServerPollerTests {
 	@Test
 	public void pollerConstant(){
 		ServerInterface server = new MockServerProxy();
-		final GameManager manager = new GameManager();
+		final GameManager manager = GameManager.getInstance();
 		manager.setServer(server);
 		GameModel model = null;
 		try{

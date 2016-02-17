@@ -2,7 +2,6 @@ package gameManager;
 
 import java.util.ArrayList;
 
-import javafx.beans.Observable;
 import model.GameException;
 import model.GameModel;
 import server.ServerException;
@@ -13,7 +12,6 @@ import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 import java.util.Observable;
-import java.util.Observer;
 
 public class GameManager extends Observable{
 	/**
@@ -21,28 +19,22 @@ public class GameManager extends Observable{
 	 */
 	private GameModel model;
 	private ServerInterface server;
-	private ArrayList<Observer> controllers;
+	private static GameManager manager = null;
 	
-	public GameManager(){
+	protected GameManager(){
 	}
 	
-	public GameManager(GameModel model, ServerInterface server){
+	protected GameManager(GameModel model, ServerInterface server){
 		this.model = model;
 		this.server = server;
 	}
 	
-	@Override
-	public void addObserver(Observer o){
-		controllers.add(o);
-	}
-	
-	@Override
-	public void notifyObservers(){
-		for(Observer o : controllers){
-			o.update(this, model);
+	public static GameManager getInstance(){
+		if(manager == null){
+			manager = new GameManager();
 		}
+		return manager;
 	}
-	
 	public void setModel(GameModel model) {
 		this.model = model;
 		notifyObservers();
