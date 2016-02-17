@@ -69,9 +69,9 @@ public class MapController extends Controller implements IMapController {
 		}
 
 		for(java.util.Map.Entry<VertexLocation, Vertex> entry : map.getVerticies().entrySet()) {
-			if(entry.getValue().getPiece().getPieceType() == PieceType.CITY) {
+			if(entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.CITY) {
 				getView().placeCity(entry.getKey(), CatanColor.RED);
-			} else if(entry.getValue().getPiece().getPieceType() == PieceType.SETTLEMENT) {
+			} else if(entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.SETTLEMENT) {
 				getView().placeSettlement(entry.getKey(), CatanColor.RED);
 			}
 		}
