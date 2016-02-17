@@ -11,13 +11,16 @@ import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
+import java.util.Observable;
+import java.util.Observer;
 
-public class GameManager {
+public class GameManager extends Observable{
 	/**
 	 * Controls calls to the model and server
 	 */
 	private GameModel model;
 	private ServerInterface server;
+	private ArrayList<Observer> controllers;
 	
 	public GameManager(){
 	}
@@ -27,8 +30,21 @@ public class GameManager {
 		this.server = server;
 	}
 	
+	@Override
+	public void addObserver(Observer o){
+		controllers.add(o);
+	}
+	
+	@Override
+	public void notifyObservers(){
+		for(Observer o : controllers){
+			o.update(this, model);
+		}
+	}
+	
 	public void setModel(GameModel model) {
 		this.model = model;
+		notifyObservers();
 	}
 	public ServerInterface getServer() {
 		return server;
@@ -45,6 +61,7 @@ public class GameManager {
 	 */
 	public void setGameModel(GameModel model){
 		this.model = model;
+		notifyObservers();
 	}
 	/**
 	 * Validates users credentials and logs them into the Game

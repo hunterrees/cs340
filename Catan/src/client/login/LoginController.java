@@ -2,6 +2,7 @@ package client.login;
 
 import client.base.*;
 import client.misc.*;
+import gameManager.GameManager;
 
 import java.net.*;
 import java.io.*;
@@ -14,10 +15,11 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Implementation for the login controller
  */
-public class LoginController extends Controller implements ILoginController {
+public class LoginController extends Controller implements ILoginController, Observer{
 
 	private IMessageView messageView;
 	private IAction loginAction;
+	private GameManager manager;
 	
 	/**
 	 * LoginController constructor
@@ -25,10 +27,11 @@ public class LoginController extends Controller implements ILoginController {
 	 * @param view Login view
 	 * @param messageView Message view (used to display error messages that occur during the login process)
 	 */
-	public LoginController(ILoginView view, IMessageView messageView) {
+	public LoginController(ILoginView view, IMessageView messageView, GameManager manager) {
 
 		super(view);
-		
+		this.manager = manager;
+		manager.addObserver(this);
 		this.messageView = messageView;
 	}
 	
@@ -87,6 +90,12 @@ public class LoginController extends Controller implements ILoginController {
 		// If register succeeded
 		getLoginView().closeModal();
 		loginAction.execute();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

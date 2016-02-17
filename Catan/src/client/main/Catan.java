@@ -6,6 +6,7 @@ import client.catan.*;
 import client.login.*;
 import client.join.*;
 import client.misc.*;
+import gameManager.GameManager;
 import client.base.*;
 
 /**
@@ -16,6 +17,7 @@ public class Catan extends JFrame
 {
 	
 	private CatanPanel catanPanel;
+	private static GameManager manager = new GameManager();
 	
 	public Catan()
 	{
@@ -87,7 +89,7 @@ public class Catan extends JFrame
 				MessageView loginMessageView = new MessageView();
 				LoginController loginController = new LoginController(
 																	  loginView,
-																	  loginMessageView);
+																	  loginMessageView, manager);
 				loginController.setLoginAction(new IAction() {
 					@Override
 					public void execute()
