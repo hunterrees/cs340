@@ -450,6 +450,6 @@ public class GameManager {
 	}
 	
 	public CatanColor getColor(int playerIndex){
-		return model.getColor();
+		return model.getColor(playerIndex);
 	}
 }
