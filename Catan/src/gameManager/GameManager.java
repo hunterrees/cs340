@@ -2,6 +2,7 @@ package gameManager;
 
 import java.util.ArrayList;
 
+import javafx.beans.Observable;
 import model.GameException;
 import model.GameModel;
 import server.ServerException;
