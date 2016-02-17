@@ -18,20 +18,17 @@ import client.data.*;
 /**
  * Implementation for the map controller
  */
-public class MapController extends Controller implements IMapController, Observer {
+public class MapController extends Controller implements IMapController {
 	
-	private GameManager manager;
+	private GameModel gm;
 	private Map map = new Map();
 
 	private IRobView robView;
 	
-	public MapController(IMapView view, IRobView robView, GameManager manager) {
+	public MapController(IMapView view, IRobView robView) {
+
+
 		super(view);
-
-		this.manager = manager;
-
-		manager.addObserver(this);
-
 
 		setRobView(robView);
 		
@@ -256,9 +253,6 @@ public class MapController extends Controller implements IMapController, Observe
 		
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		//gm=  = (GameManager)o;
-	}
+
 }
 
