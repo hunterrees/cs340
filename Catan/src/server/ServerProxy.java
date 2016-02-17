@@ -37,9 +37,11 @@ public class ServerProxy implements ServerInterface {
 		SERVER_HOST = host;
 		SERVER_PORT = port;
 		URL_PREFIX = "http://" + SERVER_HOST + ":" + SERVER_PORT;
+		translator = new ModelTranslator();
 	}
 	
-	private void post(String urlPath, String json) throws ServerException{
+	private String post(String urlPath, String json) throws ServerException{
+		StringBuffer result = new StringBuffer();
 		try{
 			URL url = new URL(URL_PREFIX + urlPath);
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
@@ -82,9 +84,16 @@ public class ServerProxy implements ServerInterface {
 							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
 				}
 			}
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String inputLine;
+			while((inputLine = in.readLine()) != null){
+				result.append(inputLine);
+			}
+			in.close();
 		}catch(Exception e){
 			throw new ServerException(String.format("doPost failed: %s", e.getMessage()), e);
 		}
+		return result.toString();
 	}
 	
 	private String get(String urlPath) throws ServerException{
@@ -145,11 +154,12 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) throws ServerException {
+	public GameModel createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) throws ServerException {
 		GamesCreateTranslator create = new GamesCreateTranslator(randomTiles, randomNumbers, randomPorts, name);
 		String json = create.translate();
 		try{
-			post("/games/create", json);
+			String model = post("/games/create", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
@@ -204,190 +214,207 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void sendChat(int playerID, String content) throws ServerException {
+	public GameModel sendChat(int playerID, String content) throws ServerException {
 		MovesSendChatTranslator chat = new MovesSendChatTranslator(playerID, content);
 		String json = chat.translate();
 		try{
-			post("/moves/sendChat", json);
+			String model = post("/moves/sendChat", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void rollNumber(int playerID, int numberRolled) throws ServerException {
+	public GameModel rollNumber(int playerID, int numberRolled) throws ServerException {
 		MovesRollNumberTranslator roll = new MovesRollNumberTranslator(playerID, numberRolled);
 		String json = roll.translate();
 		try{
-			post("/moves/rollNumber", json);
+			String model = post("/moves/rollNumber", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void robPlayer(int playerID, int victimID, HexLocation newRobberLocation) throws ServerException {
+	public GameModel robPlayer(int playerID, int victimID, HexLocation newRobberLocation) throws ServerException {
 		MovesRobPlayerTranslator rob = new MovesRobPlayerTranslator(playerID, victimID, newRobberLocation);
 		String json = rob.translate();
 		try{
-			post("/moves/robPlayer", json);
+			String model = post("/moves/robPlayer", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void finishTurn(int playerID) throws ServerException {
+	public GameModel finishTurn(int playerID) throws ServerException {
 		MovesFinishTurnTranslator finish = new MovesFinishTurnTranslator(playerID);
 		String json = finish.translate();
 		try{
-			post("/moves/finishTurn", json);
+			String model = post("/moves/finishTurn", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void buyDevCard(int playerID) throws ServerException {
+	public GameModel buyDevCard(int playerID) throws ServerException {
 		MovesBuyDevCardTranslator dev = new MovesBuyDevCardTranslator(playerID);
 		String json = dev.translate();
 		try{
-			post("/moves/buyDevCard", json);
+			String model = post("/moves/buyDevCard", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void yearOfPlenty(int playerID, ResourceType resource1, ResourceType resource2) throws ServerException {
+	public GameModel yearOfPlenty(int playerID, ResourceType resource1, ResourceType resource2) throws ServerException {
 		MovesYearOfPlentyTranslator year = new MovesYearOfPlentyTranslator(playerID, resource1, resource2);
 		String json = year.translate();
 		try{
-			post("/moves/Year_of_Plenty", json);
+			String model = post("/moves/Year_of_Plenty", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void roadBuilding(int playerID, EdgeLocation roadLocation1, EdgeLocation roadLocation2) throws ServerException {
+	public GameModel roadBuilding(int playerID, EdgeLocation roadLocation1, EdgeLocation roadLocation2) throws ServerException {
 		MovesRoadBuildingTranslator roadBuilding = new MovesRoadBuildingTranslator(playerID, roadLocation1.getHexLoc(), roadLocation1.getDir(),
 				roadLocation2.getHexLoc(), roadLocation2.getDir());
 		String json = roadBuilding.translate();
 		try{
-			post("/moves/Road_Building", json);
+			String model = post("/moves/Road_Building", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void knight(int playerID, int victimID, HexLocation newRobberLocation) throws ServerException {
+	public GameModel knight(int playerID, int victimID, HexLocation newRobberLocation) throws ServerException {
 		MovesSoldierTranslator soldier = new MovesSoldierTranslator(playerID, victimID, newRobberLocation);
 		String json = soldier.translate();
 		try{
-			post("/moves/Soldier", json);
+			String model = post("/moves/Soldier", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void monopoly(int playerID, ResourceType resource) throws ServerException {
+	public GameModel monopoly(int playerID, ResourceType resource) throws ServerException {
 		MovesMonopolyTranslator monopoly = new MovesMonopolyTranslator(playerID, resource);
 		String json = monopoly.translate();
 		try{
-			post("/moves/Monopoly", json);
+			String model = post("/moves/Monopoly", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void monument(int playerID) throws ServerException {
+	public GameModel monument(int playerID) throws ServerException {
 		MovesMonumentTranslator monument = new MovesMonumentTranslator(playerID);
 		String json = monument.translate();
 		try{
-			post("/moves/Monument", json);
+			String model = post("/moves/Monument", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void buildRoad(int playerID, EdgeLocation roadLocation, boolean setUp) throws ServerException {
+	public GameModel buildRoad(int playerID, EdgeLocation roadLocation, boolean setUp) throws ServerException {
 		MovesBuildRoadTranslator road = new MovesBuildRoadTranslator(playerID, roadLocation.getHexLoc(), roadLocation.getDir(), setUp);
 		String json = road.translate();
 		try{
-			post("/moves/buildRoad", json);
+			String model = post("/moves/buildRoad", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void buildSettlment(int playerID, VertexLocation vertexLocation, boolean setUp) throws ServerException {
+	public GameModel buildSettlment(int playerID, VertexLocation vertexLocation, boolean setUp) throws ServerException {
 		MovesBuildSettlementTranslator settlement = new MovesBuildSettlementTranslator(playerID, vertexLocation.getHexLoc(), 
 				vertexLocation.getDir(), setUp);
 		String json = settlement.translate();
 		try{
-			post("/moves/buildSettlement", json);
+			String model = post("/moves/buildSettlement", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void buildCity(int playerID, VertexLocation vertexLocation) throws ServerException {
+	public GameModel buildCity(int playerID, VertexLocation vertexLocation) throws ServerException {
 		MovesBuildCityTranslator city = new MovesBuildCityTranslator(playerID, vertexLocation.getHexLoc(), vertexLocation.getDir());
 		String json = city.translate();
 		try{
-			post("/moves/buildCity", json);
+			String model =post("/moves/buildCity", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void acceptTrade(int playerID, boolean accept) throws ServerException {
+	public GameModel acceptTrade(int playerID, boolean accept) throws ServerException {
 		MovesAcceptTradeTranslator acceptTrade = new MovesAcceptTradeTranslator(playerID, accept);
 		String json = acceptTrade.translate();
 		try{
-			post("/moves/acceptTrade", json);
+			String model = post("/moves/acceptTrade", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void maritimeTrade(int playerID, int ratio, ResourceType inputResource, ResourceType outputResource) throws ServerException {
+	public GameModel maritimeTrade(int playerID, int ratio, ResourceType inputResource, ResourceType outputResource) throws ServerException {
 		MovesMaritimeTradeTranslator maritime = new MovesMaritimeTradeTranslator(playerID, ratio, inputResource, outputResource);
 		String json = maritime.translate();
 		try{
-			post("/moves/maritimeTrade", json);
+			String model = post("/moves/maritimeTrade", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void discardCards(int playerID, ArrayList<ResourceType> resources) throws ServerException {
+	public GameModel discardCards(int playerID, ArrayList<ResourceType> resources) throws ServerException {
 		MovesDiscardCardsTranslator discard = new MovesDiscardCardsTranslator(playerID, resources);
 		String json = discard.translate();
 		try{
-			post("/moves/discardCards", json);
+			String model = post("/moves/discardCards", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}
 	}
 
 	@Override
-	public void offerTrade(int playerID, ArrayList<ResourceType> resourceGive, ArrayList<ResourceType> resourceReceive,
+	public GameModel offerTrade(int playerID, ArrayList<ResourceType> resourceGive, ArrayList<ResourceType> resourceReceive,
 			int receiverID) throws ServerException {
 		MovesOfferTradeTranslator offer = new MovesOfferTradeTranslator(playerID, resourceGive, resourceReceive, receiverID);
 		String json = offer.translate();
 		try{
-			post("/moves/offerTrade", json);
+			String model = post("/moves/offerTrade", json);
+			return translator.getModelfromJSON(model);
 		}catch(ServerException e){
 			throw e;
 		}

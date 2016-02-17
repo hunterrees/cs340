@@ -199,9 +199,8 @@ public class ModelTranslator {
 		 }
 		
 		
-		JsonArray robberLoc = mapJson.getAsJsonArray("robber");
-		map.setRobberLocation(parseRobberLocation((JsonObject)robberLoc.get(0)));
-		
+		JsonObject robberLoc = mapJson.getAsJsonObject("robber");
+		map.setRobberLocation(parseRobberLocation(robberLoc));
 		
 		return map;
 	}

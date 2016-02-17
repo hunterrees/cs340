@@ -105,7 +105,8 @@ public class GameManager extends Observable{
 	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{
 		if(name != null){
 			try{
-				server.createGame(name, randomTiles, randomNumbers, randomPorts);
+				GameModel newModel = server.createGame(name, randomTiles, randomNumbers, randomPorts);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -119,6 +120,8 @@ public class GameManager extends Observable{
 	public void joinGame(int gameID, String color)throws GameException{
 		try{
 			server.joinGame(gameID, color);
+			GameModel newModel = server.getModel(-1);
+			setModel(newModel);
 		}catch(ServerException e){
 			e.printStackTrace();
 		}
@@ -164,7 +167,8 @@ public class GameManager extends Observable{
 	 */
 	public void sendChat(int playerID, String content)throws GameException{
 		try {
-			server.sendChat(playerID, content);
+			GameModel newModel = server.sendChat(playerID, content);
+			setModel(newModel);
 		} catch (ServerException e) {
 			e.printStackTrace();
 		}
@@ -177,7 +181,8 @@ public class GameManager extends Observable{
 	public void rollNumber(int playerID, int numberRolled)throws GameException{
 		if(model.rollNumber(playerID)){
 			try{
-				server.rollNumber(playerID, numberRolled);
+				GameModel newModel = server.rollNumber(playerID, numberRolled);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -194,7 +199,8 @@ public class GameManager extends Observable{
 	public void robPlayer(int playerID, int victimID, HexLocation newRobberLocation)throws GameException{
 		if(model.robPlayer(newRobberLocation, victimID)){
 			try{
-				server.robPlayer(playerID, victimID, newRobberLocation);
+				GameModel newModel = server.robPlayer(playerID, victimID, newRobberLocation);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -209,7 +215,8 @@ public class GameManager extends Observable{
 	public void finishTurn(int playerID)throws GameException{
 		if(model.finishTurn(playerID)){
 			try{
-				server.finishTurn(playerID);
+				GameModel newModel = server.finishTurn(playerID);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -224,7 +231,8 @@ public class GameManager extends Observable{
 	public void buyDevCard(int playerID)throws GameException{
 		if(model.buyDevCard(playerID)){
 			try{
-				server.buyDevCard(playerID);
+				GameModel newModel = server.buyDevCard(playerID);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -241,7 +249,8 @@ public class GameManager extends Observable{
 	public void yearOfPlenty(int playerID, ResourceType resource1, ResourceType resource2)throws GameException{
 		if(model.yearOfPlenty(playerID, resource1, resource2)){
 			try{
-				server.yearOfPlenty(playerID, resource1, resource2);
+				GameModel newModel = server.yearOfPlenty(playerID, resource1, resource2);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -258,7 +267,8 @@ public class GameManager extends Observable{
 	public void roadBuilding(int playerID, EdgeLocation roadLocation1, EdgeLocation roadLocation2)throws GameException{
 		if(model.roadBuilding(playerID, roadLocation1, roadLocation2)){
 			try{
-				server.roadBuilding(playerID, roadLocation1, roadLocation2);
+				GameModel newModel = server.roadBuilding(playerID, roadLocation1, roadLocation2);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -275,7 +285,8 @@ public class GameManager extends Observable{
 	public void knight(int playerID, int victimID, HexLocation newRobberLocation)throws GameException{
 		if(model.soldier(playerID, newRobberLocation,victimID)){
 			try{
-				server.knight(playerID, victimID, newRobberLocation);
+				GameModel newModel = server.knight(playerID, victimID, newRobberLocation);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -291,7 +302,8 @@ public class GameManager extends Observable{
 	public void monopoly(int playerID, ResourceType resource)throws GameException{
 		if(model.monopoly(playerID)){
 			try{
-				server.monopoly(playerID, resource);
+				GameModel newModel = server.monopoly(playerID, resource);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -306,7 +318,8 @@ public class GameManager extends Observable{
 	public void monument(int playerID)throws GameException{
 		if(model.monument(playerID)){
 			try{
-				server.monument(playerID);
+				GameModel newModel = server.monument(playerID);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -323,7 +336,8 @@ public class GameManager extends Observable{
 	public void buildRoad(int playerID, EdgeLocation roadLocation, boolean setUp)throws GameException{
 		if(model.canBuildRoad(playerID, setUp, roadLocation)){
 			try{
-				server.buildRoad(playerID, roadLocation, setUp);
+				GameModel newModel = server.buildRoad(playerID, roadLocation, setUp);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -340,7 +354,8 @@ public class GameManager extends Observable{
 	public void buildSettlment(int playerID, VertexLocation vertexLocation, boolean setUp)throws GameException{
 		if(model.canBuildSettlement(playerID, setUp, vertexLocation)){
 			try{
-				server.buildSettlment(playerID, vertexLocation, setUp);
+				GameModel newModel = server.buildSettlment(playerID, vertexLocation, setUp);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -356,7 +371,8 @@ public class GameManager extends Observable{
 	public void buildCity(int playerID, VertexLocation vertexLocation)throws GameException{
 		if(model.canBuildCity(playerID, vertexLocation)){
 			try{
-				server.buildCity(playerID, vertexLocation);
+				GameModel newModel = server.buildCity(playerID, vertexLocation);
+				setModel(newModel);
 			}catch(ServerException e){
 				throw new GameException();
 			}
@@ -372,7 +388,8 @@ public class GameManager extends Observable{
 	public void offerTrade(int playerID, ArrayList<ResourceType> resourceGive,  ArrayList<ResourceType> resourceReceive, int receiverID)throws GameException{
 		if(model.offerTrade(playerID, resourceGive)){
 			try{
-				server.offerTrade(playerID, resourceGive, resourceReceive, receiverID);
+				GameModel newModel = server.offerTrade(playerID, resourceGive, resourceReceive, receiverID);
+				setModel(newModel);
 			}catch(ServerException e){
 				throw new GameException();
 			}
@@ -386,7 +403,8 @@ public class GameManager extends Observable{
 	public void acceptTrade(int playerID, boolean accept)throws GameException{
 		if(!accept || model.acceptTrade(playerID)){
 			try{
-				server.acceptTrade(playerID, accept);
+				GameModel newModel = server.acceptTrade(playerID, accept);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -404,7 +422,8 @@ public class GameManager extends Observable{
 		int ratio = model.maritimeTrade(playerID, inputResource);
 		if(ratio != -1){
 			try{
-				server.maritimeTrade(playerID, ratio, inputResource, outputResource);
+				GameModel newModel = server.maritimeTrade(playerID, ratio, inputResource, outputResource);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
@@ -421,7 +440,8 @@ public class GameManager extends Observable{
 	public void discardCards(int playerID, ArrayList<ResourceType> resources)throws GameException{
 		if(model.discardCards(playerID, resources)){
 			try{
-				server.discardCards(playerID, resources);
+				GameModel newModel = server.discardCards(playerID, resources);
+				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
