@@ -2,6 +2,7 @@ package client.map;
 
 import java.util.*;
 
+import gameManager.GameManager;
 import map.Edge;
 import map.Map;
 import map.TerrainHex;
@@ -17,15 +18,18 @@ import client.data.*;
 /**
  * Implementation for the map controller
  */
-public class MapController extends Controller implements IMapController {
+public class MapController extends Controller implements IMapController, Observer {
 	
 	private GameModel gm;
 	private Map map = new Map();
 
 	private IRobView robView;
 	
-	public MapController(IMapView view, IRobView robView) {
-		
+	public MapController(IMapView view, IRobView robView, GameManager gm) {
+		this.gm = gm;
+
+		gm.addObserver(this);
+
 		super(view);
 		
 		setRobView(robView);
@@ -190,7 +194,6 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public boolean canPlaceRoad(EdgeLocation edgeLoc) {
-		
 		return true;
 	}
 
@@ -251,6 +254,10 @@ public class MapController extends Controller implements IMapController {
 	public void robPlayer(RobPlayerInfo victim) {	
 		
 	}
-	
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//gm=  = (GameManager)o;
+	}
 }
 
