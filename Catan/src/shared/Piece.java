@@ -2,6 +2,7 @@ package shared;
 
 import map.Edge;
 import map.Vertex;
+import shared.definitions.CatanColor;
 import shared.definitions.PieceType;
 
 
@@ -63,7 +64,5 @@ public class Piece
 
 	public int getPlayerID() {
 		return playerID;
-	}
-	
-	
+	}	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import map.Map;
 import player.Player;
 import shared.ResourceCard;
+import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.HexType;
@@ -487,6 +488,10 @@ public class GameModel {
 		}else{
 			return false;
 		}
+	}
+	
+	public CatanColor getColor(int playerIndex){
+		return players.get(playerIndex).getPlayerColor();
 	}
 
 // Private methods

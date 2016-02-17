@@ -6,6 +6,7 @@ import model.GameException;
 import model.GameModel;
 import server.ServerException;
 import server.ServerInterface;
+import shared.definitions.CatanColor;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -446,5 +447,9 @@ public class GameManager {
 	 */
 	public boolean canBuildRoad(int playerID, EdgeLocation location, boolean setUp){
 		return model.canBuildRoad(playerID, setUp, location);
+	}
+	
+	public CatanColor getColor(int playerIndex){
+		return model.getColor();
 	}
 }
