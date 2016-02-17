@@ -20,18 +20,19 @@ import client.data.*;
  */
 public class MapController extends Controller implements IMapController, Observer {
 	
-	private GameModel gm;
+	private GameManager manager;
 	private Map map = new Map();
 
 	private IRobView robView;
 	
-	public MapController(IMapView view, IRobView robView, GameManager gm) {
-		this.gm = gm;
-
-		gm.addObserver(this);
-
+	public MapController(IMapView view, IRobView robView, GameManager manager) {
 		super(view);
-		
+
+		this.manager = manager;
+
+		manager.addObserver(this);
+
+
 		setRobView(robView);
 		
 		initFromModel();
