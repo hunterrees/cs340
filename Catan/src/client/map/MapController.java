@@ -6,6 +6,8 @@ import map.Edge;
 import map.Map;
 import map.TerrainHex;
 import map.Vertex;
+import model.GameModel;
+import shared.Piece;
 import shared.definitions.*;
 import shared.locations.*;
 import client.base.*;
@@ -17,7 +19,9 @@ import client.data.*;
  */
 public class MapController extends Controller implements IMapController {
 	
+	private GameModel gm;
 	private Map map = new Map();
+	
 	private IRobView robView;
 	
 	public MapController(IMapView view, IRobView robView) {
@@ -45,6 +49,21 @@ public class MapController extends Controller implements IMapController {
 	
 	protected void initFromModel() {
 		
+		HexLocation hexLoc1 = new HexLocation(0, 0);
+		TerrainHex hex1 = map.getHexes().get(hexLoc1);
+		EdgeLocation edgeLoc1 = new EdgeLocation(hexLoc1, EdgeDirection.North);
+		Edge edge = map.getEdges().get(edgeLoc1.getNormalizedLocation());
+		edge.setPiece(new Piece(PieceType.ROAD, null, null, 1));
+		
+		VertexLocation vertLoc1 = new VertexLocation(hexLoc1, VertexDirection.NorthEast);
+		Vertex vert1 = map.getVerticies().get(vertLoc1.getNormalizedLocation());
+		vert1.setPiece(new Piece(PieceType.SETTLEMENT, null, null, 1));
+		
+		VertexLocation vertLoc2 = new VertexLocation(hexLoc1, VertexDirection.SouthWest);
+		Vertex vert2 = map.getVerticies().get(vertLoc2.getNormalizedLocation());
+		vert2.setPiece(new Piece(PieceType.CITY, null, null, 1));
+		
+		
 		// Place Hexes, numbers, robber
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
 			
@@ -53,10 +72,13 @@ public class MapController extends Controller implements IMapController {
 				getView().addNumber(entry.getKey(), entry.getValue().getNumber());
 				
 			}
-			if(entry.getValue().getType() == HexType.DESERT) {
+			/*if(entry.getValue().getType() == HexType.DESERT) {
 				getView().placeRobber(entry.getKey());
-			}
+			}*/
 		}
+		
+		getView().placeRobber(map.getRobberLocation());
+		
 		for(java.util.Map.Entry<EdgeLocation, Edge> entry: map.getEdges().entrySet()){
 			if (entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.ROAD){
 				getView().placeRoad(entry.getKey(),
@@ -65,7 +87,21 @@ public class MapController extends Controller implements IMapController {
 		}
 
 		for(java.util.Map.Entry<EdgeLocation, PortType> entry : map.getEdgePorts().entrySet()) {
-			getView().addPort(entry.getKey(),entry.getValue());
+			HexLocation hexLoc = entry.getKey().getHexLoc();
+			TerrainHex hex = map.getHexes().get(hexLoc);
+			EdgeLocation edgeLoc = entry.getKey();
+			
+			
+			
+			if(hex.getType() == HexType.WATER){
+				getView().addPort(entry.getKey(),entry.getValue());
+			}
+			else{
+				hexLoc = hexLoc.getNeighborLoc(edgeLoc.getDir());
+				hex = map.getHexes().get(hexLoc);
+				edgeLoc = new EdgeLocation(hexLoc, entry.getKey().getDir().getOppositeDirection());
+				getView().addPort(edgeLoc, entry.getValue());
+			}
 		}
 
 		for(java.util.Map.Entry<VertexLocation, Vertex> entry : map.getVerticies().entrySet()) {

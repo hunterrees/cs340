@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
@@ -198,10 +199,24 @@ public class ModelTranslator {
 		 }
 		
 		
-		
+		JsonArray robberLoc = mapJson.getAsJsonArray("robber");
+		map.setRobberLocation(parseRobberLocation((JsonObject)robberLoc.get(0)));
 		
 		
 		return map;
+	}
+	
+	public HexLocation parseRobberLocation(JsonObject jsonElement) {
+		int x;
+		int y;
+		
+		JsonPrimitive myX = jsonElement.getAsJsonPrimitive("x");
+		JsonPrimitive myY = jsonElement.getAsJsonPrimitive("y");
+		
+		x = myX.getAsInt();
+		y = myY.getAsInt();
+		
+		return new HexLocation(x,y);
 	}
 	
 	public TerrainHex parseHex(JsonObject jsonHex){
