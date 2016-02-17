@@ -1404,6 +1404,10 @@ public class Map {
 		return robberLocation;
 	}
 
+	public HashMap<EdgeLocation, PortType> getEdgePorts() {
+		return edgePorts;
+	}
+
 	public void setRobberLocation(HexLocation robberLocation) {
 		this.robberLocation = robberLocation;
 	}

@@ -1,16 +1,14 @@
 package client.map;
 
 import java.util.*;
-import java.util.Map.Entry;
 
+import map.Edge;
+import map.Map;
+import map.TerrainHex;
 import shared.definitions.*;
 import shared.locations.*;
 import client.base.*;
 import client.data.*;
-import map.Edge;
-import map.Map;
-import map.Port;
-import map.TerrainHex;
 
 
 /**
@@ -47,7 +45,7 @@ public class MapController extends Controller implements IMapController {
 	protected void initFromModel() {
 		
 		// Place Hexes, numbers, robber
-		for(Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
+		for(java.util.Map.Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
 			
 			getView().addHex(entry.getKey(), entry.getValue().getType());
 			if(entry.getValue().getType() != HexType.WATER && entry.getValue().getType() != HexType.DESERT){
@@ -58,12 +56,17 @@ public class MapController extends Controller implements IMapController {
 				getView().placeRobber(entry.getKey());
 			}
 		}
-		for(Entry<EdgeLocation, Edge> entry: map.getEdges().entrySet()){
-			if (entry.getValue().getPiece() != null){
+		for(java.util.Map.Entry<EdgeLocation, Edge> entry: map.getEdges().entrySet()){
+			if (entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.ROAD){
 				getView().placeRoad(entry.getKey(),
 						CatanColor.RED);
 			}
 		}
+
+		for(java.util.Map.Entry<EdgeLocation, PortType> entry : map.getEdgePorts().entrySet()) {
+			getView().addPort(entry.getKey(),entry.getValue());
+		}
+
 		
 		// Place roads
 /*		for()
