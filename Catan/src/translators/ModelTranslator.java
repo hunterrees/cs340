@@ -453,7 +453,7 @@ public class ModelTranslator {
 		JsonPrimitive myY = location.getAsJsonPrimitive("y");
 		y = myY.getAsInt();
 		
-		JsonPrimitive myDirection = jsonCity.getAsJsonPrimitive("direction");
+		JsonPrimitive myDirection = location.getAsJsonPrimitive("direction");
 		direction = myDirection.getAsString();
 		
 		switch (direction){
