@@ -5,6 +5,7 @@ import java.util.*;
 import map.Edge;
 import map.Map;
 import map.TerrainHex;
+import map.Vertex;
 import shared.definitions.*;
 import shared.locations.*;
 import client.base.*;
@@ -67,6 +68,14 @@ public class MapController extends Controller implements IMapController {
 			getView().addPort(entry.getKey(),entry.getValue());
 		}
 
+		for(java.util.Map.Entry<VertexLocation, Vertex> entry : map.getVerticies().entrySet()) {
+			if(entry.getValue().getPiece().getPieceType() == PieceType.CITY) {
+				getView().placeCity(entry.getKey(), CatanColor.RED);
+			} else if(entry.getValue().getPiece().getPieceType() == PieceType.SETTLEMENT) {
+				getView().placeSettlement(entry.getKey(), CatanColor.RED);
+			}
+		}
+
 		
 		// Place roads
 /*		for()
@@ -124,13 +133,13 @@ public class MapController extends Controller implements IMapController {
 			}
 		}*/
 		
-		PortType portType = PortType.BRICK;
+		/*PortType portType = PortType.BRICK;
 		getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDirection.North), portType);
 		getView().addPort(new EdgeLocation(new HexLocation(0, -3), EdgeDirection.South), portType);
 		getView().addPort(new EdgeLocation(new HexLocation(-3, 3), EdgeDirection.NorthEast), portType);
 		getView().addPort(new EdgeLocation(new HexLocation(-3, 0), EdgeDirection.SouthEast), portType);
 		getView().addPort(new EdgeLocation(new HexLocation(3, -3), EdgeDirection.SouthWest), portType);
-		getView().addPort(new EdgeLocation(new HexLocation(3, 0), EdgeDirection.NorthWest), portType);
+		getView().addPort(new EdgeLocation(new HexLocation(3, 0), EdgeDirection.NorthWest), portType);*/
 
 		
 		
