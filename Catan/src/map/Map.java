@@ -489,7 +489,7 @@ public class Map {
 			if(!setup){
 				// Check if the edges are valid
 				Edge rightEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.North).getNormalizedLocation());
-				Edge upEdge = edges.get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.NorthEast).getNormalizedLocation());
+				Edge upEdge = edges.get(new EdgeLocation(upperHex.getLocation(), EdgeDirection.SouthWest).getNormalizedLocation());
 				Edge downEdge = edges.get(new EdgeLocation(currentHex.getLocation(), EdgeDirection.NorthWest).getNormalizedLocation());
 
 
@@ -661,26 +661,40 @@ public class Map {
 					cornerValid = true;
 				}
 				else{
-					/*Piece temp = left.getPiece();
+					Piece temp = left.getPiece();
 					left.setPiece(null);
-					if(canBuildSettlement(temp.getPlayerID(), setup, left.getLocation())){
+					if(canBuildSettlement(temp.getPlayerID(), false, left.getLocation())){
 						cornerValid = false;
 					}
 					else{
 						cornerValid = true;
 					}
-					left.setPiece(temp);*/
-					cornerValid = true;
+					left.setPiece(temp);
+					//cornerValid = true;
 				}
 			}
 
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!setup) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = right.getPiece();
+					right.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, right.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					right.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
-		if(left.getPiece() != null) {
+		/*if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
@@ -689,7 +703,7 @@ public class Map {
 			if (right.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
-		}
+		}*/
 
 		// See if it's valid overall
 		boolean canBuildRoad = edgeValid || cornerValid;
@@ -752,15 +766,43 @@ public class Map {
 
 		if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!setup) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = left.getPiece();
+					left.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, left.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					left.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!setup) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = right.getPiece();
+					right.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, right.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					right.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
-		if(left.getPiece() != null) {
+		/*if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
@@ -769,7 +811,7 @@ public class Map {
 			if (right.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
-		}
+		}*/
 
 		// See if it's valid overall
 		boolean canBuildRoad = edgeValid || cornerValid;
@@ -833,15 +875,43 @@ public class Map {
 
 		if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!setup) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = left.getPiece();
+					left.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, left.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					left.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!setup) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = right.getPiece();
+					right.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, right.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					right.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
-		if(left.getPiece() != null) {
+		/*if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
@@ -850,7 +920,7 @@ public class Map {
 			if (right.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
-		}
+		}*/
 
 		// See if it's valid overall
 		boolean canBuildRoad = edgeValid || cornerValid;
@@ -913,15 +983,43 @@ public class Map {
 
 		if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!free) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = left.getPiece();
+					left.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, left.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					left.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!free) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = right.getPiece();
+					right.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, right.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					right.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
-		if(left.getPiece() != null) {
+		/*if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
@@ -930,7 +1028,7 @@ public class Map {
 			if (right.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
-		}
+		}*/
 
 		// See if it's valid overall
 		boolean canBuildRoad = edgeValid || cornerValid;
@@ -993,15 +1091,43 @@ public class Map {
 
 		if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!free) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = left.getPiece();
+					left.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, left.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					left.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!free) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = right.getPiece();
+					right.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, right.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					right.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
-		if(left.getPiece() != null) {
+		/*if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
@@ -1010,7 +1136,7 @@ public class Map {
 			if (right.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
-		}
+		}*/
 
 		// See if it's valid overall
 		boolean canBuildRoad = edgeValid || cornerValid;
@@ -1076,15 +1202,43 @@ public class Map {
 
 		if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!free) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = left.getPiece();
+					left.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, left.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					left.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!free) {
+					cornerValid = true;
+				}
+				else{
+					Piece temp = right.getPiece();
+					right.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), false, right.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					right.setPiece(temp);
+					//cornerValid = true;
+				}
 			}
 		}
-		if(left.getPiece() != null) {
+		/*if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
@@ -1093,7 +1247,7 @@ public class Map {
 			if (right.getPiece().getPlayerID() != playerID) {
 				cornerValid = false;
 			}
-		}
+		}*/
 
 		// See if it's valid overall
 		boolean canBuildRoad = edgeValid || cornerValid;
