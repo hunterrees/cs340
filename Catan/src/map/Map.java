@@ -576,8 +576,8 @@ public class Map {
 
 
 
-			TerrainHex hex = hexes.get(loc.getHexLoc());
-			TerrainHex neighbor = hexes.get(hex.getLocation().getNeighborLoc(loc.getDir()));
+			TerrainHex hex = hexes.get(loc.getNormalizedLocation().getHexLoc());
+			TerrainHex neighbor = hexes.get(hex.getLocation().getNeighborLoc(loc.getNormalizedLocation().getDir()));
 			if(neighbor == null) {
 				return false;
 			}
@@ -611,7 +611,7 @@ public class Map {
 	 * @param upperLeftHex
      * @return
      */
-	private boolean edgeNWCase(int playerID, boolean setup, EdgeLocation loc, TerrainHex upperLeftHex, TerrainHex lowerRightHex) {
+	private boolean edgeNWCase(int playerID, boolean setup, EdgeLocation loc, TerrainHex lowerRightHex, TerrainHex upperLeftHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 
 
@@ -625,24 +625,26 @@ public class Map {
 		boolean edgeValid = false;
 
 
-		if(upperLeft.getPiece() != null) {
-			if (upperLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+		if(!setup) {
+			if (upperLeft.getPiece() != null) {
+				if (upperLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(upperRight.getPiece() != null) {
-			if (upperRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (upperRight.getPiece() != null) {
+				if (upperRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerLeft.getPiece() != null) {
-			if (lowerLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerLeft.getPiece() != null) {
+				if (lowerLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerRight.getPiece() != null) {
-			if (lowerRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerRight.getPiece() != null) {
+				if (lowerRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
 		}
 
@@ -655,8 +657,14 @@ public class Map {
 
 		if(left.getPiece() != null) {
 			if (left.getPiece().getPlayerID() == playerID) {
-				cornerValid = true;
+				if(!setup) {
+					cornerValid = true;
+				}
+				else{
+
+				}
 			}
+
 		}
 		if(right.getPiece() != null) {
 			if (right.getPiece().getPlayerID() == playerID) {
@@ -703,24 +711,26 @@ public class Map {
 		boolean edgeValid = false;
 
 
-		if(upperLeft.getPiece() != null) {
-			if (upperLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+		if(!setup) {
+			if (upperLeft.getPiece() != null) {
+				if (upperLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(upperRight.getPiece() != null) {
-			if (upperRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (upperRight.getPiece() != null) {
+				if (upperRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerLeft.getPiece() != null) {
-			if (lowerLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerLeft.getPiece() != null) {
+				if (lowerLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerRight.getPiece() != null) {
-			if (lowerRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerRight.getPiece() != null) {
+				if (lowerRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
 		}
 
@@ -781,25 +791,27 @@ public class Map {
 
 		boolean edgeValid = false;
 
+		if(!setup) {
 
-		if(upperLeft.getPiece() != null) {
-			if (upperLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (upperLeft.getPiece() != null) {
+				if (upperLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(upperRight.getPiece() != null) {
-			if (upperRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (upperRight.getPiece() != null) {
+				if (upperRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerLeft.getPiece() != null) {
-			if (lowerLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerLeft.getPiece() != null) {
+				if (lowerLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerRight.getPiece() != null) {
-			if (lowerRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerRight.getPiece() != null) {
+				if (lowerRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
 		}
 
@@ -860,28 +872,29 @@ public class Map {
 
 		boolean edgeValid = false;
 
+		if(!free) {
 
-		if(upperLeft.getPiece() != null) {
-			if (upperLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (upperLeft.getPiece() != null) {
+				if (upperLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
+			}
+			if (upperRight.getPiece() != null) {
+				if (upperRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
+			}
+			if (lowerLeft.getPiece() != null) {
+				if (lowerLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
+			}
+			if (lowerRight.getPiece() != null) {
+				if (lowerRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
 		}
-		if(upperRight.getPiece() != null) {
-			if (upperRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
-			}
-		}
-		if(lowerLeft.getPiece() != null) {
-			if (lowerLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
-			}
-		}
-		if(lowerRight.getPiece() != null) {
-			if (lowerRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
-			}
-		}
-
 
 		// Check if the surrounding corners make this case valid
 		Vertex left = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.West).getNormalizedLocation());
@@ -939,28 +952,29 @@ public class Map {
 
 		boolean edgeValid = false;
 
+		if(!free) {
 
-		if(upperLeft.getPiece() != null) {
-			if (upperLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (upperLeft.getPiece() != null) {
+				if (upperLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
+			}
+			if (upperRight.getPiece() != null) {
+				if (upperRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
+			}
+			if (lowerLeft.getPiece() != null) {
+				if (lowerLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
+			}
+			if (lowerRight.getPiece() != null) {
+				if (lowerRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
 		}
-		if(upperRight.getPiece() != null) {
-			if (upperRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
-			}
-		}
-		if(lowerLeft.getPiece() != null) {
-			if (lowerLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
-			}
-		}
-		if(lowerRight.getPiece() != null) {
-			if (lowerRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
-			}
-		}
-
 
 		// Check if the surrounding corners make this case valid
 		Vertex left = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthEast).getNormalizedLocation());
@@ -1019,25 +1033,28 @@ public class Map {
 
 		boolean edgeValid = false;
 
+		if(!free) {
 
-		if(upperLeft.getPiece() != null) {
-			if (upperLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+
+			if (upperLeft.getPiece() != null) {
+				if (upperLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(upperRight.getPiece() != null) {
-			if (upperRight.getPiece().getPlayerID() ==playerID) {
-				edgeValid = true;
+			if (upperRight.getPiece() != null) {
+				if (upperRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerLeft.getPiece() != null) {
-			if (lowerLeft.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerLeft.getPiece() != null) {
+				if (lowerLeft.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
-		}
-		if(lowerRight.getPiece() != null) {
-			if (lowerRight.getPiece().getPlayerID() == playerID) {
-				edgeValid = true;
+			if (lowerRight.getPiece() != null) {
+				if (lowerRight.getPiece().getPlayerID() == playerID) {
+					edgeValid = true;
+				}
 			}
 		}
 

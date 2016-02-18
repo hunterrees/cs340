@@ -54,12 +54,24 @@ public class CanBuildRoad {
         spot2 = new EdgeLocation(new HexLocation(0,-3), EdgeDirection.North).getNormalizedLocation();
         assertFalse(map.canBuildRoad(playerID, false, spot2));
 
+        // SE Case with settlement at SE
         TerrainHex bottomHex = map.getHexes().get(new HexLocation(0,2));
         Vertex bottomVertex = map.getVerticies().get(new VertexLocation(bottomHex.getLocation(),VertexDirection.SouthEast).getNormalizedLocation());
         bottomVertex.setPiece(new Piece(PieceType.SETTLEMENT, null, null, 1));
 
         Edge bottomEdge = map.getEdges().get(new EdgeLocation(bottomHex.getLocation(), EdgeDirection.SouthEast).getNormalizedLocation());
         assertTrue(map.canBuildRoad(1, true, new EdgeLocation(bottomHex.getLocation(), EdgeDirection.SouthEast)));
+
+
+        // NW case
+        TerrainHex leftHex = map.getHexes().get(new HexLocation(-1,2));
+        Edge leftEdge = map.getEdges().get(new EdgeLocation(leftHex.getLocation(),EdgeDirection.North));
+
+        leftEdge.setPiece(new Piece(PieceType.ROAD, null, null, 1));
+
+        assertTrue(map.canBuildRoad(1, false, new EdgeLocation(leftHex.getLocation(),EdgeDirection.NorthWest)));
+
+
 
     }
 
