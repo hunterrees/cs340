@@ -192,17 +192,19 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public boolean canPlaceRoad(EdgeLocation edgeLoc) {
-		return true;
+		int playerID = 1;
+
+		return map.canBuildRoad(playerID,true,edgeLoc);
 	}
 
 	public boolean canPlaceSettlement(VertexLocation vertLoc) {
-		
-		return true;
+		int playerID = 1;
+		return map.canBuildSettlement(playerID, true, vertLoc);
 	}
 
 	public boolean canPlaceCity(VertexLocation vertLoc) {
-		
-		return true;
+		int playerID = 1;
+		return map.canBuildCity(playerID,vertLoc);
 	}
 
 	public boolean canPlaceRobber(HexLocation hexLoc) {
@@ -211,17 +213,18 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public void placeRoad(EdgeLocation edgeLoc) {
-		
+		map.getEdges().get(edgeLoc).setPiece(new Piece(PieceType.ROAD,null,null,1));
 		getView().placeRoad(edgeLoc, CatanColor.ORANGE);
 	}
 
 	public void placeSettlement(VertexLocation vertLoc) {
-		
+		map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.SETTLEMENT,null,null,1));
 		getView().placeSettlement(vertLoc, CatanColor.ORANGE);
 	}
 
 	public void placeCity(VertexLocation vertLoc) {
-		
+		map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.CITY,null,null,1));
+
 		getView().placeCity(vertLoc, CatanColor.ORANGE);
 	}
 
