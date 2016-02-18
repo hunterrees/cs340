@@ -586,13 +586,13 @@ public class Map {
 				return false;
 			}
 
-			switch(loc.getDir()) {
-				case NorthWest: return edgeNWCase(playerID, free, loc, hex, neighbor);
-				case North: return edgeNCase(playerID, free, loc, hex, neighbor);
-				case NorthEast: return edgeNECase(playerID, free, loc, hex, neighbor);
-				case SouthEast: return edgeSECase(playerID, free, loc, hex, neighbor);
-				case South: return edgeSCase(playerID, free, loc, hex, neighbor);
-				case SouthWest: return edgeSWCase(playerID, free, loc, hex, neighbor);
+			switch(loc.getNormalizedLocation().getDir()) {
+				case NorthWest: return edgeNWCase(playerID, free, loc.getNormalizedLocation(), hex, neighbor);
+				case North: return edgeNCase(playerID, free, loc.getNormalizedLocation(), hex, neighbor);
+				case NorthEast: return edgeNECase(playerID, free, loc.getNormalizedLocation(), hex, neighbor);
+				case SouthEast: return edgeSECase(playerID, free, loc.getNormalizedLocation(), hex, neighbor);
+				case South: return edgeSCase(playerID, free, loc.getNormalizedLocation(), hex, neighbor);
+				case SouthWest: return edgeSWCase(playerID, free, loc.getNormalizedLocation(), hex, neighbor);
 
 
 				default: System.out.println("Error! The EdgeLocation doesn't exist!");
@@ -611,7 +611,7 @@ public class Map {
 	 * @param upperLeftHex
      * @return
      */
-	private boolean edgeNWCase(int playerID, boolean setup, EdgeLocation loc, TerrainHex lowerRightHex, TerrainHex upperLeftHex) {
+	private boolean edgeNWCase(int playerID, boolean setup, EdgeLocation loc, TerrainHex upperLeftHex, TerrainHex lowerRightHex) {
 		TerrainHex hex = hexes.get(loc.getHexLoc());
 
 
@@ -649,7 +649,7 @@ public class Map {
 
 		// Check if the surrounding corners make this case valid
 		Vertex left = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthWest).getNormalizedLocation());
-		Vertex right = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.NorthEast).getNormalizedLocation());
+		Vertex right = verticies.get(new VertexLocation(loc.getHexLoc(), VertexDirection.West).getNormalizedLocation());
 
 		boolean cornerValid = false;
 
