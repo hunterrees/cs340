@@ -661,7 +661,16 @@ public class Map {
 					cornerValid = true;
 				}
 				else{
-
+					/*Piece temp = left.getPiece();
+					left.setPiece(null);
+					if(canBuildSettlement(temp.getPlayerID(), setup, left.getLocation())){
+						cornerValid = false;
+					}
+					else{
+						cornerValid = true;
+					}
+					left.setPiece(temp);*/
+					cornerValid = true;
 				}
 			}
 

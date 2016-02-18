@@ -10,7 +10,7 @@ public class State {
     }
 
 
-    public boolean enoughFprRoad(int playerID) {
+    public boolean enoughForRoad(int playerID) {
         return false;
     }
 

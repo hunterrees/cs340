@@ -35,8 +35,8 @@ public class SetupFirst extends State{
     }
 
     @Override
-    public boolean enoughFprRoad(int playerID) {
-        return super.enoughFprRoad(playerID);
+    public boolean enoughForRoad(int playerID) {
+        return super.enoughForRoad(playerID);
     }
 
 
