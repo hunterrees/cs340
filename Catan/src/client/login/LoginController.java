@@ -3,6 +3,7 @@ package client.login;
 import client.base.*;
 import client.misc.*;
 import gameManager.GameManager;
+import model.GameException;
 
 import java.net.*;
 import java.io.*;
@@ -64,35 +65,41 @@ public class LoginController extends Controller implements ILoginController{
 
 	@Override
 	public void start() {
-		
 		getLoginView().showModal();
 	}
 
 	@Override
 	public void signIn() {
-		
-		// TODO: log in user
-		
-
-		// If log in succeeded
-		getLoginView().closeModal();
-		loginAction.execute();
+		String username = getLoginView().getLoginUsername();
+		String password = getLoginView().getLoginPassword();
+		try {
+			GameManager.getInstance().userLogin(username, password);
+			getLoginView().closeModal();
+			loginAction.execute();
+		} catch (GameException e) {
+			getLoginView().closeModal();
+			loginAction.execute();
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}		
 	}
 
 	@Override
 	public void register() {
-		
-		// TODO: register new user (which, if successful, also logs them in)
-		
-		// If register succeeded
-		getLoginView().closeModal();
-		loginAction.execute();
+		String username = getLoginView().getRegisterUsername();
+		String password = getLoginView().getRegisterPassword();
+		try{
+			GameManager.getInstance().userRegister(username, password);
+			getLoginView().closeModal();
+			loginAction.execute();
+		}catch(GameException e){
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

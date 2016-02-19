@@ -6,12 +6,17 @@ import model.GameException;
 import model.GameModel;
 import server.ServerException;
 import server.ServerInterface;
+import server.ServerProxy;
 import shared.definitions.CatanColor;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
+import translators.games.GamesListGamesTranslator;
+
 import java.util.Observable;
+
+import client.data.GameInfo;
 
 public class GameManager extends Observable{
 	/**
@@ -32,6 +37,7 @@ public class GameManager extends Observable{
 	public static GameManager getInstance(){
 		if(manager == null){
 			manager = new GameManager();
+			manager.setServer(new ServerProxy("localhost", 8081));
 		}
 		return manager;
 	}
@@ -66,7 +72,7 @@ public class GameManager extends Observable{
 			try{
 				server.userLogin(username, password);
 			}catch(ServerException e){
-				e.printStackTrace();
+				throw new GameException(e.getMessage());
 			}
 		}
 	}
@@ -80,16 +86,18 @@ public class GameManager extends Observable{
 			try{
 				server.userRegister(username, password);
 			}catch(ServerException e){
-				e.printStackTrace();
+				throw new GameException(e.getMessage());
 			}
 		}
 	}
 	/**
 	 * Lists all the games in progress
 	 */
-	public String listGames()throws GameException{
+	public GameInfo[] listGames()throws GameException{
 		try{
-			return server.listGames();
+			String json = server.listGames();
+			GamesListGamesTranslator list = new GamesListGamesTranslator(json);
+			return list.getGameInfo();
 		}catch(ServerException e){
 			e.printStackTrace();
 		}
