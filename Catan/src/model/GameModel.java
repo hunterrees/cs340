@@ -494,5 +494,7 @@ public class GameModel {
 		return players.get(playerIndex).getPlayerColor();
 	}
 
+
+
 // Private methods
 }

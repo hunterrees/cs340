@@ -213,13 +213,25 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public void placeRoad(EdgeLocation edgeLoc) {
-		map.getEdges().get(edgeLoc).setPiece(new Piece(PieceType.ROAD,null,null,1));
-		getView().placeRoad(edgeLoc, CatanColor.ORANGE);
+		Piece road = new Piece(PieceType.ROAD,null,null,1);
+		map.getEdges().get(edgeLoc).setPiece(road);
+
+		//CatanColor color = road.getColor();
+		//getView().placeRoad(edgeLoc, color);
+		getView().placeRoad(edgeLoc, CatanColor.BLUE);
+
 	}
 
 	public void placeSettlement(VertexLocation vertLoc) {
-		map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.SETTLEMENT,null,null,1));
-		getView().placeSettlement(vertLoc, CatanColor.ORANGE);
+		Piece building = new Piece(PieceType.SETTLEMENT,null,null,1);
+
+		map.getVerticies().get(vertLoc).setPiece(building);
+
+		//CatanColor color = building.getColor();
+
+		//getView().placeSettlement(vertLoc, color);
+		getView().placeSettlement(vertLoc, CatanColor.BLUE);
+
 	}
 
 	public void placeCity(VertexLocation vertLoc) {

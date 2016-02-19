@@ -1,7 +1,9 @@
 package shared;
 
+import gameManager.GameManager;
 import map.Edge;
 import map.Vertex;
+import model.GameModel;
 import shared.definitions.CatanColor;
 import shared.definitions.PieceType;
 
@@ -64,5 +66,10 @@ public class Piece
 
 	public int getPlayerID() {
 		return playerID;
-	}	
+	}
+
+	public CatanColor getColor() {
+		GameModel model = GameManager.getInstance().getModel();
+		return model.getColor(playerID);
+	}
 }
