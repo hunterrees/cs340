@@ -601,8 +601,12 @@ public class ModelTranslator {
 			status = GameState.rolling;
 		}else if(statusString.equals("Robbing")){
 			status = GameState.robbing;
-		}else{
+		}else if(statusString.equals("Discarding")){
 			status = GameState.discarding;
+		}else if(statusString.equals("FirstRound")){
+			status = GameState.firstRound;
+		}else{
+			status = GameState.secondRound;
 		}
 		
 		JsonPrimitive currentTurnJson = turnTrackerJson.getAsJsonPrimitive("currentTurn");
