@@ -28,7 +28,7 @@ import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import trade.TradeOffer;
 import translators.ModelTranslator;
-
+// test
 public class InitializeModel {
 
 	ModelTranslator translator = new ModelTranslator();

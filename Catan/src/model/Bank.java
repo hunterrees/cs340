@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import shared.*;
 import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
-
+// test
 public class Bank 
 {
 	/**
