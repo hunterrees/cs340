@@ -33,7 +33,6 @@ public class MapController extends Controller implements IMapController {
 
 
 		super(view);
-
 		setRobView(robView);
 		//map = GameManager.getInstance().getModel().getMap();
 		if (map == null){
@@ -295,14 +294,24 @@ public class MapController extends Controller implements IMapController {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
-		switch(GameManager.getInstance().getModel().getGameState()) {
-			case playing: state = new Normal(); break;
-			//case discarding: state = new Discard();
-			//case rolling: state = new Rolling();
-			case robbing: state = new Robbing();
-			case firstRound: state = new SetupFirst();
-			case secondRound: state = new SetupSecond();
-			default: state = new NotYourTurn();
+		if(GameManager.getInstance().isMyTurn()) {
+			switch (GameManager.getInstance().getModel().getGameState()) {
+				case playing:
+					state = new Normal();
+					break;
+				//case discarding: state = new Discard();
+				//case rolling: state = new Rolling();
+				case robbing:
+					state = new Robbing();
+				case firstRound:
+					state = new SetupFirst();
+				case secondRound:
+					state = new SetupSecond();
+				default:
+					state = new NotYourTurn();
+			}
+		} else {
+			state = new NotYourTurn();
 		}
 
 		map = GameManager.getInstance().getModel().getMap();

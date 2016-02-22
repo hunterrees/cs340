@@ -1,41 +1,61 @@
 package client.states;
 
+import client.map.MapController;
+import gameManager.GameManager;
+import map.Map;
+import model.GameException;
+import shared.definitions.PieceType;
+import shared.locations.EdgeLocation;
+import shared.locations.VertexLocation;
+
 /**
  * Created by Brian on 16/2/17.
  */
 public class SetupFirst extends State{
 
-    public SetupFirst() {}
+    private MapController mc;
 
-    @Override
-    public boolean canBuildCity(int playerID) {
-        return super.canBuildCity(playerID);
+    public SetupFirst(Map map, MapController mc) {
+        super(map);
+        this.mc = mc;
+
+        mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
+        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
     }
 
     @Override
-    public boolean canBuildRoad(int playerID) {
-        return super.canBuildRoad(playerID);
+    public boolean canBuildCity(int playerID, VertexLocation loc) {
+        return false;
     }
 
     @Override
-    public boolean canBuildSettlement(int playerID) {
-        return super.canBuildSettlement(playerID);
+    public boolean canBuildRoad(int playerID, EdgeLocation loc) {
+        return GameManager.getInstance().getModel().getMap().canBuildRoad(playerID, true, loc);
     }
 
     @Override
-    public boolean enoughForCity(int playerID) {
-        return super.enoughForCity(playerID);
+    public boolean canBuildSettlement(int playerID, VertexLocation loc) {
+        return GameManager.getInstance().getModel().getMap().canBuildSettlement(playerID, true, loc);
+    }
+
+    public void  buildRoad(int playerID, EdgeLocation loc) {
+        try {
+            GameManager.getInstance().buildRoad(playerID, loc, true);
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public boolean enoughForSettlement(int playerID) {
-        return super.enoughForSettlement(playerID);
+    public void buildSettlement(int playerId, VertexLocation loc) {
+        try {
+            GameManager.getInstance().buildSettlment(playerId, loc, true);
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public boolean enoughForRoad(int playerID) {
-        return super.enoughForRoad(playerID);
-    }
+
 
 
 }

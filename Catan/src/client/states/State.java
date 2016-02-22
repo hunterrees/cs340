@@ -1,12 +1,20 @@
 package client.states;
 
+import gameManager.GameManager;
+import map.Map;
+import map.Vertex;
+import model.GameException;
+import shared.locations.EdgeLocation;
+import shared.locations.VertexLocation;
+
 /**
  * Created by Brian on 16/2/17.
  */
 public class State {
+    protected Map map;
 
-    public State() {
-
+    public State(Map map) {
+        this.map = map;
     }
 
 
@@ -22,20 +30,25 @@ public class State {
         return false;
     }
 
-    public boolean canBuildRoad(int playerID) {
+    public boolean canBuildRoad(int playerID, EdgeLocation loc) {
         return false;
     }
 
-    public boolean canBuildSettlement(int playerID) {
+    public boolean canBuildSettlement(int playerID, VertexLocation loc) {
         return false;
     }
 
-    public boolean canBuildCity(int playerID) {
+    public boolean canBuildCity(int playerID, VertexLocation loc) {
         return false;
     }
 
+    public void  buildRoad(int playerID, EdgeLocation loc) {}
 
+    public void buildSettlement(int playerId, VertexLocation loc) {
 
+    }
+
+    public void buildCity(int playerId, VertexLocation loc) {}
 
 
 }

@@ -345,16 +345,13 @@ public class GameManager extends Observable{
 	 * @param setUp True if road is being built during initial set up
 	 */
 	public void buildRoad(int playerID, EdgeLocation roadLocation, boolean setUp)throws GameException{
-		if(model.canBuildRoad(playerID, setUp, roadLocation)){
 			try{
 				GameModel newModel = server.buildRoad(playerID, roadLocation, setUp);
 				setModel(newModel);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
-		}else{
-			throw new GameException();
-		}
+
 	}
 	/**
 	 * Builds a settlement at given location, won't change resources if during setUp
@@ -388,14 +385,13 @@ public class GameManager extends Observable{
 	 * @param vertexLocation Location to build city
 	 */
 	public void buildCity(int playerID, VertexLocation vertexLocation)throws GameException{
-		if(model.canBuildCity(playerID, vertexLocation)){
 			try{
 				GameModel newModel = server.buildCity(playerID, vertexLocation);
 				setModel(newModel);
 			}catch(ServerException e){
 				throw new GameException();
 			}
-		}
+
 	}
 	/**
 	 * Sends a trade offer from one player to another
@@ -506,7 +502,10 @@ public class GameManager extends Observable{
 		}
 	}
 
-	
+	public PlayerInfo getPlayerInfo() {
+		return playerInfo;
+	}
+
 	public CatanColor getColor(int playerIndex){
 		return model.getColor(playerIndex);
 	}
