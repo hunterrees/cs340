@@ -16,7 +16,7 @@ import server.MockServerProxy;
 import server.ServerInterface;
 import server.ServerPoller;
 import translators.ModelTranslator;
-
+// test
 public class ServerPollerTests {
 
 	@Test
