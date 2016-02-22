@@ -30,6 +30,7 @@ public class GameManager extends Observable{
 	private PlayerInfo playerInfo;
 
 	protected GameManager(){
+		playerInfo = new PlayerInfo();
 	}
 	
 	protected GameManager(GameModel model, ServerInterface server){
@@ -519,5 +520,13 @@ public class GameManager extends Observable{
 	public int getCurrentPlayerIndex()
 	{
 		return model.getCurrentPlayerIndex();
+	}
+
+	public PlayerInfo getPlayerInfo() {
+		return playerInfo;
+	}
+
+	public void setPlayerInfo(PlayerInfo playerInfo) {
+		this.playerInfo = playerInfo;
 	}
 }

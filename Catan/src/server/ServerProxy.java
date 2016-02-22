@@ -5,8 +5,14 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+
+import gameManager.GameManager;
 import translators.user.*;
 import translators.games.*;
 import translators.ModelTranslator;
@@ -40,6 +46,7 @@ public class ServerProxy implements ServerInterface {
 		translator = new ModelTranslator();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private String post(String urlPath, String json) throws ServerException{
 		StringBuffer result = new StringBuffer();
 		try{
@@ -58,7 +65,29 @@ public class ServerProxy implements ServerInterface {
 							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
 				}
 				userCookie = connection.getHeaderField("Set-cookie");
+				
+				String jsonCookieString = URLDecoder.decode(userCookie);
+				Gson gson = new Gson();
+				JsonObject jsonCookie = gson.fromJson(jsonCookieString, JsonObject.class);
+				JsonPrimitive nameJson = jsonCookie.getAsJsonPrimitive("name");
+				String name = nameJson.getAsString();
+				
+				JsonPrimitive idJson = jsonCookie.getAsJsonPrimitive("playerID");
+				int id = idJson.getAsInt();
+				
+				GameManager.getInstance().getPlayerInfo().setId(id);
+				GameManager.getInstance().getPlayerInfo().setName(name);
+				
 				userCookie = userCookie.replace(";Path=/;", "");
+			}else if(urlPath == "/games/create"){
+				connection.setRequestProperty("Cookie", userCookie);
+				connection.connect();
+				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
+				output.writeBytes(json);
+				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new ServerException(String.format("doPost failed: %s (http code %d) %s",
+							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
+				}
 			}else if(urlPath == "/games/join"){
 				connection.setRequestProperty("Cookie", userCookie);
 				connection.connect();
