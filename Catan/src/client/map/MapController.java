@@ -28,7 +28,7 @@ public class MapController extends Controller implements IMapController {
 	private IRobView robView;
 
 	private State state;
-	
+
 	public MapController(IMapView view, IRobView robView) {
 
 
@@ -38,8 +38,12 @@ public class MapController extends Controller implements IMapController {
 		if (map == null){
 			map = new Map();
 		}
-		
 		initFromModel();
+		//state = new SetupSecond(map, this);
+		state = new SetupFirst(map, this);
+
+		//state = new Normal(map);
+
 	}
 	
 	public IMapView getView() {
@@ -201,17 +205,17 @@ public class MapController extends Controller implements IMapController {
 	public boolean canPlaceRoad(EdgeLocation edgeLoc) {
 		int playerID = 1;
 
-		return map.canBuildRoad(playerID,true,edgeLoc);
+		return state.canBuildRoad(playerID,edgeLoc);
 	}
 
 	public boolean canPlaceSettlement(VertexLocation vertLoc) {
 		int playerID = 1;
-		return map.canBuildSettlement(playerID, true, vertLoc);
+		return state.canBuildSettlement(playerID, vertLoc);
 	}
 
 	public boolean canPlaceCity(VertexLocation vertLoc) {
 		int playerID = 1;
-		return map.canBuildCity(playerID,vertLoc);
+		return state.canBuildCity(playerID,vertLoc);
 	}
 
 	public boolean canPlaceRobber(HexLocation hexLoc) {
@@ -231,7 +235,14 @@ public class MapController extends Controller implements IMapController {
 
 		//CatanColor color = road.getColor();
 		//getView().placeRoad(edgeLoc, color);
-		getView().placeRoad(edgeLoc, CatanColor.BLUE);
+		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
+		if(state instanceof SetupSecond) {
+			state = new Normal(map);
+		}
+		if(state instanceof SetupFirst) {
+			state = new SetupSecond(map, this);
+		}
+
 
 	}
 
@@ -249,14 +260,14 @@ public class MapController extends Controller implements IMapController {
 		//CatanColor color = building.getColor();
 
 		//getView().placeSettlement(vertLoc, color);
-		getView().placeSettlement(vertLoc, CatanColor.BLUE);
+		getView().placeSettlement(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 
 	}
 
 	public void placeCity(VertexLocation vertLoc) {
 		map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.CITY,null,null,1));
 
-		getView().placeCity(vertLoc, CatanColor.ORANGE);
+		getView().placeCity(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 	}
 
 	public void placeRobber(HexLocation hexLoc) {
@@ -297,16 +308,16 @@ public class MapController extends Controller implements IMapController {
 		if(GameManager.getInstance().isMyTurn()) {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
-					state = new Normal();
+					state = new Normal(map);
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();
 				case robbing:
 					state = new Robbing();
 				case firstRound:
-					state = new SetupFirst();
+					state = new SetupFirst(map, this);
 				case secondRound:
-					state = new SetupSecond();
+					state = new SetupSecond(map, this);
 				default:
 					state = new NotYourTurn();
 			}

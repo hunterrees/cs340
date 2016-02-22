@@ -21,8 +21,9 @@ public class SetupSecond extends State {
         super(map);
         this.mc = mc;
 
-        mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
         mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+
+        mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
     }
 
     @Override
@@ -32,20 +33,22 @@ public class SetupSecond extends State {
 
     @Override
     public boolean canBuildRoad(int playerID, EdgeLocation loc) {
-        return GameManager.getInstance().getModel().getMap().canBuildRoad(playerID, true, loc);
+        return map.canBuildRoad(playerID, true, loc);
     }
 
     @Override
     public boolean canBuildSettlement(int playerID, VertexLocation loc) {
-        return GameManager.getInstance().getModel().getMap().canBuildSettlement(playerID, true, loc);
+        return map.canBuildSettlement(playerID, true, loc);
     }
 
+    @Override
     public void  buildRoad(int playerID, EdgeLocation loc) {
         try {
             GameManager.getInstance().buildRoad(playerID, loc, true);
         } catch (GameException e) {
             e.printStackTrace();
         }
+       // mc.setState(new Normal(map));
     }
 
     @Override
