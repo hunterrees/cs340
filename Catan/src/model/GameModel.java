@@ -493,7 +493,17 @@ public class GameModel {
 	public CatanColor getColor(int playerIndex){
 		return players.get(playerIndex).getPlayerColor();
 	}
-
+	public String getName(int playerIndex){
+		return players.get(playerIndex).getName();
+	}
+	public GameState getGameState()
+	{
+		return tracker.getGameStatus();
+	}
+	public int getCurrentPlayerIndex()
+	{
+		return tracker.currentTurnPlayerID;
+	}
 
 
 // Private methods
