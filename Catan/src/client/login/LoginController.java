@@ -76,11 +76,10 @@ public class LoginController extends Controller implements ILoginController{
 			GameManager.getInstance().userLogin(username, password);
 			getLoginView().closeModal();
 			loginAction.execute();
-		} catch (GameException e) {
-			getLoginView().closeModal();
-			loginAction.execute();
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+		} catch (Exception e) {
+			getMessageView().setTitle("Login Error");
+			getMessageView().setMessage("Login failed - bad password or username");
+			getMessageView().showModal();
 		}		
 	}
 
@@ -88,13 +87,43 @@ public class LoginController extends Controller implements ILoginController{
 	public void register() {
 		String username = getLoginView().getRegisterUsername();
 		String password = getLoginView().getRegisterPassword();
+		String passAgain = getLoginView().getRegisterPasswordRepeat();
+		if(username.length() < 3 || username.length() > 7){
+			getMessageView().setTitle("Register Error");
+			getMessageView().setMessage("Register failed - username must be 3 - 7 characters");
+			getMessageView().showModal();
+			return;
+		}else if(password.length() < 5){
+			getMessageView().setTitle("Register Error");
+			getMessageView().setMessage("Register failed - password must be 5 or more characters");
+			getMessageView().showModal();
+			return;
+		}else if(!password.equals(passAgain)){
+			getMessageView().setTitle("Register Error");
+			getMessageView().setMessage("Register failed - passwords must match");
+			getMessageView().showModal();
+			return;
+		}else{
+			 for (char c : password.toCharArray())
+             {
+                 if (!Character.isLetterOrDigit(c)
+                         && c != '_' && c != '-')
+                 {
+                	 getMessageView().setTitle("Register Error");
+                	 getMessageView().setMessage("Register failed - password contains invalid characters");
+                	 getMessageView().showModal();
+                     return;
+                 }
+             }
+		}
 		try{
 			GameManager.getInstance().userRegister(username, password);
 			getLoginView().closeModal();
 			loginAction.execute();
 		}catch(GameException e){
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			getMessageView().setTitle("Register Error");
+       	 	getMessageView().setMessage("Register failed - user already exists");
+			getMessageView().showModal();
 		}
 	}
 
