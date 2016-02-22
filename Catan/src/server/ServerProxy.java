@@ -59,6 +59,15 @@ public class ServerProxy implements ServerInterface {
 				}
 				userCookie = connection.getHeaderField("Set-cookie");
 				userCookie = userCookie.replace(";Path=/;", "");
+			}else if(urlPath == "/games/create"){
+				connection.setRequestProperty("Cookie", userCookie);
+				connection.connect();
+				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
+				output.writeBytes(json);
+				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+					throw new ServerException(String.format("doPost failed: %s (http code %d) %s",
+							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
+				}
 			}else if(urlPath == "/games/join"){
 				connection.setRequestProperty("Cookie", userCookie);
 				connection.connect();
