@@ -522,9 +522,6 @@ public class GameManager extends Observable{
 		return model.getCurrentPlayerIndex();
 	}
 
-	public PlayerInfo getPlayerInfo() {
-		return playerInfo;
-	}
 
 	public void setPlayerInfo(PlayerInfo playerInfo) {
 		this.playerInfo = playerInfo;
