@@ -6,7 +6,7 @@ import shared.ResourceCard;
 import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 
-public class Hand //testt
+public class Hand
 {
 	/**
 	 * Development cards owned by player
