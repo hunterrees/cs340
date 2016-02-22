@@ -8,6 +8,7 @@ import server.ServerException;
 import server.ServerInterface;
 import server.ServerProxy;
 import shared.definitions.CatanColor;
+import shared.definitions.GameState;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -489,5 +490,16 @@ public class GameManager extends Observable{
 	
 	public CatanColor getColor(int playerIndex){
 		return model.getColor(playerIndex);
+	}
+	public String getPlayerName(int playerIndex){
+		return model.getName(playerIndex);
+	}
+	public GameState getGameState()
+	{
+		return model.getGameState();
+	}
+	public int getCurrentPlayerIndex()
+	{
+		return model.getCurrentPlayerIndex();
 	}
 }
