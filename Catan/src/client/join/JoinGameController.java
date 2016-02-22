@@ -7,6 +7,7 @@ import java.util.Observable;
 import client.base.*;
 import client.data.*;
 import client.misc.*;
+import gameManager.GameManager;
 
 
 /**
@@ -110,8 +111,18 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 
 	@Override
 	public void createNewGame() {
-		
-		getNewGameView().closeModal();
+		String title = getNewGameView().getTitle();
+		boolean randomNumbers = getNewGameView().getRandomlyPlaceNumbers();
+		boolean randomTiles = getNewGameView().getRandomlyPlaceHexes();
+		boolean randomPorts = getNewGameView().getUseRandomPorts();
+		try{
+			GameManager.getInstance().createGame(title, randomTiles, randomNumbers, randomPorts);
+			getNewGameView().closeModal();
+		}catch(Exception e){
+			getMessageView().setTitle("Create Game Error");
+			getMessageView().setMessage("Error in creating the game");
+			getMessageView().showModal();
+		}
 	}
 
 	@Override

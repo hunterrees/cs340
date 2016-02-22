@@ -117,8 +117,7 @@ public class GameManager extends Observable{
 	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{
 		if(name != null){
 			try{
-				GameModel newModel = server.createGame(name, randomTiles, randomNumbers, randomPorts);
-				setModel(newModel);
+				server.createGame(name, randomTiles, randomNumbers, randomPorts);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}

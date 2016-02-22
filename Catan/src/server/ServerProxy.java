@@ -154,12 +154,11 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public GameModel createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) throws ServerException {
+	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) throws ServerException {
 		GamesCreateTranslator create = new GamesCreateTranslator(randomTiles, randomNumbers, randomPorts, name);
 		String json = create.translate();
 		try{
-			String model = post("/games/create", json);
-			return translator.getModelfromJSON(model);
+			post("/games/create", json);
 		}catch(ServerException e){
 			throw e;
 		}
