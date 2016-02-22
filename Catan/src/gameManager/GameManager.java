@@ -2,6 +2,7 @@ package gameManager;
 
 import java.util.ArrayList;
 
+import client.data.PlayerInfo;
 import model.GameException;
 import model.GameModel;
 import server.ServerException;
@@ -26,7 +27,8 @@ public class GameManager extends Observable{
 	private GameModel model;
 	private ServerInterface server;
 	private static GameManager manager = null;
-	
+	private PlayerInfo playerInfo;
+
 	protected GameManager(){
 	}
 	
@@ -34,7 +36,7 @@ public class GameManager extends Observable{
 		this.model = model;
 		this.server = server;
 	}
-	
+
 	public static GameManager getInstance(){
 		if(manager == null){
 			manager = new GameManager();
@@ -496,6 +498,15 @@ public class GameManager extends Observable{
 	public boolean canBuildRoad(int playerID, EdgeLocation location, boolean setUp){
 		return model.canBuildRoad(playerID, setUp, location);
 	}
+
+	public boolean isMyTurn() {
+		if(playerInfo.getPlayerIndex() == model.getCurrentPlayerIndex()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	
 	public CatanColor getColor(int playerIndex){
 		return model.getColor(playerIndex);

@@ -500,8 +500,7 @@ public class GameModel {
 	{
 		return tracker.getGameStatus();
 	}
-	public int getCurrentPlayerIndex()
-	{
+	public int getCurrentPlayerIndex() {
 		return tracker.currentTurnPlayerID;
 	}
 

@@ -2,6 +2,7 @@ package client.map;
 
 import java.util.*;
 
+import client.states.*;
 import gameManager.GameManager;
 import map.Edge;
 import map.Map;
@@ -25,6 +26,8 @@ public class MapController extends Controller implements IMapController {
 	private Map map;
 
 	private IRobView robView;
+
+	private State state;
 	
 	public MapController(IMapView view, IRobView robView) {
 
@@ -292,12 +295,27 @@ public class MapController extends Controller implements IMapController {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
-		
+		switch(GameManager.getInstance().getModel().getGameState()) {
+			case playing: state = new Normal(); break;
+			//case discarding: state = new Discard();
+			//case rolling: state = new Rolling();
+			case robbing: state = new Robbing();
+			case firstRound: state = new SetupFirst();
+			case secondRound: state = new SetupSecond();
+			default: state = new NotYourTurn();
+		}
+
 		map = GameManager.getInstance().getModel().getMap();
 		initFromModel();
 	}
-	
 
 
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
 }
 
