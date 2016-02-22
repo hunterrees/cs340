@@ -44,6 +44,7 @@ public class GameManager extends Observable{
 	}
 	public void setModel(GameModel model) {
 		this.model = model;
+		System.out.println("about to notify");
 		notifyObservers();
 	}
 	public ServerInterface getServer() {
@@ -361,7 +362,7 @@ public class GameManager extends Observable{
 	 * @param setUp True if settlement is being built during initial set up
 	 */
 	public void buildSettlment(int playerID, VertexLocation vertexLocation, boolean setUp)throws GameException{
-		if(model.canBuildSettlement(playerID, setUp, vertexLocation)){
+		/*if(model.canBuildSettlement(playerID, setUp, vertexLocation)){
 			try{
 				GameModel newModel = server.buildSettlment(playerID, vertexLocation, setUp);
 				setModel(newModel);
@@ -370,7 +371,15 @@ public class GameManager extends Observable{
 			}
 		}else{
 			throw new GameException();
-		}
+		}*/
+		System.out.println("building settlement in game manager");
+			try{
+				GameModel newModel = server.buildSettlment(playerID, vertexLocation, setUp);
+				setModel(newModel);
+			}catch(ServerException e){
+				e.printStackTrace();
+			}
+		
 	}
 	/**
 	 * Builds a city at given location

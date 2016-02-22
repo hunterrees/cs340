@@ -351,6 +351,7 @@ public class ServerProxy implements ServerInterface {
 		MovesBuildSettlementTranslator settlement = new MovesBuildSettlementTranslator(playerID, vertexLocation.getHexLoc(), 
 				vertexLocation.getDir(), setUp);
 		String json = settlement.translate();
+		System.out.println("ghgfhgfhfghgfhhhhhhrjyxdjrjte5dfhjaxsrtdfsikjfskjrdfxjsdfhcsjdrxfcbhsmjnfbcshbxdajnszdxv");
 		try{
 			String model = post("/moves/buildSettlement", json);
 			return translator.getModelfromJSON(model);

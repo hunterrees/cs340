@@ -7,6 +7,7 @@ import map.Edge;
 import map.Map;
 import map.TerrainHex;
 import map.Vertex;
+import model.GameException;
 import model.GameModel;
 import shared.Piece;
 import shared.definitions.*;
@@ -20,8 +21,8 @@ import client.data.*;
  */
 public class MapController extends Controller implements IMapController {
 	
-	private GameModel gm;
-	private Map map = new Map();
+	
+	private Map map;
 
 	private IRobView robView;
 	
@@ -31,6 +32,10 @@ public class MapController extends Controller implements IMapController {
 		super(view);
 
 		setRobView(robView);
+		//map = GameManager.getInstance().getModel().getMap();
+		if (map == null){
+			map = new Map();
+		}
 		
 		initFromModel();
 	}
@@ -215,6 +220,12 @@ public class MapController extends Controller implements IMapController {
 	public void placeRoad(EdgeLocation edgeLoc) {
 		Piece road = new Piece(PieceType.ROAD,null,null,1);
 		map.getEdges().get(edgeLoc).setPiece(road);
+	/*	try {
+			GameManager.getInstance().buildRoad(1, edgeLoc, true);
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 
 		//CatanColor color = road.getColor();
 		//getView().placeRoad(edgeLoc, color);
@@ -226,6 +237,12 @@ public class MapController extends Controller implements IMapController {
 		Piece building = new Piece(PieceType.SETTLEMENT,null,null,1);
 
 		map.getVerticies().get(vertLoc).setPiece(building);
+		/*try {
+			GameManager.getInstance().buildSettlment(1, vertLoc, true);
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 
 		//CatanColor color = building.getColor();
 
@@ -249,7 +266,7 @@ public class MapController extends Controller implements IMapController {
 	
 	public void startMove(PieceType pieceType, boolean isFree, boolean allowDisconnected) {	
 		
-		getView().startDrop(pieceType, CatanColor.ORANGE, true);
+		getView().startDrop(pieceType, CatanColor.BLUE, true);
 	}
 	
 	public void cancelMove() {
@@ -267,6 +284,19 @@ public class MapController extends Controller implements IMapController {
 	public void robPlayer(RobPlayerInfo victim) {	
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see client.base.Controller#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		//super.update(o, arg);
+		
+		map = GameManager.getInstance().getModel().getMap();
+		initFromModel();
+	}
+	
 
 
 }

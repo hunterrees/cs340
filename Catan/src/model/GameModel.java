@@ -505,6 +505,21 @@ public class GameModel {
 		return tracker.currentTurnPlayerID;
 	}
 
+	/**
+	 * @return the map
+	 */
+	public Map getMap() {
+		return map;
+	}
+
+	/**
+	 * @param map the map to set
+	 */
+	public void setMap(Map map) {
+		this.map = map;
+	}
+
+	
 
 // Private methods
 }
