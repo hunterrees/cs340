@@ -33,6 +33,9 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 			getView().setAIChoices(ais);
 			getView().setPlayers(getPlayerInfo());
 			getView().showModal();
+			if(GameManager.getInstance().getModel().getPlayers().size() == 4){
+				getView().closeModal();
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -50,6 +53,7 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("\n\nupdate being called\n\n");
 		start();
 	}
 	

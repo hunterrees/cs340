@@ -184,11 +184,11 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) throws ServerException {
+	public String createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts) throws ServerException {
 		GamesCreateTranslator create = new GamesCreateTranslator(randomTiles, randomNumbers, randomPorts, name);
 		String json = create.translate();
 		try{
-			post("/games/create", json);
+			return post("/games/create", json);
 		}catch(ServerException e){
 			throw e;
 		}
@@ -226,7 +226,6 @@ public class ServerProxy implements ServerInterface {
 	public void addAI(String AIname) throws ServerException {
 		GameAddAITranslator ai = new GameAddAITranslator(AIname);
 		String json = ai.translate();
-		System.out.println(json);
 		try{
 			post("/game/addAI", json);
 		}catch(ServerException e){

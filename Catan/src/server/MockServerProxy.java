@@ -55,9 +55,10 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)
+	public String createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)
 			throws ServerException {
 		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

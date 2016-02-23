@@ -43,6 +43,7 @@ public class ServerPoller {
 			try {
 				GameModel newModel = server.getModel(gameManager.getModel().getVersion());
 				if(newModel != null){
+					System.out.println("changing model");
 					gameManager.setGameModel(newModel);
 				}
 			} catch (Exception e) {

@@ -479,10 +479,12 @@ public class ModelTranslator {
 	public ArrayList<Player> buildPlayers(JsonArray playersJson){
 		ArrayList<Player> players = new ArrayList<Player>();
 		for(int i = 0; i < playersJson.size(); i++){
-			if(playersJson.get(i) != null){
-				Player player = parsePlayer((JsonObject)playersJson.get(i));
-				players.add(player);
+			JsonElement test = playersJson.get(i);
+			if(test.isJsonNull()){
+				return players;
 			}
+			Player player = parsePlayer((JsonObject)playersJson.get(i));
+			players.add(player);
 		}
 		return players;
 	}

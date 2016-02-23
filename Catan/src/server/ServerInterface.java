@@ -35,7 +35,7 @@ public interface ServerInterface {
 	 * @param randomNumbers Random numbering of tiles
 	 * @param randomPorts Random placement of ports
 	 */
-	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws ServerException;
+	public String createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws ServerException;
 	/**
 	 * 	Adds a player to game
 	 * @param gameID ID of game to join

@@ -8,6 +8,10 @@ import java.util.Observable;
 
 import javax.swing.JButton;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+
 import client.base.*;
 import client.data.*;
 import client.misc.*;
@@ -133,13 +137,19 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		boolean randomTiles = getNewGameView().getRandomlyPlaceHexes();
 		boolean randomPorts = getNewGameView().getUseRandomPorts();
 		try{
-			GameManager.getInstance().createGame(title, randomTiles, randomNumbers, randomPorts);
+			String json = GameManager.getInstance().createGame(title, randomTiles, randomNumbers, randomPorts);
+			Gson gson = new Gson();
+			JsonObject gameInfo = gson.fromJson(json, JsonObject.class);
+			JsonPrimitive jsonGameId = gameInfo.getAsJsonPrimitive("id");
+			int gameID = jsonGameId.getAsInt();
+			GameManager.getInstance().joinGame(gameID, "red");
 			getNewGameView().closeModal();
 			start();
 		}catch(Exception e){
 			getMessageView().setTitle("Create Game Error");
 			getMessageView().setMessage("Error in creating the game");
 			getMessageView().showModal();
+			e.printStackTrace();
 		}
 	}
 

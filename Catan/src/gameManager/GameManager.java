@@ -116,14 +116,15 @@ public class GameManager extends Observable{
 	 * @param randomNumbers Random numbering of tiles
 	 * @param randomPorts Random placement of ports
 	 */
-	public void createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{
+	public String createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{
 		if(name != null){
 			try{
-				server.createGame(name, randomTiles, randomNumbers, randomPorts);
+				return server.createGame(name, randomTiles, randomNumbers, randomPorts);
 			}catch(ServerException e){
 				e.printStackTrace();
 			}
 		}
+		return null;
 	}
 	/**
 	 * 	Adds a player to game
