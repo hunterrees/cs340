@@ -12,6 +12,7 @@ import client.base.*;
 import client.data.*;
 import client.misc.*;
 import gameManager.GameManager;
+import server.ServerPoller;
 
 
 /**
@@ -167,6 +168,8 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		}
 		getSelectColorView().closeModal();
 		getJoinGameView().closeModal();
+		GameManager manager = GameManager.getInstance();
+		ServerPoller poller = new ServerPoller(manager.getServer(), manager);
 		joinAction.execute();
 	}
 	

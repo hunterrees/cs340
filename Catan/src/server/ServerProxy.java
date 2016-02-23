@@ -132,6 +132,7 @@ public class ServerProxy implements ServerInterface {
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
 			if(urlPath != "/games/list"){
+				System.out.println("\n\n" + fullCookie + "\n\n");
 				connection.setRequestProperty("Cookie:", fullCookie);
 			}
 			connection.connect();

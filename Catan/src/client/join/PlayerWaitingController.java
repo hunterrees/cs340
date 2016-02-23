@@ -1,9 +1,12 @@
 package client.join;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
+import client.data.PlayerInfo;
 import gameManager.GameManager;
+import player.Player;
 
 
 /**
@@ -24,25 +27,46 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 
 	@Override
 	public void start() {
-		try{
-			GameManager.getInstance().listAIs();
-		}catch(Exception e){
-			
-		}
 		getView().showModal();
+		try{
+			/*String[] ais = GameManager.getInstance().listAIs();
+			getView().setAIChoices(ais);
+			getView().setPlayers(getPlayerInfo());
+			getView().showModal();
+			if(GameManager.getInstance().getModel().getPlayers().size() == 4){
+				getView().closeModal();
+			}*/
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public void addAI() {
 		try{
-			GameManager.getInstance().addAI(getView().getSelectedAI());
+			//GameManager.getInstance().addAI(getView().getSelectedAI());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		getView().closeModal();
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		start();
+	}
+	
+	private PlayerInfo[] getPlayerInfo(){
+		ArrayList<Player> players = GameManager.getInstance().getModel().getPlayers();
+		PlayerInfo[] playersInfo = new PlayerInfo[players.size()];
+		for(int i = 0; i < players.size(); i++){
+			playersInfo[i].setName(players.get(i).getName());
+			playersInfo[i].setColor(players.get(i).getPlayerColor());
+			playersInfo[i].setId(players.get(i).getPlayerID());
+			playersInfo[i].setPlayerIndex(i);
+		}
+		return playersInfo;
 	}
 
 }
