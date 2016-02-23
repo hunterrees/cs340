@@ -5,6 +5,7 @@ import map.Port;
 import shared.Piece;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
+import shared.definitions.PieceType;
 import shared.definitions.PortType;
 import shared.definitions.ResourceType;
 
@@ -248,6 +249,18 @@ public class Player
 	public ArrayList<Piece> getPlayerPieces()
 	{
 		return playerPieces;
+	}
+	public int numPiecesOfType(PieceType myPieceType)
+	{
+		int amount = 0;
+		for (int i = 0; i < playerPieces.size(); i++)
+		{
+			if (myPieceType == playerPieces.get(i).getPieceType())
+			{
+				amount++;
+			}
+		}
+		return amount;
 	}
 	/**
 	 * return player hand class
