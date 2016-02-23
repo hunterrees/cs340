@@ -3,6 +3,7 @@ package client.join;
 import java.util.Observable;
 
 import client.base.*;
+import gameManager.GameManager;
 
 
 /**
@@ -23,21 +24,25 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 
 	@Override
 	public void start() {
-
+		try{
+			GameManager.getInstance().listAIs();
+		}catch(Exception e){
+			
+		}
 		getView().showModal();
 	}
 
 	@Override
 	public void addAI() {
-
-		// TEMPORARY
-		getView().closeModal();
+		try{
+			GameManager.getInstance().addAI(getView().getSelectedAI());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

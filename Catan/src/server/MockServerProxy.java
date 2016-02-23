@@ -72,7 +72,7 @@ public class MockServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public String listAIs() throws ServerException {
+	public String[] listAIs() throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}

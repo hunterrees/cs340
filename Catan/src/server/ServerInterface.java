@@ -55,7 +55,7 @@ public interface ServerInterface {
 	/**
 	 * Lists the possible AIs to add
 	 */
-	public String listAIs()throws ServerException;
+	public String[] listAIs()throws ServerException;
 	/**
 	 * Sends chat message
 	 * @param playerID ID of player sending the message

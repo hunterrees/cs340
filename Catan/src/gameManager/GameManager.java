@@ -166,7 +166,7 @@ public class GameManager extends Observable{
 	/**
 	 * Lists the possible AIs to add
 	 */
-	public String listAIs()throws GameException{
+	public String[] listAIs()throws GameException{
 		try{
 			return server.listAIs();
 		}catch(ServerException e){

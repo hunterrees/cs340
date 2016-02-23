@@ -234,9 +234,11 @@ public class ServerProxy implements ServerInterface {
 	}
 
 	@Override
-	public String listAIs() throws ServerException {
+	public String[] listAIs() throws ServerException {
 		try{
-			return get("/game/listAI");
+			String json = get("/game/listAI");
+			GameListAITranslator ai = new GameListAITranslator(json);
+			return ai.getAIs();
 		}catch(ServerException e){
 			throw e;
 		}

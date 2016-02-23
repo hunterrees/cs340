@@ -96,6 +96,14 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		this.messageView = messageView;
 	}
 
+	public GameInfo getGameToJoin() {
+		return gameToJoin;
+	}
+
+	public void setGameToJoin(GameInfo gameToJoin) {
+		this.gameToJoin = gameToJoin;
+	}
+
 	@Override
 	public void start() {
 		try{
