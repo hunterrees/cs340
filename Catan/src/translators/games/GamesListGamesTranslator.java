@@ -1,7 +1,5 @@
 package translators.games;
 
-import java.util.ArrayList;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -44,7 +42,10 @@ public class GamesListGamesTranslator
 		JsonArray jsonPlayers = jsonGame.getAsJsonArray("players");
 		//What do I do if the array of players is empty?
 		for(int i = 0; i < jsonPlayers.size(); i++){
-			game.addPlayer((getPlayerInfo((JsonObject)jsonPlayers.get(i))));
+			PlayerInfo player = getPlayerInfo((JsonObject)jsonPlayers.get(i));
+			if(player != null){
+				game.addPlayer(player);
+			}
 		}
 		return game;
 	}
@@ -53,6 +54,9 @@ public class GamesListGamesTranslator
 		PlayerInfo player = new PlayerInfo();
 		
 		JsonPrimitive jsonName = jsonPlayer.getAsJsonPrimitive("name");
+		if(jsonName == null){
+			return null;
+		}
 		String name = jsonName.getAsString();
 		player.setName(name);
 		JsonPrimitive jsonId = jsonPlayer.getAsJsonPrimitive("id");

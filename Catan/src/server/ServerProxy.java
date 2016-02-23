@@ -132,8 +132,7 @@ public class ServerProxy implements ServerInterface {
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
 			if(urlPath != "/games/list"){
-				System.out.println("\n\n" + fullCookie + "\n\n");
-				connection.setRequestProperty("Cookie:", fullCookie);
+				connection.setRequestProperty("Cookie", fullCookie);
 			}
 			connection.connect();
 			if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
@@ -227,6 +226,7 @@ public class ServerProxy implements ServerInterface {
 	public void addAI(String AIname) throws ServerException {
 		GameAddAITranslator ai = new GameAddAITranslator(AIname);
 		String json = ai.translate();
+		System.out.println(json);
 		try{
 			post("/game/addAI", json);
 		}catch(ServerException e){

@@ -47,9 +47,8 @@ public class GameManager extends Observable{
 		}
 		return manager;
 	}
-	public void setModel(GameModel model) {
+	public synchronized void setModel(GameModel model) {
 		this.model = model;
-		System.out.println("about to notify");
 		notifyObservers();
 	}
 	public ServerInterface getServer() {
@@ -65,7 +64,7 @@ public class GameManager extends Observable{
 	 * Updates game model based on new info from Game
 	 * @param model New model to update the game
 	 */
-	public void setGameModel(GameModel model){
+	public synchronized void setGameModel(GameModel model){
 		this.model = model;
 		notifyObservers();
 	}

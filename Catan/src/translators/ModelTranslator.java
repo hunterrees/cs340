@@ -42,7 +42,12 @@ public class ModelTranslator {
 	//What do I do with the log and chat and winner?
 	public GameModel getModelfromJSON(String json){
 		Gson gson = new Gson();
-		JsonObject root = gson.fromJson(json, JsonObject.class);
+			JsonObject root;
+		try{
+			root = gson.fromJson(json, JsonObject.class);
+		}catch(Exception e){
+			return null;
+		}
 		JsonObject deckJson = root.getAsJsonObject("deck");
 		
 		JsonObject chatJson = root.getAsJsonObject("chat");
@@ -474,8 +479,10 @@ public class ModelTranslator {
 	public ArrayList<Player> buildPlayers(JsonArray playersJson){
 		ArrayList<Player> players = new ArrayList<Player>();
 		for(int i = 0; i < playersJson.size(); i++){
-			Player player = parsePlayer((JsonObject)playersJson.get(i));
-			players.add(player);
+			if(playersJson.get(i) != null){
+				Player player = parsePlayer((JsonObject)playersJson.get(i));
+				players.add(player);
+			}
 		}
 		return players;
 	}
