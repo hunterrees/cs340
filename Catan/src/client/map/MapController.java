@@ -237,6 +237,8 @@ public class MapController extends Controller implements IMapController {
 		//CatanColor color = road.getColor();
 		//getView().placeRoad(edgeLoc, color);
 		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
+		getView().placeRoad(edgeLoc, null);
+
 		if(state instanceof SetupSecond) {
 			state = new Normal(map, this);
 		}
