@@ -223,6 +223,7 @@ public class MapController extends Controller implements IMapController {
 		return true;
 	}
 
+	private int x = 0;
 	public void placeRoad(EdgeLocation edgeLoc) {
 		Piece road = new Piece(PieceType.ROAD,null,null,1);
 		map.getEdges().get(edgeLoc).setPiece(road);
@@ -237,10 +238,15 @@ public class MapController extends Controller implements IMapController {
 		//getView().placeRoad(edgeLoc, color);
 		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
 		if(state instanceof SetupSecond) {
-			state = new Normal(map);
+			state = new Normal(map, this);
 		}
 		if(state instanceof SetupFirst) {
 			state = new SetupSecond(map, this);
+		}
+
+		if(state instanceof Normal && x == 0) {
+			state.playRoadBuild(GameManager.getInstance().getPlayerInfo().getId());
+			x = 1;
 		}
 
 
@@ -279,7 +285,7 @@ public class MapController extends Controller implements IMapController {
 	
 	public void startMove(PieceType pieceType, boolean isFree, boolean allowDisconnected) {	
 		
-		getView().startDrop(pieceType, CatanColor.BLUE, true);
+		getView().startDrop(pieceType, GameManager.getInstance().getPlayerInfo().getColor(), true);
 	}
 	
 	public void cancelMove() {
@@ -290,8 +296,8 @@ public class MapController extends Controller implements IMapController {
 		
 	}
 	
-	public void playRoadBuildingCard() {	
-		
+	public void playRoadBuildingCard() {
+		state.playRoadBuild(GameManager.getInstance().getPlayerInfo().getId());
 	}
 	
 	public void robPlayer(RobPlayerInfo victim) {	
@@ -308,21 +314,21 @@ public class MapController extends Controller implements IMapController {
 		if(GameManager.getInstance().isMyTurn()) {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
-					state = new Normal(map);
+					state = new Normal(map, this);
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();
 				case robbing:
-					state = new Robbing();
+					state = new Robbing(map);
 				case firstRound:
 					state = new SetupFirst(map, this);
 				case secondRound:
 					state = new SetupSecond(map, this);
 				default:
-					state = new NotYourTurn();
+					state = new NotYourTurn(map);
 			}
 		} else {
-			state = new NotYourTurn();
+			state = new NotYourTurn(map);
 		}
 
 		map = GameManager.getInstance().getModel().getMap();

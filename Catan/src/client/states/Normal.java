@@ -1,8 +1,10 @@
 package client.states;
 
+import client.map.MapController;
 import gameManager.GameManager;
 import map.Map;
 import model.GameException;
+import shared.definitions.PieceType;
 import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
 
@@ -10,9 +12,11 @@ import shared.locations.VertexLocation;
  * Created by Brian on 16/2/17.
  */
 public class Normal extends State {
+    private MapController mc;
 
-    public Normal(Map map) {
+    public Normal(Map map, MapController mc) {
         super(map);
+        this.mc = mc;
     }
 
     @Override
@@ -57,5 +61,9 @@ public class Normal extends State {
         }
     }
 
-
+    @Override
+    public void playRoadBuild(int playerID) {
+        mc.startMove(PieceType.ROAD, false, false);
+        mc.startMove(PieceType.ROAD, false, false);
+    }
 }

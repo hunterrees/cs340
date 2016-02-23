@@ -50,5 +50,9 @@ public class State {
 
     public void buildCity(int playerId, VertexLocation loc) {}
 
+    public void playRoadBuild(int playerID) {
+
+    }
+
 
 }
