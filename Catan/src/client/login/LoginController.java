@@ -77,6 +77,7 @@ public class LoginController extends Controller implements ILoginController{
 			getLoginView().closeModal();
 			loginAction.execute();
 		} catch (Exception e) {
+			e.printStackTrace();
 			getMessageView().setTitle("Login Error");
 			getMessageView().setMessage("Login failed - bad password or username");
 			getMessageView().showModal();
@@ -121,6 +122,7 @@ public class LoginController extends Controller implements ILoginController{
 			getLoginView().closeModal();
 			loginAction.execute();
 		}catch(GameException e){
+			e.printStackTrace();
 			getMessageView().setTitle("Register Error");
        	 	getMessageView().setMessage("Register failed - user already exists");
 			getMessageView().showModal();

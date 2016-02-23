@@ -9,6 +9,7 @@ import com.google.gson.JsonPrimitive;
 
 import client.data.GameInfo;
 import client.data.PlayerInfo;
+import shared.definitions.CatanColor;
 import translators.GenericTranslator;
 
 public class GamesListGamesTranslator 
@@ -41,6 +42,7 @@ public class GamesListGamesTranslator
 		game.setId(id);
 		
 		JsonArray jsonPlayers = jsonGame.getAsJsonArray("players");
+		//What do I do if the array of players is empty?
 		for(int i = 0; i < jsonPlayers.size(); i++){
 			game.addPlayer((getPlayerInfo((JsonObject)jsonPlayers.get(i))));
 		}
@@ -53,8 +55,27 @@ public class GamesListGamesTranslator
 		JsonPrimitive jsonName = jsonPlayer.getAsJsonPrimitive("name");
 		String name = jsonName.getAsString();
 		player.setName(name);
-		
+		JsonPrimitive jsonId = jsonPlayer.getAsJsonPrimitive("id");
+		int id = jsonId.getAsInt();
+		player.setId(id);
+		JsonPrimitive jsonColor = jsonPlayer.getAsJsonPrimitive("color");
+		String type = jsonColor.getAsString();
+		CatanColor color = getColor(type);
+		player.setColor(color);
 		return player;
+	}
+	
+	private CatanColor getColor(String type){
+		if(type.equals("red")){return CatanColor.RED;};
+		if(type.equals("orange")){return CatanColor.ORANGE;};
+		if(type.equals("yellow")){return CatanColor.YELLOW;};
+		if(type.equals("green")){return CatanColor.GREEN;};
+		if(type.equals("blue")){return CatanColor.BLUE;};
+		if(type.equals("purple")){return CatanColor.PURPLE;};
+		if(type.equals("puce")){return CatanColor.PUCE;};
+		if(type.equals("white")){return CatanColor.WHITE;};
+		if(type.equals("brown")){return CatanColor.BROWN;};
+		return null;
 	}
 	
 }

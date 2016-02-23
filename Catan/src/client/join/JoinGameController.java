@@ -2,7 +2,11 @@ package client.join;
 
 import shared.definitions.CatanColor;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Observable;
+
+import javax.swing.JButton;
 
 import client.base.*;
 import client.data.*;
@@ -19,6 +23,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 	private ISelectColorView selectColorView;
 	private IMessageView messageView;
 	private IAction joinAction;
+	private GameInfo gameToJoin;
 	
 	/**
 	 * JoinGameController constructor
@@ -93,19 +98,22 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 
 	@Override
 	public void start() {
-		
-		getJoinGameView().showModal();
+		try{
+			GameInfo[] games = GameManager.getInstance().listGames();
+			getJoinGameView().setGames(games, GameManager.getInstance().getPlayerInfo());
+			getJoinGameView().showModal();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void startCreateNewGame() {
-		
 		getNewGameView().showModal();
 	}
 
 	@Override
 	public void cancelCreateNewGame() {
-		
 		getNewGameView().closeModal();
 	}
 
@@ -118,6 +126,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		try{
 			GameManager.getInstance().createGame(title, randomTiles, randomNumbers, randomPorts);
 			getNewGameView().closeModal();
+			start();
 		}catch(Exception e){
 			getMessageView().setTitle("Create Game Error");
 			getMessageView().setMessage("Error in creating the game");
@@ -127,6 +136,12 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 
 	@Override
 	public void startJoinGame(GameInfo game) {
+		gameToJoin = game;
+		for(int i = 0; i < game.getPlayers().size(); i++){
+			if(game.getPlayers().get(i).getId() != GameManager.getInstance().getPlayerInfo().getId()){
+				getSelectColorView().setColorEnabled(game.getPlayers().get(i).getColor(), false);
+			}
+		}
 		getSelectColorView().showModal();
 	}
 
@@ -138,13 +153,29 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 	@Override
 	public void joinGame(CatanColor color) {
 		try{
-			GameInfo[] games = GameManager.getInstance().listGames();
-			getJoinGameView().setGames(games, GameManager.getInstance().getPlayerInfo());
-			getSelectColorView().closeModal();
-			getJoinGameView().closeModal();
-			joinAction.execute();
+			GameManager.getInstance().joinGame(gameToJoin.getId(), getColorToString(color));
 		}catch(Exception e){
+			e.printStackTrace();
 		}
+		getSelectColorView().closeModal();
+		getJoinGameView().closeModal();
+		joinAction.execute();
+	}
+	
+	private String getColorToString(CatanColor color) {
+		
+		switch (color) {
+		case BLUE:return "blue";
+		case BROWN:return "brown";
+		case GREEN:return "green";
+		case ORANGE:return "orange";
+		case PUCE:return "puce";
+		case PURPLE:return "purple";
+		case RED:return "red";
+		case WHITE:return "white";
+		case YELLOW:return "yellow";
+		}
+		return null;
 	}
 	
 	@Override

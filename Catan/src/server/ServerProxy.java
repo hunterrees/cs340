@@ -65,8 +65,9 @@ public class ServerProxy implements ServerInterface {
 							urlPath, connection.getResponseCode(), connection.getResponseMessage()));
 				}
 				userCookie = connection.getHeaderField("Set-cookie");
-				
-				String jsonCookieString = URLDecoder.decode(userCookie);
+				userCookie = userCookie.replace(";Path=/;", "");
+				String cookie = userCookie.replace("catan.user=", "");
+				String jsonCookieString = URLDecoder.decode(cookie);
 				Gson gson = new Gson();
 				JsonObject jsonCookie = gson.fromJson(jsonCookieString, JsonObject.class);
 				JsonPrimitive nameJson = jsonCookie.getAsJsonPrimitive("name");
@@ -77,8 +78,6 @@ public class ServerProxy implements ServerInterface {
 				
 				GameManager.getInstance().getPlayerInfo().setId(id);
 				GameManager.getInstance().getPlayerInfo().setName(name);
-				
-				userCookie = userCookie.replace(";Path=/;", "");
 			}else if(urlPath == "/games/create"){
 				connection.setRequestProperty("Cookie", userCookie);
 				connection.connect();
@@ -132,7 +131,9 @@ public class ServerProxy implements ServerInterface {
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
-			connection.setRequestProperty("Cookie:", fullCookie);
+			if(urlPath != "/games/list"){
+				connection.setRequestProperty("Cookie:", fullCookie);
+			}
 			connection.connect();
 			if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
 				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
