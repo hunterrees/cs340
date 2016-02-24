@@ -212,18 +212,18 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public boolean canPlaceRoad(EdgeLocation edgeLoc) {
-		int playerID = 1;
+		int playerID = GameManager.getInstance().getPlayerInfo().getPlayerIndex();;
 
 		return state.canBuildRoad(playerID,edgeLoc);
 	}
 
 	public boolean canPlaceSettlement(VertexLocation vertLoc) {
-		int playerID = 1;
+		int playerID = GameManager.getInstance().getPlayerInfo().getPlayerIndex();;
 		return state.canBuildSettlement(playerID, vertLoc);
 	}
 
 	public boolean canPlaceCity(VertexLocation vertLoc) {
-		int playerID = 1;
+		int playerID = GameManager.getInstance().getPlayerInfo().getPlayerIndex();;
 		return state.canBuildCity(playerID,vertLoc);
 	}
 
@@ -235,7 +235,9 @@ public class MapController extends Controller implements IMapController {
 	private int x = 0;
 	public void placeRoad(EdgeLocation edgeLoc) {
 		Piece road = new Piece(PieceType.ROAD,null,null,1);
-		map.getEdges().get(edgeLoc).setPiece(road);
+		state.buildRoad(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), edgeLoc);
+		
+		//map.getEdges().get(edgeLoc).setPiece(road);
 	/*	try {
 			GameManager.getInstance().buildRoad(1, edgeLoc, true);
 		} catch (GameException e) {
@@ -279,13 +281,19 @@ public class MapController extends Controller implements IMapController {
 		//getView().placeSettlement(vertLoc, color);
 		getView().placeSettlement(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 
-		int id = GameManager.getInstance().getPlayerInfo().getId();
+		int id = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
+		System.out.println(" player index: " + id);
+		System.out.println("plyer ID: " + GameManager.getInstance().getPlayerInfo().getId());
+		System.out.println("build settlement");
 		state.buildSettlement(id, vertLoc);
+		initFromModel();
+		
 
 	}
 
 	public void placeCity(VertexLocation vertLoc) {
-		map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.CITY,null,null,1));
+		//map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.CITY,null,null,1));
+		state.buildCity(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), vertLoc);
 
 		getView().placeCity(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 	}
@@ -321,6 +329,7 @@ public class MapController extends Controller implements IMapController {
 	/* (non-Javadoc)
 	 * @see client.base.Controller#update(java.util.Observable, java.lang.Object)
 	 */
+	int i = 0;
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -329,29 +338,57 @@ public class MapController extends Controller implements IMapController {
 
 		map = GameManager.getInstance().getModel().getMap();
 		initFromModel();
-
+		
 		if(GameManager.getInstance().isMyTurn()) {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
+					System.out.println("normal");
+
 					state = new Normal(map, this);
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();
 				case robbing:
+					System.out.println("normal");
 					state = new Robbing(map);
+					break;
 				case firstRound:
-					state = new SetupFirst(map, this);
+						System.out.println("first state");
+						
+							getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), true);
+						
+						state = new SetupFirst(map, this);
+					break;
 				case secondRound:
-					state = new SetupSecond(map, this);
+					
+					if(!(state instanceof SetupSecond)){
+						System.out.println("seconds state");
+						state = new SetupSecond(map, this);
+					}
+					else{
+						System.out.println("no state change");
+					}
+					break;
 				default:
+					System.out.println("not your turn 1");
 					state = new NotYourTurn(map);
+					break;
 			}
 		} else {
-			state = new NotYourTurn(map);
+			System.out.println("not your turn");
+			if(!(state instanceof NotYourTurn) || i < 3){
+				state = new SetupFirst(map,this);
+				state = new NotYourTurn(map);
+				update(null, null);
+			}
+			else{
+				state = new SetupFirst(map, this);
+				state = new NotYourTurn(map);
+			}
+			i++;
 		}
 
-		map = GameManager.getInstance().getModel().getMap();
-		initFromModel();
+		
 	}
 
 
