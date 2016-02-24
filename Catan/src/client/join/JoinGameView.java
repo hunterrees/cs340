@@ -149,7 +149,7 @@ public class JoinGameView extends OverlayView implements IJoinGameView
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		buttonPanel.add(createButton);
-		buttonPanel.add(tempJoinButton);		
+		//buttonPanel.add(tempJoinButton);		
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
@@ -176,10 +176,6 @@ public class JoinGameView extends OverlayView implements IJoinGameView
 			if (e.getSource() == createButton)
 			{
 				getController().startCreateNewGame();
-			}
-			else if (e.getSource() == tempJoinButton)
-			{
-				getController().startJoinGame(null);
 			}
 			else
 			{
