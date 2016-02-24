@@ -43,6 +43,9 @@ public class PointsController extends Controller implements IPointsController {
 	}
 
 	private void initFromModel() {
+		if(GameManager.getInstance().isStartingUp()){
+			return;
+		}
 		int index = GameManager.getInstance().getCurrentPlayerIndex();
 		ArrayList<Player> players= GameManager.getInstance().getModel().getPlayers();
 		for(int i = 0; i < players.size(); i++){
@@ -62,9 +65,6 @@ public class PointsController extends Controller implements IPointsController {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(GameManager.getInstance().isStartingUp()){
-			return;
-		}
 		initFromModel();
 	}
 	

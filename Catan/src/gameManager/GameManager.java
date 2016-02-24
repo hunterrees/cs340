@@ -45,6 +45,7 @@ public class GameManager extends Observable{
 		if(manager == null){
 			manager = new GameManager();
 			manager.setServer(new ServerProxy("localhost", 8081));
+			manager.startingUp = true;
 		}
 		return manager;
 	}
