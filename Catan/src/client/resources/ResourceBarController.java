@@ -156,7 +156,7 @@ public class ResourceBarController extends Controller implements IResourceBarCon
 			return;
 		}
 		//Get manager
-		GameManager myManager = (GameManager)o;
+		GameManager myManager = GameManager.getInstance();
 		//Get player
 		PlayerInfo myPlayerInfo = myManager.getPlayerInfo();
 		Player myPlayer = myManager.getModel().getPlayers().get(myPlayerInfo.getPlayerIndex());
