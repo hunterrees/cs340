@@ -44,6 +44,7 @@ public class SetupSecond extends State {
     public void  buildRoad(int playerID, EdgeLocation loc) {
         try {
             GameManager.getInstance().buildRoad(playerID, loc, true);
+            GameManager.getInstance().finishTurn(playerID);
         } catch (GameException e) {
             e.printStackTrace();
         }

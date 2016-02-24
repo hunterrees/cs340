@@ -33,6 +33,7 @@ public class SetupFirst extends State{
 
     @Override
     public boolean canBuildRoad(int playerID, EdgeLocation loc) {
+
         return map.canBuildRoad(playerID, true, loc);
     }
 
@@ -44,9 +45,11 @@ public class SetupFirst extends State{
     public void  buildRoad(int playerID, EdgeLocation loc) {
         try {
             GameManager.getInstance().buildRoad(playerID, loc, true);
+            GameManager.getInstance().finishTurn(playerID);
         } catch (GameException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override

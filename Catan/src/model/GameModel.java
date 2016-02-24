@@ -483,7 +483,9 @@ public class GameModel {
 	}
 	
 	public boolean okToPlay(int playerID){
-		if(playerID == tracker.getCurrentTurnPlayerID() && tracker.getGameStatus() == GameState.playing){
+		if(playerID == tracker.getCurrentTurnPlayerID() && (tracker.getGameStatus() == GameState.playing ||
+				tracker.getGameStatus() == GameState.firstRound ||
+				tracker.getGameStatus() == GameState.secondRound)){
 			return true;
 		}else{
 			return false;
