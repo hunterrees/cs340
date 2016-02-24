@@ -40,7 +40,6 @@ public class GamesListGamesTranslator
 		game.setId(id);
 		
 		JsonArray jsonPlayers = jsonGame.getAsJsonArray("players");
-		//What do I do if the array of players is empty?
 		for(int i = 0; i < jsonPlayers.size(); i++){
 			PlayerInfo player = getPlayerInfo((JsonObject)jsonPlayers.get(i));
 			if(player != null){

@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import gameManager.GameManager;
 import model.GameModel;
+import shared.definitions.GameState;
 
 /**
  * 
@@ -45,6 +46,9 @@ public class ServerPoller {
 				if(newModel != null){
 					System.out.println("changing model");
 					gameManager.setGameModel(newModel);
+				}else if(GameManager.getInstance().isStartingUp()){
+					System.out.println("changing model during set up");
+					gameManager.setGameModel(gameManager.getModel());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

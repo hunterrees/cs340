@@ -28,6 +28,7 @@ public class GameManager extends Observable{
 	private ServerInterface server;
 	private static GameManager manager = null;
 	private PlayerInfo playerInfo;
+	private boolean startingUp;
 
 	protected GameManager(){
 		playerInfo = new PlayerInfo();
@@ -133,6 +134,7 @@ public class GameManager extends Observable{
 	 */
 	public void joinGame(int gameID, String color)throws GameException{
 		try{
+			startingUp = false;
 			server.joinGame(gameID, color);
 			GameModel newModel = server.getModel(-1);
 			setModel(newModel);
@@ -151,6 +153,15 @@ public class GameManager extends Observable{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void waitingModel()throws GameException{
+		try{
+			GameModel newModel = server.getModel(-1);
+			setModel(newModel);
+		}catch(ServerException e){
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Adds a new AI to the game
@@ -527,5 +538,13 @@ public class GameManager extends Observable{
 
 	public void setPlayerInfo(PlayerInfo playerInfo) {
 		this.playerInfo = playerInfo;
+	}
+
+	public boolean isStartingUp() {
+		return startingUp;
+	}
+
+	public void setStartingUp(boolean startingUp) {
+		this.startingUp = startingUp;
 	}
 }
