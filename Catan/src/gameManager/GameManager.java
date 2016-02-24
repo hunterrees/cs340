@@ -50,7 +50,12 @@ public class GameManager extends Observable{
 	}
 	public synchronized void setModel(GameModel model) {
 		this.model = model;
+		System.out.println("number of observesers = " + countObservers());
+		System.out.println("\n\n\n\n\nGAME MODEL NOTIFY becore\n\n\n\n\n\n");
+		setChanged();
 		notifyObservers();
+		System.out.println("\n\n\n\n\nGAME MODEL NOTIFY after \n\n\n\n\n\n");
+
 	}
 	public ServerInterface getServer() {
 		return server;

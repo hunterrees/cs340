@@ -19,9 +19,11 @@ public class SetupFirst extends State{
         super(map);
         this.mc = mc;
 
-        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+        System.out.println("before model");
 
         mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
+        System.out.println("after model");
+
     }
 
     @Override
@@ -54,6 +56,8 @@ public class SetupFirst extends State{
         } catch (GameException e) {
             e.printStackTrace();
         }
+        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+
     }
 // ff
 

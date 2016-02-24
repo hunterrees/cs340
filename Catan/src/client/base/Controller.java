@@ -33,6 +33,7 @@ public abstract class Controller implements IController, Observer
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		System.out.println("\n\n\nIN THE CONTROLLER UPDATE\n\n\n");
 		
 	}
 }

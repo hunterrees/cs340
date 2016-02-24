@@ -33,6 +33,8 @@ public class MapController extends Controller implements IMapController {
 
 
 		super(view);
+		//GameManager.getInstance().addObserver(this);
+
 		setRobView(robView);
 		//map = GameManager.getInstance().getModel().getMap();
 		if (map == null){
@@ -40,9 +42,13 @@ public class MapController extends Controller implements IMapController {
 		}
 		initFromModel();
 		//state = new SetupSecond(map, this);
+		System.out.println("\n\n\n\n\nin the constructorrrrrrrr\n\n\n\n\n");
 		state = new SetupFirst(map, this);
 
+		System.out.println("\n\n\n\n after first setup\n\n\n\n\n");
+
 		//state = new Normal(map);
+
 
 	}
 	
@@ -120,7 +126,8 @@ public class MapController extends Controller implements IMapController {
 
 /*		for(Entry<VertexLocation, Port> entry : map.getPorts().entrySet() {
 			
-			getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDirection.North), entry.getValue().getType());
+			getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDire
+			ction.North), entry.getValue().getType());
 
 		}
 */
@@ -313,6 +320,7 @@ public class MapController extends Controller implements IMapController {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
+		System.out.println("\n\n\n\nupdatinggggggggggggggggggggggggggggggggggggggggg\n\n\n\n\n");
 		if(GameManager.getInstance().isMyTurn()) {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:

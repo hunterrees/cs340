@@ -21,7 +21,6 @@ public class SetupSecond extends State {
         super(map);
         this.mc = mc;
 
-        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
 
         mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
     }
@@ -58,6 +57,9 @@ public class SetupSecond extends State {
         } catch (GameException e) {
             e.printStackTrace();
         }
+        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+
     }
+
 
 }
