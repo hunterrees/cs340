@@ -18,7 +18,6 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 
 	private GameState myGameState;
 	private int currentPlayerIndex;
-	GameManager myManager;
 	boolean initiated = false;
 	boolean endTurnEnabled = false;
 	
@@ -41,7 +40,7 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 		if (endTurnEnabled)
 		{
 			try {
-				myManager.finishTurn(myManager.getPlayerInfo().getId());
+				GameManager.getInstance().finishTurn(GameManager.getInstance().getPlayerInfo().getId());
 			} catch (GameException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -60,11 +59,11 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 	
 	private void initiate()
 	{
-		getView().setLocalPlayerColor(myManager.getPlayerInfo().getColor());
+		getView().setLocalPlayerColor(GameManager.getInstance().getPlayerInfo().getColor());
 		for (int i = 0; i < 4; i++)
 		{
-			String playerName = myManager.getModel().getName(i);
-			CatanColor playerColor = myManager.getColor(i);
+			String playerName = GameManager.getInstance().getModel().getName(i);
+			CatanColor playerColor = GameManager.getInstance().getColor(i);
 			getView().initializePlayer(i, playerName, playerColor);
 		}
 	}
@@ -73,11 +72,11 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			Player tempPlayer = myManager.getModel().getPlayers().get(i);
+			Player tempPlayer = GameManager.getInstance().getModel().getPlayers().get(i);
 			int playerIndex = i;
 			int points = tempPlayer.getVictoryPoints();
 			boolean highlight;
-			if (i == myManager.getCurrentPlayerIndex())
+			if (i == GameManager.getInstance().getCurrentPlayerIndex())
 			{
 				highlight = true;
 			}
@@ -97,7 +96,7 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 		String buttonMessage = "";
 		
 		if (myGameState == GameState.rolling || myGameState == GameState.robbing || myGameState == GameState.discarding
-				|| currentPlayerIndex != myManager.getPlayerInfo().getPlayerIndex())
+				|| currentPlayerIndex != GameManager.getInstance().getPlayerInfo().getPlayerIndex())
 		{
 			buttonMessage = "Waiting for Other Players";
 			endTurnEnabled = false;
@@ -121,9 +120,8 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 			initiate();
 			initiated = true;
 		}
-		myManager = (GameManager)o;
-		currentPlayerIndex = myManager.getCurrentPlayerIndex();
-		myGameState = myManager.getGameState();
+		currentPlayerIndex = GameManager.getInstance().getCurrentPlayerIndex();
+		myGameState = GameManager.getInstance().getGameState();
 		
 		updateGameState();
 		updatePlayer();

@@ -32,8 +32,6 @@ public class GameManager extends Observable{
 
 	protected GameManager(){
 		playerInfo = new PlayerInfo();
-		playerInfo.setId(1);
-		playerInfo.setColor(CatanColor.ORANGE);
 	}
 	
 	protected GameManager(GameModel model, ServerInterface server){
