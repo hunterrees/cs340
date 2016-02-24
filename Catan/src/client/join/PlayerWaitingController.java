@@ -13,10 +13,13 @@ import player.Player;
  * Implementation for the player waiting controller
  */
 public class PlayerWaitingController extends Controller implements IPlayerWaitingController {
+	
+	private int gameSize;
 
 	public PlayerWaitingController(IPlayerWaitingView view) {
 
 		super(view);
+		GameManager.getInstance().addObserver(this);
 	}
 
 	@Override
@@ -27,7 +30,6 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 
 	@Override
 	public void start() {
-		getView().showModal();
 		try{
 			String[] ais = GameManager.getInstance().listAIs();
 			getView().setAIChoices(ais);
@@ -47,7 +49,7 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 	public void addAI() {
 		try{
 			GameManager.getInstance().addAI(getView().getSelectedAI());
-			GameManager.getInstance().waitingModel();
+			GameManager.getInstance().getNewModel();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -55,13 +57,15 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("\n\nupdate being called\n\n");
-		start();
+		if(gameSize != GameManager.getInstance().getModel().getPlayers().size()){
+			start();
+		}
 	}
 	
 	private PlayerInfo[] getPlayerInfo(){
 		ArrayList<Player> players = GameManager.getInstance().getModel().getPlayers();
 		PlayerInfo[] playersInfo = new PlayerInfo[players.size()];
+		gameSize = players.size();
 		for(int i = 0; i < players.size(); i++){
 			playersInfo[i] = new PlayerInfo();
 			playersInfo[i].setName(players.get(i).getName());

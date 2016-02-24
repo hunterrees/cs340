@@ -42,13 +42,14 @@ public class ServerPoller {
 		@Override
 		public void run() {
 			try {
-				GameModel newModel = server.getModel(gameManager.getModel().getVersion());
+				GameModel newModel;
+				if(gameManager.isStartingUp()){
+					newModel = server.getModel(-1);
+				}else{
+					newModel = server.getModel(gameManager.getModel().getVersion());
+				}
 				if(newModel != null){
-					System.out.println("changing model");
 					gameManager.setGameModel(newModel);
-				}else if(GameManager.getInstance().isStartingUp()){
-					System.out.println("changing model during set up");
-					gameManager.setGameModel(gameManager.getModel());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

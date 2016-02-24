@@ -50,6 +50,7 @@ public class GameManager extends Observable{
 	}
 	public synchronized void setModel(GameModel model) {
 		this.model = model;
+		this.setChanged();
 		notifyObservers();
 	}
 	public ServerInterface getServer() {
@@ -67,6 +68,7 @@ public class GameManager extends Observable{
 	 */
 	public synchronized void setGameModel(GameModel model){
 		this.model = model;
+		this.setChanged();
 		notifyObservers();
 	}
 	/**
@@ -134,7 +136,7 @@ public class GameManager extends Observable{
 	 */
 	public void joinGame(int gameID, String color)throws GameException{
 		try{
-			startingUp = false;
+			startingUp = true;
 			server.joinGame(gameID, color);
 			GameModel newModel = server.getModel(-1);
 			setModel(newModel);
@@ -148,6 +150,9 @@ public class GameManager extends Observable{
 	 */
 	public GameModel getNewModel()throws GameException{
 		try{
+			if(startingUp){
+				return server.getModel(-1);
+			}
 			return server.getModel(model.getVersion());
 		}catch(ServerException e){
 			e.printStackTrace();
