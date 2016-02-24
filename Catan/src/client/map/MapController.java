@@ -249,7 +249,7 @@ public class MapController extends Controller implements IMapController {
 		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
 
 
-		if(state instanceof SetupSecond) {
+		/*if(state instanceof SetupSecond) {
 			state = new Normal(map, this);
 		}
 		if(state instanceof SetupFirst) {
@@ -259,7 +259,7 @@ public class MapController extends Controller implements IMapController {
 		if(state instanceof Normal && x == 0) {
 			state.playRoadBuild(GameManager.getInstance().getPlayerInfo().getId());
 			x = 1;
-		}
+		}*/
 
 
 	}
@@ -327,6 +327,10 @@ public class MapController extends Controller implements IMapController {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
 		System.out.println("\n\n\n\nupdatinggggggggggggggggggggggggggggggggggggggggg\n\n\n\n\n");
+
+		map = GameManager.getInstance().getModel().getMap();
+		initFromModel();
+
 		if(GameManager.getInstance().isMyTurn()) {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
