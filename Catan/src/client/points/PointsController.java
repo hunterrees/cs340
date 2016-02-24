@@ -1,8 +1,11 @@
 package client.points;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
+import gameManager.GameManager;
+import player.Player;
 
 
 /**
@@ -40,15 +43,29 @@ public class PointsController extends Controller implements IPointsController {
 	}
 
 	private void initFromModel() {
-		//<temp>		
-		getPointsView().setPoints(5);
-		//</temp>
+		int index = GameManager.getInstance().getCurrentPlayerIndex();
+		ArrayList<Player> players= GameManager.getInstance().getModel().getPlayers();
+		for(int i = 0; i < players.size(); i++){
+			int points = players.get(i).getVictoryPoints();
+			if(points >= 10){
+				boolean local = false;
+				if(index == i){
+					local = true;
+				}
+				getFinishedView().setWinner(players.get(i).getName(), local);
+				getFinishedView().showModal();
+			}else if(index == i){
+				getPointsView().setPoints(points);
+			}
+		}
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		if(GameManager.getInstance().isStartingUp()){
+			return;
+		}
+		initFromModel();
 	}
 	
 }
