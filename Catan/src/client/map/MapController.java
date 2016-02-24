@@ -88,8 +88,7 @@ public class MapController extends Controller implements IMapController {
 
 		for(java.util.Map.Entry<EdgeLocation, Edge> entry: map.getEdges().entrySet()){
 			if (entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.ROAD){
-				getView().placeRoad(entry.getKey(),
-						CatanColor.RED);
+				getView().placeRoad(entry.getKey(), entry.getValue().getPiece().getColor());
 			}
 		}
 
@@ -113,9 +112,9 @@ public class MapController extends Controller implements IMapController {
 
 		for(java.util.Map.Entry<VertexLocation, Vertex> entry : map.getVerticies().entrySet()) {
 			if(entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.CITY) {
-				getView().placeCity(entry.getKey(), CatanColor.RED);
+				getView().placeCity(entry.getKey(), entry.getValue().getPiece().getColor());
 			} else if(entry.getValue().getPiece() != null && entry.getValue().getPiece().getPieceType() == PieceType.SETTLEMENT) {
-				getView().placeSettlement(entry.getKey(), CatanColor.RED);
+				getView().placeSettlement(entry.getKey(), entry.getValue().getPiece().getColor());
 			}
 		}
 
