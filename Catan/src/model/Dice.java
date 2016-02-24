@@ -1,4 +1,7 @@
 package model;
+
+import java.util.Random;
+
 /**
  * 
  * Static class used by model to roll dice on each turn
@@ -15,7 +18,13 @@ public class Dice {
 	 * @return number 2-12 
 	 */
 	public static int rollDice(){
-		return 0;
+		int number = 7;
+		while(number == 7){
+			Random rand = new Random();
+			int first = rand.nextInt(6) + 1;
+			int second = rand.nextInt(6) + 1;
+			number = first + second;
+		}
+		return number;
 	};
-	// Testing this random line of code from intelij
 }
