@@ -37,15 +37,15 @@ public class MapController extends Controller implements IMapController {
 
 		setRobView(robView);
 		//map = GameManager.getInstance().getModel().getMap();
-		if (map == null){
+		/*if (map == null){
 			map = new Map();
 		}
 		initFromModel();
-		//state = new SetupSecond(map, this);
+		state = new SetupSecond(map, this);
 		System.out.println("\n\n\n\n\nin the constructorrrrrrrr\n\n\n\n\n");
 		state = new SetupFirst(map, this);
 
-		System.out.println("\n\n\n\n after first setup\n\n\n\n\n");
+		System.out.println("\n\n\n\n after first setup\n\n\n\n\n");*/
 
 		//state = new Normal(map);
 
@@ -67,6 +67,9 @@ public class MapController extends Controller implements IMapController {
 
 	
 	protected void initFromModel() {
+		if (GameManager.getInstance().isStartingUp()){
+			return;
+		}
 		
 		// Place Hexes, numbers, robber
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
