@@ -62,7 +62,6 @@ public class RollController extends Controller implements IRollController {
 	@Override
 	public void update(Observable o, Object arg) {
 		if(getRollView().isModalShowing() || getResultView().isModalShowing()){
-			System.out.println("rolling");
 			return;
 		}
 		if(GameManager.getInstance().getGameState() == GameState.rolling && GameManager.getInstance().isMyTurn()){
