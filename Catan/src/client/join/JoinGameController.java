@@ -176,11 +176,11 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		try{
 			GameManager.getInstance().joinGame(gameToJoin.getId(), getColorToString(color));
 			GameManager.getInstance().getPlayerInfo().setColor(color);
+			getSelectColorView().closeModal();
+			getJoinGameView().closeModal();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		getSelectColorView().closeModal();
-		getJoinGameView().closeModal();
 		GameManager manager = GameManager.getInstance();
 		ServerPoller poller = new ServerPoller(manager.getServer(), manager);
 		joinAction.execute();

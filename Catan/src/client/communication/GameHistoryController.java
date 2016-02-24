@@ -37,10 +37,11 @@ public class GameHistoryController extends Controller implements IGameHistoryCon
 		ArrayList<Line> lines = log.getLines();
 		ArrayList<LogEntry> entries = new ArrayList<LogEntry>();
 		for(int i = 0; i < lines.size(); i++){
-			CatanColor color = CatanColor.RED;
+			CatanColor color = null;
 			String source = lines.get(i).getSource();
 			ArrayList<Player> players = GameManager.getInstance().getModel().getPlayers();
-			for(int j = 0; i < players.size(); i++){
+			for(int j = 0; j < players.size(); j++){
+				System.out.println(players.get(j).getName());
 				if(players.get(j).getName().equals(source)){
 					color = players.get(j).getPlayerColor();
 				}
