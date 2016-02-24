@@ -159,6 +159,8 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		for(int i = 0; i < game.getPlayers().size(); i++){
 			if(game.getPlayers().get(i).getId() != GameManager.getInstance().getPlayerInfo().getId()){
 				getSelectColorView().setColorEnabled(game.getPlayers().get(i).getColor(), false);
+			}else{
+				GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
 			}
 		}
 		getSelectColorView().showModal();
@@ -178,6 +180,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		}
 		getSelectColorView().closeModal();
 		getJoinGameView().closeModal();
+		GameManager.getInstance().getPlayerInfo().setColor(color);
 		GameManager manager = GameManager.getInstance();
 		ServerPoller poller = new ServerPoller(manager.getServer(), manager);
 		joinAction.execute();
