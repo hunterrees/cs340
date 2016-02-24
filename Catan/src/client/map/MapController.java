@@ -264,7 +264,7 @@ public class MapController extends Controller implements IMapController {
 	public void placeSettlement(VertexLocation vertLoc) {
 		Piece building = new Piece(PieceType.SETTLEMENT,null,null,1);
 
-		map.getVerticies().get(vertLoc).setPiece(building);
+		//map.getVerticies().get(vertLoc).setPiece(building);
 		/*try {
 			GameManager.getInstance().buildSettlment(1, vertLoc, true);
 		} catch (GameException e) {

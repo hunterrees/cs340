@@ -51,11 +51,11 @@ public class SetupFirst extends State{
 
     @Override
     public void buildSettlement(int playerId, VertexLocation loc) {
-       /* try {
+        try {
             GameManager.getInstance().buildSettlment(playerId, loc, true);
         } catch (GameException e) {
             e.printStackTrace();
-        }*/
+        }
         mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
 
     }
