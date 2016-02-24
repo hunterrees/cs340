@@ -41,7 +41,6 @@ public class GameHistoryController extends Controller implements IGameHistoryCon
 			String source = lines.get(i).getSource();
 			ArrayList<Player> players = GameManager.getInstance().getModel().getPlayers();
 			for(int j = 0; j < players.size(); j++){
-				System.out.println(players.get(j).getName());
 				if(players.get(j).getName().equals(source)){
 					color = players.get(j).getPlayerColor();
 				}

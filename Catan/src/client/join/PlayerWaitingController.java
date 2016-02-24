@@ -36,6 +36,7 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 			getView().setPlayers(getPlayerInfo());
 			getView().showModal();
 			if(GameManager.getInstance().getModel().getPlayers().size() == 4){
+				GameManager.getInstance().getNewModel();
 				GameManager.getInstance().setStartingUp(false);
 				getView().closeModal();
 			}

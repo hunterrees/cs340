@@ -50,7 +50,11 @@ public class GameManager extends Observable{
 	public synchronized void setModel(GameModel model) {
 		this.model = model;
 		this.setChanged();
-		notifyObservers();
+		try{
+			notifyObservers();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	public ServerInterface getServer() {
 		return server;
@@ -68,7 +72,11 @@ public class GameManager extends Observable{
 	public synchronized void setGameModel(GameModel model){
 		this.model = model;
 		this.setChanged();
-		notifyObservers();
+		try{
+			notifyObservers();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Validates users credentials and logs them into the Game

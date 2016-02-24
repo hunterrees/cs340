@@ -29,7 +29,7 @@ public class ChatController extends Controller implements IChatController {
 	@Override
 	public void sendMessage(String message) {
 		try{
-			GameManager.getInstance().sendChat(GameManager.getInstance().getCurrentPlayerIndex(), message);
+			GameManager.getInstance().sendChat(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), message);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -47,7 +47,7 @@ public class ChatController extends Controller implements IChatController {
 			CatanColor color = null;
 			String source = lines.get(i).getSource();
 			ArrayList<Player> players = GameManager.getInstance().getModel().getPlayers();
-			for(int j = 0; i < players.size(); i++){
+			for(int j = 0; j < players.size(); j++){
 				if(players.get(j).getName().equals(source)){
 					color = players.get(j).getPlayerColor();
 				}
