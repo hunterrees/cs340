@@ -250,6 +250,14 @@ public class Player
 	{
 		return playerPieces;
 	}
+	
+	public boolean canDiscard(){
+		if(playerHand.getNumResources() >= 7){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public int numPiecesOfType(PieceType myPieceType)
 	{
 		int amount = 0;

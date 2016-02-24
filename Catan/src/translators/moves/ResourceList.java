@@ -1,5 +1,7 @@
 package translators.moves;
 
+import shared.definitions.ResourceType;
+
 public class ResourceList {
 	
 	private int brick;
@@ -55,5 +57,40 @@ public class ResourceList {
 
 	public void setWood(int wood) {
 		this.wood = wood;
+	}
+	
+	public int size(){
+		return brick + wood + wheat + ore + sheep;
+	}
+	
+	public void add(ResourceType type){
+		switch(type){
+		case BRICK: brick++; break;
+		case WOOD: wood++; break;
+		case WHEAT: wheat++; break;
+		case SHEEP: sheep++; break;
+		case ORE: ore++; break;
+		}
+	}
+	
+	public void remove(ResourceType type){
+		switch(type){
+		case BRICK: brick--; break;
+		case WOOD: wood--; break;
+		case WHEAT: wheat--; break;
+		case SHEEP: sheep--; break;
+		case ORE: ore--; break;
+		}
+	}
+	
+	public int get(ResourceType type){
+		switch(type){
+		case BRICK: return brick;
+		case WOOD: return wood;
+		case WHEAT: return wheat;
+		case SHEEP: return sheep;
+		case ORE: return ore;
+		}
+		return -1;
 	}
 }
