@@ -12,6 +12,7 @@ public class TradeOffer
 	//because this class will be populated. If that player accepts the trade, then
 	//execute trade will be called on the server
 
+
 	private int requestingPlayerID;
 	private int acceptingPlayerID;
 	private ArrayList<ResourceType> resourceOffered;
