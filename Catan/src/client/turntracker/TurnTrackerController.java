@@ -112,7 +112,9 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		
+		if(GameManager.getInstance().isStartingUp()){
+			return;
+		}
 		// TODO Auto-generated method stub
 		if (!initiated)
 		{

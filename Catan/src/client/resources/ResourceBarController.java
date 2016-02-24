@@ -152,6 +152,9 @@ public class ResourceBarController extends Controller implements IResourceBarCon
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		if(GameManager.getInstance().isStartingUp()){
+			return;
+		}
 		//Get manager
 		GameManager myManager = (GameManager)o;
 		//Get player
