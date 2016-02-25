@@ -114,7 +114,9 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		try{
 			GameInfo[] games = GameManager.getInstance().listGames();
 			getJoinGameView().setGames(games, GameManager.getInstance().getPlayerInfo());
-			getJoinGameView().showModal();
+			if(!getJoinGameView().isModalShowing()){
+				getJoinGameView().showModal();
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -122,12 +124,16 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 
 	@Override
 	public void startCreateNewGame() {
+		if(getJoinGameView().isModalShowing()){
+			getJoinGameView().closeModal();
+		}
 		getNewGameView().showModal();
 	}
 
 	@Override
 	public void cancelCreateNewGame() {
 		getNewGameView().closeModal();
+		start();
 	}
 
 	@Override
@@ -166,12 +172,19 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		if(getJoinGameView().isModalShowing()){
 			getJoinGameView().closeModal();
 		}
-		getSelectColorView().showModal();
+		if(!getSelectColorView().isModalShowing()){
+			getSelectColorView().showModal();
+		}
 	}
 
 	@Override
 	public void cancelJoinGame() {
-		getJoinGameView().closeModal();
+		if(getSelectColorView().isModalShowing()){
+			getSelectColorView().closeModal();
+		}
+		if(!getJoinGameView().isModalShowing()){
+			getJoinGameView().showModal();
+		}
 	}
 
 	@Override
@@ -179,8 +192,14 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		try{
 			GameManager.getInstance().joinGame(gameToJoin.getId(), getColorToString(color));
 			GameManager.getInstance().getPlayerInfo().setColor(color);
-			getSelectColorView().closeModal();
-			getJoinGameView().closeModal();
+			if(getSelectColorView().isModalShowing()){
+				System.out.println("closing color modal");
+				getSelectColorView().closeModal();
+			}
+			while(getJoinGameView().isModalShowing()){
+				System.out.println("closing join modal");
+				getJoinGameView().closeModal();
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
