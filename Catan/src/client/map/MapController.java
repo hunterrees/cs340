@@ -70,7 +70,9 @@ public class MapController extends Controller implements IMapController {
 		if (GameManager.getInstance().isStartingUp()){
 			return;
 		}
-		
+
+
+
 		// Place Hexes, numbers, robber
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
 			
@@ -247,9 +249,9 @@ public class MapController extends Controller implements IMapController {
 
 		//CatanColor color = road.getColor();
 		//getView().placeRoad(edgeLoc, color);
-		if(!(state instanceof RoadBulid)){
+	//	if(!(state instanceof RoadBulid)){
 			getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
-		}
+	//	}
 
 
 		/*if(state instanceof SetupSecond) {
@@ -350,8 +352,8 @@ public class MapController extends Controller implements IMapController {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
 					System.out.println("playing");
-					state = new RoadBulid(map, this);
-					//state = new Normal(map, this);
+					//state = new RoadBulid(map, this);
+					state = new Normal(map, this);
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();

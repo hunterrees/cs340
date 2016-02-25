@@ -5,6 +5,7 @@ import gameManager.GameManager;
 import map.Map;
 import model.GameException;
 import shared.Piece;
+import shared.definitions.CatanColor;
 import shared.definitions.PieceType;
 import shared.locations.EdgeLocation;
 
@@ -65,6 +66,9 @@ public class RoadBulid extends State {
 			map.getEdges().get(firstEdge).setPiece(null);
 			//mc.update(null, null);
 			mc.initFromModel();
-		}
+            mc.getView().placeRoad(firstEdge, CatanColor.CLEAR);
+
+
+        }
 	}
 }
