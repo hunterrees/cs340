@@ -114,9 +114,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		try{
 			GameInfo[] games = GameManager.getInstance().listGames();
 			getJoinGameView().setGames(games, GameManager.getInstance().getPlayerInfo());
-			if(!getJoinGameView().isModalShowing()){
-				getJoinGameView().showModal();
-			}
+			getJoinGameView().showModal();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -124,9 +122,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 
 	@Override
 	public void startCreateNewGame() {
-		if(getJoinGameView().isModalShowing()){
-			getJoinGameView().closeModal();
-		}
+		getJoinGameView().closeModal();
 		getNewGameView().showModal();
 	}
 
@@ -169,37 +165,22 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 				GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
 			}
 		}
-		if(getJoinGameView().isModalShowing()){
-			getJoinGameView().closeModal();
-		}
-		if(!getSelectColorView().isModalShowing()){
-			getSelectColorView().showModal();
-		}
+		getJoinGameView().closeModal();
+		getSelectColorView().showModal();
 	}
 
 	@Override
 	public void cancelJoinGame() {
-		if(getSelectColorView().isModalShowing()){
-			getSelectColorView().closeModal();
-		}
-		if(!getJoinGameView().isModalShowing()){
-			getJoinGameView().showModal();
-		}
+		getSelectColorView().closeModal();
+		getJoinGameView().showModal();
 	}
 
 	@Override
 	public void joinGame(CatanColor color) {
 		try{
+			getSelectColorView().closeModal();
 			GameManager.getInstance().joinGame(gameToJoin.getId(), getColorToString(color));
 			GameManager.getInstance().getPlayerInfo().setColor(color);
-			if(getSelectColorView().isModalShowing()){
-				System.out.println("closing color modal");
-				getSelectColorView().closeModal();
-			}
-			while(getJoinGameView().isModalShowing()){
-				System.out.println("closing join modal");
-				getJoinGameView().closeModal();
-			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
