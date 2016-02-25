@@ -66,7 +66,7 @@ public class MapController extends Controller implements IMapController {
 	
 
 	
-	protected void initFromModel() {
+	public void initFromModel() {
 		if (GameManager.getInstance().isStartingUp()){
 			return;
 		}
@@ -247,7 +247,9 @@ public class MapController extends Controller implements IMapController {
 
 		//CatanColor color = road.getColor();
 		//getView().placeRoad(edgeLoc, color);
-		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
+		if(!(state instanceof RoadBulid)){
+			getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
+		}
 
 
 		/*if(state instanceof SetupSecond) {
@@ -311,7 +313,7 @@ public class MapController extends Controller implements IMapController {
 	}
 	
 	public void cancelMove() {
-		
+		state.cancel();
 	}
 	
 	public void playSoldierCard() {	
@@ -319,7 +321,7 @@ public class MapController extends Controller implements IMapController {
 	}
 	
 	public void playRoadBuildingCard() {
-		state.playRoadBuild(GameManager.getInstance().getPlayerInfo().getId());
+		state = new RoadBulid(map, this);
 	}
 	
 	public void robPlayer(RobPlayerInfo victim) {	
@@ -348,8 +350,8 @@ public class MapController extends Controller implements IMapController {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
 					System.out.println("playing");
-
-					state = new Normal(map, this);
+					state = new RoadBulid(map, this);
+					//state = new Normal(map, this);
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();

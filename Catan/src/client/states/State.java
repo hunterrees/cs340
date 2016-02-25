@@ -53,6 +53,11 @@ public class State {
     public void playRoadBuild(int playerID) {
 
     }
+    
+    public void cancel() {
+    	
+    }
+    
 
 
 }

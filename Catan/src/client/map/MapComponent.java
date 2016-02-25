@@ -356,6 +356,7 @@ public class MapComponent extends JComponent
 		this.repaint();
 	}
 	
+	
 	public void placeSettlement(VertexLocation vertLoc, CatanColor color)
 	{
 		
