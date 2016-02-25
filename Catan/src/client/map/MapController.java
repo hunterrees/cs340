@@ -330,44 +330,64 @@ public class MapController extends Controller implements IMapController {
 	 * @see client.base.Controller#update(java.util.Observable, java.lang.Object)
 	 */
 	int i = 0;
+	boolean firstCalled = false;
+	boolean secondCalled = true;
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
 		System.out.println("\n\n\n\nupdatinggggggggggggggggggggggggggggggggggggggggg\n\n\n\n\n");
 
+
 		map = GameManager.getInstance().getModel().getMap();
+
 		initFromModel();
-		
+
 		if(GameManager.getInstance().isMyTurn()) {
+
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
-					System.out.println("normal");
+					System.out.println("playing");
 
 					state = new Normal(map, this);
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();
 				case robbing:
-					System.out.println("normal");
+					System.out.println("robbing");
 					state = new Robbing(map);
 					break;
 				case firstRound:
-						System.out.println("first state");
-						
-							getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), true);
-						
-						state = new SetupFirst(map, this);
+
+					System.out.println("first stateeeeeeee");
+					state = new SetupFirst(map, this);
+
+					if(!firstCalled) {
+						firstCalled = true;
+						System.out.println("inside first called");
+
+						Scanner s = new Scanner(System.in);
+
+						//System.out.println("wait one");
+						//s.next();
+						this.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
+						//System.out.println("wait one");
+						//s.next();
+						this.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+
+
+					}
 					break;
 				case secondRound:
-					
-					if(!(state instanceof SetupSecond)){
-						System.out.println("seconds state");
+					System.out.println("second state");
+					//if(!(state instanceof SetupSecond)){
+					//	System.out.println("seconds state");
 						state = new SetupSecond(map, this);
-					}
-					else{
-						System.out.println("no state change");
-					}
+
+					//}
+					//else{
+					//	System.out.println("no state change");
+					//}
 					break;
 				default:
 					System.out.println("not your turn 1");
@@ -375,20 +395,25 @@ public class MapController extends Controller implements IMapController {
 					break;
 			}
 		} else {
-			System.out.println("not your turn");
+/*			System.out.println("not your turn");
 			if(!(state instanceof NotYourTurn) || i < 3){
 				state = new SetupFirst(map,this);
 				state = new NotYourTurn(map);
-				update(null, null);
+				//update(null, null);
 			}
 			else{
 				state = new SetupFirst(map, this);
 				state = new NotYourTurn(map);
 			}
-			i++;
+			i++;*/
+			System.out.println("not your turn 2");
+			state = new NotYourTurn(map);
 		}
 
-		
+		System.out.println("End of update state = " + state);
+
+
+
 	}
 
 

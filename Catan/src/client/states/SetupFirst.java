@@ -8,6 +8,8 @@ import shared.definitions.PieceType;
 import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
 
+import java.util.Scanner;
+
 /**
  * Created by Brian on 16/2/17.
  */
@@ -19,9 +21,14 @@ public class SetupFirst extends State{
         super(map);
         this.mc = mc;
 
+        Scanner s = new Scanner(System.in);
+
         System.out.println("before model");
 
-        mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
+       // mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+       // System.out.println("press any key to continue");
+        //s.next();
+
         System.out.println("after model");
 
     }
@@ -59,7 +66,7 @@ public class SetupFirst extends State{
         } catch (GameException e) {
             e.printStackTrace();
         }
-        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+        //mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
 
     }
 // ff
