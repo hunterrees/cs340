@@ -370,14 +370,14 @@ public class MapController extends Controller implements IMapController {
 						firstCalled = true;
 						System.out.println("inside first called");
 
-						Scanner s = new Scanner(System.in);
-
-						//System.out.println("wait one");
-						//s.next();
-						this.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
-						//System.out.println("wait one");
-						//s.next();
-						this.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+//						Scanner s = new Scanner(System.in);
+//
+//						//System.out.println("wait one");
+//						//s.next();
+//						this.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
+//						//System.out.println("wait one");
+//						//s.next();
+//						this.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
 
 
 					}

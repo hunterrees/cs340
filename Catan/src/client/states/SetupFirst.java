@@ -25,7 +25,7 @@ public class SetupFirst extends State{
 
         System.out.println("before model");
 
-       // mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+       mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
        // System.out.println("press any key to continue");
         //s.next();
 
@@ -66,7 +66,7 @@ public class SetupFirst extends State{
         } catch (GameException e) {
             e.printStackTrace();
         }
-        //mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
 
     }
 // ff
