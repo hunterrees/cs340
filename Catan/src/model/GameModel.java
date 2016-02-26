@@ -529,7 +529,10 @@ public class GameModel {
 		this.map = map;
 	}
 
-	
+	public TradeOffer getTradeOffer()
+	{
+		return theTrade;
+	}
 
 // Private methods
 }
