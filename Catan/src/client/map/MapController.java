@@ -29,6 +29,8 @@ public class MapController extends Controller implements IMapController {
 	private IRobView robView;
 
 	private State state;
+	
+	private boolean usingSoldier = false;
 
 	public MapController(IMapView view, IRobView robView) {
 
@@ -314,27 +316,39 @@ public class MapController extends Controller implements IMapController {
 		Vertex vert5 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthWest).getNormalizedLocation());
 		Vertex vert6 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.West).getNormalizedLocation());
 		if(vert1.getPiece() != null && vert1.getPiece().getPlayerID() != playerID) {
-			robbieIndexes.add(vert1.getPiece().getPlayerID());
+			if(GameManager.getInstance().getModel().getPlayers().get(vert1.getPiece().getPlayerID()).getPlayerHand().getNumResources() > 0){
+				robbieIndexes.add(vert1.getPiece().getPlayerID());
+			}
 			
 		}
 		if(vert2.getPiece() != null && vert2.getPiece().getPlayerID() != playerID) {
-			robbieIndexes.add(vert2.getPiece().getPlayerID());
+			if(GameManager.getInstance().getModel().getPlayers().get(vert2.getPiece().getPlayerID()).getPlayerHand().getNumResources() > 0){
+				robbieIndexes.add(vert2.getPiece().getPlayerID());
+			}
 			
 		}
 		if(vert3.getPiece() != null && vert3.getPiece().getPlayerID() != playerID) {
-			robbieIndexes.add(vert3.getPiece().getPlayerID());
+			if(GameManager.getInstance().getModel().getPlayers().get(vert3.getPiece().getPlayerID()).getPlayerHand().getNumResources() > 0){
+				robbieIndexes.add(vert3.getPiece().getPlayerID());
+			}
 			
 		}
 		if(vert4.getPiece() != null && vert4.getPiece().getPlayerID() != playerID) {
-			robbieIndexes.add(vert4.getPiece().getPlayerID());
+			if(GameManager.getInstance().getModel().getPlayers().get(vert4.getPiece().getPlayerID()).getPlayerHand().getNumResources() > 0){
+				robbieIndexes.add(vert4.getPiece().getPlayerID());
+			}
 			
 		}
 		if(vert5.getPiece() != null && vert5.getPiece().getPlayerID() != playerID) {
-			robbieIndexes.add(vert5.getPiece().getPlayerID());
+			if(GameManager.getInstance().getModel().getPlayers().get(vert5.getPiece().getPlayerID()).getPlayerHand().getNumResources() > 0){
+				robbieIndexes.add(vert5.getPiece().getPlayerID());
+			}
 			
 		}
 		if(vert6.getPiece() != null && vert6.getPiece().getPlayerID() != playerID) {
-			robbieIndexes.add(vert6.getPiece().getPlayerID());
+			if(GameManager.getInstance().getModel().getPlayers().get(vert6.getPiece().getPlayerID()).getPlayerHand().getNumResources() > 0){
+				robbieIndexes.add(vert6.getPiece().getPlayerID());
+			}
 			
 		}
 		RobPlayerInfo[] robbies = new RobPlayerInfo[robbieIndexes.size()];
@@ -387,7 +401,14 @@ public class MapController extends Controller implements IMapController {
 		
 		
 		//call robberview.setplayers
-		getRobView().setPlayers(robbies);
+		if(robbies != null){
+			getRobView().setPlayers(robbies);
+		}
+		else{
+			RobPlayerInfo[] robbies2 = new RobPlayerInfo[0];
+			getRobView().setPlayers(robbies2);
+			
+		}
 		
 		//showmodal
 		
@@ -408,6 +429,12 @@ public class MapController extends Controller implements IMapController {
 	}
 	
 	public void playSoldierCard() {	
+		// called when they click on soldier
+		System.out.println("robbing");
+		state = new Robbing(map);
+		usingSoldier = true;
+		getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);
+		
 		
 	}
 	
@@ -416,6 +443,11 @@ public class MapController extends Controller implements IMapController {
 	}
 	
 	public void robPlayer(RobPlayerInfo victim) {	
+		
+		/*if(usingSoldier){
+			GameManager.getInstance().knight(playerID, victimID, newRobberLocation);
+		}*/
+		
 		
 		System.out.println("rob player called to gm");
 		try {
@@ -438,25 +470,24 @@ public class MapController extends Controller implements IMapController {
 		//super.update(o, arg);
 		System.out.println("\n\n\n\nupdatinggggggggggggggggggggggggggggggggggggggggg\n\n\n\n\n");
 
-
-		map = GameManager.getInstance().getModel().getMap();
 		if(GameManager.getInstance().isGameEnd()){
 			return;
 		}
-
+		map = GameManager.getInstance().getModel().getMap();
+		
 		initFromModel();
 
 		if(GameManager.getInstance().isMyTurn()) {
 
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
-					System.out.println("playing");
-					
+					System.out.println("normal state");
 					state = new Normal(map, this);
-					
-					/*System.out.println("robbing");
-					state = new Robbing(map);
-					getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);*/
+					/*if (!(state instanceof Robbing)){
+						System.out.println("robbing");
+						state = new Robbing(map);
+						getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);
+					}*/
 					
 					
 					break;
@@ -466,7 +497,7 @@ public class MapController extends Controller implements IMapController {
 					if (!(state instanceof Robbing)){
 						System.out.println("robbing");
 						state = new Robbing(map);
-						getRobView().showModal();
+						getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);
 					}
 					break;
 				case firstRound:

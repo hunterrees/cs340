@@ -18,13 +18,9 @@ public class Dice {
 	 * @return number 2-12 
 	 */
 	public static int rollDice(){
-		int number = 7;
-		while(number == 7){
-			Random rand = new Random();
-			int first = rand.nextInt(6) + 1;
-			int second = rand.nextInt(6) + 1;
-			number = first + second;
-		}
-		return number;
+		Random rand = new Random();
+		int first = rand.nextInt(6) + 1;
+		int second = rand.nextInt(6) + 1;
+		return first + second;
 	};
 }
