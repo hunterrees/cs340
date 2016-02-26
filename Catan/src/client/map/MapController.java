@@ -2,6 +2,7 @@ package client.map;
 
 import java.util.*;
 
+import player.Player;
 import client.states.*;
 import gameManager.GameManager;
 import map.Edge;
@@ -231,7 +232,7 @@ public class MapController extends Controller implements IMapController {
 
 	public boolean canPlaceRobber(HexLocation hexLoc) {
 		
-		return true;
+		return state.canPlaceRobber(hexLoc);
 	}
 
 	private int x = 0;
@@ -302,11 +303,99 @@ public class MapController extends Controller implements IMapController {
 		getView().placeCity(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 	}
 
+	private RobPlayerInfo[] getRobbies(HexLocation hexLoc) {
+		TreeSet<Integer> robbieIndexes = new TreeSet<>(); 
+		int playerID = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
+		// 
+		Vertex vert1 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.NorthWest));
+		Vertex vert2 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.NorthEast));
+		Vertex vert3 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.East));
+		Vertex vert4 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthEast));
+		Vertex vert5 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthWest));
+		Vertex vert6 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.West));
+		if(vert1.getPiece() != null && vert1.getPiece().getPlayerID() != playerID) {
+			robbieIndexes.add(vert1.getPiece().getPlayerID());
+			
+		}
+		if(vert2.getPiece() != null && vert2.getPiece().getPlayerID() != playerID) {
+			robbieIndexes.add(vert2.getPiece().getPlayerID());
+			
+		}
+		if(vert3.getPiece() != null && vert3.getPiece().getPlayerID() != playerID) {
+			robbieIndexes.add(vert3.getPiece().getPlayerID());
+			
+		}
+		if(vert4.getPiece() != null && vert4.getPiece().getPlayerID() != playerID) {
+			robbieIndexes.add(vert4.getPiece().getPlayerID());
+			
+		}
+		if(vert5.getPiece() != null && vert5.getPiece().getPlayerID() != playerID) {
+			robbieIndexes.add(vert5.getPiece().getPlayerID());
+			
+		}
+		if(vert6.getPiece() != null && vert6.getPiece().getPlayerID() != playerID) {
+			robbieIndexes.add(vert6.getPiece().getPlayerID());
+			
+		}
+		RobPlayerInfo[] robbies = new RobPlayerInfo[robbieIndexes.size()];
+		int j = 0;
+		for(Integer i: robbieIndexes){
+			RobPlayerInfo temp = createRobbie(i);
+			robbies[j] = temp;
+			
+			j++;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		return robbies;
+	}
+	
+	public RobPlayerInfo createRobbie(int playerIndex){
+		
+		Player player = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
+		
+		int playerID = player.getPlayerID();
+		String name = player.getName();
+		CatanColor color = player.getPlayerColor();
+		int numCards = player.getPlayerHand().getResourceCards().size();
+		
+		RobPlayerInfo temp = new RobPlayerInfo();
+		temp.setColor(color);
+		temp.setId(playerID);
+		temp.setName(name);
+		temp.setNumCards(numCards);
+		temp.setPlayerIndex(playerIndex);
+		
+		
+		
+		
+		
+		
+		return temp;
+	}
+	
 	public void placeRobber(HexLocation hexLoc) {
 		
-		getView().placeRobber(hexLoc);
+		//get player to rob info
+		RobPlayerInfo[] robbies = getRobbies(hexLoc);
+		
+		
+		//call robberview.setplayers
+		getRobView().setPlayers(robbies);
+		
+		//showmodal
+		
+		//move robber through view 
 		
 		getRobView().showModal();
+		getView().placeRobber(hexLoc);
+		map.setRobberLocation(hexLoc);
 	}
 	
 	public void startMove(PieceType pieceType, boolean isFree, boolean allowDisconnected) {	
@@ -328,6 +417,12 @@ public class MapController extends Controller implements IMapController {
 	
 	public void robPlayer(RobPlayerInfo victim) {	
 		
+		try {
+			GameManager.getInstance().robPlayer(GameManager.getInstance().getPlayerInfo().getId(), victim.getId(), map.getRobberLocation());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -352,14 +447,23 @@ public class MapController extends Controller implements IMapController {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
 					System.out.println("playing");
-					//state = new RoadBulid(map, this);
+					
 					state = new Normal(map, this);
+					
+					/*System.out.println("robbing");
+					state = new Robbing(map);
+					getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);*/
+					
+					
 					break;
 				//case discarding: state = new Discard();
 				//case rolling: state = new Rolling();
 				case robbing:
-					System.out.println("robbing");
-					state = new Robbing(map);
+					if (!(state instanceof Robbing)){
+						System.out.println("robbing");
+						state = new Robbing(map);
+						getRobView().showModal();
+					}
 					break;
 				case firstRound:
 

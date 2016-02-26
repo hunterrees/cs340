@@ -5,6 +5,7 @@ import map.Map;
 import map.Vertex;
 import model.GameException;
 import shared.locations.EdgeLocation;
+import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 
 /**
@@ -65,6 +66,12 @@ public class State {
     }
     
     public void cancel() {
+    	
+    }
+    public boolean canPlaceRobber(HexLocation hexLoc){
+    	return false;
+    }
+    public void placeRobber(HexLocation hexLoc, int playerID){
     	
     }
     

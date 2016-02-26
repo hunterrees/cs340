@@ -1542,6 +1542,19 @@ public class Map {
 	}
 
 
+	public boolean canPlaceRobber(HexLocation loc) {
+		if(robberLocation.equals(loc)) {
+			return false;
+		}
+		if (hexes.get(loc).getType() == HexType.WATER) {
+			return false;
+		}
+		
+
+		return true;
+	}
+	
+	
 	public boolean canRoadBuild(int playerID, EdgeLocation spot1, EdgeLocation spot2) {
 		boolean firstPossible = false;
 		boolean secondPossible = false;
