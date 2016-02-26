@@ -22,7 +22,17 @@ public class State {
         return false;
     }
 
-    public boolean enoughForSettlement(int playerID) {
+    public Map getMap() {
+		return map;
+	}
+
+
+	public void setMap(Map map) {
+		this.map = map;
+	}
+
+
+	public boolean enoughForSettlement(int playerID) {
         return false;
     }
 

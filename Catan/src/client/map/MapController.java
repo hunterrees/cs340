@@ -335,7 +335,7 @@ public class MapController extends Controller implements IMapController {
 	 */
 	int i = 0;
 	boolean firstCalled = false;
-	boolean secondCalled = true;
+	boolean secondCalled = false;
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -364,12 +364,12 @@ public class MapController extends Controller implements IMapController {
 				case firstRound:
 
 					System.out.println("first stateeeeeeee");
-					state = new SetupFirst(map, this);
+					
 
 					if(!firstCalled) {
 						firstCalled = true;
 						System.out.println("inside first called");
-
+						state = new SetupFirst(map, this);
 //						Scanner s = new Scanner(System.in);
 //
 //						//System.out.println("wait one");
@@ -381,12 +381,17 @@ public class MapController extends Controller implements IMapController {
 
 
 					}
+					state.setMap(map);
 					break;
 				case secondRound:
 					System.out.println("second state");
 					//if(!(state instanceof SetupSecond)){
 					//	System.out.println("seconds state");
+					if(!secondCalled){
+						secondCalled = true;
 						state = new SetupSecond(map, this);
+					}
+					state.setMap(map);
 
 					//}
 					//else{

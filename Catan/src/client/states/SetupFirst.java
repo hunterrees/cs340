@@ -9,6 +9,8 @@ import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Brian on 16/2/17.
@@ -66,7 +68,8 @@ public class SetupFirst extends State{
         } catch (GameException e) {
             e.printStackTrace();
         }
-        mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+		mc.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+			
 
     }
 // ff
