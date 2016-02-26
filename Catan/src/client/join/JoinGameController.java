@@ -179,8 +179,8 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 	public void joinGame(CatanColor color) {
 		try{
 			getSelectColorView().closeModal();
-			GameManager.getInstance().joinGame(gameToJoin.getId(), getColorToString(color));
 			GameManager.getInstance().getPlayerInfo().setColor(color);
+			GameManager.getInstance().joinGame(gameToJoin.getId(), getColorToString(color));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
