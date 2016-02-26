@@ -307,12 +307,12 @@ public class MapController extends Controller implements IMapController {
 		TreeSet<Integer> robbieIndexes = new TreeSet<>(); 
 		int playerID = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
 		// 
-		Vertex vert1 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.NorthWest));
-		Vertex vert2 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.NorthEast));
-		Vertex vert3 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.East));
-		Vertex vert4 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthEast));
-		Vertex vert5 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthWest));
-		Vertex vert6 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.West));
+		Vertex vert1 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.NorthWest).getNormalizedLocation());
+		Vertex vert2 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.NorthEast).getNormalizedLocation());
+		Vertex vert3 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.East).getNormalizedLocation());
+		Vertex vert4 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthEast).getNormalizedLocation());
+		Vertex vert5 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.SouthWest).getNormalizedLocation());
+		Vertex vert6 = map.getVerticies().get(new VertexLocation(hexLoc, VertexDirection.West).getNormalizedLocation());
 		if(vert1.getPiece() != null && vert1.getPiece().getPlayerID() != playerID) {
 			robbieIndexes.add(vert1.getPiece().getPlayerID());
 			
@@ -417,8 +417,9 @@ public class MapController extends Controller implements IMapController {
 	
 	public void robPlayer(RobPlayerInfo victim) {	
 		
+		System.out.println("rob player called to gm");
 		try {
-			GameManager.getInstance().robPlayer(GameManager.getInstance().getPlayerInfo().getId(), victim.getId(), map.getRobberLocation());
+			GameManager.getInstance().robPlayer(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), victim.getPlayerIndex(), map.getRobberLocation());
 		} catch (GameException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
