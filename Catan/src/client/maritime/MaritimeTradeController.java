@@ -165,6 +165,9 @@ public class MaritimeTradeController extends Controller implements IMaritimeTrad
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		if(GameManager.getInstance().isGameEnd()){
+			return;
+		}
 		// TODO Auto-generated method stub
 		myManager = GameManager.getInstance();
 		myPlayerInfo = myManager.getPlayerInfo();

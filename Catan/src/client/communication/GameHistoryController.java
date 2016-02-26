@@ -53,6 +53,9 @@ public class GameHistoryController extends Controller implements IGameHistoryCon
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		if(GameManager.getInstance().isGameEnd()){
+			return;
+		}
 		if(GameManager.getInstance().isStartingUp()){
 			return;
 		}

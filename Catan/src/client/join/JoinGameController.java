@@ -184,8 +184,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		GameManager manager = GameManager.getInstance();
-		ServerPoller poller = new ServerPoller(manager.getServer(), manager);
+		GameManager.getInstance().startPoller();
 		joinAction.execute();
 	}
 	
@@ -207,6 +206,9 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		if(GameManager.getInstance().isGameEnd()){
+			start();
+		}
 	}
 
 }

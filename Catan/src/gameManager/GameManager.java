@@ -7,6 +7,7 @@ import model.GameException;
 import model.GameModel;
 import server.ServerException;
 import server.ServerInterface;
+import server.ServerPoller;
 import server.ServerProxy;
 import shared.definitions.CatanColor;
 import shared.definitions.GameState;
@@ -29,6 +30,8 @@ public class GameManager extends Observable{
 	private static GameManager manager = null;
 	private PlayerInfo playerInfo;
 	private boolean startingUp;
+	private ServerPoller poller = null;
+	private boolean gameEnd;
 
 	protected GameManager(){
 		playerInfo = new PlayerInfo();
@@ -44,6 +47,7 @@ public class GameManager extends Observable{
 			manager = new GameManager();
 			manager.setServer(new ServerProxy("localhost", 8081));
 			manager.startingUp = true;
+			manager.gameEnd = false;
 		}
 		return manager;
 	}
@@ -56,6 +60,34 @@ public class GameManager extends Observable{
 			e.printStackTrace();
 		}
 	}
+	
+	public void startPoller(){
+		poller = new ServerPoller(server, this);
+		gameEnd = false;
+	}
+	
+	public void stopPoller(){
+		model = null;
+		gameEnd = true;
+		poller.stop();
+	}
+	
+	public void gameEndNofity(){
+		this.setChanged();
+		try{
+			notifyObservers();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public boolean isGameEnd() {
+		return gameEnd;
+	}
+
+	public void setGameEnd(boolean gameEnd) {
+		this.gameEnd = gameEnd;
+	}
+
 	public ServerInterface getServer() {
 		return server;
 	}

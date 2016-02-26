@@ -440,6 +440,9 @@ public class MapController extends Controller implements IMapController {
 
 
 		map = GameManager.getInstance().getModel().getMap();
+		if(GameManager.getInstance().isGameEnd()){
+			return;
+		}
 
 		initFromModel();
 

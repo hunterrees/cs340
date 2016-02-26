@@ -60,6 +60,9 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		if(GameManager.getInstance().isGameEnd()){
+			return;
+		}
 		if(gameSize != GameManager.getInstance().getModel().getPlayers().size()){
 			start();
 		}

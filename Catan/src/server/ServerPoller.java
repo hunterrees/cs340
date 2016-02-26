@@ -34,6 +34,10 @@ public class ServerPoller {
 		this.server = server;
 		return;
 	};
+	
+	public void stop(){
+		timer.cancel();
+	}
 	/**
 	 * Polls the server for updates in game model, if update is found, poller will update game model
 	 */

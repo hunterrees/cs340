@@ -37,6 +37,9 @@ public class ChatController extends Controller implements IChatController {
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		if(GameManager.getInstance().isGameEnd()){
+			return;
+		}
 		if(GameManager.getInstance().isStartingUp()){
 			return;
 		}

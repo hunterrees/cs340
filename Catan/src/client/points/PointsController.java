@@ -57,6 +57,8 @@ public class PointsController extends Controller implements IPointsController {
 				}
 				getFinishedView().setWinner(players.get(i).getName(), local);
 				getFinishedView().showModal();
+				GameManager.getInstance().stopPoller();
+				GameManager.getInstance().gameEndNofity();
 			}else if(index == i){
 				getPointsView().setPoints(points);
 			}
@@ -65,7 +67,9 @@ public class PointsController extends Controller implements IPointsController {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		initFromModel();
+		if(!GameManager.getInstance().isGameEnd()){
+			initFromModel();
+		}
 	}
 	
 }
