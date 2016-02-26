@@ -88,6 +88,12 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 
 			boolean largestArmy = false;
 			boolean longestRoad = false;
+			if(GameManager.getInstance().getModel().getTracker().getLargestArmyPlayerID() == i){
+				largestArmy = true;
+			}
+			if(GameManager.getInstance().getModel().getTracker().getLongestRoadplayerID() == i){
+				longestRoad = true;
+			}
 			getView().updatePlayer(playerIndex, points, highlight, largestArmy, longestRoad);
 		}
 	}

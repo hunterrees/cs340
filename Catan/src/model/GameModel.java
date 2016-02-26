@@ -476,14 +476,7 @@ public class GameModel {
 			return false;
 		}
 
-
-		int numMonument = (players.get(playerID).numNewDevCardRemaining(DevCardType.MONUMENT)+players.get(playerID).numOldDevCardRemaining(DevCardType.MONUMENT));
-
-		if(numMonument + players.get(playerID).getVictoryPoints() >= 10) {
-			return true;
-		} else {
-			return false;
-		}
+		return true;
 	}
 
 	public Bank getBank() {
