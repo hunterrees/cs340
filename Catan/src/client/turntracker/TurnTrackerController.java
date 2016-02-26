@@ -74,6 +74,7 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 		{
 			Player tempPlayer = GameManager.getInstance().getModel().getPlayers().get(i);
 			int playerIndex = i;
+			
 			int points = tempPlayer.getVictoryPoints();
 			boolean highlight;
 			if (i == GameManager.getInstance().getCurrentPlayerIndex())
@@ -116,7 +117,10 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 			return;
 		}
 		// TODO Auto-generated method stub
-		initiate();
+		if(!initiated){
+			initiated = true;
+			initiate();
+		}
 		currentPlayerIndex = GameManager.getInstance().getCurrentPlayerIndex();
 		myGameState = GameManager.getInstance().getGameState();
 		
