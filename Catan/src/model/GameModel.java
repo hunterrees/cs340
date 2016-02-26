@@ -174,6 +174,14 @@ public class GameModel {
 		return true;
 	}
 
+	public TurnTracker getTracker() {
+		return tracker;
+	}
+
+	public void setTracker(TurnTracker tracker) {
+		this.tracker = tracker;
+	}
+
 	/**
 	 * Returns a boolean whether or not the player can build a road at the given location
 	 * @param free

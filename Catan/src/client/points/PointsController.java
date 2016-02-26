@@ -46,7 +46,7 @@ public class PointsController extends Controller implements IPointsController {
 		if(GameManager.getInstance().isStartingUp()){
 			return;
 		}
-		int index = GameManager.getInstance().getCurrentPlayerIndex();
+		int index = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
 		ArrayList<Player> players= GameManager.getInstance().getModel().getPlayers();
 		for(int i = 0; i < players.size(); i++){
 			int points = players.get(i).getVictoryPoints();

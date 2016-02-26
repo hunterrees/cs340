@@ -45,11 +45,13 @@ public class RollController extends Controller implements IRollController {
 	@Override
 	public void rollDice() {
 		timer.cancel();
-		getRollView().closeModal();
+		if(getRollView().isModalShowing()){
+			getRollView().closeModal();
+		}
 		int number = Dice.rollDice();
 		getResultView().setRollValue(number);
 		try{
-			GameManager.getInstance().rollNumber(GameManager.getInstance().getPlayerInfo().getId(), number);
+			GameManager.getInstance().rollNumber(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), number);
 			getResultView().showModal();
 		}catch(Exception e){
 			e.printStackTrace();

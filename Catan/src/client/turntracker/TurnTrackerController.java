@@ -40,7 +40,7 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 		if (endTurnEnabled)
 		{
 			try {
-				GameManager.getInstance().finishTurn(GameManager.getInstance().getPlayerInfo().getId());
+				GameManager.getInstance().finishTurn(GameManager.getInstance().getPlayerInfo().getPlayerIndex());
 			} catch (GameException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,8 +84,15 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 			{
 				highlight = false;
 			}
+
 			boolean largestArmy = false;
 			boolean longestRoad = false;
+			if(GameManager.getInstance().getPlayerInfo().getPlayerIndex() == GameManager.getInstance().getModel().getTracker().getLargestArmyPlayerID()){
+				largestArmy = true;
+			}
+			if(GameManager.getInstance().getPlayerInfo().getPlayerIndex() == GameManager.getInstance().getModel().getTracker().getLongestRoadplayerID()){
+				longestRoad = true;
+			}
 			getView().updatePlayer(playerIndex, points, highlight, largestArmy, longestRoad);
 		}
 	}
@@ -115,11 +122,7 @@ public class TurnTrackerController extends Controller implements ITurnTrackerCon
 			return;
 		}
 		// TODO Auto-generated method stub
-		if (!initiated)
-		{
-			initiate();
-			initiated = true;
-		}
+		initiate();
 		currentPlayerIndex = GameManager.getInstance().getCurrentPlayerIndex();
 		myGameState = GameManager.getInstance().getGameState();
 		

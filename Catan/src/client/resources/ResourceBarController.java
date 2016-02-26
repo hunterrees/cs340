@@ -90,7 +90,7 @@ public class ResourceBarController extends Controller implements IResourceBarCon
 	private void enableDisableButtons(GameManager myManager, Player myPlayer, PlayerInfo myPlayerInfo)
 	{
 		boolean myTurn;
-		if (myManager.getCurrentPlayerIndex() == myPlayerInfo.getId())
+		if (myManager.getCurrentPlayerIndex() == myPlayerInfo.getPlayerIndex())
 		{
 			myTurn = true;
 		}
@@ -103,7 +103,7 @@ public class ResourceBarController extends Controller implements IResourceBarCon
 			//if my turn I can bring up dev card thing
 			getView().setElementEnabled(ResourceBarElement.PLAY_CARD, true);
 			//check resources for buying dev card
-			if (myManager.getModel().buyDevCard(myPlayerInfo.getId()))
+			if (myManager.getModel().buyDevCard(myPlayerInfo.getPlayerIndex()))
 			{
 				getView().setElementEnabled(ResourceBarElement.BUY_CARD, true);
 			}
