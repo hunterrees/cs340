@@ -26,10 +26,8 @@ public class RoadBulid extends State {
     @Override
     public void buildRoad(int playerID, EdgeLocation loc) {
     	if(firstEdge != null){
-    		try {
-    			
-    			GameManager.getInstance().buildRoad(playerID, firstEdge, true);
-    			GameManager.getInstance().buildRoad(playerID, loc, true);
+    		try {   			
+    			GameManager.getInstance().roadBuilding(playerID, firstEdge, loc);
     			
     		} catch (GameException e) {
     			e.printStackTrace();
