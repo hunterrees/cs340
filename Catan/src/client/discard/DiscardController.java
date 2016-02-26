@@ -50,6 +50,8 @@ public class DiscardController extends Controller implements IDiscardController 
 		resourcesToDiscard.add(resource);
 		if(resourcesToDiscard.get(resource) == resourceList.get(resource)){
 			getDiscardView().setResourceAmountChangeEnabled(resource, false, true);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(resource, true, true);
 		}
 		if(resourcesToDiscard.size() == numCardsToDiscard){
 			getDiscardView().setDiscardButtonEnabled(true);
@@ -64,6 +66,8 @@ public class DiscardController extends Controller implements IDiscardController 
 		resourcesToDiscard.remove(resource);
 		if(resourcesToDiscard.get(resource) == 0){
 			getDiscardView().setResourceAmountChangeEnabled(resource, true, false);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(resource, true, true);
 		}
 		getDiscardView().setDiscardButtonEnabled(false);
 		getDiscardView().setResourceDiscardAmount(resource, resourcesToDiscard.get(resource));
@@ -73,8 +77,8 @@ public class DiscardController extends Controller implements IDiscardController 
 	@Override
 	public void discard() {
 		try{
-			GameManager.getInstance().discardCards(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), getDiscardedCards());
 			getDiscardView().closeModal();
+			GameManager.getInstance().discardCards(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), getDiscardedCards());
 			resourceList = null;
 			resourcesToDiscard = null;
 		}catch(Exception e){
@@ -98,6 +102,7 @@ public class DiscardController extends Controller implements IDiscardController 
 			getResources(player.getPlayerHand().getResourceCards());
 			setMaxResources();
 			setButtonsInitially();
+			getDiscardView().setDiscardButtonEnabled(false);
 			getDiscardView().setStateMessage(getState());
 			getDiscardView().showModal();
 		}
@@ -134,28 +139,38 @@ public class DiscardController extends Controller implements IDiscardController 
 	private void setButtonsFinally(){
 		if(resourcesToDiscard.getBrick() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, false);
+		}else if(resourcesToDiscard.getBrick() == resourceList.get(ResourceType.BRICK)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, true, true);
 		}else if(resourcesToDiscard.getBrick() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, true);
 		}
+		if(resourcesToDiscard.getSheep() == 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, false);
+		}else if(resourcesToDiscard.getSheep() == resourceList.get(ResourceType.SHEEP)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, true, true);
+		}else if(resourcesToDiscard.getSheep() > 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, true);
+		}
 		if(resourcesToDiscard.getWood() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, false);
+		}else if(resourcesToDiscard.getWood() == resourceList.get(ResourceType.WOOD)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, true, true);
 		}else if(resourcesToDiscard.getWood() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, true);
 		}
 		if(resourcesToDiscard.getOre() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, false);
+		}else if(resourcesToDiscard.getOre() == resourceList.get(ResourceType.ORE)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, true, true);
 		}else if(resourcesToDiscard.getOre() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, true);
 		}
 		if(resourcesToDiscard.getWheat() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, false);
+		}else if(resourcesToDiscard.getWheat() == resourceList.get(ResourceType.WHEAT)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, true, true);
 		}else if(resourcesToDiscard.getWheat() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, true);
-		}
-		if(resourcesToDiscard.getSheep() == 0){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, false);
-		}else if(resourcesToDiscard.getSheep() > 0){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, true);
 		}
 	}
 	

@@ -123,7 +123,7 @@ public class GameModel {
      */
 	public boolean discardCards(int playerID, ArrayList<ResourceType> toDiscard) {
 		Player p = players.get((playerID));
-		if(tracker.getCurrentTurnPlayerID() != playerID || tracker.getGameStatus() != GameState.discarding) {
+		if(tracker.getGameStatus() != GameState.discarding) {
 			return false;
 		}
 

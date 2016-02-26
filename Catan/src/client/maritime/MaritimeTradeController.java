@@ -172,7 +172,7 @@ public class MaritimeTradeController extends Controller implements IMaritimeTrad
 		myManager = GameManager.getInstance();
 		myPlayerInfo = myManager.getPlayerInfo();
 		myPlayer = myManager.getModel().getPlayers().get(myPlayerInfo.getPlayerIndex());
-		if (myManager.isMyTurn())
+		if (myManager.isMyTurn() && GameManager.getInstance().getGameState() == GameState.playing)
 		{
 			getTradeView().enableMaritimeTrade(true);
 		}

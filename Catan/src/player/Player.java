@@ -252,7 +252,7 @@ public class Player
 	}
 	
 	public boolean canDiscard(){
-		if(playerHand.getNumResources() >= 7){
+		if(playerHand.getNumResources() > 7){
 			return true;
 		}else{
 			return false;

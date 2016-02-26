@@ -112,8 +112,8 @@ public class DevCardController extends Controller implements IDevCardController 
 				getPlayCardView().setCardEnabled(oldCards.get(i).getType(), true);
 			}
 			for(int i = 0; i < newCards.size(); i++){
-				if(newCards.get(i).getType() == DevCardType.MONOPOLY){
-					getPlayCardView().setCardEnabled(DevCardType.MONOPOLY, true);
+				if(newCards.get(i).getType() == DevCardType.MONUMENT){
+					getPlayCardView().setCardEnabled(DevCardType.MONUMENT, true);
 				}
 			}
 		}
