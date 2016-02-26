@@ -444,17 +444,24 @@ public class MapController extends Controller implements IMapController {
 	
 	public void robPlayer(RobPlayerInfo victim) {	
 		
-		/*if(usingSoldier){
-			GameManager.getInstance().knight(playerID, victimID, newRobberLocation);
-		}*/
-		
-		
-		System.out.println("rob player called to gm");
-		try {
-			GameManager.getInstance().robPlayer(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), victim.getPlayerIndex(), map.getRobberLocation());
-		} catch (GameException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(usingSoldier){
+			System.out.println("play soldier called to gm");
+			try {
+				GameManager.getInstance().knight(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), victim.getPlayerIndex(), map.getRobberLocation());
+				usingSoldier = false;
+			} catch (GameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			System.out.println("rob player called to gm");
+			try {
+				GameManager.getInstance().robPlayer(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), victim.getPlayerIndex(), map.getRobberLocation());
+			} catch (GameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
