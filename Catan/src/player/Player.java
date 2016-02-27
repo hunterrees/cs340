@@ -106,7 +106,11 @@ public class Player
 	{
 		if (playerHand.numResourceOfType(ResourceType.BRICK) > 0 && playerHand.numResourceOfType(ResourceType.WOOD) > 0)
 		{
-			return true;
+			for(int i = 0; i < playerPieces.size(); i++){
+				if(playerPieces.get(i).getPieceType() == PieceType.ROAD){
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -121,7 +125,11 @@ public class Player
 				&& playerHand.numResourceOfType(ResourceType.WHEAT) > 0
 				&& playerHand.numResourceOfType(ResourceType.SHEEP) > 0)
 		{
-			return true;
+			for(int i = 0; i < playerPieces.size(); i++){
+				if(playerPieces.get(i).getPieceType() == PieceType.SETTLEMENT){
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -133,7 +141,11 @@ public class Player
 	{
 		if (playerHand.numResourceOfType(ResourceType.WHEAT) > 1 && playerHand.numResourceOfType(ResourceType.ORE) > 2)
 		{
-			return true;
+			for(int i = 0; i < playerPieces.size(); i++){
+				if(playerPieces.get(i).getPieceType() == PieceType.CITY){
+					return true;
+				}
+			}
 		}
 		return false;
 	}

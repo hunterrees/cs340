@@ -7,6 +7,7 @@ import client.data.PlayerInfo;
 import gameManager.GameManager;
 import model.GameException;
 import player.Player;
+import shared.definitions.GameState;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 
@@ -90,7 +91,7 @@ public class ResourceBarController extends Controller implements IResourceBarCon
 	private void enableDisableButtons(GameManager myManager, Player myPlayer, PlayerInfo myPlayerInfo)
 	{
 		boolean myTurn;
-		if (myManager.getCurrentPlayerIndex() == myPlayerInfo.getPlayerIndex())
+		if (myManager.getCurrentPlayerIndex() == myPlayerInfo.getPlayerIndex() && myManager.getGameState() == GameState.playing)
 		{
 			myTurn = true;
 		}
