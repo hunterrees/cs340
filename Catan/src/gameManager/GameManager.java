@@ -459,7 +459,7 @@ public class GameManager extends Observable{
 	 * @param receiverID ID of player being offered trade
 	 */
 	public void offerTrade(int playerID, ArrayList<ResourceType> resourceGive,  ArrayList<ResourceType> resourceReceive, int receiverID)throws GameException{
-		if(model.offerTrade(playerID, resourceGive)){
+		if(model.offerTrade(playerID, resourceReceive)){
 			try{
 				GameModel newModel = server.offerTrade(playerID, resourceGive, resourceReceive, receiverID);
 				setModel(newModel);
