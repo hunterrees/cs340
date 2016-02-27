@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import client.base.*;
 import client.utils.*;
+import gameManager.GameManager;
 
 
 /**
@@ -78,6 +79,8 @@ public class GameFinishedView extends OverlayView implements IGameFinishedView {
 			
 			if (e.getSource() == okButton) {
 				closeModal();
+				GameManager.getInstance().stopPoller();
+				GameManager.getInstance().gameEndNofity();
 			}
 		}	
 	};
