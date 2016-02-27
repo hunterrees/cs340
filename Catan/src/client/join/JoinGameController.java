@@ -138,6 +138,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		boolean randomNumbers = getNewGameView().getRandomlyPlaceNumbers();
 		boolean randomTiles = getNewGameView().getRandomlyPlaceHexes();
 		boolean randomPorts = getNewGameView().getUseRandomPorts();
+		getNewGameView().closeModal();
 		try{
 			String json = GameManager.getInstance().createGame(title, randomTiles, randomNumbers, randomPorts);
 			Gson gson = new Gson();
@@ -145,7 +146,6 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 			JsonPrimitive jsonGameId = gameInfo.getAsJsonPrimitive("id");
 			int gameID = jsonGameId.getAsInt();
 			GameManager.getInstance().joinGame(gameID, "red");
-			getNewGameView().closeModal();
 			start();
 		}catch(Exception e){
 			getMessageView().setTitle("Create Game Error");
