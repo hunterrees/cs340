@@ -70,18 +70,31 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 	}
 	
 	private PlayerInfo[] getPlayerInfo(){
-		ArrayList<Player> players = GameManager.getInstance().getModel().getPlayers();
-		PlayerInfo[] playersInfo = new PlayerInfo[players.size()];
-		gameSize = players.size();
-		for(int i = 0; i < players.size(); i++){
-			playersInfo[i] = new PlayerInfo();
-			playersInfo[i].setName(players.get(i).getName());
-			playersInfo[i].setColor(players.get(i).getPlayerColor());
-			playersInfo[i].setId(players.get(i).getPlayerID());
-			if(players.get(i).getPlayerID() == GameManager.getInstance().getPlayerInfo().getId()){
-				GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
+		PlayerInfo[] playersInfo = null;
+		try{
+			int id = GameManager.getInstance().getGameID();
+			GameInfo[] games = GameManager.getInstance().listGames();
+			GameInfo game = games[id];
+			game.getPlayers();
+			gameSize = 0;
+			for(int i = 0; i < game.getPlayers().size(); i++){
+				if(game.getPlayers().get(i).getId() != -1){
+					gameSize++;
+				}
 			}
-			playersInfo[i].setPlayerIndex(i);
+			playersInfo = new PlayerInfo[gameSize];
+			for(int i = 0; i < game.getPlayers().size(); i++){
+				playersInfo[i] = new PlayerInfo();
+				playersInfo[i].setName(game.getPlayers().get(i).getName());
+				playersInfo[i].setColor(game.getPlayers().get(i).getColor());
+				playersInfo[i].setId(game.getPlayers().get(i).getId());
+				if(game.getPlayers().get(i).getId() == GameManager.getInstance().getPlayerInfo().getId()){
+					GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
+				}
+				playersInfo[i].setPlayerIndex(i);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return playersInfo;
 	}

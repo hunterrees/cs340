@@ -32,6 +32,15 @@ public class GameManager extends Observable{
 	private boolean startingUp;
 	private ServerPoller poller = null;
 	private boolean gameEnd;
+	private int gameID;
+
+	public int getGameID() {
+		return gameID;
+	}
+
+	public void setGameID(int gameID) {
+		this.gameID = gameID;
+	}
 
 	protected GameManager(){
 		playerInfo = new PlayerInfo();
@@ -45,7 +54,6 @@ public class GameManager extends Observable{
 	public static GameManager getInstance(){
 		if(manager == null){
 			manager = new GameManager();
-			manager.setServer(new ServerProxy("localhost", 8081));
 			manager.startingUp = true;
 			manager.gameEnd = false;
 		}

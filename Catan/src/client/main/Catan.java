@@ -7,6 +7,7 @@ import client.login.*;
 import client.join.*;
 import client.misc.*;
 import gameManager.GameManager;
+import server.ServerProxy;
 import client.base.*;
 
 /**
@@ -46,6 +47,9 @@ public class Catan extends JFrame
 	{
 		try
 		{
+			System.out.println(args[0]);
+			System.out.println(args[1]);
+			GameManager.getInstance().setServer(new ServerProxy(args[0], Integer.parseInt(args[1]) ));
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
 		catch(Exception e)

@@ -190,6 +190,7 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 			e.printStackTrace();
 		}
 		GameManager.getInstance().startPoller();
+		GameManager.getInstance().setGameID(gameToJoin.getId());
 		joinAction.execute();
 	}
 	
