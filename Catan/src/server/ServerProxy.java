@@ -50,7 +50,6 @@ public class ServerProxy implements ServerInterface {
 	private String post(String urlPath, String json) throws ServerException{
 		StringBuffer result = new StringBuffer();
 		try{
-			System.out.println("Sending a command: " + urlPath);
 			URL url = new URL(URL_PREFIX + urlPath);
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("POST");
