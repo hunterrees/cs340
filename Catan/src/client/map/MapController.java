@@ -475,9 +475,8 @@ public class MapController extends Controller implements IMapController {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
-		System.out.println("\n\n\n\nupdatinggggggggggggggggggggggggggggggggggggggggg\n\n\n\n\n");
 
-		if(GameManager.getInstance().isGameEnd()){
+		if(GameManager.getInstance().isGameEnd() || GameManager.getInstance().isStartingUp()){
 			return;
 		}
 		map = GameManager.getInstance().getModel().getMap();

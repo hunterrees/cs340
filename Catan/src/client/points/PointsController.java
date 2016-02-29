@@ -65,6 +65,9 @@ public class PointsController extends Controller implements IPointsController {
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		if(GameManager.getInstance().isStartingUp()){
+			return;
+		}
 		if(!GameManager.getInstance().isGameEnd()){
 			initFromModel();
 		}

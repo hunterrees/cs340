@@ -61,7 +61,7 @@ public class RollController extends Controller implements IRollController {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(GameManager.getInstance().isGameEnd()){
+		if(GameManager.getInstance().isGameEnd() || GameManager.getInstance().isStartingUp()){
 			return;
 		}
 		if(getRollView().isModalShowing() || getResultView().isModalShowing()){

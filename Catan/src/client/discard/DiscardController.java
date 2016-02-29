@@ -88,7 +88,7 @@ public class DiscardController extends Controller implements IDiscardController 
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(GameManager.getInstance().isGameEnd()){
+		if(GameManager.getInstance().isGameEnd() || GameManager.getInstance().isStartingUp()){
 			return;
 		}
 		if(getDiscardView().isModalShowing() || GameManager.getInstance().isStartingUp()){
