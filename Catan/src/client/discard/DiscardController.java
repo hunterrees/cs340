@@ -95,6 +95,9 @@ public class DiscardController extends Controller implements IDiscardController 
 			return;
 		}
 		int index = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
+		if(index == -1){
+			return;
+		}
 		player = GameManager.getInstance().getModel().getPlayers().get(index);
 		if(GameManager.getInstance().getGameState() == GameState.discarding && player.canDiscard()){
 			numCardsToDiscard = player.getPlayerHand().getNumResources() / 2;

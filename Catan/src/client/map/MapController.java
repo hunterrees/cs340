@@ -472,7 +472,7 @@ public class MapController extends Controller implements IMapController {
 	boolean firstCalled = false;
 	boolean secondCalled = false;
 	@Override
-	public void update(Observable o, Object arg) {
+	public synchronized void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		//super.update(o, arg);
 

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
+import client.data.GameInfo;
 import client.data.PlayerInfo;
 import gameManager.GameManager;
+import model.GameException;
 import player.Player;
 
 
@@ -38,9 +40,8 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 				getView().showModal();
 			}
 			if(GameManager.getInstance().getModel().getPlayers().size() == 4){
-				GameManager.getInstance().getNewModel();
-				GameManager.getInstance().setStartingUp(false);
 				getView().closeModal();
+				GameManager.getInstance().setStartingUp(false);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -63,7 +64,7 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 		if(GameManager.getInstance().isGameEnd()){
 			return;
 		}
-		if(gameSize != GameManager.getInstance().getModel().getPlayers().size()){
+		if(GameManager.getInstance().isStartingUp()){
 			start();
 		}
 	}
@@ -77,6 +78,9 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 			playersInfo[i].setName(players.get(i).getName());
 			playersInfo[i].setColor(players.get(i).getPlayerColor());
 			playersInfo[i].setId(players.get(i).getPlayerID());
+			if(players.get(i).getPlayerID() == GameManager.getInstance().getPlayerInfo().getId()){
+				GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
+			}
 			playersInfo[i].setPlayerIndex(i);
 		}
 		return playersInfo;

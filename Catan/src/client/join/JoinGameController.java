@@ -157,10 +157,15 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 
 	@Override
 	public void startJoinGame(GameInfo game) {
-		gameToJoin = game;
-		for(int i = 0; i < game.getPlayers().size(); i++){
-			if(game.getPlayers().get(i).getId() != GameManager.getInstance().getPlayerInfo().getId()){
-				getSelectColorView().setColorEnabled(game.getPlayers().get(i).getColor(), false);
+		try{
+			GameInfo[] games = GameManager.getInstance().listGames();
+			gameToJoin = games[game.getId()];
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		for(int i = 0; i < gameToJoin.getPlayers().size(); i++){
+			if(gameToJoin.getPlayers().get(i).getId() != GameManager.getInstance().getPlayerInfo().getId()){
+				getSelectColorView().setColorEnabled(gameToJoin.getPlayers().get(i).getColor(), false);
 			}else{
 				GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
 			}
