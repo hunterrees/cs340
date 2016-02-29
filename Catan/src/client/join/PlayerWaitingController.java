@@ -83,7 +83,7 @@ public class PlayerWaitingController extends Controller implements IPlayerWaitin
 				}
 			}
 			playersInfo = new PlayerInfo[gameSize];
-			for(int i = 0; i < game.getPlayers().size(); i++){
+			for(int i = 0; i < gameSize; i++){
 				playersInfo[i] = new PlayerInfo();
 				playersInfo[i].setName(game.getPlayers().get(i).getName());
 				playersInfo[i].setColor(game.getPlayers().get(i).getColor());
