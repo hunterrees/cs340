@@ -250,6 +250,7 @@ public class DomesticTradeController extends Controller implements IDomesticTrad
 		getWaitOverlay().showModal();
 		try {
 			myGameManager.offerTrade(myPlayerInfo.getPlayerIndex(), resourcesBeingRecieved, resourcesBeingSent, playerToTradeWith);
+			System.out.println("Player " + myPlayerInfo.getPlayerIndex() + " is sending to " + playerToTradeWith);
 		} catch (GameException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -475,7 +476,7 @@ public class DomesticTradeController extends Controller implements IDomesticTrad
 		{
 			//check if somebody has offered me a trade offer
 			myTradeOffer = myGameManager.getModel().getTradeOffer();
-			if (myTradeOffer.getAcceptingPlayerID() == myPlayerInfo.getId())
+			if (myTradeOffer.getAcceptingPlayerID() == myPlayerInfo.getPlayerIndex())
 			{
 				setUpAcceptTrade();
 			}
