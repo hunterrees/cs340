@@ -53,6 +53,7 @@ public class DiscardController extends Controller implements IDiscardController 
 		}else{
 			getDiscardView().setResourceAmountChangeEnabled(resource, true, true);
 		}
+		setButtonsNormally();
 		if(resourcesToDiscard.size() == numCardsToDiscard){
 			getDiscardView().setDiscardButtonEnabled(true);
 			setButtonsFinally();
@@ -69,6 +70,7 @@ public class DiscardController extends Controller implements IDiscardController 
 		}else{
 			getDiscardView().setResourceAmountChangeEnabled(resource, true, true);
 		}
+		setButtonsNormally();
 		getDiscardView().setDiscardButtonEnabled(false);
 		getDiscardView().setResourceDiscardAmount(resource, resourcesToDiscard.get(resource));
 		getDiscardView().setStateMessage(getState());
@@ -142,37 +144,27 @@ public class DiscardController extends Controller implements IDiscardController 
 	private void setButtonsFinally(){
 		if(resourcesToDiscard.getBrick() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, false);
-		}else if(resourcesToDiscard.getBrick() == resourceList.get(ResourceType.BRICK)){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, true, true);
-		}else if(resourcesToDiscard.getBrick() > 0){
+		}else{
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, true);
 		}
 		if(resourcesToDiscard.getSheep() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, false);
-		}else if(resourcesToDiscard.getSheep() == resourceList.get(ResourceType.SHEEP)){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, true, true);
-		}else if(resourcesToDiscard.getSheep() > 0){
+		}else{
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, true);
 		}
 		if(resourcesToDiscard.getWood() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, false);
-		}else if(resourcesToDiscard.getWood() == resourceList.get(ResourceType.WOOD)){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, true, true);
-		}else if(resourcesToDiscard.getWood() > 0){
+		}else{
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, true);
 		}
 		if(resourcesToDiscard.getOre() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, false);
-		}else if(resourcesToDiscard.getOre() == resourceList.get(ResourceType.ORE)){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, true, true);
-		}else if(resourcesToDiscard.getOre() > 0){
+		}else{
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, true);
 		}
 		if(resourcesToDiscard.getWheat() == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, false);
-		}else if(resourcesToDiscard.getWheat() == resourceList.get(ResourceType.WHEAT)){
-			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, true, true);
-		}else if(resourcesToDiscard.getWheat() > 0){
+		}else{
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, true);
 		}
 	}
@@ -222,6 +214,44 @@ public class DiscardController extends Controller implements IDiscardController 
 		}
 		resourceList = new ResourceList(brick, ore, sheep, wheat, wood);
 		
+	}
+	
+	private void setButtonsNormally(){
+		if(resourceList.get(ResourceType.BRICK) == 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, false);
+		}else if(resourcesToDiscard.getBrick() == resourceList.get(ResourceType.BRICK)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, true);
+		}else if(resourcesToDiscard.getBrick() > 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, true, true);
+		}
+		if(resourceList.get(ResourceType.SHEEP) == 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, false);
+		}else if(resourcesToDiscard.getSheep() == resourceList.get(ResourceType.SHEEP)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, true);
+		}else if(resourcesToDiscard.getSheep() > 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, true, true);
+		}
+		if(resourceList.get(ResourceType.WOOD) == 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, false);
+		}else if(resourcesToDiscard.getWood() == resourceList.get(ResourceType.WOOD)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, true);
+		}else if(resourcesToDiscard.getWood() > 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, true, true);
+		}
+		if(resourceList.get(ResourceType.ORE) == 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, false);
+		}else if(resourcesToDiscard.getOre() == resourceList.get(ResourceType.ORE)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, true);
+		}else if(resourcesToDiscard.getOre() > 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, true, true);
+		}
+		if(resourceList.get(ResourceType.WHEAT) == 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, false);
+		}else if(resourcesToDiscard.getWheat() == resourceList.get(ResourceType.WHEAT)){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, true);
+		}else if(resourcesToDiscard.getWheat() > 0){
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, true, true);
+		}
 	}
 	
 	private void setMaxResources(){
