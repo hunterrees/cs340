@@ -433,7 +433,7 @@ public class MapController extends Controller implements IMapController {
 		System.out.println("robbing");
 		state = new Robbing(map);
 		usingSoldier = true;
-		getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);
+		getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), true);
 		
 		
 	}
