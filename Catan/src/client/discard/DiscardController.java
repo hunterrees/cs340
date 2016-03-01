@@ -221,36 +221,46 @@ public class DiscardController extends Controller implements IDiscardController 
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, false);
 		}else if(resourcesToDiscard.getBrick() == resourceList.get(ResourceType.BRICK)){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, false, true);
-		}else if(resourcesToDiscard.getBrick() > 0){
+		}else if(resourceList.get(ResourceType.BRICK) > 0 && resourcesToDiscard.getBrick() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, true, true);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.BRICK, true, false);
 		}
 		if(resourceList.get(ResourceType.SHEEP) == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, false);
 		}else if(resourcesToDiscard.getSheep() == resourceList.get(ResourceType.SHEEP)){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, false, true);
-		}else if(resourcesToDiscard.getSheep() > 0){
+		}else if(resourceList.get(ResourceType.SHEEP) > 0 && resourcesToDiscard.getSheep() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, true, true);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.SHEEP, true, false);
 		}
 		if(resourceList.get(ResourceType.WOOD) == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, false);
 		}else if(resourcesToDiscard.getWood() == resourceList.get(ResourceType.WOOD)){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, false, true);
-		}else if(resourcesToDiscard.getWood() > 0){
+		}else if(resourceList.get(ResourceType.WOOD) > 0 && resourcesToDiscard.getWood() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, true, true);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WOOD, true, false);
 		}
 		if(resourceList.get(ResourceType.ORE) == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, false);
 		}else if(resourcesToDiscard.getOre() == resourceList.get(ResourceType.ORE)){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, false, true);
-		}else if(resourcesToDiscard.getOre() > 0){
+		}else if(resourceList.get(ResourceType.ORE) > 0 && resourcesToDiscard.getOre() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, true, true);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.ORE, true, false);
 		}
 		if(resourceList.get(ResourceType.WHEAT) == 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, false);
 		}else if(resourcesToDiscard.getWheat() == resourceList.get(ResourceType.WHEAT)){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, false, true);
-		}else if(resourcesToDiscard.getWheat() > 0){
+		}else if(resourceList.get(ResourceType.WHEAT) > 0 && resourcesToDiscard.getWheat() > 0){
 			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, true, true);
+		}else{
+			getDiscardView().setResourceAmountChangeEnabled(ResourceType.WHEAT, true, false);
 		}
 	}
 	

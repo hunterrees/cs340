@@ -459,7 +459,7 @@ public class DomesticTradeController extends Controller implements IDomesticTrad
 		myGameManager = GameManager.getInstance();
 		myPlayerInfo = myGameManager.getPlayerInfo();
 		myPlayer = myGameManager.getModel().getPlayers().get(myPlayerInfo.getPlayerIndex());
-		if (myGameManager.isMyTurn())
+		if (myGameManager.isMyTurn() && GameManager.getInstance().getGameState() == GameState.playing)
 		{
 			getTradeView().enableDomesticTrade(true);
 			if (myGameManager.getModel().getTradeOffer() == null && getWaitOverlay().isModalShowing())
