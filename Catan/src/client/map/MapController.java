@@ -45,7 +45,7 @@ public class MapController extends Controller implements IMapController {
 		}
 		initFromModel();
 		state = new SetupSecond(map, this);
-		System.out.println("\n\n\n\n\nin the constructorrrrrrrr\n\n\n\n\n");
+		System.out.println("\n\n\n\n\nin the constructorrrrrrrr\n\n\n\nq\n");
 		state = new SetupFirst(map, this);
 
 		System.out.println("\n\n\n\n after first setup\n\n\n\n\n");*/
