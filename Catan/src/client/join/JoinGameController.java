@@ -138,8 +138,14 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		boolean randomNumbers = getNewGameView().getRandomlyPlaceNumbers();
 		boolean randomTiles = getNewGameView().getRandomlyPlaceHexes();
 		boolean randomPorts = getNewGameView().getUseRandomPorts();
-		getNewGameView().closeModal();
 		try{
+			GameInfo[] games = GameManager.getInstance().listGames();
+			for(int i = 0; i < games.length; i++){
+				if(games[i].getTitle().equals(title)){
+					throw new Exception();
+				}
+			}
+			getNewGameView().closeModal();
 			String json = GameManager.getInstance().createGame(title, randomTiles, randomNumbers, randomPorts);
 			Gson gson = new Gson();
 			JsonObject gameInfo = gson.fromJson(json, JsonObject.class);
@@ -160,18 +166,34 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		try{
 			GameInfo[] games = GameManager.getInstance().listGames();
 			gameToJoin = games[game.getId()];
+			int numPlayers = 0;
+			boolean inGame = false;
+			for(int i = 0; i < gameToJoin.getPlayers().size(); i++){
+				if(!gameToJoin.getPlayers().get(i).getName().equals("")){
+					numPlayers++;
+				}
+				if(gameToJoin.getPlayers().get(i).getId() == GameManager.getInstance().getPlayerInfo().getId()){
+					inGame = true;
+				}
+			}
+			if(numPlayers == 4 && !inGame){
+				throw new Exception();
+			}
+			for(int i = 0; i < gameToJoin.getPlayers().size(); i++){
+				if(gameToJoin.getPlayers().get(i).getId() != GameManager.getInstance().getPlayerInfo().getId()){
+					getSelectColorView().setColorEnabled(gameToJoin.getPlayers().get(i).getColor(), false);
+				}else{
+					GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
+				}
+			}
+			getJoinGameView().closeModal();
+			getSelectColorView().showModal();
 		}catch(Exception e){
+			getMessageView().setTitle("Join Game Error");
+			getMessageView().setMessage("Error in joining the game (it's full)");
+			getMessageView().showModal();
 			e.printStackTrace();
 		}
-		for(int i = 0; i < gameToJoin.getPlayers().size(); i++){
-			if(gameToJoin.getPlayers().get(i).getId() != GameManager.getInstance().getPlayerInfo().getId()){
-				getSelectColorView().setColorEnabled(gameToJoin.getPlayers().get(i).getColor(), false);
-			}else{
-				GameManager.getInstance().getPlayerInfo().setPlayerIndex(i);
-			}
-		}
-		getJoinGameView().closeModal();
-		getSelectColorView().showModal();
 	}
 
 	@Override
