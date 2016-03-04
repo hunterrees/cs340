@@ -199,6 +199,15 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 	@Override
 	public void cancelJoinGame() {
 		getSelectColorView().closeModal();
+		getSelectColorView().setColorEnabled(CatanColor.BLUE, true);
+		getSelectColorView().setColorEnabled(CatanColor.GREEN, true);
+		getSelectColorView().setColorEnabled(CatanColor.ORANGE, true);
+		getSelectColorView().setColorEnabled(CatanColor.BROWN, true);
+		getSelectColorView().setColorEnabled(CatanColor.PUCE, true);
+		getSelectColorView().setColorEnabled(CatanColor.PURPLE, true);
+		getSelectColorView().setColorEnabled(CatanColor.RED, true);
+		getSelectColorView().setColorEnabled(CatanColor.YELLOW, true);
+		getSelectColorView().setColorEnabled(CatanColor.WHITE, true);
 		getJoinGameView().showModal();
 	}
 
