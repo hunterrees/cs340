@@ -707,11 +707,48 @@ public class Map {
 		}*/
 
 		// See if it's valid overall
-		boolean canBuildRoad = edgeValid || cornerValid;
+
+		if(cornerValid) {
+			return true;
+		}
+		else if(edgeValid && cornerValid) {
+			return true;
+		}
+		else {
+
+			// Left side
+			if(right.getPiece() != null && right.getPiece().getPlayerID() != playerID) {
+				if(upperRight.getPiece() != null && upperRight.getPiece().getPlayerID() == playerID ||
+						lowerRight.getPiece() != null && lowerRight.getPiece().getPlayerID() == playerID) {
+					System.out.println("1111");
+					return true;
+				} else {
+					System.out.println("2222");
+
+					return false;
+				}
+			}
 
 
 
-		return canBuildRoad;
+			// Right side
+			if(left.getPiece() != null && left.getPiece().getPlayerID() != playerID) {
+				if(upperLeft.getPiece() != null && upperLeft.getPiece().getPlayerID() == playerID ||
+						lowerLeft.getPiece() != null && lowerLeft.getPiece().getPlayerID() == playerID) {
+					System.out.println("3333");
+
+					return true;
+				} else {
+					System.out.println("4444");
+
+					return false;
+				}
+			}
+
+
+		}
+
+		return edgeValid;
 	}
 
 	/**
@@ -815,11 +852,50 @@ public class Map {
 		}*/
 
 		// See if it's valid overall
-		boolean canBuildRoad = edgeValid || cornerValid;
+
+		if(cornerValid) {
+			return true;
+		}
+		else if(edgeValid && cornerValid) {
+			return true;
+		}
+		else {
+
+			// Left side
+			if(right.getPiece() != null && right.getPiece().getPlayerID() != playerID) {
+				if(upperRight.getPiece() != null && upperRight.getPiece().getPlayerID() == playerID ||
+						lowerRight.getPiece() != null && lowerRight.getPiece().getPlayerID() == playerID) {
+					System.out.println("1111");
+					return true;
+				} else {
+					System.out.println("2222");
+
+					return false;
+				}
+			}
 
 
 
-		return canBuildRoad;
+			// Right side
+			if(left.getPiece() != null && left.getPiece().getPlayerID() != playerID) {
+				if(upperLeft.getPiece() != null && upperLeft.getPiece().getPlayerID() == playerID ||
+						lowerLeft.getPiece() != null && lowerLeft.getPiece().getPlayerID() == playerID) {
+					System.out.println("3333");
+
+					return true;
+				} else {
+					System.out.println("4444");
+
+					return false;
+				}
+			}
+
+
+		}
+
+		return edgeValid;
+
+
 	}
 
 	/**
@@ -924,11 +1000,48 @@ public class Map {
 		}*/
 
 		// See if it's valid overall
-		boolean canBuildRoad = edgeValid || cornerValid;
+
+		if(cornerValid) {
+			return true;
+		}
+		else if(edgeValid && cornerValid) {
+			return true;
+		}
+		else {
+
+			// Left side
+			if(left.getPiece() != null && left.getPiece().getPlayerID() != playerID) {
+				if(upperRight.getPiece() != null && upperRight.getPiece().getPlayerID() == playerID ||
+						lowerRight.getPiece() != null && lowerRight.getPiece().getPlayerID() == playerID) {
+					System.out.println("1111");
+					return true;
+				} else {
+					System.out.println("2222");
+
+					return false;
+				}
+			}
 
 
 
-		return canBuildRoad;
+			// Right side
+			if(right.getPiece() != null && right.getPiece().getPlayerID() != playerID) {
+				if(upperLeft.getPiece() != null && upperLeft.getPiece().getPlayerID() == playerID ||
+						lowerLeft.getPiece() != null && lowerLeft.getPiece().getPlayerID() == playerID) {
+					System.out.println("3333");
+
+					return true;
+				} else {
+					System.out.println("4444");
+
+					return false;
+				}
+			}
+
+
+		}
+
+		return edgeValid;
 	}
 
 	/**
