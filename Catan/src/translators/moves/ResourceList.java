@@ -19,6 +19,14 @@ public class ResourceList {
 		this.wood = wood;
 	}
 	
+	public void clear(){
+		brick = 0;
+		ore = 0;
+		sheep = 0;
+		wheat = 0;
+		wood = 0;
+	}
+	
 	public int getBrick() {
 		return brick;
 	}

@@ -81,8 +81,8 @@ public class DiscardController extends Controller implements IDiscardController 
 		try{
 			getDiscardView().closeModal();
 			GameManager.getInstance().discardCards(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), getDiscardedCards());
-			resourceList = null;
-			resourcesToDiscard = null;
+			resourceList.clear();
+			resourcesToDiscard.clear();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -93,7 +93,7 @@ public class DiscardController extends Controller implements IDiscardController 
 		if(GameManager.getInstance().isGameEnd() || GameManager.getInstance().isStartingUp()){
 			return;
 		}
-		if(getDiscardView().isModalShowing() || GameManager.getInstance().isStartingUp()){
+		if(getDiscardView().isModalShowing()){
 			return;
 		}
 		int index = GameManager.getInstance().getPlayerInfo().getPlayerIndex();

@@ -451,7 +451,7 @@ public class DomesticTradeController extends Controller implements IDomesticTrad
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		if (getTradeOverlay().isModalShowing())
+		if (getTradeOverlay().isModalShowing() || GameManager.getInstance().isGameEnd() || GameManager.getInstance().isStartingUp())
 		{
 			return;
 		}

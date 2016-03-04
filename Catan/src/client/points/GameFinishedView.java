@@ -79,8 +79,7 @@ public class GameFinishedView extends OverlayView implements IGameFinishedView {
 			
 			if (e.getSource() == okButton) {
 				closeModal();
-				GameManager.getInstance().stopPoller();
-				GameManager.getInstance().gameEndNofity();
+				System.exit(0);
 			}
 		}	
 	};

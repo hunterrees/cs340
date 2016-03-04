@@ -607,7 +607,11 @@ public class MapComponent extends JComponent
 		g2.scale(scale, scale);
 		g2.translate(-WORLD_WIDTH / 2, -WORLD_HEIGHT / 2);
 		
-		drawHexes(g2);
+		try{
+			drawHexes(g2);
+		}catch(Exception e){
+			
+		}
 		drawPorts(g2);
 		drawNumbers(g2);
 		drawRobber(g2);
