@@ -175,7 +175,12 @@ public class Map {
 		 * @return true if you can build a city here (settlement already here)j
 		 */
 		public boolean canBuildCity(int playerID, VertexLocation loc) {
-			Piece tempPiece = verticies.get(loc.getNormalizedLocation()).getPiece();
+			Piece tempPiece;
+			try{
+				tempPiece = verticies.get(loc.getNormalizedLocation()).getPiece();
+			}catch(NullPointerException e){
+				return false;
+			}
 
 			// Not valid if there's no piece there already
 			if(tempPiece == null) {

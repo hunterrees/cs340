@@ -289,9 +289,6 @@ public class MapController extends Controller implements IMapController {
 		getView().placeSettlement(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 
 		int id = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
-		System.out.println(" player index: " + id);
-		System.out.println("plyer ID: " + GameManager.getInstance().getPlayerInfo().getId());
-		System.out.println("build settlement");
 		state.buildSettlement(id, vertLoc);
 		initFromModel();
 		
@@ -430,7 +427,6 @@ public class MapController extends Controller implements IMapController {
 	
 	public void playSoldierCard() {	
 		// called when they click on soldier
-		System.out.println("robbing");
 		state = new Robbing(map);
 		usingSoldier = true;
 		getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), true);
@@ -445,7 +441,6 @@ public class MapController extends Controller implements IMapController {
 	public void robPlayer(RobPlayerInfo victim) {	
 		
 		if(usingSoldier){
-			System.out.println("play soldier called to gm");
 			try {
 				GameManager.getInstance().knight(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), victim.getPlayerIndex(), map.getRobberLocation());
 				usingSoldier = false;
@@ -455,7 +450,6 @@ public class MapController extends Controller implements IMapController {
 			}
 		}
 		else{
-			System.out.println("rob player called to gm");
 			try {
 				GameManager.getInstance().robPlayer(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), victim.getPlayerIndex(), map.getRobberLocation());
 			} catch (GameException e) {
@@ -487,7 +481,6 @@ public class MapController extends Controller implements IMapController {
 
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
-					System.out.println("normal state");
 					state = new Normal(map, this);
 					/*if (!(state instanceof Robbing)){
 						System.out.println("robbing");
@@ -501,19 +494,16 @@ public class MapController extends Controller implements IMapController {
 				//case rolling: state = new Rolling();
 				case robbing:
 					if (!(state instanceof Robbing)){
-						System.out.println("robbing");
 						state = new Robbing(map);
 						getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);
 					}
 					break;
 				case firstRound:
 
-					System.out.println("first stateeeeeeee");
 					
 
 					if(!firstCalled) {
 						firstCalled = true;
-						System.out.println("inside first called");
 						state = new SetupFirst(map, this);
 //						Scanner s = new Scanner(System.in);
 //
@@ -529,7 +519,6 @@ public class MapController extends Controller implements IMapController {
 					state.setMap(map);
 					break;
 				case secondRound:
-					System.out.println("second state");
 					//if(!(state instanceof SetupSecond)){
 					//	System.out.println("seconds state");
 					if(!secondCalled){
@@ -544,7 +533,6 @@ public class MapController extends Controller implements IMapController {
 					//}
 					break;
 				default:
-					System.out.println("not your turn 1");
 					state = new NotYourTurn(map);
 					break;
 			}
@@ -560,11 +548,9 @@ public class MapController extends Controller implements IMapController {
 				state = new NotYourTurn(map);
 			}
 			i++;*/
-			System.out.println("not your turn 2");
 			state = new NotYourTurn(map);
 		}
 
-		System.out.println("End of update state = " + state);
 
 
 

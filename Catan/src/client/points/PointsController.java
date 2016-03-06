@@ -56,8 +56,7 @@ public class PointsController extends Controller implements IPointsController {
 					local = true;
 				}
 				getFinishedView().setWinner(players.get(i).getName(), local);
-				GameManager.getInstance().setGameEnd(true);
-				GameManager.getInstance().gameEndNofity();
+				getFinishedView().showModal();
 			}else if(index == i){
 				getPointsView().setPoints(points);
 			}

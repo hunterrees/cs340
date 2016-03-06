@@ -103,7 +103,9 @@ public class DiscardController extends Controller implements IDiscardController 
 		player = GameManager.getInstance().getModel().getPlayers().get(index);
 		if(GameManager.getInstance().getGameState() == GameState.discarding && player.canDiscard()){
 			numCardsToDiscard = player.getPlayerHand().getNumResources() / 2;
-			resourcesToDiscard = new ResourceList(0,0,0,0,0);
+			if(resourcesToDiscard == null){
+				resourcesToDiscard = new ResourceList(0,0,0,0,0);
+			}
 			getResources(player.getPlayerHand().getResourceCards());
 			setMaxResources();
 			setButtonsInitially();

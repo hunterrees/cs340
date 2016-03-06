@@ -436,7 +436,6 @@ public class GameManager extends Observable{
 		}else{
 			throw new GameException();
 		}*/
-		System.out.println("building settlement in game manager");
 			try{
 				GameModel newModel = server.buildSettlment(playerID, vertexLocation, setUp);
 				setModel(newModel);

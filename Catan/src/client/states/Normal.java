@@ -31,7 +31,7 @@ public class Normal extends State {
 
     @Override
     public boolean canBuildCity(int playerID, VertexLocation loc) {
-        return map.canBuildCity(playerID, loc);
+    	return map.canBuildCity(playerID, loc);
     }
 
     @Override
