@@ -36,21 +36,9 @@ public class MapController extends Controller implements IMapController {
 
 
 		super(view);
-		//GameManager.getInstance().addObserver(this);
 
 		setRobView(robView);
-		//map = GameManager.getInstance().getModel().getMap();
-		/*if (map == null){
-			map = new Map();
-		}
-		initFromModel();
-		state = new SetupSecond(map, this);
-		System.out.println("\n\n\n\n\nin the constructorrrrrrrr\n\n\n\nq\n");
-		state = new SetupFirst(map, this);
 
-		System.out.println("\n\n\n\n after first setup\n\n\n\n\n");*/
-
-		//state = new Normal(map);
 
 
 	}
@@ -123,97 +111,7 @@ public class MapController extends Controller implements IMapController {
 			}
 		}
 
-		
-		// Place roads
-/*		for()
-		getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.NorthWest),
-				CatanColor.RED);*/
-		
-		
 
-/*		for(Entry<VertexLocation, Port> entry : map.getPorts().entrySet() {
-			
-			getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDire
-			ction.North), entry.getValue().getType());
-
-		}
-*/
-		
-		
-		
-		
-		/*Random rand = new Random();
-
-		for (int x = 0; x <= 3; ++x) {
-			
-			int maxY = 3 - x;			
-			for (int y = -3; y <= maxY; ++y) {				
-				int r = rand.nextInt(HexType.values().length);
-				HexType hexType = HexType.values()[r];
-				HexLocation hexLoc = new HexLocation(x, y);
-				getView().addHex(hexLoc, hexType);
-				getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.NorthWest),
-						CatanColor.RED);
-				getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.SouthWest),
-						CatanColor.RED);
-				getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.South),
-						CatanColor.RED);
-				getView().placeSettlement(new VertexLocation(hexLoc,  VertexDirection.NorthWest), CatanColor.RED);
-				getView().placeCity(new VertexLocation(hexLoc,  VertexDirection.NorthEast), CatanColor.RED);
-			}
-			
-			if (x != 0) {
-				int minY = x - 3;
-				for (int y = minY; y <= 3; ++y) {
-					int r = rand.nextInt(HexType.values().length);
-					HexType hexType = HexType.values()[r];
-					HexLocation hexLoc = new HexLocation(-x, y);
-					getView().addHex(hexLoc, hexType);
-					getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.NorthWest),
-							CatanColor.RED);
-					getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.SouthWest),
-							CatanColor.RED);
-					getView().placeRoad(new EdgeLocation(hexLoc, EdgeDirection.South),
-							CatanColor.RED);
-					getView().placeSettlement(new VertexLocation(hexLoc,  VertexDirection.NorthWest), CatanColor.RED);
-					getView().placeCity(new VertexLocation(hexLoc,  VertexDirection.NorthEast), CatanColor.RED);
-				}
-			}
-		}*/
-		
-		/*PortType portType = PortType.BRICK;
-		getView().addPort(new EdgeLocation(new HexLocation(0, 3), EdgeDirection.North), portType);
-		getView().addPort(new EdgeLocation(new HexLocation(0, -3), EdgeDirection.South), portType);
-		getView().addPort(new EdgeLocation(new HexLocation(-3, 3), EdgeDirection.NorthEast), portType);
-		getView().addPort(new EdgeLocation(new HexLocation(-3, 0), EdgeDirection.SouthEast), portType);
-		getView().addPort(new EdgeLocation(new HexLocation(3, -3), EdgeDirection.SouthWest), portType);
-		getView().addPort(new EdgeLocation(new HexLocation(3, 0), EdgeDirection.NorthWest), portType);*/
-
-		
-		
-		
-/*for(Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
-			
-			
-			if(entry.getValue().getType() != HexType.WATER && entry.getValue().getType() != HexType.DESERT){
-				getView().addNumber(entry.getKey(), entry.getValue().getNumber());
-				
-			}
-			
-		}*/
-		
-		/*getView().addNumber(new HexLocation(-2, 0), 5);
-		getView().addNumber(new HexLocation(-2, 1), 5);
-		getView().addNumber(new HexLocation(-2, 2), 5);
-		getView().addNumber(new HexLocation(-1, 0), 5);
-		getView().addNumber(new HexLocation(-1, 1), 5);
-		getView().addNumber(new HexLocation(1, -1), 5);
-		getView().addNumber(new HexLocation(1, 0), 5);
-		getView().addNumber(new HexLocation(2, -2), 5);
-		getView().addNumber(new HexLocation(2, -1), 5);
-		getView().addNumber(new HexLocation(2, 0), 5);*/
-		
-		//</temp>
 	}
 
 	public boolean canPlaceRoad(EdgeLocation edgeLoc) {
@@ -241,33 +139,9 @@ public class MapController extends Controller implements IMapController {
 	public void placeRoad(EdgeLocation edgeLoc) {
 		Piece road = new Piece(PieceType.ROAD,null,null,1);
 		state.buildRoad(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), edgeLoc);
-		
-		//map.getEdges().get(edgeLoc).setPiece(road);
-	/*	try {
-			GameManager.getInstance().buildRoad(1, edgeLoc, true);
-		} catch (GameException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 
-		//CatanColor color = road.getColor();
-		//getView().placeRoad(edgeLoc, color);
-	//	if(!(state instanceof RoadBulid)){
-			getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
-	//	}
+		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
 
-
-		/*if(state instanceof SetupSecond) {
-			state = new Normal(map, this);
-		}
-		if(state instanceof SetupFirst) {
-			state = new SetupSecond(map, this);
-		}
-
-		if(state instanceof Normal && x == 0) {
-			state.playRoadBuild(GameManager.getInstance().getPlayerInfo().getId());
-			x = 1;
-		}*/
 
 
 	}
@@ -275,17 +149,7 @@ public class MapController extends Controller implements IMapController {
 	public void placeSettlement(VertexLocation vertLoc) {
 		Piece building = new Piece(PieceType.SETTLEMENT,null,null,1);
 
-		//map.getVerticies().get(vertLoc).setPiece(building);
-		/*try {
-			GameManager.getInstance().buildSettlment(1, vertLoc, true);
-		} catch (GameException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 
-		//CatanColor color = building.getColor();
-
-		//getView().placeSettlement(vertLoc, color);
 		getView().placeSettlement(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
 
 		int id = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
@@ -296,7 +160,6 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public void placeCity(VertexLocation vertLoc) {
-		//map.getVerticies().get(vertLoc).setPiece(new Piece(PieceType.CITY,null,null,1));
 		state.buildCity(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), vertLoc);
 
 		getView().placeCity(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());
@@ -482,16 +345,11 @@ public class MapController extends Controller implements IMapController {
 			switch (GameManager.getInstance().getModel().getGameState()) {
 				case playing:
 					state = new Normal(map, this);
-					/*if (!(state instanceof Robbing)){
-						System.out.println("robbing");
-						state = new Robbing(map);
-						getView().startDrop(PieceType.ROBBER, GameManager.getInstance().getPlayerInfo().getColor(), false);
-					}*/
+
 					
 					
 					break;
-				//case discarding: state = new Discard();
-				//case rolling: state = new Rolling();
+
 				case robbing:
 					if (!(state instanceof Robbing)){
 						state = new Robbing(map);
@@ -505,49 +363,27 @@ public class MapController extends Controller implements IMapController {
 					if(!firstCalled) {
 						firstCalled = true;
 						state = new SetupFirst(map, this);
-//						Scanner s = new Scanner(System.in);
-//
-//						//System.out.println("wait one");
-//						//s.next();
-//						this.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
-//						//System.out.println("wait one");
-//						//s.next();
-//						this.getView().startDrop(PieceType.ROAD, GameManager.getInstance().getPlayerInfo().getColor(), false);
+
 
 
 					}
 					state.setMap(map);
 					break;
 				case secondRound:
-					//if(!(state instanceof SetupSecond)){
-					//	System.out.println("seconds state");
+
 					if(!secondCalled){
 						secondCalled = true;
 						state = new SetupSecond(map, this);
 					}
 					state.setMap(map);
 
-					//}
-					//else{
-					//	System.out.println("no state change");
-					//}
 					break;
 				default:
 					state = new NotYourTurn(map);
 					break;
 			}
 		} else {
-/*			System.out.println("not your turn");
-			if(!(state instanceof NotYourTurn) || i < 3){
-				state = new SetupFirst(map,this);
-				state = new NotYourTurn(map);
-				//update(null, null);
-			}
-			else{
-				state = new SetupFirst(map, this);
-				state = new NotYourTurn(map);
-			}
-			i++;*/
+
 			state = new NotYourTurn(map);
 		}
 
