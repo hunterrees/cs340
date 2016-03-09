@@ -2,13 +2,13 @@ package client.turntracker;
 
 import shared.definitions.CatanColor;
 import shared.definitions.GameState;
+import shared.model.GameException;
+import shared.model.player.Player;
 
 import java.util.Observable;
 
 import client.base.*;
-import gameManager.GameManager;
-import model.GameException;
-import player.Player;
+import client.gameManager.GameManager;
 
 
 /**

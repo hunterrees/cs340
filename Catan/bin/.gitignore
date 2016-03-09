@@ -1,4 +1,11 @@
-/client/
-/translators/
 /map/
+/client/
+/server/
+/canDoTests/
+/serverTests/
+/shared/
 /gameManager/
+/model/
+/player/
+/trade/
+/translators/

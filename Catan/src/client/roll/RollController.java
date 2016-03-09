@@ -5,9 +5,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import client.base.*;
-import gameManager.GameManager;
-import model.Dice;
+import client.gameManager.GameManager;
 import shared.definitions.GameState;
+import shared.model.Dice;
 
 
 /**

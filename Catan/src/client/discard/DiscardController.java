@@ -2,15 +2,15 @@ package client.discard;
 
 import shared.ResourceCard;
 import shared.definitions.*;
-import translators.moves.ResourceList;
+import shared.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
+import client.gameManager.GameManager;
 import client.misc.*;
-import gameManager.GameManager;
-import player.Player;
+import client.translators.moves.ResourceList;
 
 
 /**

@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import model.GameModel;
-import model.TurnTracker;
-import player.Player;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.locations.HexLocation;
+import shared.model.GameModel;
+import shared.model.TurnTracker;
+import shared.model.player.Player;
 
 public class CanUseMonument {
 

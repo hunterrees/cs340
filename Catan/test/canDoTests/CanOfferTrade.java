@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import model.GameModel;
-import model.TurnTracker;
-import player.Player;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
+import shared.model.GameModel;
+import shared.model.TurnTracker;
+import shared.model.player.Player;
 
 public class CanOfferTrade {
 

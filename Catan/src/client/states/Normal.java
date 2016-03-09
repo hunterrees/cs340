@@ -1,12 +1,12 @@
 package client.states;
 
+import client.gameManager.GameManager;
 import client.map.MapController;
-import gameManager.GameManager;
-import map.Map;
-import model.GameException;
 import shared.definitions.PieceType;
 import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
+import shared.model.GameException;
+import shared.model.map.Map;
 
 /**
  * Created by Brian on 16/2/17.

@@ -1,15 +1,15 @@
 package client.maritime;
 
 import shared.definitions.*;
+import shared.model.GameException;
+import shared.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
 import client.data.PlayerInfo;
-import gameManager.GameManager;
-import model.GameException;
-import player.Player;
+import client.gameManager.GameManager;
 
 
 /**

@@ -3,13 +3,13 @@ package client.devcards;
 import shared.DevelopmentCard;
 import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
+import shared.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
-import gameManager.GameManager;
-import player.Player;
+import client.gameManager.GameManager;
 
 
 /**

@@ -2,8 +2,9 @@ package client.domestic;
 
 import shared.ResourceCard;
 import shared.definitions.*;
-import trade.TradeOffer;
-import translators.moves.ResourceList;
+import shared.model.GameException;
+import shared.model.player.Player;
+import shared.model.trade.TradeOffer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,10 +12,9 @@ import java.util.Observable;
 
 import client.base.*;
 import client.data.PlayerInfo;
+import client.gameManager.GameManager;
 import client.misc.*;
-import gameManager.GameManager;
-import model.GameException;
-import player.Player;
+import client.translators.moves.ResourceList;
 
 
 /**

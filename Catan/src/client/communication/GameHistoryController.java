@@ -3,12 +3,12 @@ package client.communication;
 import java.util.*;
 
 import client.base.*;
-import gameManager.GameManager;
-import model.Chat;
-import model.Line;
-import model.Log;
-import player.Player;
+import client.gameManager.GameManager;
 import shared.definitions.*;
+import shared.model.Chat;
+import shared.model.Line;
+import shared.model.Log;
+import shared.model.player.Player;
 
 
 /**

@@ -1,9 +1,9 @@
 package client.login;
 
 import client.base.*;
+import client.gameManager.GameManager;
 import client.misc.*;
-import gameManager.GameManager;
-import model.GameException;
+import shared.model.GameException;
 
 import java.net.*;
 import java.io.*;

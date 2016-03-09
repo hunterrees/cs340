@@ -1,11 +1,11 @@
 package shared;
 
-import gameManager.GameManager;
-import map.Edge;
-import map.Vertex;
-import model.GameModel;
+import client.gameManager.GameManager;
 import shared.definitions.CatanColor;
 import shared.definitions.PieceType;
+import shared.model.GameModel;
+import shared.model.map.Edge;
+import shared.model.map.Vertex;
 
 
 //Add player ID

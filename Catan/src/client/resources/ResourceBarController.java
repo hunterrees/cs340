@@ -4,12 +4,12 @@ import java.util.*;
 
 import client.base.*;
 import client.data.PlayerInfo;
-import gameManager.GameManager;
-import model.GameException;
-import player.Player;
+import client.gameManager.GameManager;
 import shared.definitions.GameState;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
+import shared.model.GameException;
+import shared.model.player.Player;
 
 
 /**

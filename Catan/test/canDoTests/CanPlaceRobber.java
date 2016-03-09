@@ -7,11 +7,6 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import map.Map;
-import map.TerrainHex;
-import model.GameModel;
-import model.TurnTracker;
-import player.Player;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
@@ -19,6 +14,11 @@ import shared.definitions.GameState;
 import shared.definitions.HexType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
+import shared.model.GameModel;
+import shared.model.TurnTracker;
+import shared.model.map.Map;
+import shared.model.map.TerrainHex;
+import shared.model.player.Player;
 
 public class CanPlaceRobber {
 

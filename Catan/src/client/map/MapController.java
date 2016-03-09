@@ -2,20 +2,20 @@ package client.map;
 
 import java.util.*;
 
-import player.Player;
 import client.states.*;
-import gameManager.GameManager;
-import map.Edge;
-import map.Map;
-import map.TerrainHex;
-import map.Vertex;
-import model.GameException;
-import model.GameModel;
 import shared.Piece;
 import shared.definitions.*;
 import shared.locations.*;
+import shared.model.GameException;
+import shared.model.GameModel;
+import shared.model.map.Edge;
+import shared.model.map.Map;
+import shared.model.map.TerrainHex;
+import shared.model.map.Vertex;
+import shared.model.player.Player;
 import client.base.*;
 import client.data.*;
+import client.gameManager.GameManager;
 
 
 /**

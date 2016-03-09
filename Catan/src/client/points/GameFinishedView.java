@@ -7,8 +7,8 @@ import java.awt.image.*;
 import javax.swing.*;
 
 import client.base.*;
+import client.gameManager.GameManager;
 import client.utils.*;
-import gameManager.GameManager;
 
 
 /**

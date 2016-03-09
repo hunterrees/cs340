@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
-import gameManager.GameManager;
-import model.Chat;
-import model.Line;
-import player.Player;
+import client.gameManager.GameManager;
 import shared.definitions.CatanColor;
+import shared.model.Chat;
+import shared.model.Line;
+import shared.model.player.Player;
 
 
 /**

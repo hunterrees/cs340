@@ -2,7 +2,7 @@ package client.states;
 
 import client.map.MapController;
 import shared.locations.HexLocation;
-import map.Map;
+import shared.model.map.Map;
 
 /**
  * Created by Brian on 16/2/17.

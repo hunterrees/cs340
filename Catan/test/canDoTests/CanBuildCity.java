@@ -1,8 +1,6 @@
 package canDoTests;
 
 import static org.junit.Assert.*;
-import map.Map;
-import map.Vertex;
 
 import org.junit.Test;
 
@@ -11,6 +9,8 @@ import shared.definitions.PieceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
+import shared.model.map.Map;
+import shared.model.map.Vertex;
 
 public class CanBuildCity {
 

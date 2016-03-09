@@ -6,9 +6,9 @@ import java.util.Observable;
 import client.base.*;
 import client.data.GameInfo;
 import client.data.PlayerInfo;
-import gameManager.GameManager;
-import model.GameException;
-import player.Player;
+import client.gameManager.GameManager;
+import shared.model.GameException;
+import shared.model.player.Player;
 
 
 /**

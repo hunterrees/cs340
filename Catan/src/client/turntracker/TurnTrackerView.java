@@ -7,8 +7,8 @@ import javax.swing.*;
 import shared.definitions.*;
 import client.base.*;
 import client.catan.*;
+import client.gameManager.GameManager;
 import client.utils.ImageUtils;
-import gameManager.GameManager;
 
 
 /**

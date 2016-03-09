@@ -3,11 +3,11 @@ package client.main;
 import javax.swing.*;
 
 import client.catan.*;
+import client.gameManager.GameManager;
 import client.login.*;
 import client.join.*;
 import client.misc.*;
-import gameManager.GameManager;
-import server.ServerProxy;
+import client.server.ServerProxy;
 import client.base.*;
 
 /**

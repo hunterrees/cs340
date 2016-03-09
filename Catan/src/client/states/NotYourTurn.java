@@ -1,6 +1,6 @@
 package client.states;
 
-import map.Map;
+import shared.model.map.Map;
 
 /**
  * Created by Brian on 16/2/17.

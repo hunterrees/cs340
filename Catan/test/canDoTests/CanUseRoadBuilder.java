@@ -2,13 +2,14 @@ package canDoTests;
 
 import static org.junit.Assert.*;
 
-import map.Edge;
-import map.Vertex;
 import org.junit.Test;
-import map.Map;
+
 import shared.Piece;
 import shared.definitions.PieceType;
 import shared.locations.*;
+import shared.model.map.Edge;
+import shared.model.map.Map;
+import shared.model.map.Vertex;
 
 
 public class CanUseRoadBuilder {

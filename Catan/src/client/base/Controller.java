@@ -3,7 +3,7 @@ package client.base;
 import java.util.Observable;
 import java.util.Observer;
 
-import gameManager.GameManager;
+import client.gameManager.GameManager;
 
 /**
  * Base class for controllers

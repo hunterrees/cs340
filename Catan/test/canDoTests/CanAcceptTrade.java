@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import model.Bank;
-import model.GameModel;
-import model.TurnTracker;
-import player.Player;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
-import trade.TradeOffer;
+import shared.model.Bank;
+import shared.model.GameModel;
+import shared.model.TurnTracker;
+import shared.model.player.Player;
+import shared.model.trade.TradeOffer;
 
 public class CanAcceptTrade {
 //tests

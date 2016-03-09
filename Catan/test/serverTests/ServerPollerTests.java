@@ -10,12 +10,12 @@ import java.util.TimerTask;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import gameManager.GameManager;
-import model.GameModel;
-import server.MockServerProxy;
-import server.ServerInterface;
-import server.ServerPoller;
-import translators.ModelTranslator;
+import client.gameManager.GameManager;
+import client.server.MockServerProxy;
+import client.server.ServerInterface;
+import client.server.ServerPoller;
+import client.translators.ModelTranslator;
+import shared.model.GameModel;
 // test
 public class ServerPollerTests {
 

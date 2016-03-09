@@ -1,13 +1,13 @@
 package canDoTests;
 
-import map.Edge;
-import map.Map;
-import map.TerrainHex;
-import map.Vertex;
 import org.junit.Test;
 import shared.Piece;
 import shared.definitions.PieceType;
 import shared.locations.*;
+import shared.model.map.Edge;
+import shared.model.map.Map;
+import shared.model.map.TerrainHex;
+import shared.model.map.Vertex;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

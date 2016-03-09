@@ -1,12 +1,12 @@
 package client.states;
 
+import client.gameManager.GameManager;
 import client.map.MapController;
-import gameManager.GameManager;
-import map.Map;
-import model.GameException;
 import shared.definitions.PieceType;
 import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
+import shared.model.GameException;
+import shared.model.map.Map;
 
 import java.util.Scanner;
 import java.util.Timer;
@@ -25,13 +25,11 @@ public class SetupFirst extends State{
 
         Scanner s = new Scanner(System.in);
 
-        System.out.println("before model");
 
        mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);
        // System.out.println("press any key to continue");
         //s.next();
 
-        System.out.println("after model");
 
     }
 

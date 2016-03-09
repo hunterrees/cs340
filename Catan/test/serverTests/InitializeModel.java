@@ -7,27 +7,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import map.Edge;
-import map.Map;
-import map.TerrainHex;
-import map.Vertex;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import model.Bank;
-import model.Chat;
-import model.Log;
-import model.TurnTracker;
+import client.translators.ModelTranslator;
 import shared.definitions.DevCardType;
 import shared.definitions.GameState;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
-import trade.TradeOffer;
-import translators.ModelTranslator;
+import shared.model.Bank;
+import shared.model.Chat;
+import shared.model.Log;
+import shared.model.TurnTracker;
+import shared.model.map.Edge;
+import shared.model.map.Map;
+import shared.model.map.TerrainHex;
+import shared.model.map.Vertex;
+import shared.model.trade.TradeOffer;
 // test
 public class InitializeModel {
 

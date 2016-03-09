@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
-import gameManager.GameManager;
-import player.Player;
+import client.gameManager.GameManager;
+import shared.model.player.Player;
 
 
 /**

@@ -14,9 +14,9 @@ import com.google.gson.JsonPrimitive;
 
 import client.base.*;
 import client.data.*;
+import client.gameManager.GameManager;
 import client.misc.*;
-import gameManager.GameManager;
-import server.ServerPoller;
+import client.server.ServerPoller;
 
 
 /**
