@@ -8,7 +8,11 @@ public class MaritimeTrade extends Command {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Preconditions: The player has the resources being offered according to owned ports, and the bank has 
+	 * the desired resource available
+	 * Postconditions: The resources are exchanged between the bank and player
+	 */
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
