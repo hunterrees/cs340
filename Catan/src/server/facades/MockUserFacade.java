@@ -2,7 +2,7 @@ package server.facades;
 
 import client.server.ServerException;
 
-public class UserFacade implements UserFacadeInterface{
+public class MockUserFacade implements UserFacadeInterface {
 
 	@Override
 	public String login(String json) throws ServerException {

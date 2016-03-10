@@ -2,7 +2,7 @@ package server.facades;
 
 import client.server.ServerException;
 
-public class MovesFacade implements MovesFacadeInterface{
+public class MockMovesFacade implements MovesFacadeInterface{
 
 	@Override
 	public String determineOperation(String command, String json, int gameID) throws ServerException {

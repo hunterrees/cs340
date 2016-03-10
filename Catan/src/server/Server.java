@@ -1,6 +1,14 @@
 package server;
 
+import java.util.ArrayList;
+
 import com.sun.net.httpserver.HttpServer;
+
+import server.handlers.GameHandler;
+import server.handlers.GamesHandler;
+import server.handlers.MovesHandler;
+import server.handlers.UserHandler;
+import shared.model.*;
 
 public class Server {
 	
@@ -11,12 +19,28 @@ public class Server {
 	/**
 	 * which port the server is listening on
 	 */
-	private int port;
+	private static int PORT = 8081;
 	/**
 	 * the max number of pending connections
 	 */
-	private int connections;
-	
+	private static int MAX_WAITING_CONNECTIONS = 10;
+	/**
+	 * used for /user/* commands
+	 */
+	private UserHandler userHandler;
+	/**
+	 * used for /games/* commands
+	 */
+	private GamesHandler gamesHandler;
+	/**
+	 * used for /game/* commands
+	 */
+	private GameHandler gameHandler;
+	/**
+	 * used for /moves/* commands
+	 */
+	private MovesHandler movesHandler;
+
 	public Server(){
 	}
 
