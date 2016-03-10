@@ -25,6 +25,6 @@ public interface GamesFacadeInterface {
 	 * @return
 	 * @throws ServerException
 	 */
-	public void joinGame(String json) throws ServerException;
+	public String joinGame(String json) throws ServerException;
 
 }

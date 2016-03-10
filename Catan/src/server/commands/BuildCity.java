@@ -2,9 +2,9 @@ package server.commands;
 
 import shared.model.GameModel;
 
-public class buildCity extends Command {
+public class BuildCity extends Command {
 
-	public buildCity(GameModel model, String json) {
+	public BuildCity(GameModel model, String json) {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}

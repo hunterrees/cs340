@@ -5,7 +5,7 @@ import client.server.ServerException;
 public class MockGameFacade implements GameFacadeInterface{
 
 	@Override
-	public String getModel(String json, int gameID) throws ServerException {
+	public String getModel(int gameID) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}

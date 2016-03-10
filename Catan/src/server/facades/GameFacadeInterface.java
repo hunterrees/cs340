@@ -6,12 +6,11 @@ public interface GameFacadeInterface {
 
 	/**
 	 * returns the gameModel of the requested game
-	 * @param json
 	 * @param gameID
 	 * @return
 	 * @throws ServerException
 	 */
-	public String getModel(String json, int gameID) throws ServerException;
+	public String getModel(int gameID) throws ServerException;
 	
 	/**
 	 * adds and AI to the request game

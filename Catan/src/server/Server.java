@@ -1,14 +1,11 @@
 package server;
 
-import java.util.ArrayList;
-
 import com.sun.net.httpserver.HttpServer;
 
 import server.handlers.GameHandler;
 import server.handlers.GamesHandler;
 import server.handlers.MovesHandler;
 import server.handlers.UserHandler;
-import shared.model.*;
 
 public class Server {
 	
