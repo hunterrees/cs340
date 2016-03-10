@@ -4,8 +4,8 @@ import shared.model.GameModel;
 
 public abstract class Command {
 	
-	private GameModel model;
-	private String json;
+	protected GameModel model;
+	protected String json;
 	
 	public Command(GameModel model, String json){
 		this.model = model;
