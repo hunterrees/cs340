@@ -9,6 +9,12 @@ public class BuyDevCard extends Command{
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Preconditions: The player has the required resources (1 ore, 1 wheat, 1 sheep)
+	 * 					There are Dev cards remaining in the bank.
+	 * PostConditions: A random dev card is added to the players hand. If it's a monument it's added to old
+	 * 					dev cards. Otherwise it is added to new dev cards (unplayable this turn).
+	 */
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
