@@ -8,7 +8,10 @@ public class OfferTrade extends Command{
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Preconditions: The trader has the resources being offered
+	 * PostConditions: The tradeOffer class instance in the model is populated
+	 */
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
