@@ -9,6 +9,11 @@ public class FinishTurn extends Command {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Preconditions: The game is in the correct state
+	 * PostConditions: Cards in the newDevCards hand are transferred to the oldDevCards hand.
+	 * 					The turn counter is incremented.
+	 */
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
