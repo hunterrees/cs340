@@ -1716,4 +1716,46 @@ public class Map {
 	public HashMap<VertexLocation, Port> getPorts() {
 		return ports;
 	}
+
+	/**
+	 * Places a a road at loc
+	 * @param playerID
+	 * @param loc
+     */
+	public void placeRoad(int playerID, EdgeLocation loc) {
+
+	}
+
+	/**
+	 * Places a settlement at lc
+	 * @param playerID
+	 * @param loc
+     */
+	public void placeSettlement(int playerID, VertexLocation loc) {
+
+	}
+
+	/**
+	 * Places a city at loc
+	 * @param playerID
+	 * @param loc
+     */
+	public void placeCity(int playerID, VertexLocation loc) {
+
+	}
+
+	/**
+	 * Sets the map as a random map
+	 */
+	public void generateRandomMap() {
+
+	}
+
+	/**
+	 * Moves the robber to loc
+	 * @param loc
+     */
+	public void moveRobber(HexLocation loc) {
+
+	}
 }
