@@ -10,6 +10,11 @@ public class Monopoly extends Command {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Preconditions: It's the player's turn. No other dev cards have been played.
+	 * Postconditions: All resources of specified type are moved from their respective player hand's to this
+	 * 					player's hand.
+	 */
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
