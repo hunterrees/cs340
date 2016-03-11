@@ -14,7 +14,7 @@ public class JoinGame extends Command{
 	 * Preconditions: The user has previously logged in to the server.
 	 *  The player may join the game because they are already in the game, or there is space in the game to add a new player.
 	 *  The specified game ID is valid.
-	 *  The specified color is valid(red, gree, blue, yellow, puce, brown, white, purple).
+	 *  The specified color is valid(red, green, blue, yellow, puce, brown, white, purple).
 	 * Postconditions: If the operation succeeds,
 	 *	1. The server returns an HTTP 200 success response with “Success” in the body.
 	 *	2. The player is in the game with the specified color (i.e. calls to /games/list method will
