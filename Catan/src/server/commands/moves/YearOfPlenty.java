@@ -1,10 +1,11 @@
-package server.commands;
+package server.commands.moves;
 
+import server.commands.Command;
 import shared.model.GameModel;
 
-public class RobPlayer extends Command {
+public class YearOfPlenty extends Command {
 
-	public RobPlayer(GameModel model, String json) {
+	public YearOfPlenty(GameModel model, String json) {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}
@@ -14,5 +15,4 @@ public class RobPlayer extends Command {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

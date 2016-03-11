@@ -1,10 +1,11 @@
-package server.commands;
+package server.commands.moves;
 
+import server.commands.Command;
 import shared.model.GameModel;
 
-public class AcceptTrade extends Command{
+public class RobPlayer extends Command {
 
-	public AcceptTrade(GameModel model, String json) {
+	public RobPlayer(GameModel model, String json) {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}

@@ -1,5 +1,6 @@
-package server.commands;
+package server.commands.moves;
 
+import server.commands.Command;
 import shared.model.GameModel;
 
 public class SendChat extends Command{

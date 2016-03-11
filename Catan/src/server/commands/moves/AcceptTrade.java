@@ -1,10 +1,11 @@
-package server.commands;
+package server.commands.moves;
 
+import server.commands.Command;
 import shared.model.GameModel;
 
-public class DiscardCards extends Command {
+public class AcceptTrade extends Command{
 
-	public DiscardCards(GameModel model, String json) {
+	public AcceptTrade(GameModel model, String json) {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}

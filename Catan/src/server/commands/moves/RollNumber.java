@@ -1,10 +1,11 @@
-package server.commands;
+package server.commands.moves;
 
+import server.commands.Command;
 import shared.model.GameModel;
 
-public class Monument extends Command {
+public class RollNumber extends Command{
 
-	public Monument(GameModel model, String json) {
+	public RollNumber(GameModel model, String json) {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}

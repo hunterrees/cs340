@@ -1,10 +1,11 @@
-package server.commands;
+package server.commands.moves;
 
+import server.commands.Command;
 import shared.model.GameModel;
 
-public class BuildRoad extends Command {
+public class RoadBuilding extends Command {
 
-	public BuildRoad(GameModel model, String json) {
+	public RoadBuilding(GameModel model, String json) {
 		super(model, json);
 		// TODO Auto-generated constructor stub
 	}
