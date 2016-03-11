@@ -12,6 +12,6 @@ public abstract class Command {
 		this.json = json;
 	}
 
-	public abstract void execute();
+	public abstract Object execute();
 
 }

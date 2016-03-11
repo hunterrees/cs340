@@ -16,9 +16,9 @@ public class BuyDevCard extends Command{
 	 * 					dev cards. Otherwise it is added to new dev cards (unplayable this turn).
 	 */
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

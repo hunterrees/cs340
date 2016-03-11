@@ -10,9 +10,8 @@ public class YearOfPlenty extends Command {
 	}
 
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-
 }

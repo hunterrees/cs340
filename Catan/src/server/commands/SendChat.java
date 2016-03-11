@@ -14,9 +14,9 @@ public class SendChat extends Command{
 	 * PostConditions: The message is sent to the chat log.
 	 */
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

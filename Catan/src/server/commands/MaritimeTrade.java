@@ -14,9 +14,9 @@ public class MaritimeTrade extends Command {
 	 * Postconditions: The resources are exchanged between the bank and player
 	 */
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

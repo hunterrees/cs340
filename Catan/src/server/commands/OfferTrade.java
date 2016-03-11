@@ -13,9 +13,9 @@ public class OfferTrade extends Command{
 	 * PostConditions: The tradeOffer class instance in the model is populated
 	 */
 	@Override
-	public void execute() {
+	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }
