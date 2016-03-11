@@ -15,6 +15,7 @@ public class YearOfPlenty extends Command {
 	 * Postconditions: The two specified resources are removed from the bank and added to the hand of the 
 	 * 					player.
 	 */
+	//testing
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
