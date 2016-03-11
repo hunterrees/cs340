@@ -12,7 +12,15 @@ public class Login extends Command{
 
 	/**
 	 * Preconditions: username and password are not null.
-	 * Postconditions: 
+	 * Postconditions: If the username and password are valid: 
+	 * 1. The server returns an HTTP 200 success response with "Success" in the body.
+	 * 2. The HTTP response headers set the catan.user cookie to contain the identity of the
+	 *	logged­in player. The cookie uses ”Path=/”, and its value contains a url­encoded JSON object of
+	 *	the following form: { “name”: STRING, “password”: STRING, “playerID”: INTEGER }. For
+	 *	example, { “name”: “Rick”, “password”: “secret”, “playerID”: 14 }.
+	 *
+	 *If the username and password ane not valid, or the operation fails for any reason:
+	 *1. The server returns an HTTP 400 error response, and the body contains an error message.
 	 */
 	@Override
 	public Object execute() {
