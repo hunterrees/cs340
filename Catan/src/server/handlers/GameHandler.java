@@ -1,10 +1,13 @@
 package server.handlers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import client.server.ServerException;
 import server.facades.GameFacadeInterface;
 
 public class GameHandler implements HttpHandler{
@@ -32,8 +35,23 @@ public class GameHandler implements HttpHandler{
 	 */
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Game endpoint received");
+		String command = exchange.getRequestURI().toString().replace("/game", "");
+		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
+		StringBuilder json = new StringBuilder();
+		String inputLine;
+		while((inputLine = in.readLine()) != null){
+			json.append(inputLine);
+		}
+		try{
+			switch(command){
+				case "/addAI": facade.addAI(json.toString()); break;
+				case "/listAIs": facade.listAIs(); break;
+				default: System.out.println("Unavailable method");
+			}
+		}catch(ServerException e){
+			e.printStackTrace();
+		} 
 	}
 
 }

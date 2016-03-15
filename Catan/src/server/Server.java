@@ -1,7 +1,10 @@
 package server;
 
 import com.sun.net.httpserver.HttpServer;
+import java.net.*;
+import java.io.*;
 
+import server.facades.*;
 import server.handlers.GameHandler;
 import server.handlers.GamesHandler;
 import server.handlers.MovesHandler;
@@ -38,20 +41,50 @@ public class Server {
 	 */
 	private MovesHandler movesHandler;
 
-	public Server(){
+	private Server(boolean testing){
+		if(testing){
+			userHandler = new UserHandler(new MockUserFacade());
+			gamesHandler = new GamesHandler(new MockGamesFacade());
+			gameHandler = new GameHandler(new MockGameFacade());
+			movesHandler = new MovesHandler(new MockMovesFacade());
+		}else{
+			userHandler = new UserHandler(new UserFacade());
+			gamesHandler = new GamesHandler(new GamesFacade());
+			gameHandler = new GameHandler(new GameFacade());
+			movesHandler = new MovesHandler(new MovesFacade());
+		}
 	}
 
 	/**
 	 * creates the server and creates contexts with handlers
 	 */
 	private void run(){
+		try {
+			System.out.println("Starting server");
+			server = HttpServer.create(new InetSocketAddress(PORT), MAX_WAITING_CONNECTIONS);
+		} 
+		catch (IOException e) {		
+			System.out.println("Failed to start server");
+			return;
+		}
 		
+		server.setExecutor(null);
+		
+		server.createContext("/user", userHandler);
+		server.createContext("/games", gamesHandler);
+		server.createContext("/game", gameHandler);
+		server.createContext("/moves", movesHandler);
+		
+		server.start();
 	}
 	/**
 	 * Starts the server running
 	 * @param args command line argument for port to run on
 	 */
 	public static void main(String args[]){
-
+		if(args.length > 0){
+			PORT = Integer.parseInt(args[0]);
+		}
+		new Server(false).run();
 	}
 }

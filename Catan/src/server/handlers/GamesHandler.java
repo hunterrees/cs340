@@ -32,7 +32,7 @@ public class GamesHandler implements HttpHandler{
 	 */
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Games endpoint received");
 		
 	}
 

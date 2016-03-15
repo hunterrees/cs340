@@ -11,7 +11,7 @@ public class MockGameFacade implements GameFacadeInterface{
 	}
 
 	@Override
-	public void addAI(String json, int gameID) throws ServerException {
+	public void addAI(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		
 	}

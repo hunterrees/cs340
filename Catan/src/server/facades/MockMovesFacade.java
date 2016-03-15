@@ -5,103 +5,103 @@ import client.server.ServerException;
 public class MockMovesFacade implements MovesFacadeInterface{
 
 	@Override
-	public String determineOperation(String command, String json, int gameID) throws ServerException {
+	public String determineOperation(String command, String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String sendChat(String json, int gameID) throws ServerException {
+	public String sendChat(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String rollNumber(String json, int gameID) throws ServerException {
+	public String rollNumber(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String robPlayer(String json, int gameID) throws ServerException {
+	public String robPlayer(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String finishTurn(String json, int gameID) throws ServerException {
+	public String finishTurn(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String buyDevCard(String json, int gameID) throws ServerException {
+	public String buyDevCard(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String yearOfPlenty(String json, int gameID) throws ServerException {
+	public String yearOfPlenty(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String roadBuilding(String json, int gameID) throws ServerException {
+	public String roadBuilding(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String soldier(String json, int gameID) throws ServerException {
+	public String soldier(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String monopoly(String json, int gameID) throws ServerException {
+	public String monopoly(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String monument(String json, int gameID) throws ServerException {
+	public String monument(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String buildRoad(String json, int gameID) throws ServerException {
+	public String buildRoad(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String buildSettlement(String json, int gameID) throws ServerException {
+	public String buildSettlement(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String buildCity(String json, int gameID) throws ServerException {
+	public String buildCity(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String offerTrade(String json, int gameID) throws ServerException {
+	public String offerTrade(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String acceptTrade(String json, int gameID) throws ServerException {
+	public String acceptTrade(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String discardCards(String json, int gameID) throws ServerException {
+	public String discardCards(String json) throws ServerException {
 		// TODO Auto-generated method stub
 		return null;
 	}

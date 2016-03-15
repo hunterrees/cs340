@@ -15,10 +15,9 @@ public interface GameFacadeInterface {
 	/**
 	 * adds and AI to the request game
 	 * @param json
-	 * @param gameID
 	 * @throws ServerException
 	 */
-	public void addAI(String json, int gameID) throws ServerException;
+	public void addAI(String json) throws ServerException;
 	
 	/**
 	 * lists the possible AIs to add to a game
