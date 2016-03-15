@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class ListGames extends Command{
 
-	public ListGames(GameModel model, String json) {
-		super(model, json);
+	public ListGames(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

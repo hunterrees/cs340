@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class RobPlayer extends Command {
 
-	public RobPlayer(GameModel model, String json) {
-		super(model, json);
+	public RobPlayer(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

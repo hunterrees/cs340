@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class RollNumber extends Command{
 
-	public RollNumber(GameModel model, String json) {
-		super(model, json);
+	public RollNumber(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

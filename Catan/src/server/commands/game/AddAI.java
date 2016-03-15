@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class AddAI extends Command {
 
-	public AddAI(GameModel model, String json) {
-		super(model, json);
+	public AddAI(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 	/**

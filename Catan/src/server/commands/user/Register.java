@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class Register extends Command{
 
-	public Register(GameModel model, String json) {
-		super(model, json);
+	public Register(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

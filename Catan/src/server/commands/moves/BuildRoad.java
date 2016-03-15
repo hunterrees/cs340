@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class BuildRoad extends Command {
 
-	public BuildRoad(GameModel model, String json) {
-		super(model, json);
+	public BuildRoad(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

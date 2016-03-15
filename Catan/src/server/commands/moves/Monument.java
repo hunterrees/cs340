@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class Monument extends Command {
 
-	public Monument(GameModel model, String json) {
-		super(model, json);
+	public Monument(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

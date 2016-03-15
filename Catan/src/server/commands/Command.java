@@ -1,5 +1,6 @@
 package server.commands;
 
+import server.ServerManager;
 import shared.model.GameModel;
 
 public abstract class Command {
@@ -13,8 +14,13 @@ public abstract class Command {
 	 */
 	protected String json;
 	
-	public Command(GameModel model, String json){
-		this.model = model;
+	protected int gameID;
+	
+	public Command(int gameID, String json){
+		this.gameID = gameID;
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		this.json = json;
 	}
 

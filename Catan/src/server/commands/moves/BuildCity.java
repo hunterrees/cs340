@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class BuildCity extends Command {
 
-	public BuildCity(GameModel model, String json) {
-		super(model, json);
+	public BuildCity(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

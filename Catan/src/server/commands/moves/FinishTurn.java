@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class FinishTurn extends Command {
 
-	public FinishTurn(GameModel model, String json) {
-		super(model, json);
+	public FinishTurn(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

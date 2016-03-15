@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class Monopoly extends Command {
 
-	public Monopoly(GameModel model, String json) {
-		super(model, json);
+	public Monopoly(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

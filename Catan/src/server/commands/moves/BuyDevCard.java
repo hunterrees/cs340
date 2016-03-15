@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class BuyDevCard extends Command{
 
-	public BuyDevCard(GameModel model, String json) {
-		super(model, json);
+	public BuyDevCard(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

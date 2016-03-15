@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class DiscardCards extends Command {
 
-	public DiscardCards(GameModel model, String json) {
-		super(model, json);
+	public DiscardCards(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

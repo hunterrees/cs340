@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class OfferTrade extends Command{
 
-	public OfferTrade(GameModel model, String json) {
-		super(model, json);
+	public OfferTrade(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 	/**

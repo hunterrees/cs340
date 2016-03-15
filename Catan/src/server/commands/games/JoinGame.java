@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class JoinGame extends Command{
 
-	public JoinGame(GameModel model, String json) {
-		super(model, json);
+	public JoinGame(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 

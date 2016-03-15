@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class MaritimeTrade extends Command {
 
-	public MaritimeTrade(GameModel model, String json) {
-		super(model, json);
+	public MaritimeTrade(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 	/**

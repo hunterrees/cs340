@@ -18,8 +18,8 @@ public class BuildSettlement extends Command {
 	boolean free;
 	String type;
 
-	public BuildSettlement(GameModel model, String json) {
-		super(model, json);
+	public BuildSettlement(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 		translate(json);
 	}

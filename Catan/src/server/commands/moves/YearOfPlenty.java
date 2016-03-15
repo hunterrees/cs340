@@ -5,8 +5,8 @@ import shared.model.GameModel;
 
 public class YearOfPlenty extends Command {
 
-	public YearOfPlenty(GameModel model, String json) {
-		super(model, json);
+	public YearOfPlenty(int gameID, String json) {
+		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 
