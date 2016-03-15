@@ -1723,7 +1723,7 @@ public class Map {
 	 * @param loc
      */
 	public void placeRoad(int playerID, EdgeLocation loc) {
-
+		edges.get(loc.getNormalizedLocation()).setPiece(new Piece(PieceType.ROAD, null, null, playerID));
 	}
 
 	/**
@@ -1732,7 +1732,8 @@ public class Map {
 	 * @param loc
      */
 	public void placeSettlement(int playerID, VertexLocation loc) {
-
+		Vertex vert = verticies.get(loc.getNormalizedLocation());
+		vert.setPiece(new Piece(PieceType.SETTLEMENT, null, null, playerID));
 	}
 
 	/**
@@ -1742,6 +1743,7 @@ public class Map {
      */
 	public void placeCity(int playerID, VertexLocation loc) {
 
+		verticies.get(loc.getNormalizedLocation()).setPiece(new Piece(PieceType.CITY, null, null, playerID));
 	}
 
 	/**
