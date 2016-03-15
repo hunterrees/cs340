@@ -20,6 +20,9 @@ public class ServerManager {
 	 * generates the default users and games on the server
 	 */
 	protected ServerManager(){
+		users = new ArrayList<User>();
+		games = new ArrayList<GameModel>();
+		users.add(new User("Sam", "sam", 0));
 	}
 	
 	/**
@@ -45,6 +48,11 @@ public class ServerManager {
 	 * @return
 	 */
 	public User getUser(String name){
+		for(int i = 0; i < users.size(); i++){
+			if(users.get(i).getName().equals(name)){
+				return users.get(i);
+			}
+		}
 		return null;
 	}
 	
@@ -53,7 +61,11 @@ public class ServerManager {
 	 * @param user
 	 */
 	public void addUser(User user){
-		
+		users.add(user);
+	}
+	
+	public int numUsers(){
+		return users.size();
 	}
 	
 	public static ServerManager getInstance(){

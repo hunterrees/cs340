@@ -1,13 +1,30 @@
 package server.commands.user;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import client.server.ServerException;
+import server.ServerManager;
+import server.User;
 import server.commands.Command;
 import shared.model.GameModel;
 
 public class Register extends Command{
+	
+	private String username;
+	private String password;
 
 	public Register(int gameID, String json) {
 		super(gameID, json);
-		// TODO Auto-generated constructor stub
+		Gson gson = new Gson();
+		JsonObject root = null;
+		try{
+			root = gson.fromJson(json, JsonObject.class);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		username = root.getAsJsonPrimitive("username").getAsString();
+		password = root.getAsJsonPrimitive("password").getAsString();
 	}
 
 	/**
@@ -24,11 +41,20 @@ public class Register extends Command{
 	 *	reason,
 	 *	1. The server returns an HTTP 400 error response, and the body contains an error
 	 *	message.
+	 * @throws ServerException 
 	 */
 	@Override
-	public Object execute() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object execute() throws ServerException {
+		if(username.equals("") || password.equals("")){
+			throw new ServerException("Blank username or password");
+		}
+		User user = ServerManager.getInstance().getUser(username);
+		if(user != null){
+			throw new ServerException("User already exists");
+		}
+		user = new User(username, password, ServerManager.getInstance().numUsers());
+		ServerManager.getInstance().addUser(user);
+		return user.generateCookie();
 	}
 
 }

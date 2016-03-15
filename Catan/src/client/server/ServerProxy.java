@@ -72,7 +72,6 @@ public class ServerProxy implements ServerInterface {
 				JsonObject jsonCookie = gson.fromJson(jsonCookieString, JsonObject.class);
 				JsonPrimitive nameJson = jsonCookie.getAsJsonPrimitive("name");
 				String name = nameJson.getAsString();
-				
 				JsonPrimitive idJson = jsonCookie.getAsJsonPrimitive("playerID");
 				int id = idJson.getAsInt();
 				
@@ -119,6 +118,7 @@ public class ServerProxy implements ServerInterface {
 			}
 			in.close();
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new ServerException(String.format("doPost failed: %s", e.getMessage()), e);
 		}
 		return result.toString();

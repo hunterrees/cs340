@@ -1,15 +1,19 @@
 package server;
 
+import java.net.URLEncoder;
+
+import com.google.gson.Gson;
+
 public class User {
 	
 	private String name;
 	private String password;
-	private int ID;
+	private int playerID;
 	
-	public User(String name, String password, int ID) {
+	public User(String name, String password, int playerID) {
 		this.name = name;
 		this.password = password;
-		this.ID = ID;
+		this.playerID = playerID;
 	}
 
 	public String getName() {
@@ -27,19 +31,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getID() {
-		return ID;
+	public int getplayerID() {
+		return playerID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setplayerID(int playerID) {
+		playerID = playerID;
 	}
 
 	/**
 	 * Generate the user cookie for the client and returns it
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public String generateCookie(){
-		return null;
+		Gson gson = new Gson();
+		return URLEncoder.encode(gson.toJson(this));
 	}
 }

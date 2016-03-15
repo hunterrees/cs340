@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -36,7 +37,6 @@ public class UserHandler implements HttpHandler{
 	 */
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-		System.out.println("User endpoint received");
 		String command = exchange.getRequestURI().toString().replace("/user", "");
 		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
 		StringBuilder json = new StringBuilder();
@@ -44,13 +44,27 @@ public class UserHandler implements HttpHandler{
 		while((inputLine = in.readLine()) != null){
 			json.append(inputLine);
 		}
+		String cookie ="";
 		try{
 			switch(command){
-				case "/login": facade.login(json.toString()); break;
-				case "/register": facade.register(json.toString()); break;
+				case "/login": cookie = facade.login(json.toString()); break;
+				case "/register": cookie = facade.register(json.toString()); break;
 				default: System.out.println("Unavailable method");
 			}
+			exchange.getResponseHeaders().set("Content-Type", "application/text");
+			String userCookie = "catan.user=" + cookie + ";Path=/;";
+			exchange.getResponseHeaders().add("Set-cookie", userCookie);
+			System.out.println(userCookie);
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			String body = "Success";
+			byte[] response = body.getBytes();
+			exchange.getResponseBody().write(response);
+			exchange.getResponseBody().close();
 		}catch(ServerException e){
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+			byte[] response = e.getMessage().getBytes();
+			exchange.getResponseBody().write(response);
+			exchange.close();
 			e.printStackTrace();
 		} 
 	}

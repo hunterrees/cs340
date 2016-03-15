@@ -1,21 +1,21 @@
 package server.facades;
 
 import client.server.ServerException;
+import server.commands.user.Login;
+import server.commands.user.Register;
 
 public class UserFacade implements UserFacadeInterface{
 
 	@Override
 	public String login(String json) throws ServerException {
-		System.out.println("Login called");
-		System.out.println(json);
-		return null;
+		Login loginCommand = new Login(-1, json);
+		return (String) loginCommand.execute();
 	}
 
 	@Override
 	public String register(String json) throws ServerException {
-		System.out.println("Register called");
-		System.out.println(json);
-		return null;
+		Register registerCommand = new Register(-1, json);
+		return (String) registerCommand.execute();
 	}
 
 }

@@ -1,5 +1,6 @@
 package server.commands;
 
+import client.server.ServerException;
 import server.ServerManager;
 import shared.model.GameModel;
 
@@ -27,7 +28,8 @@ public abstract class Command {
 	/**
 	 * Updates the model according to the command and parameters given
 	 * @return
+	 * @throws ServerException 
 	 */
-	public abstract Object execute();
+	public abstract Object execute() throws ServerException;
 
 }
