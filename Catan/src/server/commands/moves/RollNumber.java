@@ -25,6 +25,11 @@ public class RollNumber extends Command{
 
 
 	public void givePlayerResources(int roll) {
+		if(roll == 7) {
+			// Do robber stuff here
+			return;
+		}
+
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
 			if(entry.getValue().getNumber() == roll && !map.getRobberLocation().equals(entry.getKey())) {
 				// Check every edge
