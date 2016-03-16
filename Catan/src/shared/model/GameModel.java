@@ -26,6 +26,7 @@ public class GameModel {
 	private Chat chat;
 	private Log log;
 	private int winner;
+	private String title;
 
 // Constructor
 	public GameModel(Map map, Bank bank, ArrayList<Player> players, HexLocation robberLoc, TradeOffer theTrade,
@@ -537,6 +538,14 @@ public class GameModel {
 	public void setTradeOffer(TradeOffer tradeToSet)
 	{
 		theTrade = tradeToSet;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 

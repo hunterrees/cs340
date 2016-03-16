@@ -54,7 +54,6 @@ public class UserHandler implements HttpHandler{
 			exchange.getResponseHeaders().set("Content-Type", "application/text");
 			String userCookie = "catan.user=" + cookie + ";Path=/;";
 			exchange.getResponseHeaders().add("Set-cookie", userCookie);
-			System.out.println(userCookie);
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			String body = "Success";
 			byte[] response = body.getBytes();

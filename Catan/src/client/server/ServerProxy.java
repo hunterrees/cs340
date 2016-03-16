@@ -74,7 +74,6 @@ public class ServerProxy implements ServerInterface {
 				String name = nameJson.getAsString();
 				JsonPrimitive idJson = jsonCookie.getAsJsonPrimitive("playerID");
 				int id = idJson.getAsInt();
-				
 				GameManager.getInstance().getPlayerInfo().setId(id);
 				GameManager.getInstance().getPlayerInfo().setName(name);
 			}else if(urlPath == "/games/create"){

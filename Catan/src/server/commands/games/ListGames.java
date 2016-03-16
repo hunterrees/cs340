@@ -1,5 +1,6 @@
 package server.commands.games;
 
+import server.ServerManager;
 import server.commands.Command;
 import shared.model.GameModel;
 
@@ -20,7 +21,15 @@ public class ListGames extends Command{
 	 */
 	@Override
 	public Object execute() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < ServerManager.getInstance().getGames().size(); i++){
+			GameModel game = ServerManager.getInstance().getGame(i);
+			for(int j = 0; j < game.getPlayers().size(); j++){
+				//extract PlayerInfo
+			}
+			//extract GameInfo and add PlayerInfo
+			//add game info to the array
+		}
+		//make the GameInfo into a Json string and return it
 		return null;
 	}
 
