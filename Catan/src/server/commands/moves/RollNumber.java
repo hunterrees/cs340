@@ -1,6 +1,9 @@
 package server.commands.moves;
 
 import client.gameManager.GameManager;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import server.commands.Command;
 import shared.definitions.HexType;
 import shared.definitions.PieceType;
@@ -13,20 +16,59 @@ import shared.model.map.TerrainHex;
 import shared.model.map.Vertex;
 import shared.model.player.Player;
 
+import java.util.ArrayList;
+
 public class RollNumber extends Command{
 
-	Map map;
+	Map map = model.getMap();
+
+	String type;
+	int numRolled;
+	int playerIndex;
 
 	public RollNumber(int gameID, String json) {
 		super(gameID, json);
 		// TODO Auto-generated constructor stub
+		translate(json);
 	}
 
+
+	public void translate(String json) {
+		Gson gson = new Gson();
+		JsonObject root;
+		try{
+			root = gson.fromJson(json, JsonObject.class);
+		}catch(Exception e){
+			return;
+		}
+
+		JsonPrimitive typePrim = root.getAsJsonPrimitive("type");
+		type = typePrim.getAsString();
+
+		JsonPrimitive myPlayerIndex = root.getAsJsonPrimitive("playerIndex");
+		playerIndex = myPlayerIndex.getAsInt();
+
+		JsonPrimitive myNumRolled = root.getAsJsonPrimitive("number");
+		numRolled = myNumRolled.getAsInt();
+
+
+	}
+
+	public void sevenRolled() {
+		ArrayList<Player> players = model.getPlayers();
+
+		for(Player p : players) {
+			if(p.getPlayerHand().getNumResources() > 7) {
+				// Have player discard cards
+			}
+		}
+	}
 
 
 	public void givePlayerResources(int roll) {
 		if(roll == 7) {
 			// Do robber stuff here
+			sevenRolled();
 			return;
 		}
 
