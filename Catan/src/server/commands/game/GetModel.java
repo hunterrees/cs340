@@ -39,65 +39,7 @@ public class GetModel extends Command{
 	 */
 
 
-	public ArrayList<Integer> generateNumberPool() {
-		ArrayList<Integer> list = new ArrayList<>();
 
-		// Add the numbers in
-		list.add(2);
-
-		list.add(3);
-		list.add(3);
-
-		list.add(4);
-		list.add(4);
-
-		list.add(5);
-		list.add(5);
-
-		list.add(6);
-		list.add(6);
-
-		list.add(8);
-		list.add(8);
-
-		list.add(9);
-		list.add(9);
-
-		list.add(10);
-		list.add(10);
-
-		list.add(11);
-		list.add(11);
-
-		list.add(12);
-
-		// Shuffle the numbers
-		Collections.shuffle(list);
-
-		return list;
-	}
-
-
-	public void generateRandomNumbers() {
-
-		ArrayList<Integer> numbers = generateNumberPool();
-		int counter = 0;
-
-
-		for(java.util.Map.Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()){
-
-			if(entry.getValue().getType() != HexType.WATER &&
-					entry.getValue().getType() != HexType.DESERT) {
-
-				entry.getValue().setNumber(numbers.get(counter));
-				counter ++;
-			}
-		}
-
-		if(counter != numbers.size()) {
-			System.out.println("Error! Didn't use correct number of numbers! Location: GetModel.generateRandomNumbers()");
-		}
-	}
 
 	public void generateRandomHexes() {
 		// Create this method in the map class
