@@ -30,7 +30,6 @@ public class RollNumber extends Command{
 				// Check every edge
 				for(java.util.Map.Entry<VertexLocation, Vertex> entryTwo : entry.getValue().getVerticies().entrySet()) {
 					if(entryTwo.getValue().getPiece() != null) {
-						// I don't know if the id in piece is the playerIndex or not
 						addResource(entryTwo.getValue().getPiece().getPieceType(), entry.getValue().getType(), entryTwo.getValue().getPiece().getPlayerID());
 					}
 				}

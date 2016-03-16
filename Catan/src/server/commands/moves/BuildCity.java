@@ -16,7 +16,7 @@ public class BuildCity extends Command {
 
 	VertexLocation vertLoc;
 	int playerIndex;
-	boolean free;
+	
 	String type;
 
 	public BuildCity(int gameID, String json) {
@@ -59,10 +59,9 @@ public class BuildCity extends Command {
 			case "W" : vertDir = VertexDirection.West; break;
 			default : vertDir = null; break;
 		}
-		vertLoc = new VertexLocation(new HexLocation(x, y), vertDir);
+		vertLoc = new VertexLocation(new HexLocation(x, y), vertDir).getNormalizedLocation();
 
-		JsonPrimitive primFree = root.getAsJsonPrimitive("free");
-		free = primFree.getAsBoolean();
+		
 
 	}
 
@@ -77,32 +76,15 @@ public class BuildCity extends Command {
 	public Object execute() {
 		// TODO Auto-generated method stub
 
-
-		model.getMap().placeSettlement(playerIndex, vertLoc);
-		if(!free){
+		if(model.canBuildCity(playerIndex, vertLoc)){
+			model.getMap().placeSettlement(playerIndex, vertLoc);
 			//take resources from player
-
+	
 			Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
-
-			// Check if user has enough resources
-			boolean enough;
-			if(p.getPlayerHand().numResourceOfType(ResourceType.WHEAT) > 1 &&
-					p.getPlayerHand().numResourceOfType(ResourceType.ORE) > 2) {
-				enough = true;
-			} else {
-				enough = false;
-			}
-
 			// Remove the resources
-			if(enough) {
-				p.getPlayerHand().removeResources(2, ResourceType.WHEAT);
-				p.getPlayerHand().removeResources(3, ResourceType.ORE);
-
-
-			}
-
+			p.getPlayerHand().removeResources(2, ResourceType.WHEAT);
+			p.getPlayerHand().removeResources(3, ResourceType.ORE);	
 		}
-
 		return null;
 	}
 

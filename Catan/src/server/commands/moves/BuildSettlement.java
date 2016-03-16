@@ -61,7 +61,7 @@ public class BuildSettlement extends Command {
 			case "W" : vertDir = VertexDirection.West; break;
 			default : vertDir = null; break;
 		}
-		vertLoc = new VertexLocation(new HexLocation(x, y), vertDir);
+		vertLoc = new VertexLocation(new HexLocation(x, y), vertDir).getNormalizedLocation();
 		
 		JsonPrimitive primFree = root.getAsJsonPrimitive("free");
 		free = primFree.getAsBoolean();
