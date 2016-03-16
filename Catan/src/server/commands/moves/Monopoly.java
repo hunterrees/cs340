@@ -21,7 +21,7 @@ public class Monopoly extends Command {
 		// TODO Auto-generated constructor stub
 	}
 
-	private void translate(String json)
+	private void translate()
 	{
 		Gson gson = new Gson();
 		JsonObject root;
@@ -97,6 +97,7 @@ public class Monopoly extends Command {
 	
 	@Override
 	public Object execute() {
+		translate();
 		int stealAmount = 0;
 		for (int i = 0; i < 4; i++)
 		{
