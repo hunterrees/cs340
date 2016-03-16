@@ -533,6 +533,11 @@ public class GameModel {
 	{
 		return theTrade;
 	}
+	
+	public void setTradeOffer(TradeOffer tradeToSet)
+	{
+		theTrade = tradeToSet;
+	}
 
 
 // Private methods
