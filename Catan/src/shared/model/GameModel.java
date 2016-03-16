@@ -534,5 +534,6 @@ public class GameModel {
 		return theTrade;
 	}
 
+
 // Private methods
 }
