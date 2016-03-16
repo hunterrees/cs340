@@ -1,7 +1,12 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import client.translators.ModelTranslator;
 import shared.model.GameModel;
 
 public class ServerManager {
@@ -16,13 +21,40 @@ public class ServerManager {
 	private ArrayList<User> users;
 	
 	private static ServerManager manager = null;
+	
+	private ModelTranslator translator;
 	/**
 	 * generates the default users and games on the server
+	 * @throws FileNotFoundException 
 	 */
-	protected ServerManager(){
+	protected ServerManager() throws FileNotFoundException{
 		users = new ArrayList<User>();
 		games = new ArrayList<GameModel>();
 		users.add(new User("Sam", "sam", 0));
+		users.add(new User("Pete", "pete", 1));
+		users.add(new User("Brooke", "brooke", 2));
+		users.add(new User("Mark", "mark", 3));
+		Scanner scanner1 = new Scanner(new BufferedReader(new FileReader("Games/defaultGame.json")));
+		StringBuilder defaultJson = new StringBuilder();
+		while(scanner1.hasNext()){
+			String inputLine = scanner1.next();
+			defaultJson.append(inputLine);
+		}
+		GameModel defaultGame = translator.getModelfromJSON(defaultJson.toString());
+		defaultGame.setTitle("Default Game");
+		games.add(defaultGame);
+		scanner1.close();
+		
+		Scanner scanner2 = new Scanner(new BufferedReader(new FileReader("Games/defaultGame.json")));
+		StringBuilder setUpJson = new StringBuilder();
+		while(scanner2.hasNext()){
+			String inputLine = scanner2.next();
+			defaultJson.append(inputLine);
+		}
+		GameModel setUpGame = translator.getModelfromJSON(setUpJson.toString());
+		setUpGame.setTitle("Empty Game");
+		games.add(setUpGame);
+		scanner2.close();
 	}
 	
 	/**
@@ -39,7 +71,7 @@ public class ServerManager {
 	 * @param model
 	 */
 	public void createGame(GameModel model){
-		
+		games.add(model);
 	}
 	
 	/**
@@ -56,6 +88,17 @@ public class ServerManager {
 		return null;
 	}
 	
+	public boolean validateUser(String cookie){
+		cookie = cookie.replace("user.cookie=", "");
+		cookie = cookie.replace(";", "");
+		for(int i = 0; i < users.size(); i++){
+			if(users.get(i).generateCookie().equals(cookie)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * adds a user to the server
 	 * @param user
@@ -70,9 +113,20 @@ public class ServerManager {
 	
 	public static ServerManager getInstance(){
 		if(manager == null){
-			manager = new ServerManager();
+			try {
+				manager = new ServerManager();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		return manager;
 	}
 
+	public ArrayList<GameModel> getGames() {
+		return games;
+	}
+
+	public ArrayList<User> getUsers() {
+		return users;
+	}
 }

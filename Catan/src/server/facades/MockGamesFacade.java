@@ -17,9 +17,9 @@ public class MockGamesFacade implements GamesFacadeInterface {
 	}
 
 	@Override
-	public String joinGame(String json) throws ServerException {
+	public int joinGame(String json) throws ServerException {
 		// TODO Auto-generated method stub
-		return null;
+		return -1;
 	}
 
 }
