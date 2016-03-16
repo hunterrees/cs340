@@ -79,33 +79,40 @@ public class BuildSettlement extends Command {
 	public Object execute() {
 		// TODO Auto-generated method stub
 		
-		
-		model.getMap().placeSettlement(playerIndex, vertLoc);
-		if(!free){
-			//take resources from player
-
-			Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
-
-			// Check if user has enough resources
-			boolean enough;
-			if(p.getPlayerHand().numResourceOfType(ResourceType.WOOD) > 0 &&
-					p.getPlayerHand().numResourceOfType(ResourceType.BRICK) > 0 &&
-					p.getPlayerHand().numResourceOfType(ResourceType.SHEEP) > 0 &&
-					p.getPlayerHand().numResourceOfType(ResourceType.WHEAT) > 0) {
-				enough = true;
-			} else {
-				enough = false;
-			}
-
-			// Remove the resources
-			if(enough) {
-				p.getPlayerHand().removeResources(1, ResourceType.WOOD);
-				p.getPlayerHand().removeResources(1, ResourceType.BRICK);
-				p.getPlayerHand().removeResources(1, ResourceType.SHEEP);
-				p.getPlayerHand().removeResources(1, ResourceType.WHEAT);
-
-			}
+		if(model.getMap().canBuildSettlement(playerIndex, free, vertLoc)){
 			
+		
+		
+			if(!free){
+				//take resources from player
+	
+				Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
+	
+				// Check if user has enough resources
+				boolean enough;
+				if(p.getPlayerHand().numResourceOfType(ResourceType.WOOD) > 0 &&
+						p.getPlayerHand().numResourceOfType(ResourceType.BRICK) > 0 &&
+						p.getPlayerHand().numResourceOfType(ResourceType.SHEEP) > 0 &&
+						p.getPlayerHand().numResourceOfType(ResourceType.WHEAT) > 0) {
+					enough = true;
+				} else {
+					enough = false;
+				}
+	
+				// Remove the resources
+				if(enough) {
+					p.getPlayerHand().removeResources(1, ResourceType.WOOD);
+					p.getPlayerHand().removeResources(1, ResourceType.BRICK);
+					p.getPlayerHand().removeResources(1, ResourceType.SHEEP);
+					p.getPlayerHand().removeResources(1, ResourceType.WHEAT);
+					model.getMap().placeSettlement(playerIndex, vertLoc);
+	
+				}
+				
+			}
+			else{
+				model.getMap().placeSettlement(playerIndex, vertLoc);
+			}
 		}
 		
 		return null;
