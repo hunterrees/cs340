@@ -57,20 +57,10 @@ public class BuyDevCard extends Command{
 		// TODO Auto-generated method stub
 
 		// Check if the player has enough resources to buy a development card
-		boolean enough = true;
+		Player p = model.getPlayers().get(playerIndex);
 
-		if(enough) {
-			Player p = model.getPlayers().get(playerIndex);
-
-			// Remove resources
-			p.getPlayerHand().removeResources(1, ResourceType.SHEEP);
-			p.getPlayerHand().removeResources(1, ResourceType.WHEAT);
-			p.getPlayerHand().removeResources(1, ResourceType.ORE);
-
+		if(p.canBuyDevCard()) {
 			p.canBuyDevCard();
-
-
-
 		}
 
 
