@@ -74,6 +74,8 @@ public class Server {
 		server.createContext("/games", gamesHandler);
 		server.createContext("/game", gameHandler);
 		server.createContext("/moves", movesHandler);
+		server.createContext("/docs/api/data", new Handlers.JSONAppender("")); 
+		server.createContext("/docs/api/view", new Handlers.BasicFile(""));
 		
 		server.start();
 	}
