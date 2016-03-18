@@ -18,22 +18,20 @@ public abstract class Command {
 	
 	protected int gameID;
 	
-	protected boolean myTurn(int playerID)
+	protected void myTurn(int playerID) throws ServerException
 	{
-		if (model.getTracker().getCurrentTurnPlayerID() == playerID)
+		if (model.getTracker().getCurrentTurnPlayerID() != playerID)
 		{
-			return true;
+			throw new ServerException("Not your turn");
 		}
-		return false;
 	}
 	
-	protected boolean playingState()
+	protected void playingState() throws ServerException
 	{
-		if (model.getTracker().getGameStatus() == GameState.playing)
+		if (model.getTracker().getGameStatus() != GameState.playing)
 		{
-			return true;
+			throw new ServerException("Gamestate is not Playing");
 		}
-		return false;
 	}
 	
 	public Command(int gameID, String json){
