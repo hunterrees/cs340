@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import client.server.ServerException;
 import server.commands.Command;
 import shared.ResourceCard;
 import shared.definitions.ResourceType;
@@ -96,8 +97,10 @@ public class Monopoly extends Command {
 	
 	
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		translate();
+		playingState();
+		myTurn(playerIndex);
 		int stealAmount = 0;
 		for (int i = 0; i < 4; i++)
 		{
