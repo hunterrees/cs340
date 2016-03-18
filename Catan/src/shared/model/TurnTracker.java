@@ -41,4 +41,16 @@ public class TurnTracker
 		this.currentTurnPlayerID = currentTurnPlayerID;
 	}
 	
+	public String statusToString(){
+		switch(gameStatus){
+			case playing: return "Playing";
+			case rolling: return "Rolling";
+			case firstRound: return "FirstRound";
+			case secondRound: return "SecondRound";
+			case discarding: return "Discarding";
+			case robbing: return "Robbing";
+		}
+		return null;
+	}
+	
 }

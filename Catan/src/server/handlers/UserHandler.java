@@ -45,13 +45,13 @@ public class UserHandler implements HttpHandler{
 			json.append(inputLine);
 		}
 		String cookie ="";
+		exchange.getResponseHeaders().set("Content-Type", "application/text");
 		try{
 			switch(command){
 				case "/login": cookie = facade.login(json.toString()); break;
 				case "/register": cookie = facade.register(json.toString()); break;
 				default: System.out.println("Unavailable method");
 			}
-			exchange.getResponseHeaders().set("Content-Type", "application/text");
 			String userCookie = "catan.user=" + cookie + ";Path=/;";
 			exchange.getResponseHeaders().add("Set-cookie", userCookie);
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
@@ -60,10 +60,10 @@ public class UserHandler implements HttpHandler{
 			exchange.getResponseBody().write(response);
 			exchange.getResponseBody().close();
 		}catch(ServerException e){
-			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 			byte[] response = e.getMessage().getBytes();
 			exchange.getResponseBody().write(response);
-			exchange.close();
+			exchange.getResponseBody().close();
 			e.printStackTrace();
 		} 
 	}

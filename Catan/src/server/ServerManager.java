@@ -28,6 +28,8 @@ public class ServerManager {
 	 * @throws FileNotFoundException 
 	 */
 	protected ServerManager() throws FileNotFoundException{
+		try{
+		translator = new ModelTranslator();
 		users = new ArrayList<User>();
 		games = new ArrayList<GameModel>();
 		users.add(new User("Sam", "sam", 0));
@@ -45,16 +47,19 @@ public class ServerManager {
 		games.add(defaultGame);
 		scanner1.close();
 		
-		Scanner scanner2 = new Scanner(new BufferedReader(new FileReader("Games/defaultGame.json")));
+		Scanner scanner2 = new Scanner(new BufferedReader(new FileReader("Games/setUpGame.json")));
 		StringBuilder setUpJson = new StringBuilder();
 		while(scanner2.hasNext()){
 			String inputLine = scanner2.next();
-			defaultJson.append(inputLine);
+			setUpJson.append(inputLine);
 		}
 		GameModel setUpGame = translator.getModelfromJSON(setUpJson.toString());
 		setUpGame.setTitle("Empty Game");
 		games.add(setUpGame);
 		scanner2.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**

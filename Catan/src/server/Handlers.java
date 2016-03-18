@@ -57,7 +57,6 @@ public static class JSONAppender extends BaseFile{
 	
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-		System.out.println( this.rootPath + " ___ " + this.getRequestPath(exchange));
 		this.sendFile(exchange, this.rootPath + this.getRequestPath(exchange) +".json");
 	} 
 	}
