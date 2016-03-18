@@ -31,6 +31,14 @@ public class Hand
 	 * returns number of total resources owned by player
 	 * @return
 	 */
+	public void newDevCardsToOld()
+	{
+		for (int i = 0; i < newDevelopmentCards.size(); i++)
+		{
+			oldDevelopmentCards.add(newDevelopmentCards.get(i));
+		}
+		newDevelopmentCards = new ArrayList<DevelopmentCard>();
+	}
 	public int getNumResources()
 	{
 		return resourceCards.size();
