@@ -3,8 +3,14 @@ package server.commands.moves;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import server.ServerTranslator;
 import server.commands.Command;
+import shared.model.Chat;
 import shared.model.GameModel;
+import shared.model.Line;
+import shared.model.player.Player;
+
+import java.util.ArrayList;
 
 public class SendChat extends Command{
 
@@ -48,7 +54,19 @@ public class SendChat extends Command{
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return null;
+		Player p = model.getPlayers().get(playerIndex);
+
+		ArrayList<Line> lines = model.getChat().getLines();
+		lines.add(new Line(p.getName(), message));
+		model.setChat(new Chat(lines));
+
+		//Line line = new Line(p.getName(), p.getName() + " bought a development card");
+		//model.getLog().addLine(line);
+
+		//model.getTracker().setGameStatus(blah);
+
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }

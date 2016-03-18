@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeDirection;
@@ -12,6 +13,7 @@ import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.player.Player;
 
 public class BuildRoad extends Command {
@@ -81,20 +83,24 @@ public class BuildRoad extends Command {
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
+		Player p = model.getPlayers().get(playerIndex);
+
 		if(model.canBuildRoad(playerIndex, free, edgeLoc)){
 			model.getMap().placeRoad(playerIndex, edgeLoc);
 			
-			Player p = model.getPlayers().get(playerIndex);
 			p.getPlayerHand().removeResources(1, ResourceType.WOOD);
 			p.getPlayerHand().removeResources(1, ResourceType.BRICK);
 			
 		}
 
 
+		Line line = new Line(p.getName(), p.getName() + " built a road");
+		model.getLog().addLine(line);
 
+		//model.getTracker().setGameStatus(blah);
 
-
-		return null;
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }

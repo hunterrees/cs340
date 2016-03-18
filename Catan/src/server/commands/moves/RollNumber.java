@@ -4,13 +4,16 @@ import client.gameManager.GameManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.GameState;
 import shared.definitions.HexType;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.map.Map;
 import shared.model.map.TerrainHex;
 import shared.model.map.Vertex;
@@ -59,7 +62,8 @@ public class RollNumber extends Command{
 
 		for(Player p : players) {
 			if(p.getPlayerHand().getNumResources() > 7) {
-				// Have player discard cards
+				model.getTracker().setGameStatus(GameState.discarding);
+				break;
 			}
 		}
 	}
@@ -127,7 +131,19 @@ public class RollNumber extends Command{
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return null;
+		Player p = model.getPlayers().get(playerIndex);
+
+
+		givePlayerResources(numRolled);
+		Line line = new Line(p.getName(), p.getName() + " rolled a " + numRolled);
+		model.getLog().addLine(line);
+
+
+
+		//model.getTracker().setGameStatus(blah);
+
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }

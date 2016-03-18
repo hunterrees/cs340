@@ -5,12 +5,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.map.Map;
 import shared.model.player.Player;
 
@@ -78,7 +80,8 @@ public class BuildSettlement extends Command {
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		
+		Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
+
 		if(model.getMap().canBuildSettlement(playerIndex, free, vertLoc)){
 			
 		
@@ -86,8 +89,7 @@ public class BuildSettlement extends Command {
 			if(!free){
 				//take resources from player
 	
-				Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
-	
+
 				// Check if user has enough resources
 				boolean enough;
 				if(p.getPlayerHand().numResourceOfType(ResourceType.WOOD) > 0 &&
@@ -114,8 +116,14 @@ public class BuildSettlement extends Command {
 				model.getMap().placeSettlement(playerIndex, vertLoc);
 			}
 		}
-		
-		return null;
+
+		Line line = new Line(p.getName(), p.getName() + " built a road");
+		model.getLog().addLine(line);
+
+		//model.getTracker().setGameStatus(blah);
+
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }

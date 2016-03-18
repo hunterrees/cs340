@@ -4,10 +4,12 @@ import client.gameManager.GameManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
 import shared.model.Bank;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.player.Player;
 
 public class BuyDevCard extends Command{
@@ -64,7 +66,13 @@ public class BuyDevCard extends Command{
 		}
 
 
-		return null;
+		Line line = new Line(p.getName(), p.getName() + " bought a development card");
+		model.getLog().addLine(line);
+
+		//model.getTracker().setGameStatus(blah);
+
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }
