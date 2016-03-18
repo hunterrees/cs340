@@ -1,14 +1,16 @@
 package server.facades;
 
 import client.server.ServerException;
+import server.commands.games.CreateGame;
+import server.commands.games.JoinGame;
 import server.commands.games.ListGames;
 
 public class GamesFacade implements GamesFacadeInterface{
 
 	@Override
 	public String createGame(String json) throws ServerException {
-		// TODO Auto-generated method stub
-		return null;
+		CreateGame createGameCommand = new CreateGame(-1, json);
+		return (String) createGameCommand.execute();
 	}
 
 	@Override
@@ -19,8 +21,8 @@ public class GamesFacade implements GamesFacadeInterface{
 
 	@Override
 	public int joinGame(String json) throws ServerException {
-		// TODO Auto-generated method stub
-		return -1;
+		JoinGame joinGameCommand = new JoinGame(-1, json);
+		return (int) joinGameCommand.execute();
 	}
 
 }

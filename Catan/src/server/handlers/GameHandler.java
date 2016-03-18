@@ -3,6 +3,7 @@ package server.handlers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -50,6 +51,9 @@ public class GameHandler implements HttpHandler{
 				default: System.out.println("Unavailable method");
 			}
 		}catch(ServerException e){
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
+			exchange.getResponseBody().write(e.getMessage().getBytes());
+			exchange.getResponseBody().close();
 			e.printStackTrace();
 		} 
 	}

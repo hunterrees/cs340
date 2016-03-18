@@ -9,6 +9,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import client.server.ServerException;
+import server.ServerManager;
 import server.facades.GamesFacadeInterface;
 
 public class GamesHandler implements HttpHandler{
@@ -38,14 +39,7 @@ public class GamesHandler implements HttpHandler{
 	public void handle(HttpExchange exchange) throws IOException {
 		System.out.println("Games endpoint received");
 		String command = exchange.getRequestURI().toString().replace("/games", "");
-		if(!command.equals("/list")){
-			System.out.println(command);
-			try{
-				System.out.println("Cookie " + exchange.getRequestHeaders().get("Cookie").get(0));
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
+		
 		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
 		StringBuilder json = new StringBuilder();
 		String inputLine;
@@ -54,20 +48,28 @@ public class GamesHandler implements HttpHandler{
 		}
 		int gameID = -1;
 		try{
+			if(!command.equals("/list")){
+				String cookie = exchange.getRequestHeaders().get("Cookie").get(0);
+				System.out.println(cookie);
+				if(!ServerManager.getInstance().validateUser(cookie)){
+					throw new ServerException("Invalid User cookie");
+				}else{
+					System.out.println("Valid user cookie");
+				}
+			}
 			switch(command){
 				case "/list": facade.listGames(); break;
-				case "/joinGame": gameID = facade.joinGame(json.toString()); break;
-				case "/createGame": facade.createGame(json.toString()); break;
+				case "/join": gameID = facade.joinGame(json.toString()); break;
+				case "/create": facade.createGame(json.toString()); break;
 			}
 			if(gameID != -1){
 				String cookie = "catan.game=" + gameID + ";Path=/;";
 				exchange.getResponseHeaders().add("Set-cookie", cookie);
 			}
 		}catch(ServerException e){
-			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-			byte[] response = e.getMessage().getBytes();
-			exchange.getResponseBody().write(response);
-			exchange.close();
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
+			exchange.getResponseBody().write(e.getMessage().getBytes());
+			exchange.getResponseBody().close();
 			e.printStackTrace();
 		}
 		
