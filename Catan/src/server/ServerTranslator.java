@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import client.translators.moves.ResourceList;
 import shared.ResourceCard;
+import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
@@ -77,6 +78,8 @@ public class ServerTranslator {
 	}
 	
 	public String buildPlayers(ArrayList<Player> players){
+		//What do I do if there are less than 4 players?
+		//Player pieces need to be generated correclty initially
 		StringBuilder result = new StringBuilder();
 		String input = "\"players\": [";
 		result.append(input);
@@ -122,13 +125,55 @@ public class ServerTranslator {
 			input = "\"monument\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.MONUMENT) + "},";
 			result.append(input);
 			
-			input = "\"roads\":" + players.get(i).numPiecesOfType(PieceType.ROAD);
+			input = "\"roads\":" + players.get(i).numPiecesOfType(PieceType.ROAD) + ",";
 			result.append(input);
-			input = "\"cities\":" + players.get(i).numPiecesOfType(PieceType.CITY);
+			input = "\"cities\":" + players.get(i).numPiecesOfType(PieceType.CITY) + ",";
 			result.append(input);
-			input = "\"settlements\":" + players.get(i).numPiecesOfType(PieceType.SETTLEMENT);
+			input = "\"settlements\":" + players.get(i).numPiecesOfType(PieceType.SETTLEMENT) + ",";
 			result.append(input);
-			
+			input = "\"soldiers\":" + players.get(i).getSoldiers() + ",";
+			result.append(input);
+			input = "\"victoryPoints\":" + players.get(i).getVictoryPoints() + ",";
+			result.append(input);
+			input = "\"monuments\":" + players.get(i).getMonuments() + ",";
+			result.append(input);
+			input = "\"playedDevCard\":" + players.get(i).isHasPlayedDevCard() + ",";
+			result.append(input);
+			input = "\"discarded\":" + players.get(i).isHasDiscarded() + ",";
+			result.append(input);
+			input = "\"playerID\":" + players.get(i).getPlayerID() + ",";
+			result.append(input);
+			input = "\"playerIndex\":" + i + ",";
+			result.append(input);
+			input = "\"name\":\"" + players.get(i).getName() + "\",";
+			result.append(input);
+			input = "\"color\":\"" + getColor(players.get(i).getPlayerColor()) + "\"}";
+			result.append(input);
+			if(i < players.size() - 1){
+				result.append(",");
+			}else if(players.size() < 4){
+				result.append(",");
+				for(int j = players.size(); j < 3; j++){
+					result.append("null,");
+				}
+				result.append("null");
+			}
+		}
+		result.append("],");
+		return result.toString();
+	}
+	
+	private String getColor(CatanColor color){
+		switch(color){
+			case WHITE: return "white";
+			case BLUE: return "blue";
+			case ORANGE: return "orange";
+			case RED: return "red";
+			case YELLOW: return "yellow";
+			case PURPLE: return "purple";
+			case PUCE: return "puce";
+			case BROWN: return "brown";
+			case GREEN: return "green";
 		}
 		return null;
 	}

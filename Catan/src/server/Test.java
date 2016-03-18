@@ -2,13 +2,17 @@ package server;
 
 import java.util.ArrayList;
 
+import shared.Piece;
+import shared.definitions.CatanColor;
 import shared.definitions.GameState;
+import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.model.Bank;
 import shared.model.Chat;
 import shared.model.Line;
 import shared.model.Log;
 import shared.model.TurnTracker;
+import shared.model.player.Player;
 import shared.model.trade.TradeOffer;
 
 public class Test {
@@ -38,5 +42,26 @@ public class Test {
 		System.out.println(translator.buildTradeOffer(null));
 		TradeOffer offer = new TradeOffer(2, 1, offering, receiving);
 		System.out.println(translator.buildTradeOffer(offer));
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player player1 = new Player(0, CatanColor.ORANGE, "Steve");
+		player1.setHasDiscarded(false);
+		player1.setHasPlayedDevCard(false);
+		player1.addVictoryPoint();
+		player1.setMonuments(2);
+		player1.setSoldiers(2);
+		players.add(player1);
+		System.out.println(translator.buildPlayers(players));
+		Player player2 = new Player(1, CatanColor.ORANGE, "Steven");
+		player2.setHasDiscarded(false);
+		player2.setHasPlayedDevCard(false);
+		player2.addVictoryPoint();
+		player2.setMonuments(2);
+		player2.setSoldiers(2);
+		player2.getPlayerPieces().add(new Piece(PieceType.ROAD, null, null, 1));
+		players.add(player2);
+		players.add(player1);
+		players.add(player1);
+		System.out.println(translator.buildPlayers(players));
 	}
 }
