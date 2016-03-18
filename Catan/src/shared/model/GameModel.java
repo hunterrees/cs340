@@ -548,6 +548,9 @@ public class GameModel {
 		this.title = title;
 	}
 
-
+	public void incrementVersionNumber()
+	{
+		version++;
+	}
 // Private methods
 }
