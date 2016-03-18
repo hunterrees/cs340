@@ -47,10 +47,11 @@ public class GamesHandler implements HttpHandler{
 			json.append(inputLine);
 		}
 		int gameID = -1;
+		exchange.getResponseHeaders().set("Content-Type", "application/text");
 		try{
 			if(!command.equals("/list")){
 				String cookie = exchange.getRequestHeaders().get("Cookie").get(0);
-				System.out.println(cookie);
+				//System.out.println(cookie);
 				if(!ServerManager.getInstance().validateUser(cookie)){
 					throw new ServerException("Invalid User cookie");
 				}else{
@@ -66,7 +67,7 @@ public class GamesHandler implements HttpHandler{
 				String cookie = "catan.game=" + gameID + ";Path=/;";
 				exchange.getResponseHeaders().add("Set-cookie", cookie);
 			}
-		}catch(ServerException e){
+		}catch(Exception e){
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 			exchange.getResponseBody().write(e.getMessage().getBytes());
 			exchange.getResponseBody().close();

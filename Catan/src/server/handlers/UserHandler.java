@@ -60,7 +60,7 @@ public class UserHandler implements HttpHandler{
 			exchange.getResponseBody().write(response);
 			exchange.getResponseBody().close();
 		}catch(ServerException e){
-			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
 			exchange.getResponseBody().write(e.getMessage().getBytes());
 			exchange.getResponseBody().close();
 			e.printStackTrace();
