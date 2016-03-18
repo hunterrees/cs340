@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import client.server.ServerException;
 import client.translators.ModelTranslator;
 import client.translators.moves.ResourceList;
 import server.commands.Command;
@@ -24,11 +25,12 @@ public class OfferTrade extends Command{
 	/**
 	 * Preconditions: The trader has the resources being offered
 	 * PostConditions: The tradeOffer class instance in the model is populated
+	 * @throws ServerException 
 	 */
 	
 
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 		ModelTranslator microTranslator = new ModelTranslator();
 		Gson gson = new Gson();
@@ -38,6 +40,9 @@ public class OfferTrade extends Command{
 		}catch(Exception e){
 			return model;
 		}
+		int playerIndex = root.getAsJsonPrimitive("playerIndex").getAsInt();
+		playingState();
+		myTurn(playerIndex);
 		TradeOffer myTradeOffer = microTranslator.buildTradeOffer(root);
 		model.setTradeOffer(myTradeOffer);
 		return model;
