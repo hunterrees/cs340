@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.DevelopmentCard;
 import shared.definitions.ResourceType;
 import shared.model.Bank;
 import shared.model.GameModel;
@@ -62,7 +63,9 @@ public class BuyDevCard extends Command{
 		Player p = model.getPlayers().get(playerIndex);
 
 		if(p.canBuyDevCard()) {
-			p.canBuyDevCard();
+			// Take a development card out of the bank and give it to the player
+			DevelopmentCard card = model.getBank().getDevelopmentCards().get(0);
+			p.getPlayerHand().addNewDevelopmentCard(card.getType());
 		}
 
 

@@ -86,8 +86,10 @@ public class BuildRoad extends Command {
 		Player p = model.getPlayers().get(playerIndex);
 
 		if(model.canBuildRoad(playerIndex, free, edgeLoc)){
+			// Place it on the map
 			model.getMap().placeRoad(playerIndex, edgeLoc);
-			
+
+			// Remove the correct resources
 			p.getPlayerHand().removeResources(1, ResourceType.WOOD);
 			p.getPlayerHand().removeResources(1, ResourceType.BRICK);
 			

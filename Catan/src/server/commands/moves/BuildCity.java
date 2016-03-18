@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.Piece;
+import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
@@ -81,13 +83,18 @@ public class BuildCity extends Command {
 		Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
 
 		if(model.canBuildCity(playerIndex, vertLoc)){
+			// Build the city
 			model.getMap().placeSettlement(playerIndex, vertLoc);
-			//take resources from player
-	
+
 			// Remove the resources
 			p.getPlayerHand().removeResources(2, ResourceType.WHEAT);
-			p.getPlayerHand().removeResources(3, ResourceType.ORE);	
+			p.getPlayerHand().removeResources(3, ResourceType.ORE);
+
+			// Get a settlement back
+			p.getPlayerPieces().add(new Piece(PieceType.SETTLEMENT, null, null, playerIndex));
 		}
+
+
 
 		Line line = new Line(p.getName(), p.getName() + " built a city");
 		model.getLog().addLine(line);
