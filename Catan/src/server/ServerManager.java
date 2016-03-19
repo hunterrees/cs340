@@ -68,6 +68,9 @@ public class ServerManager {
 	 * @return
 	 */
 	public GameModel getGame(int index){
+		if(index >= games.size()){
+			return null;
+		}
 		return games.get(index);
 	}
 	
@@ -93,15 +96,15 @@ public class ServerManager {
 		return null;
 	}
 	
-	public boolean validateUser(String cookie){
+	public User validateUser(String cookie){
 		cookie = cookie.replace("catan.user=", "");
 		cookie = cookie.replace(";", "");
 		for(int i = 0; i < users.size(); i++){
 			if(users.get(i).generateCookie().equals(cookie)){
-				return true;
+				return users.get(i);
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	/**

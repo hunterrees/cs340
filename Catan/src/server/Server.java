@@ -60,11 +60,9 @@ public class Server {
 	 */
 	private void run(){
 		try {
-			System.out.println("Starting server");
 			server = HttpServer.create(new InetSocketAddress(PORT), MAX_WAITING_CONNECTIONS);
 		} 
 		catch (IOException e) {		
-			System.out.println("Failed to start server");
 			return;
 		}
 		

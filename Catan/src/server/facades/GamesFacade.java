@@ -1,6 +1,7 @@
 package server.facades;
 
 import client.server.ServerException;
+import server.User;
 import server.commands.games.CreateGame;
 import server.commands.games.JoinGame;
 import server.commands.games.ListGames;
@@ -20,8 +21,10 @@ public class GamesFacade implements GamesFacadeInterface{
 	}
 
 	@Override
-	public int joinGame(String json) throws ServerException {
+	public int joinGame(String json, User user) throws ServerException {
+		System.out.println("Join game called");
 		JoinGame joinGameCommand = new JoinGame(-1, json);
+		joinGameCommand.setUser(user);
 		return (int) joinGameCommand.execute();
 	}
 

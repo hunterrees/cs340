@@ -1,6 +1,7 @@
 package server.facades;
 
 import client.server.ServerException;
+import server.User;
 
 public interface GamesFacadeInterface {
 
@@ -25,6 +26,6 @@ public interface GamesFacadeInterface {
 	 * @return
 	 * @throws ServerException
 	 */
-	public int joinGame(String json) throws ServerException;
+	public int joinGame(String json, User user) throws ServerException;
 
 }

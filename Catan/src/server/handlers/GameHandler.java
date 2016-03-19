@@ -37,6 +37,7 @@ public class GameHandler implements HttpHandler{
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
 		System.out.println("Game endpoint received");
+		
 		String command = exchange.getRequestURI().toString().replace("/game", "");
 		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
 		StringBuilder json = new StringBuilder();
@@ -44,12 +45,17 @@ public class GameHandler implements HttpHandler{
 		while((inputLine = in.readLine()) != null){
 			json.append(inputLine);
 		}
+		exchange.getResponseHeaders().set("Content-Type", "application/text");
 		try{
+			String response = "Success";
 			switch(command){
 				case "/addAI": facade.addAI(json.toString()); break;
-				case "/listAIs": facade.listAIs(); break;
+				case "/listAI": response = facade.listAIs(); break;
 				default: System.out.println("Unavailable method");
 			}
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			exchange.getResponseBody().write(response.getBytes());
+			exchange.getResponseBody().close();
 		}catch(ServerException e){
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
 			exchange.getResponseBody().write(e.getMessage().getBytes());

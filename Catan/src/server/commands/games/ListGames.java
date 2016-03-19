@@ -1,5 +1,9 @@
 package server.commands.games;
 
+import com.google.gson.Gson;
+
+import server.GameInfo;
+import server.PlayerInfo;
 import server.ServerManager;
 import server.commands.Command;
 import shared.model.GameModel;
@@ -13,7 +17,7 @@ public class ListGames extends Command{
 
 	/**
 	 * Preconditions: None
-	 * Postconditions: If the operation succeds:
+	 * Postconditions: If the operation succeeds:
 	 *  1. The server returns an HTTP 200 success response.
 	 *  2. The body contains a JSON array containing a list of objects that contain information about the server's games.
 	 * If the operation fails:
@@ -21,16 +25,23 @@ public class ListGames extends Command{
 	 */
 	@Override
 	public Object execute() {
+		GameInfo[] gameInfos = new GameInfo[ServerManager.getInstance().getGames().size()];
 		for(int i = 0; i < ServerManager.getInstance().getGames().size(); i++){
 			GameModel game = ServerManager.getInstance().getGame(i);
+			GameInfo gameInfo = new GameInfo();
 			for(int j = 0; j < game.getPlayers().size(); j++){
-				//extract PlayerInfo
+				PlayerInfo player = new PlayerInfo();
+				player.setColor(game.getPlayers().get(j).getPlayerColor());
+				player.setId(game.getPlayers().get(j).getPlayerID());
+				player.setName(game.getPlayers().get(j).getName());
+				gameInfo.addPlayer(player);
 			}
-			//extract GameInfo and add PlayerInfo
-			//add game info to the array
+			gameInfo.setId(i);
+			gameInfo.setTitle(game.getTitle());
+			gameInfos[i] = gameInfo;
 		}
-		//make the GameInfo into a Json string and return it
-		return null;
+		Gson gson = new Gson();
+		return gson.toJson(gameInfos);
 	}
 
 }

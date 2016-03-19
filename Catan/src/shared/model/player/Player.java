@@ -62,12 +62,29 @@ public class Player
 	public Player(int playerID, CatanColor playerColor, String name)
 	{
 		playerPieces = new ArrayList<Piece>();
+		generateStartingPieces();
 		playerPorts = new ArrayList<Port>();
 		this.playerID = playerID;
 		this.playerColor = playerColor;
 		this.name = name;
 		playerHand = new Hand();
+		hasPlayedDevCard = false;
+		hasDiscarded = false;
+		soldiers = 0;
+		monuments = 0;
 		victoryPoints = 0;
+	}
+	
+	public void generateStartingPieces(){
+		for(int i = 0; i < 5; i++){
+			playerPieces.add(new Piece(PieceType.SETTLEMENT, null, null, playerID));
+		}
+		for(int i = 0; i < 4; i++){
+			playerPieces.add(new Piece(PieceType.CITY, null, null, playerID));
+		}
+		for(int i = 0; i < 15; i++){
+			playerPieces.add(new Piece(PieceType.ROAD, null, null, playerID));
+		}
 	}
 
 	/**

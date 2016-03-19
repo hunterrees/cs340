@@ -24,6 +24,6 @@ public interface GameFacadeInterface {
 	 * @return
 	 * @throws ServerException
 	 */
-	public String[] listAIs() throws ServerException;
+	public String listAIs() throws ServerException;
 
 }

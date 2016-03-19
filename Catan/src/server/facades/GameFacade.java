@@ -1,6 +1,7 @@
 package server.facades;
 
 import client.server.ServerException;
+import server.commands.game.*;
 
 public class GameFacade implements GameFacadeInterface{
 
@@ -12,14 +13,13 @@ public class GameFacade implements GameFacadeInterface{
 
 	@Override
 	public void addAI(String json) throws ServerException {
-		// TODO Auto-generated method stub
-		
+		return;
 	}
 
 	@Override
-	public String[] listAIs() throws ServerException {
-		// TODO Auto-generated method stub
-		return null;
+	public String listAIs() throws ServerException {
+		ListAI listAICommand = new ListAI(-1, "");
+		return (String) listAICommand.execute();
 	}
 
 }

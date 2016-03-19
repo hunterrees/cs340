@@ -1,5 +1,7 @@
 package server.commands.game;
 
+import com.google.gson.Gson;
+
 import server.commands.Command;
 import shared.model.GameModel;
 
@@ -7,7 +9,6 @@ public class ListAI extends Command {
 
 	public ListAI(int gameID, String json) {
 		super(gameID, json);
-		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * Preconditions: none
@@ -16,8 +17,7 @@ public class ListAI extends Command {
 	 */
 	@Override
 	public Object execute() {
-		// TODO Auto-generated method stub
-		return null;
+		return "[]";
 	}
 
 }
