@@ -1,20 +1,8 @@
 package server.commands.game;
 
 import server.commands.Command;
-import shared.definitions.HexType;
-import shared.locations.HexLocation;
-import shared.model.GameModel;
-import shared.model.map.Map;
-import shared.model.map.TerrainHex;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class GetModel extends Command{
-
-	Map map;
 
 	public GetModel(int gameID, String json) {
 		super(gameID, json);
@@ -37,23 +25,6 @@ public class GetModel extends Command{
 	 *	1. The server returns an HTTP 400 error response, and the body contains an error
 	 *	message.
 	 */
-
-
-
-
-	public void generateRandomHexes() {
-		// Create this method in the map class
-	}
-
-	public void generateRandomPorts() {
-		// Create this method in the map class
-	}
-
-
-
-
-
-
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub

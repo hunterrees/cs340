@@ -25,6 +25,9 @@ public class ListGames extends Command{
 	 */
 	@Override
 	public Object execute() {
+		Gson gson = new Gson();
+		StringBuilder result = new StringBuilder();
+		result.append("[");
 		GameInfo[] gameInfos = new GameInfo[ServerManager.getInstance().getGames().size()];
 		for(int i = 0; i < ServerManager.getInstance().getGames().size(); i++){
 			GameModel game = ServerManager.getInstance().getGame(i);
@@ -39,9 +42,33 @@ public class ListGames extends Command{
 			gameInfo.setId(i);
 			gameInfo.setTitle(game.getTitle());
 			gameInfos[i] = gameInfo;
+			if(game.getPlayers().size() < 4){
+				String input = "";
+				if(i != 0){
+					result.append(",");
+				}
+				result.append("{");
+				input = "\"title\": \"" + gameInfos[i].getTitle() + "\",";
+				result.append(input);
+				input = "\"id\": " + i + ",";
+				result.append(input);
+				input = "\"players\":";
+				result.append(input);
+				result.append("[");
+				for(int j = 0; j < game.getPlayers().size(); j++){
+					result.append(gson.toJson(gameInfo.getPlayers()[j]));
+					result.append(",");
+				}
+				for(int j = game.getPlayers().size(); j < 3; j++){
+					result.append("{},");
+				}
+				result.append("{} ] }");
+			}else{
+				result.append(gson.toJson(gameInfo));
+			}
 		}
-		Gson gson = new Gson();
-		return gson.toJson(gameInfos);
+		result.append("]");
+		return result.toString();
 	}
 
 }

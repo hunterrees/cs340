@@ -1,7 +1,6 @@
 package server.commands.game;
 
 import server.commands.Command;
-import shared.model.GameModel;
 
 public class AddAI extends Command {
 

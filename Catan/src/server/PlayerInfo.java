@@ -9,8 +9,6 @@ public class PlayerInfo {
 	
 	public PlayerInfo()
 	{
-		setId(-1);
-		setName("");
 	}
 	
 	public int getId()
@@ -50,6 +48,7 @@ public class PlayerInfo {
 		case PUCE: this.color = "puce"; break;
 		case BROWN: this.color = "brown"; break;
 		case GREEN: this.color = "green"; break;
+		default:break;
 		}
 	}
 

@@ -2,13 +2,16 @@ package server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import client.translators.moves.ResourceList;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
+import shared.definitions.HexType;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
+import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 import shared.model.*;
@@ -37,7 +40,7 @@ public class ServerTranslator {
 		result.append(buildPlayers(model.getPlayers()));
 		result.append(buildTradeOffer(model.getTradeOffer()));
 		result.append(buildTurnTracker(model.getTracker()));
-		String version = "\"version\":" + model.getVersion() + ",";
+		String version = "\"version\":" + model.getVersion() + ",\n";
 		String winner = "\"winner\":" + model.getWinner() + "}";
 		result.append(version);
 		result.append(winner);
@@ -47,33 +50,37 @@ public class ServerTranslator {
 	public String buildBank(Bank bank){
 		//Starting resources of the bank need to be generated correctly
 		StringBuilder result = new StringBuilder();
-		String input = "\"bank\": {\"brick\":" + bank.numResourceRemaining(ResourceType.BRICK);
+		String input = "\"bank\": {\n\"brick\":" + bank.numResourceRemaining(ResourceType.BRICK);
 		result.append(input);
-		input = ",\"ore\":" + bank.numResourceRemaining(ResourceType.ORE);
+		input = ",\n\"ore\":" + bank.numResourceRemaining(ResourceType.ORE);
 		result.append(input);
-		input = ",\"sheep\":" + bank.numResourceRemaining(ResourceType.SHEEP);
+		input = ",\n\"sheep\":" + bank.numResourceRemaining(ResourceType.SHEEP);
 		result.append(input);
-		input = ",\"wheat\":" + bank.numResourceRemaining(ResourceType.WHEAT);
+		input = ",\n\"wheat\":" + bank.numResourceRemaining(ResourceType.WHEAT);
 		result.append(input);
-		input = ",\"wood\":" + bank.numResourceRemaining(ResourceType.WOOD);
+		input = ",\n\"wood\":" + bank.numResourceRemaining(ResourceType.WOOD);
 		result.append(input);
-		result.append("},");
+		result.append("\n},\n");
 		
-		input = "\"deck\": {\"yearOfPlenty\":" + bank.numDevCardsRemaining(DevCardType.YEAR_OF_PLENTY);
+		input = "\"deck\": {\n\"yearOfPlenty\":" + bank.numDevCardsRemaining(DevCardType.YEAR_OF_PLENTY);
 		result.append(input);
-		input = ",\"monopoly\":" + bank.numDevCardsRemaining(DevCardType.MONOPOLY);
+		input = "\n,\"monopoly\":" + bank.numDevCardsRemaining(DevCardType.MONOPOLY);
 		result.append(input);
-		input = ",\"monument\":" + bank.numDevCardsRemaining(DevCardType.MONUMENT);
+		input = "\n,\"monument\":" + bank.numDevCardsRemaining(DevCardType.MONUMENT);
 		result.append(input);
-		input = ",\"soldier\":" + bank.numDevCardsRemaining(DevCardType.SOLDIER);
+		input = "\n,\"soldier\":" + bank.numDevCardsRemaining(DevCardType.SOLDIER);
 		result.append(input);
-		input = ",\"roadBuilding\":" + bank.numDevCardsRemaining(DevCardType.ROAD_BUILD);
+		input = "\n,\"roadBuilding\":" + bank.numDevCardsRemaining(DevCardType.ROAD_BUILD);
 		result.append(input);
-		result.append("},");
+		result.append("\n},");
 		return result.toString();
 	}
 
 	public String buildMap(Map map){
+		StringBuilder result = new StringBuilder();
+		String input = "\"map\": {\n";
+		result.append(input);
+		result.append(buildHexes(map.getHexes()));
 		return null;
 	}
 	
@@ -84,82 +91,82 @@ public class ServerTranslator {
 		String input = "\"players\": [";
 		result.append(input);
 		for(int i = 0; i < players.size(); i++){
-			result.append("{");
+			result.append("\n{\n");
 			ResourceList resources = resourceTranslate(players.get(i).getPlayerHand().getResourceCards());
-			input = "\"resources\": {";
+			input = "\"resources\": {\n";
 			result.append(input);
-			input = "\"brick\":" + resources.getBrick() + ",";
+			input = "\"brick\":" + resources.getBrick() + ",\n";
 			result.append(input);
-			input = "\"ore\":" + resources.getOre() + ",";
+			input = "\"ore\":" + resources.getOre() + ",\n";
 			result.append(input);
-			input = "\"sheep\":" + resources.getSheep() + ",";
+			input = "\"sheep\":" + resources.getSheep() + ",\n";
 			result.append(input);
-			input = "\"wheat\":" + resources.getWheat() + ",";
+			input = "\"wheat\":" + resources.getWheat() + ",\n";
 			result.append(input);
-			input = "\"wood\":" + resources.getWood() + "},";
-			result.append(input);
-			
-			input = "\"oldDevCards\": {";
-			result.append(input);
-			input = "\"yearOfPlenty\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.YEAR_OF_PLENTY) + ",";
-			result.append(input);
-			input = "\"monopoly\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.MONOPOLY) + ",";
-			result.append(input);
-			input = "\"soldier\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.SOLDIER) + ",";
-			result.append(input);
-			input = "\"roadBuilding\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.ROAD_BUILD) + ",";
-			result.append(input);
-			input = "\"monument\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.MONUMENT) + "},";
+			input = "\"wood\":" + resources.getWood() + "\n},\n";
 			result.append(input);
 			
-			input = "\"newDevCards\": {";
+			input = "\"oldDevCards\": {\n";
 			result.append(input);
-			input = "\"yearOfPlenty\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.YEAR_OF_PLENTY) + ",";
+			input = "\"yearOfPlenty\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.YEAR_OF_PLENTY) + ",\n";
 			result.append(input);
-			input = "\"monopoly\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.MONOPOLY) + ",";
+			input = "\"monopoly\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.MONOPOLY) + ",\n";
 			result.append(input);
-			input = "\"soldier\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.SOLDIER) + ",";
+			input = "\"soldier\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.SOLDIER) + ",\n";
 			result.append(input);
-			input = "\"roadBuilding\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.ROAD_BUILD) + ",";
+			input = "\"roadBuilding\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.ROAD_BUILD) + ",\n";
 			result.append(input);
-			input = "\"monument\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.MONUMENT) + "},";
+			input = "\"monument\":" + players.get(i).getPlayerHand().numOldDevCardRemaining(DevCardType.MONUMENT) + "\n},\n";
 			result.append(input);
 			
-			input = "\"roads\":" + players.get(i).numPiecesOfType(PieceType.ROAD) + ",";
+			input = "\"newDevCards\": {\n";
 			result.append(input);
-			input = "\"cities\":" + players.get(i).numPiecesOfType(PieceType.CITY) + ",";
+			input = "\"yearOfPlenty\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.YEAR_OF_PLENTY) + ",\n";
 			result.append(input);
-			input = "\"settlements\":" + players.get(i).numPiecesOfType(PieceType.SETTLEMENT) + ",";
+			input = "\"monopoly\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.MONOPOLY) + ",\n";
 			result.append(input);
-			input = "\"soldiers\":" + players.get(i).getSoldiers() + ",";
+			input = "\"soldier\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.SOLDIER) + ",\n";
 			result.append(input);
-			input = "\"victoryPoints\":" + players.get(i).getVictoryPoints() + ",";
+			input = "\"roadBuilding\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.ROAD_BUILD) + ",\n";
 			result.append(input);
-			input = "\"monuments\":" + players.get(i).getMonuments() + ",";
+			input = "\"monument\":" + players.get(i).getPlayerHand().numNewDevCardRemaining(DevCardType.MONUMENT) + "\n},\n";
 			result.append(input);
-			input = "\"playedDevCard\":" + players.get(i).isHasPlayedDevCard() + ",";
+			
+			input = "\"roads\":" + players.get(i).numPiecesOfType(PieceType.ROAD) + ",\n";
 			result.append(input);
-			input = "\"discarded\":" + players.get(i).isHasDiscarded() + ",";
+			input = "\"cities\":" + players.get(i).numPiecesOfType(PieceType.CITY) + ",\n";
 			result.append(input);
-			input = "\"playerID\":" + players.get(i).getPlayerID() + ",";
+			input = "\"settlements\":" + players.get(i).numPiecesOfType(PieceType.SETTLEMENT) + ",\n";
+			result.append(input);
+			input = "\"soldiers\":" + players.get(i).getSoldiers() + ",\n";
+			result.append(input);
+			input = "\"victoryPoints\":" + players.get(i).getVictoryPoints() + ",\n";
+			result.append(input);
+			input = "\"monuments\":" + players.get(i).getMonuments() + ",\n";
+			result.append(input);
+			input = "\"playedDevCard\":" + players.get(i).isHasPlayedDevCard() + ",\n";
+			result.append(input);
+			input = "\"discarded\":" + players.get(i).isHasDiscarded() + ",\n";
+			result.append(input);
+			input = "\"playerID\":" + players.get(i).getPlayerID() + ",\n";
 			result.append(input);
 			input = "\"playerIndex\":" + i + ",";
 			result.append(input);
-			input = "\"name\":\"" + players.get(i).getName() + "\",";
+			input = "\"name\":\"" + players.get(i).getName() + "\",\n";
 			result.append(input);
-			input = "\"color\":\"" + getColor(players.get(i).getPlayerColor()) + "\"}";
+			input = "\"color\":\"" + getColor(players.get(i).getPlayerColor()) + "\"\n}";
 			result.append(input);
 			if(i < players.size() - 1){
 				result.append(",");
 			}else if(players.size() < 4){
 				result.append(",");
 				for(int j = players.size(); j < 3; j++){
-					result.append("null,");
+					result.append("null,\n");
 				}
-				result.append("null");
+				result.append("null\n");
 			}
 		}
-		result.append("],");
+		result.append("\n],");
 		return result.toString();
 	}
 	
@@ -202,24 +209,24 @@ public class ServerTranslator {
 			return "";
 		}
 		StringBuilder result = new StringBuilder();
-		String input = "\"tradeOffer\": {";
+		String input = "\"tradeOffer\": {\n";
 		result.append(input);
-		input = "\"sender\":" + offer.getRequestingPlayerID() + ",";
+		input = "\"sender\":" + offer.getRequestingPlayerID() + ",\n";
 		result.append(input);
-		input = "\"receiver\":" + offer.getAcceptingPlayerID() + ",";
+		input = "\"receiver\":" + offer.getAcceptingPlayerID() + ",\n";
 		result.append(input);
 		ResourceList resources = resourceTranslate(offer.getResourceOffered(), offer.getResourceDesired());
-		input = "\"offer\": {";
+		input = "\"offer\": {\n";
 		result.append(input);
-		input = "\"brick\":" + resources.getBrick() + ",";
+		input = "\"brick\":" + resources.getBrick() + ",\n";
 		result.append(input);
-		input = "\"ore\":" + resources.getOre() + ",";
+		input = "\"ore\":" + resources.getOre() + ",\n";
 		result.append(input);
-		input = "\"sheep\":" + resources.getSheep() + ",";
+		input = "\"sheep\":" + resources.getSheep() + ",\n";
 		result.append(input);
-		input = "\"wheat\":" + resources.getWheat() + ",";
+		input = "\"wheat\":" + resources.getWheat() + ",\n";
 		result.append(input);
-		input = "\"wood\":" + resources.getWood() + "} },";
+		input = "\"wood\":" + resources.getWood() + "\n} \n},";
 		result.append(input);
 		return result.toString();
 	}
@@ -255,58 +262,83 @@ public class ServerTranslator {
 	
 	public String buildTurnTracker(TurnTracker tracker){
 		StringBuilder result = new StringBuilder();
-		String input = "\"turnTracker\": {";
+		String input = "\"turnTracker\": {\n";
 		result.append(input);
 		input = "\"status\": \"" + tracker.statusToString() + "\",";
 		result.append(input);
-		input = "\"currentTurn\":" + tracker.getCurrentTurnPlayerID() + ",";
+		input = "\n\"currentTurn\":" + tracker.getCurrentTurnPlayerID() + ",";
 		result.append(input);
-		input = "\"longestRoad\":" + tracker.getLongestRoadplayerID() + ",";
+		input = "\n\"longestRoad\":" + tracker.getLongestRoadplayerID() + ",";
 		result.append(input);
-		input = "\"largestArmy\":" + tracker.getLargestArmyPlayerID() + "},";
+		input = "\n\"largestArmy\":" + tracker.getLargestArmyPlayerID() + "\n},";
 		result.append(input);
 		return result.toString();
 	}
 	
 	public String buildChat(Chat chat){
 		StringBuilder result = new StringBuilder();
-		result.append("\"chat\": { \"lines\": [ ");
+		result.append("\"chat\": { \n\"lines\": [ \n");
 		ArrayList<Line> lines = chat.getLines();
 		for(int i = 0; i < lines.size() - 1; i++){
 			String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
 			result.append(input);
-			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},";
+			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
 			result.append(input);
 		}
 		String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
 		result.append(input);
-		input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"} ] },";
+		input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"}\n ] },";
 		result.append(input);
 		return result.toString();
 	}
 	
 	public String buildLog(Log log){
 		StringBuilder result = new StringBuilder();
-		result.append("\"log\": { \"lines\": [ ");
+		result.append("\"log\": { \n\"lines\": [ \n");
 		ArrayList<Line> lines = log.getLines();
 		for(int i = 0; i < lines.size() - 1; i++){
 			String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
 			result.append(input);
-			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},";
+			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
 			result.append(input);
 		}
 		String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
 		result.append(input);
-		input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"} ] },";
+		input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"}\n ] },";
 		result.append(input);
 		return result.toString();
 	}
 	
 	public String buildHexes(HashMap<HexLocation, TerrainHex> hexes){
+		StringBuilder result = new StringBuilder();
+		String input = "\"hexes\": [\n";
+		for(Entry<HexLocation, TerrainHex> hex : hexes.entrySet()){
+			result.append("{\n");
+			if(hex.getValue().getType() != HexType.DESERT){
+				//add resource tag
+			}
+			input = "\"location\": {\n";
+			result.append(input);
+			input = "\"x\":" + hex.getValue().getLocation().getX() + ",\n";
+			result.append(input);
+			input = "\"y\":" + hex.getValue().getLocation().getY() + "\n},";
+			result.append(input);
+			if(hex.getValue().getType() != HexType.DESERT){
+				//add number tag
+			}
+		}
 		return null;
 	}
 	
 	public String buildPorts(HashMap<VertexLocation, Port> ports){
+		return null;
+	}
+	
+	public String buildRoads(HashMap<EdgeLocation, Edge> edges){
+		return null;
+	}
+	
+	public String buildSettlementsAndCities(HashMap<VertexLocation, Vertex> verticies){
 		return null;
 	}
 }

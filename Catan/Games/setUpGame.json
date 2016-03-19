@@ -348,7 +348,7 @@
       "monuments": 0,
       "playedDevCard": false,
       "discarded": false,
-      "playerID": 10,
+      "playerID": 2,
       "playerIndex": 2,
       "name": "Pete",
       "color": "red"
@@ -383,7 +383,7 @@
       "monuments": 0,
       "playedDevCard": false,
       "discarded": false,
-      "playerID": 11,
+      "playerID": 3,
       "playerIndex": 3,
       "name": "Mark",
       "color": "green"

@@ -1,9 +1,6 @@
 package server.commands.game;
 
-import com.google.gson.Gson;
-
 import server.commands.Command;
-import shared.model.GameModel;
 
 public class ListAI extends Command {
 

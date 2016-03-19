@@ -7,7 +7,6 @@ import client.server.ServerException;
 import server.ServerManager;
 import server.User;
 import server.commands.Command;
-import shared.model.GameModel;
 
 public class Login extends Command{
 	
