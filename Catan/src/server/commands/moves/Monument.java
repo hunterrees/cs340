@@ -6,6 +6,7 @@ import com.google.gson.JsonPrimitive;
 
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 import shared.model.GameModel;
 import shared.model.Line;
@@ -60,7 +61,11 @@ public class Monument extends Command {
 		// TODO Auto-generated method stub
 		translate();
 		addVictoryPoint();
-		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " used Monument");
+		if (!model.getPlayers().get(playerIndex).getPlayerHand().removeNewDevCard(DevCardType.MONUMENT))
+		{
+			model.getPlayers().get(playerIndex).getPlayerHand().removeOldDevCard(DevCardType.MONUMENT);
+		}
+		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " built a monument and gained a victory point");
 		model.getLog().addLine(tempLine);
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
