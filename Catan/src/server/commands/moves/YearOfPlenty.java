@@ -9,6 +9,7 @@ import com.google.gson.JsonPrimitive;
 import client.server.ServerException;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 import shared.model.Line;
 
@@ -91,8 +92,13 @@ public class YearOfPlenty extends Command {
 		{
 			throw new ServerException("The bank doesn't have the necessary resources");
 		}
+		if (model.getPlayers().get(playerIndex).isHasPlayedDevCard())
+		{
+			throw new ServerException("This player has already played a dev card this turn");
+		}
 		moveResources();
-		
+		model.getPlayers().get(playerIndex).setHasPlayedDevCard(true);
+		model.getPlayers().get(playerIndex).getPlayerHand().removeOldDevCard(DevCardType.YEAR_OF_PLENTY);
 		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() 
 				+ " used Year of Plenty and got " + resource1.toString() + " and " + resource2.toString());
 		model.getLog().addLine(tempLine);

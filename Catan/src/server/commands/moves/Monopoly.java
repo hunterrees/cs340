@@ -7,10 +7,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import client.server.ServerException;
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.ResourceCard;
+import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 import shared.model.GameModel;
+import shared.model.Line;
 
 public class Monopoly extends Command {
 	
@@ -101,6 +104,11 @@ public class Monopoly extends Command {
 		translate();
 		playingState();
 		myTurn(playerIndex);
+		if (model.getPlayers().get(playerIndex).isHasPlayedDevCard())
+		{
+			throw new ServerException("This player has already played a dev card this turn");
+		}
+		model.getPlayers().get(playerIndex).setHasPlayedDevCard(true);
 		int stealAmount = 0;
 		for (int i = 0; i < 4; i++)
 		{
@@ -112,7 +120,12 @@ public class Monopoly extends Command {
 		}
 		model.getPlayers().get(playerIndex).getPlayerHand().addResources(stealAmount, resourceToSteal);
 		// TODO Auto-generated method stub
-		return model;
+		model.getPlayers().get(playerIndex).getPlayerHand().removeOldDevCard(DevCardType.MONOPOLY);
+		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() 
+				+ " used Year of Plenty and took everyone's " + resourceToSteal);
+		model.getLog().addLine(tempLine);
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }

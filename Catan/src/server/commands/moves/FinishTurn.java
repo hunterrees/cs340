@@ -41,6 +41,10 @@ public class FinishTurn extends Command {
 	private void newDevCardsToOld(int playerIndex)
 	{
 		model.getPlayers().get(playerIndex).getPlayerHand().newDevCardsToOld();
+		for (int i = 0; i < 4; i++)
+		{
+			model.getPlayers().get(i).setHasPlayedDevCard(false);
+		}
 	}
 	
 	@Override
