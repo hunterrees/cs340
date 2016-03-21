@@ -1,10 +1,19 @@
 package server.commands.moves;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+
+import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.ResourceType;
 import shared.model.GameModel;
+import shared.model.Line;
 
 public class Monument extends Command {
 
+	ResourceType resource;
+	int playerIndex;
 	public Monument(int gameID, String json) {
 		super(gameID, json);
 		// TODO Auto-generated constructor stub
@@ -14,10 +23,47 @@ public class Monument extends Command {
 	 * Preconditions: It is the player's turn
 	 * Postconditions: A victory point is added ot the player
 	 */
+	
+	private void translate()
+	{
+		Gson gson = new Gson();
+		JsonObject root;
+		try{
+			root = gson.fromJson(json, JsonObject.class);
+		}catch(Exception e){
+			return;
+		}
+		
+		JsonPrimitive typePrim = root.getAsJsonPrimitive("type");
+		
+		playerIndex = root.getAsJsonPrimitive("playerIndex").getAsInt();
+		JsonPrimitive primResource = root.getAsJsonPrimitive("type");
+		String resource1String = primResource.getAsString();
+		switch(resource1String)
+		{
+			case "wood" : resource = ResourceType.WOOD; break;
+			case "ore" : resource = ResourceType.ORE; break;
+			case "wheat" : resource = ResourceType.WHEAT; break;
+			case "sheep" : resource = ResourceType.SHEEP; break;
+			case "brick" : resource = ResourceType.BRICK; break;
+			default : resource = null; break;
+		}
+	}
+	
+	private void addVictoryPoint()
+	{
+		model.getPlayers().get(playerIndex).addVictoryPoint();
+		model.checkVictory();
+	}
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return null;
+		translate();
+		addVictoryPoint();
+		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " used Monument");
+		model.getLog().addLine(tempLine);
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }
