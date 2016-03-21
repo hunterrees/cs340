@@ -81,6 +81,16 @@ public class GameModel {
 	 * @param playerID
 	 * @return
      */
+	public void checkVictory()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			if (players.get(i).getVictoryPoints() >= 10)
+			{
+				winner = i;
+			}
+		}
+	}
 	public boolean acceptTrade(int playerID) {
 		Player p = players.get((playerID));
 
