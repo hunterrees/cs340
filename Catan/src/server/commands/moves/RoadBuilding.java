@@ -17,6 +17,7 @@ public class RoadBuilding extends Command {
 	String type;
 	int playerIndex;
 	EdgeLocation edgeLoc1;
+	EdgeLocation edgeLoc2;
 
 
 	public RoadBuilding(int gameID, String json) {
@@ -48,19 +49,40 @@ public class RoadBuilding extends Command {
 		int y = primY.getAsInt();
 		JsonPrimitive primDir = jsonLoc.getAsJsonPrimitive("direction");
 		String dir = primDir.getAsString();
-		EdgeDirection edgeDir;
+		EdgeDirection edgeDir1;
 		//make vertLoc
 		switch(dir){
-			case "NW" : edgeDir = EdgeDirection.NorthWest; break;
-			case "NE" : edgeDir = EdgeDirection.NorthEast; break;
-			case "N" : edgeDir = EdgeDirection.North; break;
-			case "SE" : edgeDir = EdgeDirection.SouthEast; break;
-			case "SW" : edgeDir = EdgeDirection.SouthWest; break;
-			case "S" : edgeDir = EdgeDirection.South; break;
-			default : edgeDir = null; break;
+			case "NW" : edgeDir1 = EdgeDirection.NorthWest; break;
+			case "NE" : edgeDir1 = EdgeDirection.NorthEast; break;
+			case "N" : edgeDir1 = EdgeDirection.North; break;
+			case "SE" : edgeDir1 = EdgeDirection.SouthEast; break;
+			case "SW" : edgeDir1 = EdgeDirection.SouthWest; break;
+			case "S" : edgeDir1 = EdgeDirection.South; break;
+			default : edgeDir1 = null; break;
 		}
-		edgeLoc1 = new EdgeLocation(new HexLocation(x, y), edgeDir).getNormalizedLocation();
+		edgeLoc1 = new EdgeLocation(new HexLocation(x, y), edgeDir1).getNormalizedLocation();
 
+
+		// Spot2's stuff
+		jsonLoc = root.getAsJsonObject("spot2");
+		primX = jsonLoc.getAsJsonPrimitive("x");
+		x = primX.getAsInt();
+		primY = jsonLoc.getAsJsonPrimitive("y");
+		y = primY.getAsInt();
+		primDir = jsonLoc.getAsJsonPrimitive("direction");
+		dir = primDir.getAsString();
+		EdgeDirection edgeDir2;
+		//make vertLoc
+		switch(dir){
+			case "NW" : edgeDir2 = EdgeDirection.NorthWest; break;
+			case "NE" : edgeDir2 = EdgeDirection.NorthEast; break;
+			case "N" : edgeDir2 = EdgeDirection.North; break;
+			case "SE" : edgeDir2 = EdgeDirection.SouthEast; break;
+			case "SW" : edgeDir2 = EdgeDirection.SouthWest; break;
+			case "S" : edgeDir2 = EdgeDirection.South; break;
+			default : edgeDir2 = null; break;
+		}
+		edgeLoc2 = new EdgeLocation(new HexLocation(x, y), edgeDir2).getNormalizedLocation();
 
 
 	}
