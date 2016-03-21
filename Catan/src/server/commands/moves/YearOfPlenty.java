@@ -1,14 +1,18 @@
 package server.commands.moves;
 
+import java.io.Serializable;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import client.server.ServerException;
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
-import shared.model.GameModel;
+import shared.model.Line;
 
+@SuppressWarnings("serial")
 public class YearOfPlenty extends Command {
 
 	private ResourceType resource1;
@@ -80,12 +84,18 @@ public class YearOfPlenty extends Command {
 	@Override
 	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
+		translate();
 		playingState();
 		myTurn(playerIndex);
 		if (!bankHasResources())
 		{
 			throw new ServerException("The bank doesn't have the necessary resources");
 		}
-		return null;
+		moveResources();
+		
+		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " used Year of Plenty");
+		model.getLog().addLine(tempLine);
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 }
