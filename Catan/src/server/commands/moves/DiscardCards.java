@@ -104,7 +104,7 @@ public class DiscardCards extends Command {
 		}
 		discard();
 		checkDiscarders();
-		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " used Year of Plenty");
+		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " discarded");
 		model.getLog().addLine(tempLine);
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
