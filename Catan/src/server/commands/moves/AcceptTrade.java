@@ -1,15 +1,40 @@
 package server.commands.moves;
 
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+
+import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.ResourceType;
 import shared.model.GameModel;
+import shared.model.Line;
+import shared.model.trade.TradeOffer;
 
 public class AcceptTrade extends Command{
 
+	private int playerIndex;
+	private boolean willAccept;
+	
 	public AcceptTrade(int gameID, String json) {
 		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}
 
+	private void translate()
+	{
+		Gson gson = new Gson();
+		JsonObject root;
+		try{
+			root = gson.fromJson(json, JsonObject.class);
+		}catch(Exception e){
+			return;
+		}
+		playerIndex = root.getAsJsonPrimitive("playerIndex").getAsInt();
+		willAccept = root.getAsJsonPrimitive("willAccept").getAsBoolean();
+	}
 	/**
 	 * Preconditions: You have been offered a domestic trade.
 	 * To accept the trade offer, you have the required resources
@@ -17,10 +42,44 @@ public class AcceptTrade extends Command{
 	 * If you declined, no resources are exchanged.
 	 * The trade offer is removed after choice is made.
 	 */
+	
+	private void moveResources()
+	{
+		TradeOffer myOffer = model.getTradeOffer();
+		ArrayList<ResourceType> resourcesOffered = myOffer.getResourceOffered();
+		ArrayList<ResourceType> resourcesDesired = myOffer.getResourceDesired();
+		for (int i = 0; i < resourcesOffered.size(); i++)
+		{
+			//requesting player loses resources offered
+			model.getPlayers().get(myOffer.getRequestingPlayerID()).getPlayerHand().removeResources(1, resourcesOffered.get(i));
+			//accepting player gains resources offered
+			model.getPlayers().get(myOffer.getAcceptingPlayerID()).getPlayerHand().addResources(1, resourcesOffered.get(i));
+		}
+		for (int i = 0; i < resourcesDesired.size(); i++)
+		{
+			model.getPlayers().get(myOffer.getAcceptingPlayerID()).getPlayerHand().removeResources(1, resourcesDesired.get(i));
+			model.getPlayers().get(myOffer.getRequestingPlayerID()).getPlayerHand().addResources(1, resourcesDesired.get(i));
+		}
+	}
+	
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return null;
+		translate();
+		if (willAccept)
+		{
+			moveResources();
+			Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), "The trade was accepted");
+			model.getLog().addLine(tempLine);
+		}
+		else
+		{
+			Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), "The trade was not accepted");
+			model.getLog().addLine(tempLine);
+		}
+		model.setTradeOffer(null);
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }
