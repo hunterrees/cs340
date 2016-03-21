@@ -103,6 +103,9 @@ public class RoadBuilding extends Command {
 		// TODO Auto-generated method stub
 		Player p = model.getPlayers().get(playerIndex);
 
+		model.roadBuilding(p.getPlayerID(), edgeLoc1, edgeLoc2);
+
+
 
 		Line line = new Line(p.getName(), p.getName() + " played road building");
 		model.getLog().addLine(line);
