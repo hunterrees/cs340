@@ -5,8 +5,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import client.server.ServerException;
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.model.GameModel;
+import shared.model.Line;
 
 public class FinishTurn extends Command {
 
@@ -60,7 +62,10 @@ public class FinishTurn extends Command {
 		incrementTurn(playerIndex);
 		newDevCardsToOld(playerIndex);
 		
-		return model;
+		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " turn just ended");
+		model.getLog().addLine(tempLine);
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 		
 	}
 
