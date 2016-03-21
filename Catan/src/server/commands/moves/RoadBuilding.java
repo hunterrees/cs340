@@ -104,7 +104,7 @@ public class RoadBuilding extends Command {
 		Player p = model.getPlayers().get(playerIndex);
 
 
-		Line line = new Line(p.getName(), p.getName() + " bought a development card");
+		Line line = new Line(p.getName(), p.getName() + " played road building");
 		model.getLog().addLine(line);
 
 		//model.getTracker().setGameStatus(blah);

@@ -117,7 +117,7 @@ public class BuildSettlement extends Command {
 			}
 		}
 
-		Line line = new Line(p.getName(), p.getName() + " built a road");
+		Line line = new Line(p.getName(), p.getName() + " built a settlement");
 		model.getLog().addLine(line);
 
 		//model.getTracker().setGameStatus(blah);

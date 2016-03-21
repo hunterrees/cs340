@@ -63,7 +63,7 @@ public class RollNumber extends Command{
 		for(Player p : players) {
 			if(p.getPlayerHand().getNumResources() > 7) {
 				model.getTracker().setGameStatus(GameState.discarding);
-				break;
+				return;
 			}
 		}
 	}
