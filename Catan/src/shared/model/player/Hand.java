@@ -92,6 +92,36 @@ public class Hand
 		}
 		return true;
 	}
+	
+	public boolean removeNewDevCard(DevCardType type)
+	{
+		if (!newDevelopmentCards.contains(new DevelopmentCard(type)))
+		{
+			return false;
+		}
+		for (int i = 0; i < newDevelopmentCards.size(); i++)
+		{
+			if (newDevelopmentCards.get(i).getType() == type)
+			{
+				newDevelopmentCards.remove(i);
+				break;
+			}
+		}
+		return true;
+	}
+	
+	public void removeOldDevCard(DevCardType type)
+	{
+		
+		for (int i = 0; i < newDevelopmentCards.size(); i++)
+		{
+			if (oldDevelopmentCards.get(i).getType() == type)
+			{
+				oldDevelopmentCards.remove(i);
+				break;
+			}
+		}
+	}
 	/**
 	 * returns number of resources of specified type in player hand
 	 * @param type
