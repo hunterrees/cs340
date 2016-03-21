@@ -8,6 +8,7 @@ import server.commands.Command;
 import shared.model.Chat;
 import shared.model.GameModel;
 import shared.model.Line;
+import shared.model.Line;
 import shared.model.player.Player;
 
 import java.util.ArrayList;

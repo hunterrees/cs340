@@ -69,7 +69,7 @@ public class RollNumber extends Command{
 	}
 
 
-	public void givePlayerResources(int roll) {
+	public void givePlayersResources(int roll) {
 		if(roll == 7) {
 			// Do robber stuff here
 			sevenRolled();
@@ -134,7 +134,7 @@ public class RollNumber extends Command{
 		Player p = model.getPlayers().get(playerIndex);
 
 
-		givePlayerResources(numRolled);
+		givePlayersResources(numRolled);
 		Line line = new Line(p.getName(), p.getName() + " rolled a " + numRolled);
 		model.getLog().addLine(line);
 
