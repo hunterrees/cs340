@@ -5,9 +5,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import client.server.ServerException;
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
 import shared.model.GameModel;
+import shared.model.Line;
 
 public class MaritimeTrade extends Command {
 
@@ -76,6 +78,7 @@ public class MaritimeTrade extends Command {
 		// TODO Auto-generated method stub
 		myTurn(playerIndex);
 		playingState();
+		translate();
 		
 		if (model.maritimeTrade(playerIndex, inputResource) == -1)
 		{
@@ -86,7 +89,10 @@ public class MaritimeTrade extends Command {
 			throw new ServerException("The bank has 0 of this resource");
 		}
 		makeTrade();
-		return model;
+		
+		
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }
