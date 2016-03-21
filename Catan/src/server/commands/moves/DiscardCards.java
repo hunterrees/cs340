@@ -102,12 +102,19 @@ public class DiscardCards extends Command {
 		{
 			throw new ServerException("Player doesn't have over 7 cards or already discarded");
 		}
-		discard();
-		checkDiscarders();
-		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " discarded");
-		model.getLog().addLine(tempLine);
-		ServerTranslator temp = new ServerTranslator(model);
-		return temp.translate();
+		try
+		{
+			discard();
+			checkDiscarders();
+			Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " discarded");
+			model.getLog().addLine(tempLine);
+			ServerTranslator temp = new ServerTranslator(model);
+			return temp.translate();
+		}
+		catch (ServerException myException)
+		{
+			throw new ServerException("player does not have the necessary resources");
+		}
 	}
 
 }
