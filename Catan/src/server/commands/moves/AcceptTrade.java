@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import client.server.ServerException;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
@@ -17,6 +18,7 @@ public class AcceptTrade extends Command{
 
 	private int playerIndex;
 	private boolean willAccept;
+	ArrayList<ResourceType> resourceDesired;
 	
 	public AcceptTrade(int gameID, String json) {
 		super(gameID, json);
@@ -35,19 +37,14 @@ public class AcceptTrade extends Command{
 		playerIndex = root.getAsJsonPrimitive("playerIndex").getAsInt();
 		willAccept = root.getAsJsonPrimitive("willAccept").getAsBoolean();
 	}
-	/**
-	 * Preconditions: You have been offered a domestic trade.
-	 * To accept the trade offer, you have the required resources
-	 * Postconditions: If you accepted, you and the player who offered swap the specified resources.
-	 * If you declined, no resources are exchanged.
-	 * The trade offer is removed after choice is made.
-	 */
+
 	
 	private void moveResources()
 	{
 		TradeOffer myOffer = model.getTradeOffer();
 		ArrayList<ResourceType> resourcesOffered = myOffer.getResourceOffered();
 		ArrayList<ResourceType> resourcesDesired = myOffer.getResourceDesired();
+		resourceDesired = resourcesDesired;
 		for (int i = 0; i < resourcesOffered.size(); i++)
 		{
 			//requesting player loses resources offered
@@ -61,13 +58,25 @@ public class AcceptTrade extends Command{
 			model.getPlayers().get(myOffer.getRequestingPlayerID()).getPlayerHand().addResources(1, resourcesDesired.get(i));
 		}
 	}
-	
+	/**
+	 * Preconditions: You have been offered a domestic trade.
+	 * To accept the trade offer, you have the required resources
+	 * Postconditions: If you accepted, you and the player who offered swap the specified resources.
+	 * If you declined, no resources are exchanged.
+	 * The trade offer is removed after choice is made.
+	 * @throws ServerException 
+	 */
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
+		playingState();
 		translate();
 		if (willAccept)
 		{
+			if (!model.acceptTrade(playerIndex))
+			{
+				throw new ServerException("Player does not have the required resources");
+			}
 			moveResources();
 			Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), "The trade was accepted");
 			model.getLog().addLine(tempLine);
