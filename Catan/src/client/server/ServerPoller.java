@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import client.gameManager.GameManager;
-import shared.definitions.GameState;
 import shared.model.GameModel;
 
 /**

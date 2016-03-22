@@ -9,6 +9,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import client.server.ServerException;
+import server.ServerManager;
+import server.User;
 import server.facades.GameFacadeInterface;
 
 public class GameHandler implements HttpHandler{
@@ -47,20 +49,52 @@ public class GameHandler implements HttpHandler{
 		}
 		exchange.getResponseHeaders().set("Content-Type", "application/text");
 		try{
+			String cookie = "";
+			String[] cookies = new String[2];
+			User user = null;
+			int userInt;
+			int gameInt;
+			try{
+				cookie = exchange.getRequestHeaders().get("Cookie").get(0);
+				cookies = cookie.split(";");
+			}catch(Exception e){
+				throw new ServerException("No cookie");
+			}
+			if(cookies[0].contains(".user")){
+				userInt = 0;
+				gameInt = 1;
+			}else{
+				userInt = 1;
+				gameInt = 0;
+			}
+			try{
+				user = ServerManager.getInstance().validateUser(cookies[userInt]);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			if(user == null){
+				throw new ServerException("Invalid user cookie");
+			}
+			String gameCookie = cookies[gameInt];
+			gameCookie = gameCookie.replace("catan.game=", "");
+			gameCookie = gameCookie.trim();
+			int gameID = Integer.parseInt(gameCookie);
+			
 			String response = "Success";
 			switch(command){
 				case "/addAI": facade.addAI(json.toString()); break;
 				case "/listAI": response = facade.listAIs(); break;
-				default: System.out.println("Unavailable method");
+				default: if(command.contains("model")){ response = facade.getModel(gameID, command); } break;
 			}
+			System.out.println(response);
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			exchange.getResponseBody().write(response.getBytes());
 			exchange.getResponseBody().close();
 		}catch(ServerException e){
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, -1);
-			exchange.getResponseBody().write(e.getMessage().getBytes());
-			exchange.getResponseBody().close();
 			e.printStackTrace();
+			exchange.getResponseBody().write(e.getMessage().getBytes());
+			exchange.getResponseBody().close();	
 		} 
 	}
 

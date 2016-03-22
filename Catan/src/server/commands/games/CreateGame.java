@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import client.server.ServerException;
+
 public class CreateGame extends Command{
 
 	shared.model.map.Map map = model.getMap();
@@ -301,9 +303,10 @@ public class CreateGame extends Command{
 	 * If the operation fails,
 	 *	1. The server returns an HTTP 400 error response, and the body contains an error
 	 *	   message.
+	 * @throws ServerException 
 	 */
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 		if(randomNumbers){
 			randomizeNumbers();

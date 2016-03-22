@@ -1,6 +1,8 @@
 package server.commands.moves;
 
 import client.gameManager.GameManager;
+import client.server.ServerException;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -54,9 +56,10 @@ public class BuyDevCard extends Command{
          * 					There are Dev cards remaining in the bank.
          * PostConditions: A random dev card is added to the players hand. If it's a monument it's added to old
          * 					dev cards. Otherwise it is added to new dev cards (unplayable this turn).
+		 * @throws ServerException 
          */
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 
 		// Check if the player has enough resources to buy a development card

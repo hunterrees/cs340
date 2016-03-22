@@ -10,7 +10,7 @@ public interface GameFacadeInterface {
 	 * @return
 	 * @throws ServerException
 	 */
-	public String getModel(int gameID) throws ServerException;
+	public String getModel(int gameID, String command) throws ServerException;
 	
 	/**
 	 * adds and AI to the request game

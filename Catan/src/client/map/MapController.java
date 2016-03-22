@@ -3,11 +3,9 @@ package client.map;
 import java.util.*;
 
 import client.states.*;
-import shared.Piece;
 import shared.definitions.*;
 import shared.locations.*;
 import shared.model.GameException;
-import shared.model.GameModel;
 import shared.model.map.Edge;
 import shared.model.map.Map;
 import shared.model.map.TerrainHex;
@@ -135,9 +133,7 @@ public class MapController extends Controller implements IMapController {
 		return state.canPlaceRobber(hexLoc);
 	}
 
-	private int x = 0;
 	public void placeRoad(EdgeLocation edgeLoc) {
-		Piece road = new Piece(PieceType.ROAD,null,null,1);
 		state.buildRoad(GameManager.getInstance().getPlayerInfo().getPlayerIndex(), edgeLoc);
 
 		getView().placeRoad(edgeLoc, GameManager.getInstance().getPlayerInfo().getColor());
@@ -147,7 +143,6 @@ public class MapController extends Controller implements IMapController {
 	}
 
 	public void placeSettlement(VertexLocation vertLoc) {
-		Piece building = new Piece(PieceType.SETTLEMENT,null,null,1);
 
 
 		getView().placeSettlement(vertLoc, GameManager.getInstance().getPlayerInfo().getColor());

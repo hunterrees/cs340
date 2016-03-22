@@ -2,6 +2,7 @@ package server;
 
 import java.util.ArrayList;
 
+import client.server.ServerException;
 import client.translators.ModelTranslator;
 import shared.Piece;
 import shared.definitions.CatanColor;
@@ -25,7 +26,7 @@ import shared.model.trade.TradeOffer;
 
 public class Test {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws ServerException{
 		TurnTracker tracker = new TurnTracker(0, 1, GameState.rolling, 2);
 		ServerTranslator translator = new ServerTranslator(null);
 		System.out.println(translator.buildTurnTracker(tracker));

@@ -1,6 +1,5 @@
 package client.states;
 
-import client.map.MapController;
 import shared.locations.HexLocation;
 import shared.model.map.Map;
 

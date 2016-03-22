@@ -8,7 +8,6 @@ import client.gameManager.GameManager;
 import shared.definitions.GameState;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
-import shared.model.GameException;
 import shared.model.player.Player;
 
 

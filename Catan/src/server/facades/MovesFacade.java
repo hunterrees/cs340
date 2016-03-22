@@ -13,7 +13,7 @@ public class MovesFacade implements MovesFacadeInterface{
 			case "/robPlayer": return robPlayer(json, gameID);
 			case "/finishTurn": return finishTurn(json, gameID);
 			case "/buyDevCard": return buyDevCard(json, gameID);
-			case "/Year_Of_Plenty": return yearOfPlenty(json, gameID);
+			case "/Year_of_Plenty": return yearOfPlenty(json, gameID);
 			case "/Road_Building": return roadBuilding(json, gameID);
 			case "/Soldier": return soldier(json, gameID);
 			case "/Monopoly": return monopoly(json, gameID);

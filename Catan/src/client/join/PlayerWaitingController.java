@@ -1,14 +1,11 @@
 package client.join;
 
-import java.util.ArrayList;
 import java.util.Observable;
 
 import client.base.*;
 import client.data.GameInfo;
 import client.data.PlayerInfo;
 import client.gameManager.GameManager;
-import shared.model.GameException;
-import shared.model.player.Player;
 
 
 /**

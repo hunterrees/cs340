@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import client.server.ServerException;
 import client.translators.moves.ResourceList;
 import shared.ResourceCard;
 import shared.definitions.CatanColor;
@@ -32,28 +33,34 @@ public class ServerTranslator {
 	/**
 	 * Translates the game model into json and returns it as a string
 	 * @return
+	 * @throws ServerException 
 	 */
-	public String translate(){
-		StringBuilder result = new StringBuilder();
-		result.append("{");
-		result.append(buildBank(model.getBank()));
-		result.append(buildChat(model.getChat()));
-		result.append(buildLog(model.getLog()));
-		result.append(buildMap(model.getMap()));
-		result.append(buildPlayers(model.getPlayers()));
-		result.append(buildTradeOffer(model.getTradeOffer()));
-		result.append(buildTurnTracker(model.getTracker()));
-		String version = "\"version\":" + model.getVersion() + ",\n";
-		String winner = "\"winner\":" + model.getWinner() + "}";
-		result.append(version);
-		result.append(winner);
-		return result.toString();
+	public String translate() throws ServerException{
+		try{
+			StringBuilder result = new StringBuilder();
+			result.append("{");
+			result.append(buildBank(model.getBank()));
+			result.append(buildChat(model.getChat()));
+			result.append(buildLog(model.getLog()));
+			result.append(buildMap(model.getMap()));
+			result.append(buildPlayers(model.getPlayers()));
+			result.append(buildTradeOffer(model.getTradeOffer()));
+			result.append(buildTurnTracker(model.getTracker()));
+			String version = "\n\"version\":" + model.getVersion() + ",\n";
+			String winner = "\"winner\":" + model.getWinner() + "\n}";
+			result.append(version);
+			result.append(winner);
+			return result.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new ServerException(e.getMessage());
+		}
 	}
 	
 	public String buildBank(Bank bank){
 		//Starting resources of the bank need to be generated correctly
 		StringBuilder result = new StringBuilder();
-		String input = "\"bank\": {\n\"brick\":" + bank.numResourceRemaining(ResourceType.BRICK);
+		String input = "\n\"bank\": {\n\"brick\":" + bank.numResourceRemaining(ResourceType.BRICK);
 		result.append(input);
 		input = ",\n\"ore\":" + bank.numResourceRemaining(ResourceType.ORE);
 		result.append(input);
@@ -67,13 +74,13 @@ public class ServerTranslator {
 		
 		input = "\"deck\": {\n\"yearOfPlenty\":" + bank.numDevCardsRemaining(DevCardType.YEAR_OF_PLENTY);
 		result.append(input);
-		input = "\n,\"monopoly\":" + bank.numDevCardsRemaining(DevCardType.MONOPOLY);
+		input = ",\n\"monopoly\":" + bank.numDevCardsRemaining(DevCardType.MONOPOLY);
 		result.append(input);
-		input = "\n,\"monument\":" + bank.numDevCardsRemaining(DevCardType.MONUMENT);
+		input = ",\n\"monument\":" + bank.numDevCardsRemaining(DevCardType.MONUMENT);
 		result.append(input);
-		input = "\n,\"soldier\":" + bank.numDevCardsRemaining(DevCardType.SOLDIER);
+		input = ",\n\"soldier\":" + bank.numDevCardsRemaining(DevCardType.SOLDIER);
 		result.append(input);
-		input = "\n,\"roadBuilding\":" + bank.numDevCardsRemaining(DevCardType.ROAD_BUILD);
+		input = ",\n\"roadBuilding\":" + bank.numDevCardsRemaining(DevCardType.ROAD_BUILD);
 		result.append(input);
 		result.append("\n},");
 		return result.toString();
@@ -81,7 +88,7 @@ public class ServerTranslator {
 
 	public String buildMap(Map map){
 		StringBuilder result = new StringBuilder();
-		String input = "\"map\": {\n";
+		String input = "\n\"map\": {\n";
 		result.append(input);
 		result.append(buildHexes(map.getHexes()));
 		result.append(buildPorts(map.getPorts()));
@@ -194,8 +201,8 @@ public class ServerTranslator {
 			case PUCE: return "puce";
 			case BROWN: return "brown";
 			case GREEN: return "green";
+			default: return null;
 		}
-		return null;
 	}
 	
 	private ResourceList resourceTranslate(ArrayList<ResourceCard> resources){
@@ -275,7 +282,7 @@ public class ServerTranslator {
 	
 	public String buildTurnTracker(TurnTracker tracker){
 		StringBuilder result = new StringBuilder();
-		String input = "\"turnTracker\": {\n";
+		String input = "\n\"turnTracker\": {\n";
 		result.append(input);
 		input = "\"status\": \"" + tracker.statusToString() + "\",";
 		result.append(input);
@@ -290,7 +297,7 @@ public class ServerTranslator {
 	
 	public String buildChat(Chat chat){
 		StringBuilder result = new StringBuilder();
-		result.append("\"chat\": { \n\"lines\": [ \n");
+		result.append("\n\"chat\": { \n\"lines\": [ \n");
 		ArrayList<Line> lines = chat.getLines();
 		for(int i = 0; i < lines.size() - 1; i++){
 			String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
@@ -298,16 +305,20 @@ public class ServerTranslator {
 			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
 			result.append(input);
 		}
-		String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
-		result.append(input);
-		input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"}\n ] },";
-		result.append(input);
+		if(lines.size() > 0){
+			String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
+			result.append(input);
+			input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"}\n ] },";
+			result.append(input);
+		}else{
+			result.append("] \n},");
+		}
 		return result.toString();
 	}
 	
 	public String buildLog(Log log){
 		StringBuilder result = new StringBuilder();
-		result.append("\"log\": { \n\"lines\": [ \n");
+		result.append("\n\"log\": { \n\"lines\": [ \n");
 		ArrayList<Line> lines = log.getLines();
 		for(int i = 0; i < lines.size() - 1; i++){
 			String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
@@ -315,10 +326,14 @@ public class ServerTranslator {
 			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
 			result.append(input);
 		}
-		String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
-		result.append(input);
-		input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"}\n ] },";
-		result.append(input);
+		if(lines.size() > 0){
+			String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
+			result.append(input);
+			input = "\"message\":\"" + lines.get(lines.size() - 1).getMessage() + "\"}\n ] },";
+			result.append(input);
+		}else{
+			result.append("] \n},");
+		}
 		return result.toString();
 	}
 	

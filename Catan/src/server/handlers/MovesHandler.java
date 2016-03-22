@@ -10,6 +10,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import client.server.ServerException;
 import server.ServerManager;
+import server.User;
 import server.facades.MovesFacadeInterface;
 
 public class MovesHandler implements HttpHandler{
@@ -38,9 +39,6 @@ public class MovesHandler implements HttpHandler{
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
 		System.out.println("Moves endpoint received");
-		//handle cookies throw an exception if invalid
-		//get id from the cookie, pass to the facade
-		int gameID = 0;
 		String command = exchange.getRequestURI().toString().replace("/moves", "");
 		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
 		StringBuilder json = new StringBuilder();
@@ -50,6 +48,24 @@ public class MovesHandler implements HttpHandler{
 		}
 		exchange.getResponseHeaders().set("Content-Type", "application/text");
 		try{
+			String cookie = "";
+			String[] cookies = new String[2];
+			User user = null;
+			try{
+				cookie = exchange.getRequestHeaders().get("Cookie").get(0);
+				cookies = cookie.split(";");
+			}catch(Exception e){
+				throw new ServerException("No cookie");
+			}
+			user = ServerManager.getInstance().validateUser(cookies[0]);
+			if(user == null){
+				throw new ServerException("Invalid user cookie");
+			}
+			String gameCookie = cookies[1];
+			gameCookie = gameCookie.replace("catan.game=", "");
+			gameCookie = gameCookie.trim();
+			int gameID = Integer.parseInt(gameCookie);
+			
 			String response = facade.determineOperation(command, json.toString(), gameID);
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			exchange.getResponseBody().write(response.getBytes());

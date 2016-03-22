@@ -24,7 +24,6 @@ import shared.model.map.Edge;
 import shared.model.map.Map;
 import shared.model.map.Port;
 import shared.model.map.TerrainHex;
-import shared.model.map.Vertex;
 import shared.model.player.Hand;
 import shared.model.player.Player;
 import shared.model.trade.TradeOffer;
@@ -56,8 +55,6 @@ public class ModelTranslator {
 		JsonObject logJson = root.getAsJsonObject("log");
 		Log log = buildLog(logJson);
 		
-		JsonObject mapJson = root.getAsJsonObject("map");
-		Map map = buildMap(mapJson);
 		
 		JsonObject bankJson = root.getAsJsonObject("bank");
 		Bank bank = buildBank(deckJson, bankJson);
@@ -78,6 +75,9 @@ public class ModelTranslator {
 		int winner = winnerJson.getAsInt();
 		JsonPrimitive versionJson = root.getAsJsonPrimitive("version");
 		int version = versionJson.getAsInt();
+		
+		JsonObject mapJson = root.getAsJsonObject("map");
+		Map map = buildMap(mapJson);
 		
 		for(int i = 0; i < players.size(); i++){
 			ArrayList<Port> ports = map.listPorts(i);

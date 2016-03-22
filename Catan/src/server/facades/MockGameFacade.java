@@ -11,7 +11,7 @@ import server.commands.game.ListAI;
 public class MockGameFacade implements GameFacadeInterface{
 
 	@Override
-	public String getModel(int gameID) throws ServerException {
+	public String getModel(int gameID, String command) throws ServerException {
 		File file = new File("Games/defaultGame.json");
 		String jsonText = "";
 		try {

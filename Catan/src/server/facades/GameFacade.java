@@ -6,9 +6,9 @@ import server.commands.game.*;
 public class GameFacade implements GameFacadeInterface{
 
 	@Override
-	public String getModel(int gameID) throws ServerException {
-		// TODO Auto-generated method stub
-		return null;
+	public String getModel(int gameID, String command) throws ServerException {
+		GetModel getModelCommand = new GetModel(gameID, command);
+		return (String) getModelCommand.execute();
 	}
 
 	@Override

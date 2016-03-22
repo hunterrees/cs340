@@ -1,13 +1,9 @@
 package client.states;
 
-import client.gameManager.GameManager;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
-import shared.model.GameException;
 import shared.model.map.Map;
-import shared.model.map.Vertex;
-
 /**
  * Created by Brian on 16/2/17.
  */

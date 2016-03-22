@@ -5,7 +5,6 @@ import java.util.*;
 import client.base.*;
 import client.gameManager.GameManager;
 import shared.definitions.*;
-import shared.model.Chat;
 import shared.model.Line;
 import shared.model.Log;
 import shared.model.player.Player;

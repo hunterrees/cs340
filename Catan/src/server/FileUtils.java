@@ -26,6 +26,7 @@ public static byte[] readFile(String path) throws IOException {
 // Create an input stream from the file object 
 	FileInputStream in=new FileInputStream(file); // Read it all
 	in.read(contents); // Close the file in.close();
+	in.close();
 	return contents;
  }
 public static String getMimeType(String path){

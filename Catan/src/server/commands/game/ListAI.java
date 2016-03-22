@@ -14,7 +14,7 @@ public class ListAI extends Command {
 	 */
 	@Override
 	public Object execute() {
-		return "[]";
+		return "[\"NONE\"]";
 	}
 
 }

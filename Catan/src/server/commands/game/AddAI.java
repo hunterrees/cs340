@@ -1,10 +1,11 @@
 package server.commands.game;
 
+import client.server.ServerException;
 import server.commands.Command;
 
 public class AddAI extends Command {
 
-	public AddAI(int gameID, String json) {
+	public AddAI(int gameID, String json) throws ServerException {
 		super(gameID, json);
 		// TODO Auto-generated constructor stub
 	}

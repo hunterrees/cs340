@@ -6,7 +6,6 @@ import client.data.PlayerInfo;
 import client.server.ServerException;
 import client.server.ServerInterface;
 import client.server.ServerPoller;
-import client.server.ServerProxy;
 import client.translators.games.GamesListGamesTranslator;
 import shared.definitions.CatanColor;
 import shared.definitions.GameState;

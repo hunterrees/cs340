@@ -2,11 +2,8 @@ package client.join;
 
 import shared.definitions.CatanColor;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.Observable;
 
-import javax.swing.JButton;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -16,7 +13,6 @@ import client.base.*;
 import client.data.*;
 import client.gameManager.GameManager;
 import client.misc.*;
-import client.server.ServerPoller;
 
 
 /**
@@ -237,8 +233,8 @@ public class JoinGameController extends Controller implements IJoinGameControlle
 		case RED:return "red";
 		case WHITE:return "white";
 		case YELLOW:return "yellow";
+		default: return null;
 		}
-		return null;
 	}
 	
 	@Override

@@ -8,9 +8,6 @@ import shared.locations.VertexLocation;
 import shared.model.GameException;
 import shared.model.map.Map;
 
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Brian on 16/2/17.
@@ -22,8 +19,6 @@ public class SetupFirst extends State{
     public SetupFirst(Map map, MapController mc) {
         super(map);
         this.mc = mc;
-
-        Scanner s = new Scanner(System.in);
 
 
        mc.getView().startDrop(PieceType.SETTLEMENT, GameManager.getInstance().getPlayerInfo().getColor(), false);

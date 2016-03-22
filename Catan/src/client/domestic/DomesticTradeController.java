@@ -1,6 +1,5 @@
 package client.domestic;
 
-import shared.ResourceCard;
 import shared.definitions.*;
 import shared.model.GameException;
 import shared.model.player.Player;
@@ -14,7 +13,6 @@ import client.base.*;
 import client.data.PlayerInfo;
 import client.gameManager.GameManager;
 import client.misc.*;
-import client.translators.moves.ResourceList;
 
 
 /**
@@ -209,7 +207,6 @@ public class DomesticTradeController extends Controller implements IDomesticTrad
 
 	private void recieveIncreaseDecreaseEnable(ResourceType resource)
 	{
-		int numberInHand = myPlayer.getPlayerHand().numResourceOfType(resource);
 		int numberRecieving = 0;
 		for (int i = 0; i < resourcesBeingRecieved.size(); i++)
 		{

@@ -1,12 +1,16 @@
 package server.commands.game;
 
+import client.server.ServerException;
+import server.ServerManager;
+import server.ServerTranslator;
 import server.commands.Command;
 
 public class GetModel extends Command{
 
+	private ServerTranslator translator;
+	
 	public GetModel(int gameID, String json) {
 		super(gameID, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -24,11 +28,26 @@ public class GetModel extends Command{
 	 *	If the operation fails,
 	 *	1. The server returns an HTTP 400 error response, and the body contains an error
 	 *	message.
+	 * @throws ServerException 
 	 */
 	@Override
-	public Object execute() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object execute() throws ServerException {
+		model = ServerManager.getInstance().getGame(gameID);
+		if(model == null){
+			throw new ServerException("Game doesn't exist");
+		}
+		translator = new ServerTranslator(model);
+		if(json.contains("?")){
+			json = json.replace("/model?version=", "");
+			int version = Integer.parseInt(json);
+			if(version < model.getVersion()){
+				return translator.translate();
+			}else{
+				return "true";
+			}
+		}else{
+			return translator.translate();
+		}
 	}
 
 }

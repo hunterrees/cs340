@@ -23,7 +23,7 @@ public class ServerProxyTests {
 	//if the response code isn't 200, the ServerProxy will throw an exception and thus fail the test
 	
 	@BeforeClass
-	public void startUp(){
+	public static void startUp(){
 		new Server(true).run();
 	}
 	@Before

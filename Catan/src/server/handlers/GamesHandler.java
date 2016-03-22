@@ -54,6 +54,7 @@ public class GamesHandler implements HttpHandler{
 				String cookie = "";
 				try{
 					cookie = exchange.getRequestHeaders().get("Cookie").get(0);
+					System.out.println(cookie);
 				}catch(Exception e){
 					throw new ServerException("No user cookie");
 				}

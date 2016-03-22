@@ -66,6 +66,9 @@ public class ListGames extends Command{
 			}else{
 				result.append(gson.toJson(gameInfo));
 			}
+			if(i < ServerManager.getInstance().getGames().size() - 1){
+				result.append(",");
+			}
 		}
 		result.append("]");
 		return result.toString();
