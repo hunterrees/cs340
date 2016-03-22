@@ -79,12 +79,6 @@ public class RollNumber extends Command{
 
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
 			if(entry.getValue().getNumber() == roll && !map.getRobberLocation().equals(entry.getKey())) {
-				// Check every edge
-				/*for(java.util.Map.Entry<VertexLocation, Vertex> entryTwo : entry.getValue().getVerticies().entrySet()) {
-					if(entryTwo.getValue().getPiece() != null) {
-						addResource(entryTwo.getValue().getPiece().getPieceType(), entry.getValue().getType(), entryTwo.getValue().getPiece().getPlayerID());
-					}
-				}*/
 
 				Vertex vert1 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.NorthWest).getNormalizedLocation());
 				if(vert1.getPiece() != null) {
