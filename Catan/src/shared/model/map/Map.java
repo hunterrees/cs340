@@ -126,7 +126,7 @@ public class Map {
 
 
 		// Port 7
-		VertexLocation loc13 = new VertexLocation(new HexLocation(1,-2), VertexDirection.NorthEast).getNormalizedLocation();
+		VertexLocation loc13 = new VertexLocation(new HexLocation(1,-2), VertexDirection.East).getNormalizedLocation();
 		ports.put(loc13, new Port(PortType.SHEEP));
 
 		VertexLocation loc14 = new VertexLocation(new HexLocation(1,-2), VertexDirection.NorthWest).getNormalizedLocation();
