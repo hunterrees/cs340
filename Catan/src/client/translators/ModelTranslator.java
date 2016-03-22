@@ -347,16 +347,16 @@ public class ModelTranslator {
 
 		// Vertex ports
 		Port port1 = new Port(type);
-		port1.setLoc(new VertexLocation(new HexLocation(x,y), vd1));
+		port1.setLoc(new VertexLocation(new HexLocation(x,y), vd1).getNormalizedLocation());
 
 		Port port2 = new Port(type);
-		port2.setLoc(new VertexLocation(new HexLocation(x,y), vd2));
+		port2.setLoc(new VertexLocation(new HexLocation(x,y), vd2).getNormalizedLocation());
 
 		ports.put(port1.getLoc(), port1);
 		ports.put(port2.getLoc(), port2);
 
 		// Edge ports
-		edgePorts.put(new EdgeLocation(new HexLocation(x,y),ed), type);
+		edgePorts.put(new EdgeLocation(new HexLocation(x,y),ed).getNormalizedLocation(), type);
 
 
 
