@@ -1,6 +1,7 @@
 package server.commands.moves;
 
 import client.gameManager.GameManager;
+import client.server.ServerException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -77,7 +78,7 @@ public class BuildCity extends Command {
 	 * You got one settlement back.
 	 */
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 
 		Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
@@ -100,6 +101,7 @@ public class BuildCity extends Command {
 		model.getLog().addLine(line);
 
 		//model.getTracker().setGameStatus(blah);
+		p.addVictoryPoint();
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();

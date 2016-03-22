@@ -5,7 +5,7 @@ import server.commands.Command;
 import shared.definitions.HexType;
 import shared.definitions.PortType;
 import shared.locations.*;
-import shared.model.GameModel;
+import shared.model.*;
 import shared.model.map.*;
 
 import java.util.*;
@@ -16,10 +16,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import client.server.ServerException;
+import shared.model.player.Player;
+import shared.model.trade.TradeOffer;
 
 public class CreateGame extends Command{
 
-	shared.model.map.Map map = model.getMap();
+	shared.model.map.Map map = new shared.model.map.Map();
 	private boolean randomTiles;
 	private boolean randomNumbers;
 	private boolean randomPorts;
@@ -27,6 +29,9 @@ public class CreateGame extends Command{
 	private ArrayList<HexType> hexList;
 	private ArrayList<Integer> numberList;
 	private ArrayList<PortType> portList;
+	Bank bank = new Bank();
+	ArrayList<Player> players;
+	HexLocation robberLoc;
 	
 
 	HashMap<VertexLocation, Port> ports = new HashMap<>();
@@ -36,6 +41,12 @@ public class CreateGame extends Command{
 		// TODO Auto-generated constructor stub
 		translate(json);
 		randomize();
+	}
+
+	private void createModel() {
+
+	/*	model = new GameModel(map, bank, players, robberLoc, null,
+				new TurnTracker(), new Log(), new Chat(), -1);*/
 	}
 
 	public void randomize(){
@@ -164,6 +175,9 @@ public class CreateGame extends Command{
 
 				entry.getValue().setNumber(numberList.get(counter));
 				counter++;
+			}
+			if(entry.getValue().getType() == HexType.DESERT) {
+				robberLoc = entry.getKey();
 			}
 		}
 
@@ -320,7 +334,7 @@ public class CreateGame extends Command{
 			randomizePorts();
 		}
 
-
+		createModel();
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
