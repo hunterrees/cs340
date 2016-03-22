@@ -40,6 +40,7 @@ public class GameModel {
 		this.theTrade = theTrade;
 		this.bank = bank;
 		this.players = players;
+		this.version = 0;
 	}
 
 // Public methods
