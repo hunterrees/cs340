@@ -11,6 +11,7 @@ import shared.definitions.HexType;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
+import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
 import shared.model.Line;
@@ -78,12 +79,44 @@ public class RollNumber extends Command{
 
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
 			if(entry.getValue().getNumber() == roll && !map.getRobberLocation().equals(entry.getKey())) {
-				// Check every edge
-				for(java.util.Map.Entry<VertexLocation, Vertex> entryTwo : entry.getValue().getVerticies().entrySet()) {
-					if(entryTwo.getValue().getPiece() != null) {
-						addResource(entryTwo.getValue().getPiece().getPieceType(), entry.getValue().getType(), entryTwo.getValue().getPiece().getPlayerID());
-					}
+
+				Vertex vert1 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.NorthWest).getNormalizedLocation());
+				if(vert1.getPiece() != null) {
+					addResource(vert1.getPiece().getPieceType(), entry.getValue().getType(),vert1.getPiece().getPlayerID());
+
 				}
+
+				Vertex vert2 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.NorthEast).getNormalizedLocation());
+				if(vert2.getPiece() != null) {
+					addResource(vert2.getPiece().getPieceType(), entry.getValue().getType(),vert2.getPiece().getPlayerID());
+
+				}
+
+				Vertex vert3 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.East).getNormalizedLocation());
+				if(vert3.getPiece() != null) {
+					addResource(vert3.getPiece().getPieceType(), entry.getValue().getType(),vert3.getPiece().getPlayerID());
+
+				}
+
+				Vertex vert4 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.SouthEast).getNormalizedLocation());
+				if(vert4.getPiece() != null) {
+					addResource(vert4.getPiece().getPieceType(), entry.getValue().getType(),vert4.getPiece().getPlayerID());
+
+				}
+
+				Vertex vert5 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.SouthWest).getNormalizedLocation());
+				if(vert5.getPiece() != null) {
+					addResource(vert5.getPiece().getPieceType(), entry.getValue().getType(),vert5.getPiece().getPlayerID());
+
+				}
+
+				Vertex vert6 = map.getVerticies().get(new VertexLocation(entry.getKey(), VertexDirection.West).getNormalizedLocation());
+				if(vert6.getPiece() != null) {
+					addResource(vert6.getPiece().getPieceType(), entry.getValue().getType(),vert6.getPiece().getPlayerID());
+
+				}
+
+
 
 			}
 		}

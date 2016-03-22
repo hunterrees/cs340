@@ -3,6 +3,7 @@ package server.commands.moves;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import server.ServerTranslator;
 import server.commands.Command;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
@@ -65,7 +66,9 @@ public class RobPlayer extends Command {
 	@Override
 	public Object execute() {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		model.robPlayer(hexLoc, victimIndex);
+
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();	}
 
 }
