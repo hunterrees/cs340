@@ -100,6 +100,7 @@ public class ServerManager {
 	public User validateUser(String cookie){
 		cookie = cookie.replace("catan.user=", "");
 		cookie = cookie.replace(";", "");
+		cookie = cookie.trim();
 		for(int i = 0; i < users.size(); i++){
 			if(users.get(i).generateCookie().equals(cookie)){
 				return users.get(i);

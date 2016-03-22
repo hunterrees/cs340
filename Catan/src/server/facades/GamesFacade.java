@@ -22,7 +22,6 @@ public class GamesFacade implements GamesFacadeInterface{
 
 	@Override
 	public int joinGame(String json, User user) throws ServerException {
-		System.out.println("Join game called");
 		JoinGame joinGameCommand = new JoinGame(-1, json);
 		joinGameCommand.setUser(user);
 		return (int) joinGameCommand.execute();

@@ -49,15 +49,28 @@ public class GamesHandler implements HttpHandler{
 		int gameID = -1;
 		exchange.getResponseHeaders().set("Content-Type", "application/text");
 		try{
+			String cookie = "";
 			User user = null;
 			if(!command.equals("/list")){
-				String cookie = "";
+				String[] cookies = new String[2];
+				
+				int userInt;
 				try{
 					cookie = exchange.getRequestHeaders().get("Cookie").get(0);
+					cookies = cookie.split(";");
 				}catch(Exception e){
-					throw new ServerException("No user cookie");
+					throw new ServerException("No cookie");
 				}
-				user = ServerManager.getInstance().validateUser(cookie);
+				if(cookies[0].contains(".user")){
+					userInt = 0;
+				}else{
+					userInt = 1;
+				}
+				try{
+					user = ServerManager.getInstance().validateUser(cookies[userInt]);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 				if(user == null){
 					throw new ServerException("Invalid user cookie");
 				}
@@ -69,12 +82,13 @@ public class GamesHandler implements HttpHandler{
 				case "/create": response = facade.createGame(json.toString()); break;
 			}
 			if(gameID != -1){
-				String cookie = "catan.game=" + gameID + ";Path=/;";
+				cookie = "catan.game=" + gameID + ";Path=/;";
 				exchange.getResponseHeaders().add("Set-cookie", cookie);
 				response = "Success";
 			}
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			exchange.getResponseBody().write(response.getBytes());
+			exchange.getResponseBody().flush();
 			exchange.getResponseBody().close();
 		}catch(Exception e){
 			e.printStackTrace();

@@ -129,7 +129,7 @@ public class Map {
 		VertexLocation loc13 = new VertexLocation(new HexLocation(1,-2), VertexDirection.East).getNormalizedLocation();
 		ports.put(loc13, new Port(PortType.SHEEP));
 
-		VertexLocation loc14 = new VertexLocation(new HexLocation(1,-2), VertexDirection.NorthWest).getNormalizedLocation();
+		VertexLocation loc14 = new VertexLocation(new HexLocation(1,-2), VertexDirection.NorthEast).getNormalizedLocation();
 		ports.put(loc14, new Port(PortType.SHEEP));
 
 		edgePorts.put(new EdgeLocation(new HexLocation(1,-2),EdgeDirection.NorthEast),PortType.SHEEP);

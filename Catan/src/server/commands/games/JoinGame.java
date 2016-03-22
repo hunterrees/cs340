@@ -61,6 +61,7 @@ public class JoinGame extends Command{
 		}else{
 			for(int i = 0; i < game.getPlayers().size(); i++){
 				if(game.getPlayers().get(i).getName().equals(user.getName())){
+					game.getPlayers().get(i).setPlayerColor(catanColor);
 					return gameID;
 				}
 			}

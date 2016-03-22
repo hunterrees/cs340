@@ -211,7 +211,7 @@ public class ServerProxy implements ServerInterface {
 			result.append("/game/model?version=");
 			result.append(versionID);
 			String json = get(result.toString());
-			if(json == "true"){
+			if(json.equals("true")){
 				return null;
 			}
 			return translator.getModelfromJSON(json);

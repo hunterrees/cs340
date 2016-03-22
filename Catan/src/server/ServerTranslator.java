@@ -91,7 +91,8 @@ public class ServerTranslator {
 		String input = "\n\"map\": {\n";
 		result.append(input);
 		result.append(buildHexes(map.getHexes()));
-		result.append(buildPorts(map.getPorts()));
+		result.append(buildRoads(map.getEdges()));
+		result.append(buildPorts(map.getEdgePorts()));
 		result.append(buildSettlementsAndCities(map.getVerticies()));
 		input = "\"radius\": 3,\n";
 		result.append(input);
@@ -381,30 +382,30 @@ public class ServerTranslator {
 		}
 	}
 	
-	public String buildPorts(HashMap<VertexLocation, Port> ports){
+	public String buildPorts(HashMap<EdgeLocation, PortType> ports){
 		StringBuilder result = new StringBuilder();
 		String input = "\"ports\": [\n";
 		result.append(input);
 		int i = ports.entrySet().size();
-		for(Entry<VertexLocation, Port> port : ports.entrySet()){
+		for(Entry<EdgeLocation, PortType> port : ports.entrySet()){
 			i--;
 			result.append("{\n");
-			if(port.getValue().getType() != PortType.THREE){
+			if(port.getValue() != PortType.THREE){
 				input = "\"ratio\":2,\n";
 				result.append(input);
-				input = "\"resource\": \"" + portType(port.getValue().getType()) + "\",\n";
+				input = "\"resource\": \"" + portType(port.getValue()) + "\",\n";
 				result.append(input);
 			}else{
 				input = "\"ratio\":3,\n";
 				result.append(input);
 			}
-			input = "\"direction\": \"" + direction(port.getKey().getDir()) + "\",\n";
+			input = "\"direction\": \"" + direction(port.getKey().getNormalizedLocation().getDir()) + "\",\n";
 			result.append(input);
 			input = "\"location\": {\n";
 			result.append(input);
-			input = "\"x\":" + port.getKey().getHexLoc().getX() + ",\n";
+			input = "\"x\":" + port.getKey().getNormalizedLocation().getHexLoc().getX() + ",\n";
 			result.append(input);
-			input = "\"y\":" + port.getKey().getHexLoc().getY() + "\n}";
+			input = "\"y\":" + port.getKey().getNormalizedLocation().getHexLoc().getY() + "\n}";
 			result.append(input);
 			if(i > 0){
 				result.append("\n},\n");
@@ -473,9 +474,9 @@ public class ServerTranslator {
 			input = "\"y\":" + roadEdges.get(i).getLocation().getNormalizedLocation().getHexLoc().getY() + "\n}";
 			result.append(input);
 			if(i < roadEdges.size() - 1){
-				result.append(",\n");
+				result.append("},\n");
 			}else{
-				result.append("\n");
+				result.append("}\n");
 			}
 		}
 		result.append("],");

@@ -57,6 +57,7 @@ public class UserHandler implements HttpHandler{
 			String body = "Success";
 			byte[] response = body.getBytes();
 			exchange.getResponseBody().write(response);
+			exchange.getResponseBody().flush();
 			exchange.getResponseBody().close();
 		}catch(ServerException e){
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
