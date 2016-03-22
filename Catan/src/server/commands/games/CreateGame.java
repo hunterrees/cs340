@@ -179,6 +179,8 @@ public class CreateGame extends Command{
 		list.add(PortType.THREE);
 		list.add(PortType.THREE);
 
+		list.add(PortType.THREE);
+
 		list.add(PortType.WOOD);
 		list.add(PortType.BRICK);
 		list.add(PortType.SHEEP);
