@@ -56,6 +56,35 @@ public class CanUseRoadBuilder {
 		// Building them next to another player's settlement
 		assertFalse(map.canRoadBuild(2, el1, el2));
 		assertFalse(map.canRoadBuild(2, el2, el1));
+		
+		// Building one next to settlement then another next to a road
+		assertTrue(map.canRoadBuild(1, el6, el1));
+		assertTrue(map.canRoadBuild(1, el1, el6));
+		
+		Vertex vert = map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.SouthWest).getNormalizedLocation());
+		vert.setPiece(new Piece(PieceType.SETTLEMENT, null, null, 3));
+		
+		//Building in valid place but also next to enemy settlement
+		assertTrue(map.canRoadBuild(1, el6, el1));
+		assertTrue(map.canRoadBuild(1, el1, el6));
+		
+		//Building through enemy settlement
+		assertFalse(map.canRoadBuild(1, el5, el6));
+		assertFalse(map.canRoadBuild(1, el6, el5));
+		
+		
+		Vertex vert2 = map.getVerticies().get(new VertexLocation(new HexLocation(1,1), VertexDirection.SouthEast).getNormalizedLocation());
+		vert2.setPiece(new Piece(PieceType.SETTLEMENT, null, null, 1));
+		
+		EdgeLocation el7 = new EdgeLocation(new HexLocation(1,1), EdgeDirection.South).getNormalizedLocation();
+		EdgeLocation el8 = new EdgeLocation(new HexLocation(1,1), EdgeDirection.SouthEast).getNormalizedLocation();
+		
+		assertTrue(map.canRoadBuild(1, el7, el8));
+		assertTrue(map.canRoadBuild(1, el8, el7));
+		
+		
+		
+		
 	}
 
 }

@@ -1668,8 +1668,8 @@ public class Map {
 
 		// First case
 		if(canBuildRoad(playerID, false, spot1.getNormalizedLocation())) {
-			Edge tempEdge = edges.get(spot1);
-			Piece temp = new Piece(PieceType.ROAD, tempEdge, null, playerID);
+			Edge tempEdge = edges.get(spot1.getNormalizedLocation());
+			Piece temp = new Piece(PieceType.ROAD, null, null, playerID);
 			edges.get(spot1.getNormalizedLocation()).setPiece(temp);
 			if(canBuildRoad(playerID, false, spot2.getNormalizedLocation())) {
 				firstPossible = true;
@@ -1681,7 +1681,7 @@ public class Map {
 		// Second case
 		if(canBuildRoad(playerID, false, spot2.getNormalizedLocation())) {
 			Edge tempEdge = edges.get(spot2.getNormalizedLocation());
-			Piece temp = new Piece(PieceType.ROAD, tempEdge, null, playerID);
+			Piece temp = new Piece(PieceType.ROAD, null, null, playerID);
 			edges.get(spot2.getNormalizedLocation()).setPiece(temp);
 			if(canBuildRoad(playerID, false, spot1.getNormalizedLocation())) {
 				secondPossible = true;
@@ -1691,7 +1691,7 @@ public class Map {
 
 
 
-		return firstPossible || secondPossible;
+		return (firstPossible || secondPossible);
 	}
 
 	public HashMap<HexLocation, TerrainHex> getHexes() {

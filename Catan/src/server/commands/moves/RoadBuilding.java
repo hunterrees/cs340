@@ -104,7 +104,7 @@ public class RoadBuilding extends Command {
 		Player p = model.getPlayers().get(playerIndex);
 
 		model.roadBuilding(p.getPlayerID(), edgeLoc1, edgeLoc2);
-
+		
 
 
 		Line line = new Line(p.getName(), p.getName() + " played road building");
