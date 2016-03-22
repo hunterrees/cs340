@@ -78,8 +78,9 @@ public class ServerManager {
 	 * creates a new game on the server
 	 * @param model
 	 */
-	public void createGame(GameModel model){
+	public int createGame(GameModel model){
 		games.add(model);
+		return games.size() - 1;
 	}
 	
 	/**
