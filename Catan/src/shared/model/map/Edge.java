@@ -16,7 +16,7 @@ public class Edge {
 	 
 	 */
 	public Edge(EdgeLocation location){
-		
+		this.location = location;
 	}
 	
 	/**

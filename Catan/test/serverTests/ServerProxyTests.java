@@ -5,9 +5,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import client.server.ServerProxy;
+import server.Server;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
@@ -19,6 +21,11 @@ public class ServerProxyTests {
 	
 	ServerProxy server = new ServerProxy("localhost", 8081);
 	//if the response code isn't 200, the ServerProxy will throw an exception and thus fail the test
+	
+	@BeforeClass
+	public void startUp(){
+		new Server(true).run();
+	}
 	@Before
 	public void login() {
 		System.out.println("Testing Server Proxy");

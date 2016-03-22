@@ -41,7 +41,7 @@ public class Server {
 	 */
 	private MovesHandler movesHandler;
 
-	private Server(boolean testing){
+	public Server(boolean testing){
 		if(testing){
 			userHandler = new UserHandler(new MockUserFacade());
 			gamesHandler = new GamesHandler(new MockGamesFacade());
@@ -58,7 +58,7 @@ public class Server {
 	/**
 	 * creates the server and creates contexts with handlers
 	 */
-	private void run(){
+	public void run(){
 		try {
 			server = HttpServer.create(new InetSocketAddress(PORT), MAX_WAITING_CONNECTIONS);
 		} 

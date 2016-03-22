@@ -10,9 +10,12 @@ import shared.definitions.CatanColor;
 import shared.definitions.DevCardType;
 import shared.definitions.HexType;
 import shared.definitions.PieceType;
+import shared.definitions.PortType;
 import shared.definitions.ResourceType;
+import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
+import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.*;
 import shared.model.map.*;
@@ -81,7 +84,17 @@ public class ServerTranslator {
 		String input = "\"map\": {\n";
 		result.append(input);
 		result.append(buildHexes(map.getHexes()));
-		return null;
+		result.append(buildPorts(map.getPorts()));
+		result.append(buildSettlementsAndCities(map.getVerticies()));
+		input = "\"radius\": 3,\n";
+		result.append(input);
+		input = "\"robber\": {\n";
+		result.append(input);
+		input = "\"x\":" + map.getRobberLocation().getX() + ",\n";
+		result.append(input);
+		input = "\"y\":" + map.getRobberLocation().getY() + "\n}\n},\n";
+		result.append(input);
+		return result.toString();
 	}
 	
 	public String buildPlayers(ArrayList<Player> players){
@@ -312,33 +325,203 @@ public class ServerTranslator {
 	public String buildHexes(HashMap<HexLocation, TerrainHex> hexes){
 		StringBuilder result = new StringBuilder();
 		String input = "\"hexes\": [\n";
+		result.append(input);
+		int i = hexes.entrySet().size();
 		for(Entry<HexLocation, TerrainHex> hex : hexes.entrySet()){
-			result.append("{\n");
-			if(hex.getValue().getType() != HexType.DESERT){
-				//add resource tag
-			}
-			input = "\"location\": {\n";
-			result.append(input);
-			input = "\"x\":" + hex.getValue().getLocation().getX() + ",\n";
-			result.append(input);
-			input = "\"y\":" + hex.getValue().getLocation().getY() + "\n},";
-			result.append(input);
-			if(hex.getValue().getType() != HexType.DESERT){
-				//add number tag
+			i--;
+			if(hex.getValue().getType() != HexType.WATER){
+				result.append("{\n");
+				if(hex.getValue().getType() != HexType.DESERT){
+					input = "\"resource\": \"" + resourceType(hex.getValue().getType()) + "\",\n";
+					result.append(input);
+				}
+				input = "\"location\": {\n";
+				result.append(input);
+				input = "\"x\":" + hex.getValue().getLocation().getX() + ",\n";
+				result.append(input);
+				input = "\"y\":" + hex.getValue().getLocation().getY() + "\n}";
+				result.append(input);
+				if(hex.getValue().getType() != HexType.DESERT){
+					input = ",\n\"number\":" + hex.getValue().getNumber();
+					result.append(input);
+				}
+				if(i > 0){
+					result.append("\n},\n");
+				}else{
+					result.append("\n}\n],");
+				}
 			}
 		}
-		return null;
+		return result.toString();
+	}
+	
+	public String resourceType(HexType type){
+		switch(type){
+			case BRICK: return "brick";
+			case WOOD: return "wood";
+			case WHEAT: return "wheat";
+			case ORE: return "ore";
+			case SHEEP: return "sheep";
+			default: return "";
+		}
 	}
 	
 	public String buildPorts(HashMap<VertexLocation, Port> ports){
-		return null;
+		StringBuilder result = new StringBuilder();
+		String input = "\"ports\": [\n";
+		result.append(input);
+		int i = ports.entrySet().size();
+		for(Entry<VertexLocation, Port> port : ports.entrySet()){
+			i--;
+			result.append("{\n");
+			if(port.getValue().getType() != PortType.THREE){
+				input = "\"ratio\":2,\n";
+				result.append(input);
+				input = "\"resource\": \"" + portType(port.getValue().getType()) + "\",\n";
+				result.append(input);
+			}else{
+				input = "\"ratio\":3,\n";
+				result.append(input);
+			}
+			input = "\"direction\": \"" + direction(port.getKey().getDir()) + "\",\n";
+			result.append(input);
+			input = "\"location\": {\n";
+			result.append(input);
+			input = "\"x\":" + port.getKey().getHexLoc().getX() + ",\n";
+			result.append(input);
+			input = "\"y\":" + port.getKey().getHexLoc().getY() + "\n}";
+			result.append(input);
+			if(i > 0){
+				result.append("\n},\n");
+			}else{
+				result.append("\n}\n],");
+			}
+		}
+		return result.toString();
+	}
+	
+	public String direction(VertexDirection direction){
+		switch(direction){
+			case NorthWest: return "NW";
+			case NorthEast: return "NE";
+			case SouthWest: return "SW";
+			case SouthEast: return "SE";
+			case West: return "W";
+			case East: return "E";
+			default: return "";
+		}
+	}
+	
+	public String direction(EdgeDirection direction){
+		switch(direction){
+			case NorthWest: return "NW";
+			case NorthEast: return "NE";
+			case SouthWest: return "SW";
+			case SouthEast: return "SE";
+			case North: return "N";
+			case South: return "S";
+			default: return "";
+		}
+	}
+	
+	public String portType(PortType type){
+		switch(type){
+			case WHEAT: return "wheat";
+			case WOOD: return "wood";
+			case BRICK: return "brick";
+			case ORE: return "ore";
+			case SHEEP: return "sheep";
+			default: return "";
+		}
 	}
 	
 	public String buildRoads(HashMap<EdgeLocation, Edge> edges){
-		return null;
+		StringBuilder result = new StringBuilder();
+		String input = "\"roads\": [\n";
+		result.append(input);
+		ArrayList<Edge> roadEdges = new ArrayList<Edge>();
+		for(Entry<EdgeLocation, Edge> edge : edges.entrySet()){
+			if(edge.getValue().getPiece() != null){
+				roadEdges.add(edge.getValue());
+			}
+		}
+		for(int i = 0; i < roadEdges.size(); i++){
+			result.append("{\n");
+			input = "\"owner\":" + roadEdges.get(i).getPiece().getPlayerID() + ",\n";
+			result.append(input);
+			input = "\"location\": {\n";
+			result.append(input);
+			input = "\"direction\": \"" + direction(roadEdges.get(i).getLocation().getNormalizedLocation().getDir()) + "\",\n";
+			result.append(input);
+			input = "\"x\":" + roadEdges.get(i).getLocation().getNormalizedLocation().getHexLoc().getX()+ ",\n";
+			result.append(input);
+			input = "\"y\":" + roadEdges.get(i).getLocation().getNormalizedLocation().getHexLoc().getY() + "\n}";
+			result.append(input);
+			if(i < roadEdges.size() - 1){
+				result.append(",\n");
+			}else{
+				result.append("\n");
+			}
+		}
+		result.append("],");
+		return result.toString();
 	}
 	
 	public String buildSettlementsAndCities(HashMap<VertexLocation, Vertex> verticies){
-		return null;
+		StringBuilder result = new StringBuilder();
+		ArrayList<Vertex> settlements = new ArrayList<Vertex>();
+		ArrayList<Vertex> cities = new ArrayList<Vertex>();
+		for(Entry<VertexLocation, Vertex> vertex : verticies.entrySet()){
+			if(vertex.getValue().getPiece()!= null){
+				if(vertex.getValue().getPiece().getPieceType() == PieceType.SETTLEMENT){
+					settlements.add(vertex.getValue());
+				}else{
+					cities.add(vertex.getValue());
+				}
+			}
+		}
+		String input = "\"settlements\": [\n";
+		result.append(input);
+		for(int i = 0; i < settlements.size(); i++){
+			result.append("{\n");
+			input = "\"owner\":" + settlements.get(i).getPiece().getPlayerID() + ",\n";
+			result.append(input);
+			input = "\"location\": {\n";
+			result.append(input);
+			input = "\"direction\": \"" + direction(settlements.get(i).getLocation().getNormalizedLocation().getDir()) + "\",\n";
+			result.append(input);
+			input = "\"x\":" + settlements.get(i).getLocation().getNormalizedLocation().getHexLoc().getX()+ ",\n";
+			result.append(input);
+			input = "\"y\":" + settlements.get(i).getLocation().getNormalizedLocation().getHexLoc().getY() + "\n}";
+			result.append(input);
+			if(i < settlements.size() - 1){
+				result.append("\n},\n");
+			}else{
+				result.append("\n}\n");
+			}
+		}
+		result.append("],\n");
+		input = "\"cities\": [\n";
+		result.append(input);
+		for(int i = 0; i < cities.size(); i++){
+			result.append("{\n");
+			input = "\"owner\":" + cities.get(i).getPiece().getPlayerID() + ",\n";
+			result.append(input);
+			input = "\"location\": {\n";
+			result.append(input);
+			input = "\"direction\": \"" + direction(cities.get(i).getLocation().getNormalizedLocation().getDir()) + "\",\n";
+			result.append(input);
+			input = "\"x\":" + cities.get(i).getLocation().getNormalizedLocation().getHexLoc().getX()+ ",\n";
+			result.append(input);
+			input = "\"y\":" + cities.get(i).getLocation().getNormalizedLocation().getHexLoc().getY() + "\n}";
+			result.append(input);
+			if(i < cities.size() - 1){
+				result.append("\n},\n");
+			}else{
+				result.append("\n}\n");
+			}
+		}
+		result.append("],\n");
+		return result.toString();
 	}
 }

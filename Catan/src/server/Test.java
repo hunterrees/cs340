@@ -2,16 +2,24 @@ package server;
 
 import java.util.ArrayList;
 
+import client.translators.ModelTranslator;
 import shared.Piece;
 import shared.definitions.CatanColor;
 import shared.definitions.GameState;
 import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
+import shared.locations.EdgeDirection;
+import shared.locations.EdgeLocation;
+import shared.locations.HexLocation;
+import shared.locations.VertexDirection;
+import shared.locations.VertexLocation;
 import shared.model.Bank;
 import shared.model.Chat;
+import shared.model.GameModel;
 import shared.model.Line;
 import shared.model.Log;
 import shared.model.TurnTracker;
+import shared.model.map.Map;
 import shared.model.player.Player;
 import shared.model.trade.TradeOffer;
 
@@ -63,5 +71,21 @@ public class Test {
 		players.add(player1);
 		players.add(player1);
 		System.out.println(translator.buildPlayers(players));
+		
+		Map map = new Map();
+		map.placeRoad(1, new EdgeLocation(new HexLocation(-1, 1), EdgeDirection.South));
+		map.placeRoad(1, new EdgeLocation(new HexLocation(1, 1), EdgeDirection.NorthWest));
+		map.placeSettlement(1, new VertexLocation(new HexLocation(1, 1), VertexDirection.East));
+		map.placeCity(1, new VertexLocation(new HexLocation(-1, 1), VertexDirection.East));
+		map.placeSettlement(1, new VertexLocation(new HexLocation(-1, 1), VertexDirection.West));
+		System.out.println(translator.buildMap(map));
+		
+		GameModel model = new GameModel(map, bank, players, map.getRobberLocation(), null, tracker, log, chat, -1);
+		translator = new ServerTranslator(model);
+		System.out.println(translator.translate());
+		ModelTranslator fromJson = new ModelTranslator();
+		String input = translator.translate();
+		GameModel version2 = fromJson.getModelfromJSON(input);
+		System.out.println(version2.getWinner());
 	}
 }
