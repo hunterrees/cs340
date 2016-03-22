@@ -38,8 +38,8 @@ public class MovesHandler implements HttpHandler{
 	 */
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-		System.out.println("Moves endpoint received");
 		String command = exchange.getRequestURI().toString().replace("/moves", "");
+		
 		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
 		StringBuilder json = new StringBuilder();
 		String inputLine;
@@ -51,17 +51,30 @@ public class MovesHandler implements HttpHandler{
 			String cookie = "";
 			String[] cookies = new String[2];
 			User user = null;
+			int userInt;
+			int gameInt;
 			try{
 				cookie = exchange.getRequestHeaders().get("Cookie").get(0);
 				cookies = cookie.split(";");
 			}catch(Exception e){
 				throw new ServerException("No cookie");
 			}
-			user = ServerManager.getInstance().validateUser(cookies[0]);
+			if(cookies[0].contains(".user")){
+				userInt = 0;
+				gameInt = 1;
+			}else{
+				userInt = 1;
+				gameInt = 0;
+			}
+			try{
+				user = ServerManager.getInstance().validateUser(cookies[userInt]);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			if(user == null){
 				throw new ServerException("Invalid user cookie");
 			}
-			String gameCookie = cookies[1];
+			String gameCookie = cookies[gameInt];
 			gameCookie = gameCookie.replace("catan.game=", "");
 			gameCookie = gameCookie.trim();
 			int gameID = Integer.parseInt(gameCookie);

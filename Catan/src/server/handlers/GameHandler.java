@@ -38,8 +38,6 @@ public class GameHandler implements HttpHandler{
 	 */
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
-		System.out.println("Game endpoint received");
-		
 		String command = exchange.getRequestURI().toString().replace("/game", "");
 		BufferedReader in = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
 		StringBuilder json = new StringBuilder();
@@ -86,7 +84,6 @@ public class GameHandler implements HttpHandler{
 				case "/listAI": response = facade.listAIs(); break;
 				default: if(command.contains("model")){ response = facade.getModel(gameID, command); } break;
 			}
-			System.out.println(response);
 			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 			exchange.getResponseBody().write(response.getBytes());
 			exchange.getResponseBody().close();
