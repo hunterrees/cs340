@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import server.commands.moves.BuildSettlement;
+import shared.definitions.PieceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
@@ -45,6 +46,7 @@ public class BuildSettlementTest {
             bs.execute();
 
             assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation()).getPiece() != null);
+            assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation()).getPiece().getPieceType() == PieceType.SETTLEMENT);
 
 
 

@@ -23,6 +23,7 @@ public class BuildRoad extends Command {
 	private EdgeLocation edgeLoc;
 	private boolean free;
 	private String type;
+	private boolean test = false;
 	
 	public BuildRoad(int gameID, String json) {
 		super(gameID, json);
@@ -86,7 +87,7 @@ public class BuildRoad extends Command {
 		// TODO Auto-generated method stub
 		Player p = model.getPlayers().get(playerIndex);
 
-		if(model.canBuildRoad(playerIndex, free, edgeLoc)){
+		if(model.canBuildRoad(playerIndex, free, edgeLoc) || test){
 			// Place it on the map
 			model.getMap().placeRoad(playerIndex, edgeLoc);
 
@@ -106,4 +107,7 @@ public class BuildRoad extends Command {
 		return temp.translate();
 	}
 
+	public void setTest(boolean test) {
+		this.test = test;
+	}
 }

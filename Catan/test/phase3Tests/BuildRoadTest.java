@@ -7,6 +7,10 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import server.commands.moves.BuildRoad;
 import server.commands.moves.BuildSettlement;
+import shared.definitions.PieceType;
+import shared.locations.EdgeDirection;
+import shared.locations.EdgeLocation;
+import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
 import shared.model.map.Map;
@@ -29,18 +33,21 @@ public class BuildRoadTest {
                 "  \"roadLocation\": {\n" +
                 "    \"x\": 0,\n" +
                 "    \"y\": 0,\n" +
-                "    \"direction\": \"N\"\n" +
+                "    \"direction\": \"NE\"\n" +
                 "  },\n" +
-                "  \"free\": \"Boolean\"\n" +
+                "  \"free\": \"true\"\n" +
                 "}");
 
         GameModel model = bs.getModel();
         Map map = model.getMap();
 
         try {
+            bs.setTest(true);
+
             bs.execute();
 
-            //assertTrue("test if the settlement is in the correct place");
+            assertTrue(map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthEast).getNormalizedLocation()).getPiece() != null);
+            assertTrue(map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthEast).getNormalizedLocation()).getPiece().getPieceType() == PieceType.ROAD);
 
 
 
