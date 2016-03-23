@@ -44,9 +44,6 @@ public class ListGames extends Command{
 			gameInfos[i] = gameInfo;
 			if(game.getPlayers().size() < 4){
 				String input = "";
-				if(i != 0){
-					result.append(",");
-				}
 				result.append("{");
 				input = "\"title\": \"" + gameInfos[i].getTitle() + "\",";
 				result.append(input);

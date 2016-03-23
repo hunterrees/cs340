@@ -54,6 +54,7 @@ public class CreateGame extends Command{
 
 		model = new GameModel(map, bank, players,  robberLoc, null,
 					tracker, log, chat, -1);
+		model.setTitle(name);
 	}
 
 	public void randomize(){
@@ -334,9 +335,9 @@ public class CreateGame extends Command{
 				"\t{},\n" +
 				"\t{},\n" +
 				"\t{},\n" +
-				"\t{}, \n" +
+				"\t{} \n" +
 				"\t]" +
-				"}\n");
+				"\n}\n");
 System.out.println(sb.toString());
 		return sb.toString();
 	}
