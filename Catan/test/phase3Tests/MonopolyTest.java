@@ -80,10 +80,9 @@ public class MonopolyTest {
 		}
 		try {
 			myMonopoly.execute();
-			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getPlayerHand().numResourceOfType(ResourceType.WOOD) == 0);
+			fail("monopoly threw an exception");
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block
-			fail("monopoly threw an exception");
 			e.printStackTrace();
 		}
 		
