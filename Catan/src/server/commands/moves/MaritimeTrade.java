@@ -76,9 +76,9 @@ public class MaritimeTrade extends Command {
 	@Override
 	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
+		translate();
 		myTurn(playerIndex);
 		playingState();
-		translate();
 		
 		if (model.maritimeTrade(playerIndex, inputResource) == -1)
 		{

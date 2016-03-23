@@ -27,8 +27,12 @@ public class Phase1Tests{
 				"canDoTests.CanBuyDevCard", "canDoTests.CanDiscardCards", "canDoTests.CanFinishTurn", "canDoTests.CanMaritimeTrade",
 				"canDoTests.CanOfferTrade", "canDoTests.CanPlaceRobber", "canDoTests.CanRollNumber", "canDoTests.CanUseMonopoly",
 				"canDoTests.CanUseMonument", "canDoTests.CanUseRoadBuilder", "canDoTests.CanUseSoldier", "canDoTests.CanUseYearOfPlenty",
-				"serverTests.ServerProxyTests", "serverTests.ServerPollerTests", "serverTests.InitializeModel"
-		};
+				"serverTests.ServerProxyTests", "serverTests.ServerPollerTests", "serverTests.InitializeModel", "phase3Tests.AddAITest",
+				"phase3Tests.BuildCityTest", "phase3Tests.BuildRoadTest", "phase3Tests.BuildSettlementTest", "phase3Tests.BuyDevCardTest",
+				"phase3Tests.CreateGameTest", "phase3Tests.GetModelTest", "phase3Tests.JoinGameTest", "phase3Tests.ListAITest",
+				"phase3Tests.ListAITest", "phase3Tests.ListGamesTest", "phase3Tests.LoginTest", "phase3Tests.MonopolyTest",
+				"phase3Tests.RegisterTest", "phase3Tests.RoadBuildTest", "phase3Tests.RobPlayerTest", "phase3Tests.SoldierTest",
+		}; 
 
 		org.junit.runner.JUnitCore.main(testClasses);
 	}
