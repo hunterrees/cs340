@@ -67,10 +67,10 @@ public class DiscardCards extends Command {
 			if (model.getPlayers().get(i).getPlayerHand().getNumResources() <= 7)
 			{
 				model.getPlayers().get(i).setHasDiscarded(true);
-				if (model.getPlayers().get(i).isHasDiscarded() == false)
-				{
-					endDiscardingState = false;
-				}
+				
+			}else if (model.getPlayers().get(i).isHasDiscarded() == false)
+			{
+				endDiscardingState = false;
 			}
 		}
 		if (endDiscardingState)

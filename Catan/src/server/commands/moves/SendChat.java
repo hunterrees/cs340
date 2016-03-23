@@ -43,7 +43,7 @@ public class SendChat extends Command{
 		JsonPrimitive myPlayerIndex = root.getAsJsonPrimitive("playerIndex");
 		playerIndex = myPlayerIndex.getAsInt();
 
-		JsonPrimitive myMessage = root.getAsJsonPrimitive("number");
+		JsonPrimitive myMessage = root.getAsJsonPrimitive("content");
 		message = myMessage.getAsString();
 
 
