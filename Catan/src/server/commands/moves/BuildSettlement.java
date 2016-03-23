@@ -136,6 +136,7 @@ public class BuildSettlement extends Command {
 		
 
 		ServerTranslator temp = new ServerTranslator(model);
+		model.updateVersionNumber();
 		return temp.translate();
 	}
 

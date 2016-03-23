@@ -111,7 +111,7 @@ public class BuildRoad extends Command {
 		
 
 		//model.getTracker().setGameStatus(blah);
-
+		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}

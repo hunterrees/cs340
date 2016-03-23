@@ -106,7 +106,7 @@ public class BuildCity extends Command {
 
 
 		
-
+		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}
