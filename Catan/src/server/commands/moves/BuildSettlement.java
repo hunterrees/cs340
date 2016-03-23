@@ -9,6 +9,8 @@ import com.google.gson.JsonPrimitive;
 
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.GameState;
+import shared.definitions.HexType;
 import shared.definitions.PieceType;
 import shared.definitions.PortType;
 import shared.definitions.ResourceType;
@@ -19,6 +21,8 @@ import shared.model.GameModel;
 import shared.model.Line;
 import shared.model.map.Map;
 import shared.model.map.Port;
+import shared.model.map.TerrainHex;
+import shared.model.map.Vertex;
 import shared.model.player.Player;
 
 import java.util.ArrayList;
@@ -91,6 +95,29 @@ public class BuildSettlement extends Command {
 		}
 	}
 
+	public void giveStartingResources(Player p){
+		HashMap<VertexLocation, Vertex> verticies = model.getMap().getVerticies();
+		HashMap<HexLocation, TerrainHex> hexes = model.getMap().getHexes();
+		
+		
+		
+		for(java.util.Map.Entry<VertexLocation, Vertex> entry : verticies.entrySet()) {
+			if(entry.getKey().getNormalizedLocation().equals(vertLoc)){
+				HexLocation hexLoc = entry.getKey().getHexLoc();
+				HexType type = hexes.get(hexLoc).getType();
+				
+				switch(type){
+					case WOOD: p.getPlayerHand().addResources(1, ResourceType.WOOD); break;
+					case WHEAT: p.getPlayerHand().addResources(1, ResourceType.WHEAT); break;
+					case BRICK: p.getPlayerHand().addResources(1, ResourceType.BRICK); break;
+					case ORE: p.getPlayerHand().addResources(1, ResourceType.ORE); break;
+					case SHEEP: p.getPlayerHand().addResources(1, ResourceType.SHEEP); break;
+					default: break;
+				}
+				
+			}
+		}
+	}
 
 
 
@@ -150,6 +177,9 @@ public class BuildSettlement extends Command {
 				//model.getTracker().setGameStatus(blah);
 				p.addVictoryPoint();
 				p.removePiece(PieceType.SETTLEMENT);
+				if(model.getGameState() == GameState.secondRound){
+					giveStartingResources(p);
+				}
 			}
 			addPort(vertLoc);
 		}
