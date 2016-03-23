@@ -42,12 +42,17 @@ import static org.junit.Assert.* ;
                  "    \"y\": 0,\n" +
                  "    \"direction\": \"NE\"\n" +
                  "  },\n" +
-                 "  \"free\": true\n" +
+                 "  \"free\": false\n" +
                  "}");
  
          GameModel model = bs.getModel();
          Map map = model.getMap();
          Player p = bs.getModel().getPlayers().get(0);
+         p.getPlayerHand().addResources(2, ResourceType.WOOD);
+         p.getPlayerHand().addResources(2, ResourceType.BRICK);
+         p.getPlayerHand().addResources(2, ResourceType.SHEEP);
+         p.getPlayerHand().addResources(2, ResourceType.WHEAT);
+         
          
          try {
         	 ArrayList<Line> lines = bs.getModel().getLog().getLines();
@@ -70,7 +75,7 @@ import static org.junit.Assert.* ;
              assertTrue(before + 1 == after); // VP +1
              assertTrue(logBefore+1 == logAfter); //Added something to the log
              assertTrue(numSettlements == numSettlementsAfter + 1); //settlement was removed
-            // assertTrue(wood == woodAfter + 1); //wood resource removed but it was free so dont check this...
+             assertTrue(wood == woodAfter + 1); //wood resource removed 
   
   
          } catch (ServerException e) {
