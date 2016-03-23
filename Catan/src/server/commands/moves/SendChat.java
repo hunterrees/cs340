@@ -55,18 +55,9 @@ public class SendChat extends Command{
 	 */
 	@Override
 	public Object execute() throws ServerException {
-		// TODO Auto-generated method stub
 		Player p = model.getPlayers().get(playerIndex);
-
-		ArrayList<Line> lines = model.getChat().getLines();
-		lines.add(new Line(p.getName(), message));
-		model.setChat(new Chat(lines));
-
-		//Line line = new Line(p.getName(), p.getName() + " bought a development card");
-		//model.getLog().addLine(line);
-
-		//model.getTracker().setGameStatus(blah);
-
+		model.getChat().addLine(new Line(p.getName(), message));
+		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}

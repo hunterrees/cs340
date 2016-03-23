@@ -68,14 +68,16 @@ public class RollNumber extends Command{
 				return;
 			}
 		}
+		model.getTracker().setGameStatus(GameState.robbing);
 	}
 
 
 	public void givePlayersResources(int roll) {
 		if(roll == 7) {
-			// Do robber stuff here
 			sevenRolled();
 			return;
+		}else{
+			model.getTracker().setGameStatus(GameState.playing);
 		}
 
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
@@ -116,9 +118,6 @@ public class RollNumber extends Command{
 					addResource(vert6.getPiece().getPieceType(), entry.getValue().getType(),vert6.getPiece().getPlayerID());
 
 				}
-
-				model.getTracker().setGameStatus(GameState.playing);
-				model.setVersion(model.getVersion() + 1);
 
 			}
 		}
@@ -165,17 +164,15 @@ public class RollNumber extends Command{
 	 */
 	@Override
 	public Object execute() throws ServerException {
-		// TODO Auto-generated method stub
+		if(!model.rollNumber(playerIndex)){
+			throw new ServerException("Not your turn or not time to roll");
+		}
 		Player p = model.getPlayers().get(playerIndex);
-
-
+	
+		model.updateVersionNumber();
 		givePlayersResources(numRolled);
 		Line line = new Line(p.getName(), p.getName() + " rolled a " + numRolled);
 		model.getLog().addLine(line);
-
-
-
-		//model.getTracker().setGameStatus(blah);
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
