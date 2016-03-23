@@ -10,6 +10,7 @@ import com.google.gson.JsonPrimitive;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.PieceType;
+import shared.definitions.PortType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
@@ -17,7 +18,11 @@ import shared.locations.VertexLocation;
 import shared.model.GameModel;
 import shared.model.Line;
 import shared.model.map.Map;
+import shared.model.map.Port;
 import shared.model.player.Player;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BuildSettlement extends Command {
 	
@@ -73,6 +78,21 @@ public class BuildSettlement extends Command {
 		free = primFree.getAsBoolean();
 		
 	}
+
+	public void addPort(VertexLocation loc) {
+		HashMap<VertexLocation, Port> ports = model.getMap().getPorts();
+
+		for(java.util.Map.Entry<VertexLocation, Port> entry : ports.entrySet()) {
+			if(loc.equals(entry.getKey())) {
+				model.getPlayers().get(playerIndex).addPort(entry.getValue().getType());
+
+				return;
+			}
+		}
+	}
+
+
+
 
 	/**
 	 * Preconditions: The settlement location is valid: 
@@ -131,6 +151,7 @@ public class BuildSettlement extends Command {
 				p.addVictoryPoint();
 				p.removePiece(PieceType.SETTLEMENT);
 			}
+			addPort(vertLoc);
 		}
 
 		
