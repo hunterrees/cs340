@@ -126,7 +126,7 @@ public class RollNumber extends Command{
 	public void addResource(PieceType pt, HexType ht, int playerIndex) {
 		Player p = model.getPlayers().get(playerIndex);
 		int amount = 0;
-
+		
 		if(pt == PieceType.SETTLEMENT) {
 			amount = 1;
 		} else if(pt == PieceType.CITY) {

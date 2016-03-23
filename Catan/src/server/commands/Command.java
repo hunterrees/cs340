@@ -28,10 +28,15 @@ public abstract class Command {
 	
 	protected void playingState() throws ServerException
 	{
-		if (model.getTracker().getGameStatus() != GameState.playing)
+		if (model.getTracker().getGameStatus() == GameState.playing)
 		{
-			throw new ServerException("Gamestate is not Playing");
+			return;
+		}else if(model.getTracker().getGameStatus() == GameState.firstRound){
+			return;
+		}else if(model.getTracker().getGameStatus() == GameState.secondRound){
+			return;
 		}
+		throw new ServerException("Not the proper state");
 	}
 	
 	public Command(int gameID, String json){
