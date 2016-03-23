@@ -99,6 +99,7 @@ public class YearOfPlenty extends Command {
 		moveResources();
 		model.getPlayers().get(playerIndex).setHasPlayedDevCard(true);
 		model.getPlayers().get(playerIndex).getPlayerHand().removeOldDevCard(DevCardType.YEAR_OF_PLENTY);
+		model.updateVersionNumber();
 		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() 
 				+ " used Year of Plenty and got " + resource1.toString() + " and " + resource2.toString());
 		model.getLog().addLine(tempLine);

@@ -86,6 +86,7 @@ public class AcceptTrade extends Command{
 			Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), "The trade was not accepted");
 			model.getLog().addLine(tempLine);
 		}
+		model.updateVersionNumber();
 		model.setTradeOffer(null);
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
