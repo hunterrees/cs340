@@ -86,22 +86,32 @@ public class CreateGame extends Command{
 		list.add(HexType.WOOD);
 		list.add(HexType.WOOD);
 		list.add(HexType.WOOD);
+		list.add(HexType.WOOD);
+
 
 		list.add(HexType.BRICK);
 		list.add(HexType.BRICK);
+		list.add(HexType.BRICK);
+
 
 		list.add(HexType.SHEEP);
 		list.add(HexType.SHEEP);
 		list.add(HexType.SHEEP);
+		list.add(HexType.SHEEP);
+
 
 
 		list.add(HexType.WHEAT);
 		list.add(HexType.WHEAT);
 		list.add(HexType.WHEAT);
+		list.add(HexType.WHEAT);
+
 
 
 		list.add(HexType.ORE);
 		list.add(HexType.ORE);
+		list.add(HexType.WHEAT);
+
 
 		list.add(HexType.DESERT);
 
@@ -115,7 +125,7 @@ public class CreateGame extends Command{
 
 		int counter = 0;
 		for (java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
-			if (entry.getValue().getType() != HexType.WATER) {
+			if (entry.getValue().getType() != HexType.WATER && entry.getValue().getType() != HexType.DESERT) {
 				entry.getValue().setType(hexList.get(counter));
 				counter++;
 			}
