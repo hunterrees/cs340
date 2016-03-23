@@ -106,8 +106,10 @@ public class DiscardCards extends Command {
 		{
 			discard();
 			checkDiscarders();
+			model.updateVersionNumber();
 			Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " discarded");
 			model.getLog().addLine(tempLine);
+			
 			ServerTranslator temp = new ServerTranslator(model);
 			return temp.translate();
 		}

@@ -95,6 +95,7 @@ public class OfferTrade extends Command{
 		translate();
 		model.setTradeOffer(completedOffer);
 		
+		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}

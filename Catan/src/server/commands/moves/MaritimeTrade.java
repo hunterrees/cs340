@@ -90,7 +90,7 @@ public class MaritimeTrade extends Command {
 		}
 		makeTrade();
 		
-		
+		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}

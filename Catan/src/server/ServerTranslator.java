@@ -301,10 +301,12 @@ public class ServerTranslator {
 		result.append("\n\"chat\": { \n\"lines\": [ \n");
 		ArrayList<Line> lines = chat.getLines();
 		for(int i = 0; i < lines.size() - 1; i++){
-			String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
-			result.append(input);
-			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
-			result.append(input);
+			if(lines.size() > 0){
+				String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
+				result.append(input);
+				input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
+				result.append(input);
+			}
 		}
 		if(lines.size() > 0){
 			String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";
@@ -322,10 +324,12 @@ public class ServerTranslator {
 		result.append("\n\"log\": { \n\"lines\": [ \n");
 		ArrayList<Line> lines = log.getLines();
 		for(int i = 0; i < lines.size() - 1; i++){
-			String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
-			result.append(input);
-			input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
-			result.append(input);
+			if(lines.size() > 0){
+				String input = "{\"source\":\"" + lines.get(i).getSource() + "\",";
+				result.append(input);
+				input = "\"message\":\"" + lines.get(i).getMessage() + "\"},\n";
+				result.append(input);
+			}
 		}
 		if(lines.size() > 0){
 			String input = "{\"source\":\"" + lines.get(lines.size() - 1).getSource() + "\",";

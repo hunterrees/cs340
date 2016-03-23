@@ -66,6 +66,7 @@ public class Monument extends Command {
 		{
 			model.getPlayers().get(playerIndex).getPlayerHand().removeOldDevCard(DevCardType.MONUMENT);
 		}
+		model.updateVersionNumber();
 		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " built a monument and gained a victory point");
 		model.getLog().addLine(tempLine);
 		ServerTranslator temp = new ServerTranslator(model);

@@ -65,7 +65,7 @@ public class FinishTurn extends Command {
 		//increment player turn
 		incrementTurn(playerIndex);
 		newDevCardsToOld(playerIndex);
-		
+		model.updateVersionNumber();
 		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() + " turn just ended");
 		model.getLog().addLine(tempLine);
 		ServerTranslator temp = new ServerTranslator(model);

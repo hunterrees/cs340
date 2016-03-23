@@ -121,6 +121,7 @@ public class Monopoly extends Command {
 		model.getPlayers().get(playerIndex).getPlayerHand().addResources(stealAmount, resourceToSteal);
 		// TODO Auto-generated method stub
 		model.getPlayers().get(playerIndex).getPlayerHand().removeOldDevCard(DevCardType.MONOPOLY);
+		model.updateVersionNumber();
 		Line tempLine = new Line(model.getPlayers().get(playerIndex).getName(), model.getPlayers().get(playerIndex).getName() 
 				+ " used Year of Plenty and took everyone's " + resourceToSteal);
 		model.getLog().addLine(tempLine);
