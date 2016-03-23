@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.DevCardType;
 import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -101,19 +102,21 @@ public class RoadBuilding extends Command {
 	 */
 	@Override
 	public Object execute() throws ServerException {
-		// TODO Auto-generated method stub
+		if(!model.roadBuilding(playerIndex, edgeLoc1, edgeLoc2)){
+			throw new ServerException("Can't place roads right there");
+		}
 		Player p = model.getPlayers().get(playerIndex);
 
-		//model.roadBuilding(p.getPlayerID(), edgeLoc1, edgeLoc2);
 		model.getMap().placeRoad(playerIndex, edgeLoc1);
 		model.getMap().placeRoad(playerIndex, edgeLoc2);
+		p.setHasPlayedDevCard(true);
+		p.getPlayerHand().removeOldDevCard(DevCardType.ROAD_BUILD);
 		
-
+		//check for most roads
+		//check for victory
 
 		Line line = new Line(p.getName(), p.getName() + " played road building");
 		model.getLog().addLine(line);
-
-		//model.getTracker().setGameStatus(blah);
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();

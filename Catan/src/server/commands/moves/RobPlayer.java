@@ -21,7 +21,6 @@ public class RobPlayer extends Command {
 
 	public RobPlayer(int gameID, String json) {
 		super(gameID, json);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -66,8 +65,9 @@ public class RobPlayer extends Command {
 	 */
 	@Override
 	public Object execute() throws ServerException {
-		// TODO Auto-generated method stub
-		model.robPlayer(hexLoc, victimIndex);
+		if(!model.robPlayer(hexLoc, victimIndex)){
+			throw new ServerException("Can't rob player (wrong location or wrong player)");
+		}
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
