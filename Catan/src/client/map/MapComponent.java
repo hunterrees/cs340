@@ -609,16 +609,17 @@ public class MapComponent extends JComponent
 		
 		try{
 			drawHexes(g2);
+			drawPorts(g2);
+			drawNumbers(g2);
+			drawRobber(g2);
+			drawRoads(g2);
+			drawSettlements(g2);
+			drawCities(g2);
+			drawDropShape(g2);
 		}catch(Exception e){
 			
 		}
-		drawPorts(g2);
-		drawNumbers(g2);
-		drawRobber(g2);
-		drawRoads(g2);
-		drawSettlements(g2);
-		drawCities(g2);
-		drawDropShape(g2);
+	
 	}
 	
 	private void drawHexes(Graphics2D g2)

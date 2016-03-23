@@ -56,18 +56,17 @@ public class JoinGame extends Command{
 		if(catanColor == null){
 			throw new ServerException("Invalid color");
 		}
+		for(int i = 0; i < game.getPlayers().size(); i++){
+			if(game.getPlayers().get(i).getName().equals(user.getName())){
+				game.getPlayers().get(i).setPlayerColor(catanColor);
+				return gameID;
+			}
+		}
 		if(game.getPlayers().size() < 4){
 			game.getPlayers().add(new Player(user.getplayerID(), catanColor, user.getName()));
-		}else{
-			for(int i = 0; i < game.getPlayers().size(); i++){
-				if(game.getPlayers().get(i).getName().equals(user.getName())){
-					game.getPlayers().get(i).setPlayerColor(catanColor);
-					return gameID;
-				}
-			}
-			throw new ServerException("Game is full and user wasn't in gamea already");
+			return gameID;
 		}
-		return gameID;
+			throw new ServerException("Game is full and user wasn't in gamea already");
 	}
 	
 	public void setUser(User user){
