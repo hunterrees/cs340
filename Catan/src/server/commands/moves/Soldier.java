@@ -7,6 +7,7 @@ import com.google.gson.JsonPrimitive;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.ResourceCard;
+import shared.definitions.DevCardType;
 import shared.locations.HexLocation;
 import shared.model.GameModel;
 import shared.model.Line;
@@ -104,7 +105,7 @@ public class Soldier extends Command {
 
 		// Update solider number
 		p.setSoldiers(p.getSoldiers()+1);
-
+		p.getPlayerHand().removeOldDevCard(DevCardType.SOLDIER);
 		// Change has played dev card
 		p.setHasPlayedDevCard(true);
 

@@ -110,7 +110,7 @@ public class RobPlayer extends Command {
 
 		Player p = model.getPlayers().get(playerIndex);
 
-		Line line = new Line(p.getName(), p.getName() + " played the robber");
+		Line line = new Line(p.getName(), p.getName() + " moved the robber");
 		model.getLog().addLine(line);
 
 		model.updateVersionNumber();

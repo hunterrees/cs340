@@ -11,6 +11,7 @@ public class RegisterTest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing register command");
 		UserTranslator user = new UserTranslator("Sam", "samuel");
 		Register register = new Register(-1, user.translate());
 		try{

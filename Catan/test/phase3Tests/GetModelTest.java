@@ -14,6 +14,7 @@ public class GetModelTest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing get model command");
 		GetModel getModel = new GetModel(0, "");
 		String json = "";
 		try {

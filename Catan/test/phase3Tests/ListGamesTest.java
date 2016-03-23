@@ -10,6 +10,7 @@ public class ListGamesTest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing list games command");
 		ListGames list = new ListGames(-1, "");
 		try{
 			list.execute();

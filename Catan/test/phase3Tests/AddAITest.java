@@ -10,6 +10,7 @@ public class AddAITest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing add ai command");
 		ListAI addAI = new ListAI(-1, "");
 		try{
 			addAI.execute();

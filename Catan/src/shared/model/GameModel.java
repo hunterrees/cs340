@@ -579,8 +579,7 @@ public class GameModel {
 
 		int playerIndex = -1;
 		for(int i = 0; i < players.size(); i++) {
-			if(15-players.get(getCurrentPlayerIndex()).getNumRoads() > currentLongestIndex) {
-				currentLongestIndex = 15-players.get(getCurrentPlayerIndex()).getNumRoads();
+			if(15-players.get(getCurrentPlayerIndex()).getNumRoads() > 15-players.get(currentLongestIndex).getNumRoads()) {
 				playerIndex = i;
 			}
 		}
@@ -604,8 +603,7 @@ public class GameModel {
 
 		int playerIndex = -1;
 		for(int i = 0; i < players.size(); i++) {
-			if(players.get(getCurrentPlayerIndex()).getSoldiers() > currentLargesetIndex) {
-				currentLargesetIndex = players.get(getCurrentPlayerIndex()).getSoldiers();
+			if(players.get(getCurrentPlayerIndex()).getSoldiers() > players.get(currentLargesetIndex).getSoldiers()) {
 				playerIndex = i;
 			}
 		}

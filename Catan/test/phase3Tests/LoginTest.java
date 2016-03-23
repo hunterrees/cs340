@@ -11,6 +11,7 @@ public class LoginTest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing login command");
 		UserTranslator user = new UserTranslator("Sam", "samuel");
 		Login login = new Login(-1, user.translate());
 		try{

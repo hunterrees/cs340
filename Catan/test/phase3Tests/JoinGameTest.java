@@ -12,6 +12,7 @@ public class JoinGameTest {
 
 	@Test
 	public void test() {
+		System.out.println("Testing join game command");
 		GamesJoinTranslator joining = new GamesJoinTranslator(3, "orange");
 		JoinGame join = new JoinGame(-1, joining.translate());
 		User user = new User("Sam", "sam", 0);
