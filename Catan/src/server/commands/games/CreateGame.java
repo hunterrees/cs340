@@ -1,5 +1,6 @@
 package server.commands.games;
 
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.GameState;
@@ -322,6 +323,23 @@ public class CreateGame extends Command{
 	}
 
 
+	private String createJsonString(int id) {
+		StringBuilder sb = new StringBuilder();
+
+
+		sb.append("{\n" +
+				"\t\"title\": " + "\"" + name + "\",\n" +
+				"\t\"id\": " + id + ",\n" +
+				"\t\"players\": [\n" +
+				"\t{},\n" +
+				"\t{},\n" +
+				"\t{},\n" +
+				"\t{}, \n" +
+				"\t]" +
+				"}\n");
+System.out.println(sb.toString());
+		return sb.toString();
+	}
 
 
 
@@ -352,8 +370,10 @@ public class CreateGame extends Command{
 
 		createModel();
 
-		ServerTranslator temp = new ServerTranslator(model);
-		return temp.translate();
+		//ServerTranslator temp = new ServerTranslator(model);
+		//return temp.translate();
+		int id = ServerManager.getInstance().createGame(model);
+		return createJsonString(id);
 	}
 
 }
