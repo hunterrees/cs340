@@ -102,7 +102,9 @@ public class RobPlayer extends Command {
 		model.getMap().setRobberLocation(hexLoc);
 
 		// Exchange resources
-		robPlayer();
+		if(victimIndex != -1){
+			robPlayer();
+		}
 
 
 
