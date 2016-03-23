@@ -56,7 +56,7 @@ public class RoadBuildTest {
 			Edge edge2 = map.getEdges().get(new EdgeLocation(new HexLocation(1,1), EdgeDirection.SouthEast).getNormalizedLocation());
             assertTrue(edge2.getPiece() != null);
             assertTrue(edge2.getPiece().getPieceType() == PieceType.ROAD);
-			assertTrue(logBefore+1 == logAfter);
+			assertTrue(logBefore+1 == logAfter); //actually logs a message
 
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block

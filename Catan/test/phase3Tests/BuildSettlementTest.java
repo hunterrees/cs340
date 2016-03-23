@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import server.commands.moves.BuildSettlement;
 import shared.definitions.PieceType;
+import shared.definitions.PortType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
@@ -18,6 +19,8 @@ import shared.model.GameModel;
 import shared.model.Line;
 import shared.model.map.Map;
   
+import shared.model.map.Port;
+import shared.model.map.Vertex;
 import shared.model.player.Player;
 
  import java.io.File;
@@ -61,6 +64,10 @@ import static org.junit.Assert.* ;
              int before = p.getVictoryPoints();
              int wood = p.getPlayerHand().numResourceOfType(ResourceType.WOOD);
              
+            // Vertex vert = map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation());
+             map.getPorts().put(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation(), new Port(PortType.WOOD));
+             int ports = p.getPlayerPorts().size();
+             
              bs.setTest(true);
              bs.execute();
  
@@ -69,6 +76,7 @@ import static org.junit.Assert.* ;
              
              int numSettlementsAfter = p.getNumSettlements();
              int woodAfter = p.getPlayerHand().numResourceOfType(ResourceType.WOOD);
+             int portsAfter = p.getPlayerPorts().size();
              
              assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation()).getPiece() != null);
              assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation()).getPiece().getPieceType() == PieceType.SETTLEMENT);
@@ -76,6 +84,8 @@ import static org.junit.Assert.* ;
              assertTrue(logBefore+1 == logAfter); //Added something to the log
              assertTrue(numSettlements == numSettlementsAfter + 1); //settlement was removed
              assertTrue(wood == woodAfter + 1); //wood resource removed 
+             assertTrue(ports == portsAfter - 1); // adds a port to the player if settlement was built on a port
+             assertTrue(p.getPlayerPorts().get(p.getPlayerPorts().size() - 1).getType() == PortType.WOOD); //port added is of the correct type
   
   
          } catch (ServerException e) {
