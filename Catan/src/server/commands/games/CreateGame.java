@@ -45,8 +45,8 @@ public class CreateGame extends Command{
 
 	private void createModel() {
 
-		/*model = new GameModel(map, bank, players,  robberLoc, TradeOffer theTrade,
-				TurnTracker tracker, Log log, Chat chat, int winner);*/
+		model = new GameModel(map, bank, players,  robberLoc, TradeOffer theTrade,
+				TurnTracker tracker, Log log, Chat chat, int winner);
 	}
 
 	public void randomize(){
