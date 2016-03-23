@@ -104,7 +104,8 @@ public class BuildRoad extends Command {
 
 			// Update most roads
 			model.updateLongestRoad();
-			
+
+			model.checkVictory();
 		}
 
 

@@ -101,6 +101,7 @@ public class BuildCity extends Command {
 
 			//model.getTracker().setGameStatus(blah);
 			p.addVictoryPoint();
+			model.checkVictory();
 		}
 
 

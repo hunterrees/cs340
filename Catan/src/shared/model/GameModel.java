@@ -84,6 +84,7 @@ public class GameModel {
      */
 	public void checkVictory()
 	{
+		
 		for (int i = 0; i < 4; i++)
 		{
 			if (players.get(i).getVictoryPoints() >= 10)

@@ -154,7 +154,7 @@ public class BuildSettlement extends Command {
 			addPort(vertLoc);
 		}
 
-		
+		model.checkVictory();
 
 		ServerTranslator temp = new ServerTranslator(model);
 		model.updateVersionNumber();

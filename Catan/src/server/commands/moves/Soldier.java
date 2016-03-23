@@ -119,7 +119,7 @@ public class Soldier extends Command {
 
 
 
-
+		model.checkVictory();
 
 		Line line = new Line(p.getName(), p.getName() + " played a soldier");
 		model.getLog().addLine(line);
