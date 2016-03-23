@@ -42,6 +42,10 @@ public abstract class Command {
 		this.json = json;
 	}
 
+	public GameModel getModel() {
+		return model;
+	}
+
 	/**
 	 * Updates the model according to the command and parameters given
 	 * @return

@@ -3,6 +3,7 @@ package phase3Tests;
 import org.junit.Test;
 import server.commands.moves.BuildSettlement;
 import shared.locations.VertexLocation;
+import shared.model.GameModel;
 import shared.model.map.Map;
 
 /**
@@ -11,13 +12,10 @@ import shared.model.map.Map;
 public class BuildSettlementTest {
     @Test
     public void test() {
-        Map map = new Map();
+        GameModel model;
 
-       /* BuildSettlement bs = new BuildSettlement(1, makejsonandputithere);
+        BuildSettlement bs = new BuildSettlement(0, "");
 
-        bs.execute();
-
-        map.getVerticies().get(new VertexLocation())*/
     }
 
 
