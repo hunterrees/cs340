@@ -33,8 +33,8 @@ public class ServerManager {
 		users = new ArrayList<User>();
 		games = new ArrayList<GameModel>();
 		users.add(new User("Sam", "sam", 0));
-		users.add(new User("Pete", "pete", 1));
-		users.add(new User("Brooke", "brooke", 2));
+		users.add(new User("Brooke", "brooke", 1));
+		users.add(new User("Pete", "pete", 2));
 		users.add(new User("Mark", "mark", 3));
 		Scanner scanner1 = new Scanner(new BufferedReader(new FileReader("Games/defaultGame.json")));
 		StringBuilder defaultJson = new StringBuilder();

@@ -29,6 +29,7 @@ public class FinishTurn extends Command {
 	{
 		if(model.getGameState() == GameState.playing){
 			playerIndex = ++playerIndex%4;
+			System.out.println(2%4);
 			model.getTracker().setCurrentTurnPlayerID(playerIndex);
 			model.getTracker().setGameStatus(GameState.rolling);
 		}else if((model.getGameState() == GameState.firstRound) && (model.getCurrentPlayerIndex() == 3)){
