@@ -75,6 +75,10 @@ public class Player
 		victoryPoints = 0;
 	}
 	
+	public void addPiece(PieceType type){
+		playerPieces.add(new Piece(type, null, null, playerID));
+	}
+	
 	public int getNumCities(){
 		int count = 0;
 		for( int i = 0; i < playerPieces.size(); i++){
