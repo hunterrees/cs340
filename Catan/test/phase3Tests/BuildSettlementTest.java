@@ -13,11 +13,11 @@ public class BuildSettlementTest {
     public void test() {
         Map map = new Map();
 
-        BuildSettlement bs = new BuildSettlement(1, makejsonandputithere);
+       /* BuildSettlement bs = new BuildSettlement(1, makejsonandputithere);
 
         bs.execute();
 
-        map.getVerticies().get(new VertexLocation())
+        map.getVerticies().get(new VertexLocation())*/
     }
 
 

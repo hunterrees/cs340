@@ -1,5 +1,6 @@
 package server.commands.moves;
 
+import client.server.ServerException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -64,11 +65,12 @@ public class RobPlayer extends Command {
 	 * 					A resource card is moved from the hand of the player being robbed to the hand of the robber.
 	 */
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 		model.robPlayer(hexLoc, victimIndex);
 
 		ServerTranslator temp = new ServerTranslator(model);
-		return temp.translate();	}
+		return temp.translate();
+	}
 
 }
