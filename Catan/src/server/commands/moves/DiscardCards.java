@@ -79,7 +79,7 @@ public class DiscardCards extends Command {
 			{
 				model.getPlayers().get(i).setHasDiscarded(false);
 			}
-			model.getTracker().setGameStatus(GameState.playing);
+			model.getTracker().setGameStatus(GameState.robbing);
 		}
 	}
 	/**

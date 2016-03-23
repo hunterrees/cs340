@@ -569,6 +569,7 @@ public class GameModel {
 
 	public void updateLongestRoad() {
 		int currentLongestIndex = tracker.getLongestRoadplayerID();
+
 		if(currentLongestIndex == -1 && 15-players.get(getCurrentPlayerIndex()).getNumRoads() >= 5) {
 			tracker.setLongestRoadplayerID(currentLongestIndex);
 			return;
