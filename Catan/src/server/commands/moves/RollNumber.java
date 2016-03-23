@@ -117,7 +117,8 @@ public class RollNumber extends Command{
 
 				}
 
-
+				model.getTracker().setGameStatus(GameState.playing);
+				model.setVersion(model.getVersion() + 1);
 
 			}
 		}

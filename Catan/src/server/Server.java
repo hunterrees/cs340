@@ -84,6 +84,7 @@ public class Server {
 	public static void main(String args[]){
 		if(args.length > 0){
 			PORT = Integer.parseInt(args[0]);
+			System.out.println("running");
 		}
 		new Server(false).run();
 	}
