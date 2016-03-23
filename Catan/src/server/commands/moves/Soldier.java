@@ -1,14 +1,87 @@
 package server.commands.moves;
 
+import client.server.ServerException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import server.ServerTranslator;
 import server.commands.Command;
+import shared.ResourceCard;
+import shared.locations.HexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
+import shared.model.player.Player;
+
+import java.util.ArrayList;
 
 public class Soldier extends Command {
+	String type;
+	int playerIndex;
+	int victimIndex;
+	HexLocation hexLoc;
 
 	public Soldier(int gameID, String json) {
 		super(gameID, json);
 		// TODO Auto-generated constructor stub
+		translate(json);
 	}
+
+
+
+
+
+	private void translate(String json){
+		Gson gson = new Gson();
+		JsonObject root;
+		try{
+			root = gson.fromJson(json, JsonObject.class);
+		}catch(Exception e){
+			return;
+		}
+
+		JsonPrimitive primType = root.getAsJsonPrimitive("playerIndex");
+		type = primType.getAsString();
+
+		JsonPrimitive primPlayerIndex = root.getAsJsonPrimitive("playerIndex");
+		playerIndex = primPlayerIndex.getAsInt();
+
+		JsonPrimitive primVictimIndex = root.getAsJsonPrimitive("victimIndex");
+		victimIndex = primVictimIndex.getAsInt();
+
+		JsonObject jsonLoc = root.getAsJsonObject("location");
+		JsonPrimitive primX = jsonLoc.getAsJsonPrimitive("x");
+		int x = primX.getAsInt();
+		JsonPrimitive primY = jsonLoc.getAsJsonPrimitive("y");
+		int y = primY.getAsInt();
+
+		hexLoc = new HexLocation(x, y);
+
+
+
+	}
+
+
+
+	public void robPlayer() {
+		Player stealer = model.getPlayers().get(playerIndex);
+		Player loser = model.getPlayers().get(victimIndex);
+
+		ArrayList<ResourceCard> stealerCards = stealer.getPlayerHand().getResourceCards();
+		ArrayList<ResourceCard> loserCards = loser.getPlayerHand().getResourceCards();
+
+		if(loserCards.size() == 0) {
+			return;
+		}
+
+		ResourceCard stolenCard = loserCards.get(0);
+		loserCards.remove(0);
+		stealerCards.add(stolenCard);
+
+		stealer.getPlayerHand().setResourceCards(stealerCards);
+		loser.getPlayerHand().setResourceCards(loserCards);
+
+	}
+
 
 	/**
 	 * Preconditions: The robber is is being moved from its current location
@@ -19,9 +92,43 @@ public class Soldier extends Command {
 	 * 					No other Dev cards can be played this turn
 	 */
 	@Override
-	public Object execute() {
+	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
-		return null;
+
+		Player p = model.getPlayers().get(playerIndex);
+
+
+
+		// Change robber location
+		model.getMap().setRobberLocation(hexLoc);
+
+		// Update solider number
+		p.setSoldiers(p.getSoldiers()+1);
+
+		// Change has played dev card
+		p.setHasPlayedDevCard(true);
+
+		// Exchange resources
+		robPlayer();
+
+		// Check for largest army
+		model.updateLargestArmy();
+
+
+
+
+
+
+
+
+		Line line = new Line(p.getName(), p.getName() + " played a soldier");
+		model.getLog().addLine(line);
+
+		model.updateVersionNumber();
+
+
+		ServerTranslator temp = new ServerTranslator(model);
+		return temp.translate();
 	}
 
 }

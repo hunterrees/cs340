@@ -101,6 +101,9 @@ public class BuildRoad extends Command {
 			model.getLog().addLine(line);
 			
 			p.removePiece(PieceType.ROAD);
+
+			// Update most roads
+			model.updateLongestRoad();
 			
 		}
 

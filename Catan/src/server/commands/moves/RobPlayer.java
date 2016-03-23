@@ -6,10 +6,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.ResourceCard;
+import shared.definitions.GameState;
+import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
+import shared.model.player.Player;
+
+import java.util.ArrayList;
 
 public class RobPlayer extends Command {
 
@@ -55,6 +62,26 @@ public class RobPlayer extends Command {
 
 	}
 
+	public void robPlayer() {
+		Player stealer = model.getPlayers().get(playerIndex);
+		Player loser = model.getPlayers().get(victimIndex);
+
+		ArrayList<ResourceCard> stealerCards = stealer.getPlayerHand().getResourceCards();
+		ArrayList<ResourceCard> loserCards = loser.getPlayerHand().getResourceCards();
+
+		if(loserCards.size() == 0) {
+			return;
+		}
+
+		ResourceCard stolenCard = loserCards.get(0);
+		loserCards.remove(0);
+		stealerCards.add(stolenCard);
+
+		stealer.getPlayerHand().setResourceCards(stealerCards);
+		loser.getPlayerHand().setResourceCards(loserCards);
+
+	}
+
 
 	/**
 	 * Preconditions: The robber is being moved to a different location
@@ -68,6 +95,23 @@ public class RobPlayer extends Command {
 		if(!model.robPlayer(hexLoc, victimIndex)){
 			throw new ServerException("Can't rob player (wrong location or wrong player)");
 		}
+
+		// Change robber location
+		model.getMap().setRobberLocation(hexLoc);
+
+		// Exchange resources
+		robPlayer();
+
+
+
+		Player p = model.getPlayers().get(playerIndex);
+
+		Line line = new Line(p.getName(), p.getName() + " played the robber");
+		model.getLog().addLine(line);
+
+		model.updateVersionNumber();
+
+		model.getTracker().setGameStatus(GameState.playing);
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();

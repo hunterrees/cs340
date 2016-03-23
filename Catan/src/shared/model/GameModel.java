@@ -563,5 +563,53 @@ public class GameModel {
 	{
 		version++;
 	}
+
+	public void updateLongestRoad() {
+		int currentLongestIndex = tracker.getLongestRoadplayerID();
+		if(currentLongestIndex == -1 && 15-players.get(getCurrentPlayerIndex()).getNumRoads() >= 5) {
+			tracker.setLongestRoadplayerID(currentLongestIndex);
+			return;
+		}
+
+
+		int playerIndex = -1;
+		for(int i = 0; i < players.size(); i++) {
+			if(15-players.get(getCurrentPlayerIndex()).getNumRoads() > currentLongestIndex) {
+				currentLongestIndex = 15-players.get(getCurrentPlayerIndex()).getNumRoads();
+				playerIndex = i;
+			}
+		}
+
+		if(playerIndex != -1) {
+			tracker.setLongestRoadplayerID(playerIndex);
+		}
+
+
+	}
+
+	public void updateLargestArmy() {
+		int currentLargesetIndex = tracker.getLargestArmyPlayerID();
+		if(currentLargesetIndex == -1 && players.get(getCurrentPlayerIndex()).getSoldiers() >= 3) {
+			tracker.setLargestArmyPlayerID(currentLargesetIndex);
+			return;
+		}
+
+
+		int playerIndex = -1;
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(getCurrentPlayerIndex()).getSoldiers() > currentLargesetIndex) {
+				currentLargesetIndex = players.get(getCurrentPlayerIndex()).getSoldiers();
+				playerIndex = i;
+			}
+		}
+
+		if(playerIndex != -1) {
+			tracker.setLargestArmyPlayerID(playerIndex);
+		}
+
+
+	}
+
+
 // Private methods
 }
