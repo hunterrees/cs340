@@ -83,7 +83,7 @@ public class BuildSettlement extends Command {
 		HashMap<VertexLocation, Port> ports = model.getMap().getPorts();
 
 		for(java.util.Map.Entry<VertexLocation, Port> entry : ports.entrySet()) {
-			if(loc.equals(entry.getKey())) {
+			if(loc.equals(entry.getKey().getNormalizedLocation())) {
 				model.getPlayers().get(playerIndex).addPort(entry.getValue().getType());
 
 				return;

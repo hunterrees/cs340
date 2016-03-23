@@ -117,7 +117,8 @@ public class RoadBuilding extends Command {
 
 		Line line = new Line(p.getName(), p.getName() + " played road building");
 		model.getLog().addLine(line);
-
+		
+		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}
