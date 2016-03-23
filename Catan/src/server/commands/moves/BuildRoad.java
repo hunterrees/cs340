@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import server.Server;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.PieceType;
@@ -106,6 +107,8 @@ public class BuildRoad extends Command {
 			model.updateLongestRoad();
 
 			model.checkVictory();
+		} else {
+			throw new ServerException("Cannot build a road");
 		}
 
 

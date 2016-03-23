@@ -76,6 +76,13 @@ public class BuyDevCard extends Command{
 			model.getBank().setBankDevelopmentCards(banksCards);
 
 			p.getPlayerHand().addNewDevelopmentCard(card.getType());
+
+			p.getPlayerHand().removeResources(1, ResourceType.SHEEP);
+			p.getPlayerHand().removeResources(1, ResourceType.WHEAT);
+			p.getPlayerHand().removeResources(1, ResourceType.ORE);
+
+
+
 		}
 
 
