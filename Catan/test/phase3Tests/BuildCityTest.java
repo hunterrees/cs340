@@ -22,20 +22,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.* ;
 
-String json = "{\n"+
-        "  \"type\": \"Road_Building\",\n"+
-        "  \"playerIndex\": 0,\n"+
-        "  \"spot1\": {\n"+
-        "    \"x\": 0,\n"+
-        "    \"y\": 0,\n"+
-        "    \"direction\": \"string\"\n"+
-        "  },\n"+
-        "  \"spot2\": {\n"+
-        "    \"x\": 0,\n"+
-        "    \"y\": 0,\n"+
-        "    \"direction\": \"string\"\n"+
-        "  }\n"+
-        "}";
+
 
 /**
  * Created by briantiu on 3/21/16.
