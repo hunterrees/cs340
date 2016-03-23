@@ -49,7 +49,7 @@ public class BuildCityTest {
         Player p = bs.getModel().getPlayers().get(0);
         p.getPlayerHand().addResources(4, ResourceType.ORE);
         p.getPlayerHand().addResources(4, ResourceType.WHEAT);
-// sas
+// sassdf
         try {
             ArrayList<Line> lines = bs.getModel().getLog().getLines();
             int logBefore = lines.size();
