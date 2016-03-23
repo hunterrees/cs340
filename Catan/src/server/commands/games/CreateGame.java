@@ -2,6 +2,7 @@ package server.commands.games;
 
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.GameState;
 import shared.definitions.HexType;
 import shared.definitions.PortType;
 import shared.locations.*;
@@ -44,9 +45,13 @@ public class CreateGame extends Command{
 	}
 
 	private void createModel() {
+		TurnTracker tracker = new TurnTracker(-1,-1, GameState.firstRound, 0);
+		Log log = new Log(new ArrayList<Line>());
+		Chat chat = new Chat(new ArrayList<Line>());
 
-		/*model = new GameModel(map, bank, players,  robberLoc, TradeOffer theTrade,
-				TurnTracker tracker, Log log, Chat chat, int winner);*/
+
+		model = new GameModel(map, bank, players,  robberLoc, null,
+					tracker, log, chat, -1);
 	}
 
 	public void randomize(){
