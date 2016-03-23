@@ -23,6 +23,15 @@ import static org.junit.Assert.* ;
 public class BuildCityTest {
     @Test
     public void test() {
+        String json = "{\n" +
+                "  \"type\": \"buildCity\",\n" +
+                "  \"playerIndex\": 0,\n" +
+                "  \"vertexLocation\": {\n" +
+                "    \"x\": 0,\n" +
+                "    \"y\": 0,\n" +
+                "    \"direction\": \"SE\"\n" +
+                "  }\n" +
+                "}";
         BuildCity bs = new BuildCity(0, "   add json file here     ");
 
         GameModel model = bs.getModel();

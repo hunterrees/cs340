@@ -23,7 +23,16 @@ import static org.junit.Assert.* ;
 public class BuildRoadTest {
     @Test
     public void test() {
-        BuildRoad bs = new BuildRoad(0, "   add json file here     ");
+        BuildRoad bs = new BuildRoad(0, "{\n" +
+                "  \"type\": \"buildRoad\",\n" +
+                "  \"playerIndex\": 0,\n" +
+                "  \"roadLocation\": {\n" +
+                "    \"x\": 0,\n" +
+                "    \"y\": 0,\n" +
+                "    \"direction\": \"N\"\n" +
+                "  },\n" +
+                "  \"free\": \"Boolean\"\n" +
+                "}");
 
         GameModel model = bs.getModel();
         Map map = model.getMap();
