@@ -15,13 +15,15 @@ import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.map.Map;
+import shared.model.player.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.* ;
-
 
 
 /**
@@ -43,13 +45,22 @@ public class BuildCityTest {
 
         GameModel model = bs.getModel();
         Map map = model.getMap();
+        Player p = bs.getModel().getPlayers().get(0);
 
         try {
-        	bs.setTest(true);
+            ArrayList<Line> lines = bs.getModel().getLog().getLines();
+            int logBefore = lines.size();
+
+            int before = p.getVictoryPoints();
+            bs.setTest(true);
             bs.execute();
+            int after = p.getVictoryPoints();
+            int logAfter = bs.getModel().getLog().getLines().size();
 
             assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.SouthEast).getNormalizedLocation()).getPiece() != null);
             assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.SouthEast).getNormalizedLocation()).getPiece().getPieceType() == PieceType.CITY);
+            assertTrue(before + 1 == after);
+            assertTrue(logBefore+1 == logAfter);
 
 
 

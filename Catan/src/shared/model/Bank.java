@@ -1,6 +1,8 @@
 package shared.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import shared.*;
 import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
@@ -25,6 +27,7 @@ public class Bank
 	
 	public Bank(ArrayList<ResourceCard> resources, ArrayList<DevelopmentCard> devCards){
 		bankResourceCards = resources;
+		Collections.shuffle(devCards);
 		bankDevelopmentCards = devCards;
 	}
 	/**
@@ -134,5 +137,9 @@ public class Bank
 	public void setResources(ArrayList<ResourceCard> resourceDeck)
 	{
 		bankResourceCards = resourceDeck;
+	}
+
+	public void setBankDevelopmentCards(ArrayList<DevelopmentCard> bankDevelopmentCards) {
+		this.bankDevelopmentCards = bankDevelopmentCards;
 	}
 }

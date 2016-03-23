@@ -13,10 +13,12 @@ import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.map.Map;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.* ;
 
@@ -42,12 +44,18 @@ public class BuildRoadTest {
         Map map = model.getMap();
 
         try {
+            ArrayList<Line> lines = bs.getModel().getLog().getLines();
+            int logBefore = lines.size();
+
+
             bs.setTest(true);
 
             bs.execute();
+            int logAfter = bs.getModel().getLog().getLines().size();
 
             assertTrue(map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthEast).getNormalizedLocation()).getPiece() != null);
             assertTrue(map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthEast).getNormalizedLocation()).getPiece().getPieceType() == PieceType.ROAD);
+            assertTrue(logBefore+1 == logAfter);
 
 
 

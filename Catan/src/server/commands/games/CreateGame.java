@@ -30,7 +30,7 @@ public class CreateGame extends Command{
 	private ArrayList<Integer> numberList;
 	private ArrayList<PortType> portList;
 	Bank bank = new Bank();
-	ArrayList<Player> players;
+	ArrayList<Player> players = new ArrayList<>();
 	HexLocation robberLoc;
 	
 
@@ -45,8 +45,8 @@ public class CreateGame extends Command{
 
 	private void createModel() {
 
-	/*	model = new GameModel(map, bank, players, robberLoc, null,
-				new TurnTracker(), new Log(), new Chat(), -1);*/
+		/*model = new GameModel(map, bank, players,  robberLoc, TradeOffer theTrade,
+				TurnTracker tracker, Log log, Chat chat, int winner);*/
 	}
 
 	public void randomize(){

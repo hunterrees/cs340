@@ -11,8 +11,11 @@ import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.model.GameModel;
+import shared.model.Line;
 import shared.model.map.Edge;
 import shared.model.map.Map;
+
+import java.util.ArrayList;
 
 public class RoadBuildTest {
 
@@ -40,15 +43,21 @@ public class RoadBuildTest {
         Map map = model.getMap();
         
         try {
+			ArrayList<Line> lines = rb.getModel().getLog().getLines();
+			int logBefore = lines.size();
+
+
 			rb.execute();
-			
+			int logAfter = rb.getModel().getLog().getLines().size();
+
 			Edge edge = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthWest).getNormalizedLocation());
 			assertTrue(edge.getPiece() != null);
             assertTrue(edge.getPiece().getPieceType() == PieceType.ROAD);
 			Edge edge2 = map.getEdges().get(new EdgeLocation(new HexLocation(1,1), EdgeDirection.SouthEast).getNormalizedLocation());
             assertTrue(edge2.getPiece() != null);
             assertTrue(edge2.getPiece().getPieceType() == PieceType.ROAD);
-            
+			assertTrue(logBefore+1 == logAfter);
+
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -15,10 +15,13 @@ import shared.model.GameModel;
 import shared.model.Line;
 import shared.model.player.Player;
 
+import java.util.ArrayList;
+
 public class BuyDevCard extends Command{
 
 	private String type;
 	private int playerIndex;
+	private boolean test = false;
 
 
 
@@ -65,9 +68,13 @@ public class BuyDevCard extends Command{
 		// Check if the player has enough resources to buy a development card
 		Player p = model.getPlayers().get(playerIndex);
 
-		if(p.canBuyDevCard()) {
+		if(p.canBuyDevCard() || test) {
 			// Take a development card out of the bank and give it to the player
 			DevelopmentCard card = model.getBank().getDevelopmentCards().get(0);
+			ArrayList<DevelopmentCard> banksCards = model.getBank().getDevelopmentCards();
+			banksCards.remove(0);
+			model.getBank().setBankDevelopmentCards(banksCards);
+
 			p.getPlayerHand().addNewDevelopmentCard(card.getType());
 		}
 
@@ -81,4 +88,7 @@ public class BuyDevCard extends Command{
 		return temp.translate();
 	}
 
+	public void setTest(boolean test) {
+		this.test = test;
+	}
 }
