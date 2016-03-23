@@ -559,7 +559,7 @@ public class GameModel {
 		this.title = title;
 	}
 
-	public void incrementVersionNumber()
+	public void updateVersionNumber()
 	{
 		version++;
 	}
