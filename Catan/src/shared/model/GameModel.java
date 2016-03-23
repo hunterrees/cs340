@@ -576,6 +576,10 @@ public class GameModel {
 				return;
 			}
 		}
+		
+		if(currentLongestIndex == -1){
+			return;
+		}
 
 		int playerIndex = -1;
 		for(int i = 0; i < players.size(); i++) {
@@ -599,6 +603,10 @@ public class GameModel {
 				tracker.setLargestArmyPlayerID(currentLargesetIndex);
 				return;
 			}
+		}
+		
+		if(currentLargesetIndex == -1){
+			return;
 		}
 
 		int playerIndex = -1;

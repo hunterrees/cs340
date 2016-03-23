@@ -95,8 +95,10 @@ public class BuildRoad extends Command {
 			model.getMap().placeRoad(playerIndex, edgeLoc);
 
 			// Remove the correct resources
-			p.getPlayerHand().removeResources(1, ResourceType.WOOD);
-			p.getPlayerHand().removeResources(1, ResourceType.BRICK);
+			if(!free){
+				p.getPlayerHand().removeResources(1, ResourceType.WOOD);
+				p.getPlayerHand().removeResources(1, ResourceType.BRICK);
+			}
 			
 			Line line = new Line(p.getName(), p.getName() + " built a road");
 			model.getLog().addLine(line);
