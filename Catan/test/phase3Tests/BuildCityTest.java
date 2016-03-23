@@ -75,13 +75,7 @@ public class BuildCityTest {
 
     }
 
-    private JsonObject toJson(String fileName) throws IOException {
-        File file = new File(fileName);
-        String jsonText = FileUtils.readFileToString(file);
-        JsonParser parser = new JsonParser();
-        JsonObject json = (JsonObject) parser.parse(jsonText);
-        return json;
-    }
+ 
 
 
 }
