@@ -43,8 +43,8 @@ public class CreateGameTest {
 
             for(java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
                 switch(entry.getValue().getType()) {
-                    case WATER: water++;   assertTrue(entry.getValue().getNumber() == -1); break;
-                    case DESERT: desert++; assertTrue(entry.getValue().getNumber() == -1); break;
+                    case WATER: water++;  assertTrue(entry.getValue().getNumber() == -1); break;
+                    case DESERT: desert++; assertTrue(entry.getValue().getNumber() < 1); break;
                     case WOOD: wood++;     assertTrue(entry.getValue().getNumber() > 1);   break;
                     case BRICK: brick++;   assertTrue(entry.getValue().getNumber() > 1);   break;
                     case SHEEP: sheep++;   assertTrue(entry.getValue().getNumber() > 1);   break;
@@ -55,7 +55,6 @@ public class CreateGameTest {
 
 
             }
-
             assertTrue(water == 18);
             assertTrue(desert == 1);
             assertTrue(wood == 4);

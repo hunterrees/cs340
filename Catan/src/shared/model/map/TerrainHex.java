@@ -161,6 +161,8 @@ public class TerrainHex {
 		this.number = number;
 	}
 
-	
+
+
+
 
 }
