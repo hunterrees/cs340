@@ -2,13 +2,14 @@ package server.commands.moves;
 
 import client.gameManager.GameManager;
 import client.server.ServerException;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.HexLocation;
 import shared.locations.VertexDirection;
@@ -112,19 +113,27 @@ public class BuildSettlement extends Command {
 					p.getPlayerHand().removeResources(1, ResourceType.WHEAT);
 					model.getMap().placeSettlement(playerIndex, vertLoc);
 	
+					Line line = new Line(p.getName(), p.getName() + " built a settlement");
+					model.getLog().addLine(line);
+
+					//model.getTracker().setGameStatus(blah);
+					p.addVictoryPoint();
+					p.removePiece(PieceType.SETTLEMENT);
 				}
 				
 			}
 			else{
 				model.getMap().placeSettlement(playerIndex, vertLoc);
+				Line line = new Line(p.getName(), p.getName() + " built a settlement");
+				model.getLog().addLine(line);
+
+				//model.getTracker().setGameStatus(blah);
+				p.addVictoryPoint();
+				p.removePiece(PieceType.SETTLEMENT);
 			}
 		}
 
-		Line line = new Line(p.getName(), p.getName() + " built a settlement");
-		model.getLog().addLine(line);
-
-		//model.getTracker().setGameStatus(blah);
-		p.addVictoryPoint();
+		
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();

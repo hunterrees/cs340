@@ -93,8 +93,9 @@ public class BuildCity extends Command {
 			p.getPlayerHand().removeResources(3, ResourceType.ORE);
 
 			// Get a settlement back
-			p.getPlayerPieces().add(new Piece(PieceType.SETTLEMENT, null, null, playerIndex));
+			
 			p.removePiece(PieceType.CITY);
+			p.addPiece(PieceType.SETTLEMENT);
 			Line line = new Line(p.getName(), p.getName() + " built a city");
 			model.getLog().addLine(line);
 
