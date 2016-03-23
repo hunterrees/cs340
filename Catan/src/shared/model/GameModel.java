@@ -79,7 +79,7 @@ public class GameModel {
 
 	/**
 	 *
-	 * @param playerID
+	 * @param
 	 * @return
      */
 	public void checkVictory()
@@ -570,11 +570,12 @@ public class GameModel {
 	public void updateLongestRoad() {
 		int currentLongestIndex = tracker.getLongestRoadplayerID();
 
-		if(currentLongestIndex == -1 && 15-players.get(getCurrentPlayerIndex()).getNumRoads() >= 5) {
-			tracker.setLongestRoadplayerID(currentLongestIndex);
-			return;
+		for(Player p : players) {
+			if (currentLongestIndex == -1 && 15 - players.get(p.getPlayerID()).getNumRoads() >= 5) {
+				tracker.setLongestRoadplayerID(currentLongestIndex);
+				return;
+			}
 		}
-
 
 		int playerIndex = -1;
 		for(int i = 0; i < players.size(); i++) {
@@ -593,11 +594,13 @@ public class GameModel {
 
 	public void updateLargestArmy() {
 		int currentLargesetIndex = tracker.getLargestArmyPlayerID();
-		if(currentLargesetIndex == -1 && players.get(getCurrentPlayerIndex()).getSoldiers() >= 3) {
-			tracker.setLargestArmyPlayerID(currentLargesetIndex);
-			return;
-		}
 
+		for(Player p : players) {
+			if (currentLargesetIndex == -1 && players.get(p.getPlayerID()).getSoldiers() >= 3) {
+				tracker.setLargestArmyPlayerID(currentLargesetIndex);
+				return;
+			}
+		}
 
 		int playerIndex = -1;
 		for(int i = 0; i < players.size(); i++) {
