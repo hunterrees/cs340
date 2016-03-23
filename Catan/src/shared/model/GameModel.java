@@ -218,7 +218,7 @@ public class GameModel {
 			return false;
 		}
 
-		if(free) {
+		if(!free) {
 			if (!players.get(playerID).canBuildRoad()) {
 				return false;
 			}
