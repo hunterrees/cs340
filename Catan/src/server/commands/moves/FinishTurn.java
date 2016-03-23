@@ -7,6 +7,7 @@ import com.google.gson.JsonPrimitive;
 import client.server.ServerException;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.GameState;
 import shared.model.GameModel;
 import shared.model.Line;
 
@@ -26,16 +27,21 @@ public class FinishTurn extends Command {
 	
 	private void incrementTurn(int playerIndex)
 	{
-		int nextTurn = 0;
-		if (playerIndex == 3)
-		{
-			nextTurn = 0;
+		if(model.getGameState() == GameState.playing){
+			playerIndex = ++playerIndex%4;
+			model.getTracker().setCurrentTurnPlayerID(playerIndex);
+			model.getTracker().setGameStatus(GameState.rolling);
+		}else if((model.getGameState() == GameState.firstRound) && (model.getCurrentPlayerIndex() == 3)){
+			model.getTracker().setGameStatus(GameState.secondRound);
+		}else if((model.getGameState() == GameState.secondRound) && model.getCurrentPlayerIndex() == 0){
+			model.getTracker().setGameStatus(GameState.rolling);
+		}else if(model.getGameState() == GameState.firstRound){
+			playerIndex = ++playerIndex%4;
+			model.getTracker().setCurrentTurnPlayerID(playerIndex);
+		}else if (model.getGameState() == GameState.secondRound){
+			playerIndex = --playerIndex%4;
+			model.getTracker().setCurrentTurnPlayerID(playerIndex);
 		}
-		else 
-		{
-			nextTurn = playerIndex + 1;
-		}
-		model.getTracker().setCurrentTurnPlayerID(nextTurn);
 	}
 	
 	private void newDevCardsToOld(int playerIndex)
@@ -59,10 +65,8 @@ public class FinishTurn extends Command {
 			return null;
 		}
 		playerIndex = root.getAsJsonPrimitive("playerIndex").getAsInt();
-		playingState();
 		myTurn(playerIndex);
 		
-		//increment player turn
 		incrementTurn(playerIndex);
 		newDevCardsToOld(playerIndex);
 		model.updateVersionNumber();
