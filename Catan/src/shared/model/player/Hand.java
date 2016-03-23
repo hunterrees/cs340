@@ -113,7 +113,7 @@ public class Hand
 	public void removeOldDevCard(DevCardType type)
 	{
 		
-		for (int i = 0; i < newDevelopmentCards.size(); i++)
+		for (int i = 0; i < oldDevelopmentCards.size(); i++)
 		{
 			if (oldDevelopmentCards.get(i).getType() == type)
 			{
