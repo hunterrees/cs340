@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
@@ -24,6 +26,7 @@ public class BuildSettlement extends Command {
 	int playerIndex;
 	boolean free;
 	String type;
+	private boolean test = false;
 
 	public BuildSettlement(int gameID, String json) {
 		super(gameID, json);
@@ -81,9 +84,9 @@ public class BuildSettlement extends Command {
 	@Override
 	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
-		Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
+		Player p = model.getPlayers().get(playerIndex);
 
-		if(model.getMap().canBuildSettlement(playerIndex, free, vertLoc)){
+		if(model.getMap().canBuildSettlement(playerIndex, free, vertLoc) || test){
 			
 		
 		
@@ -128,4 +131,7 @@ public class BuildSettlement extends Command {
 		return temp.translate();
 	}
 
+	public void setTest(boolean test) {
+		this.test = test;
+	}
 }

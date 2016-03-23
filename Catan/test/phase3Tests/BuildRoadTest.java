@@ -5,9 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import server.commands.moves.BuildRoad;
 import server.commands.moves.BuildSettlement;
-import shared.locations.HexLocation;
-import shared.locations.VertexDirection;
 import shared.locations.VertexLocation;
 import shared.model.GameModel;
 import shared.model.map.Map;
@@ -21,30 +20,18 @@ import static org.junit.Assert.* ;
 /**
  * Created by briantiu on 3/21/16.
  */
-public class BuildSettlementTest {
+public class BuildRoadTest {
     @Test
     public void test() {
-
-
-        BuildSettlement bs = new BuildSettlement(0, "{\n" +
-                "  \"type\": \"buildSettlement\",\n" +
-                "  \"playerIndex\": 0,\n" +
-                "  \"vertexLocation\": {\n" +
-                "    \"x\": 0,\n" +
-                "    \"y\": 0,\n" +
-                "    \"direction\": \"NE\"\n" +
-                "  },\n" +
-                "  \"free\": true\n" +
-                "}");
+        BuildRoad bs = new BuildRoad(0, "   add json file here     ");
 
         GameModel model = bs.getModel();
         Map map = model.getMap();
 
         try {
-            bs.setTest(true);
             bs.execute();
 
-            assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.NorthEast).getNormalizedLocation()).getPiece() != null);
+            //assertTrue("test if the settlement is in the correct place");
 
 
 
