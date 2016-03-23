@@ -28,6 +28,8 @@ public class RobPlayer extends Command {
 
 	public RobPlayer(int gameID, String json) {
 		super(gameID, json);
+
+		translate(json);
 	}
 
 
