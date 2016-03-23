@@ -44,6 +44,7 @@ public class CreateGame extends Command{
 		randomize();
 	}
 
+
 	private void createModel() {
 		TurnTracker tracker = new TurnTracker(-1,-1, GameState.firstRound, 0);
 		Log log = new Log(new ArrayList<Line>());
