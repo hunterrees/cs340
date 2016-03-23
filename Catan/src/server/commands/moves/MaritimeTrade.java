@@ -52,7 +52,7 @@ public class MaritimeTrade extends Command {
 			default : inputResource = null; break;
 		}
 		JsonPrimitive primResource2 = root.getAsJsonPrimitive("outputResource");
-		String outputResourceString = primResource.getAsString();
+		String outputResourceString = primResource2.getAsString();
 		switch(outputResourceString)
 		{
 			case "wood" : outputResource = ResourceType.WOOD; break;
