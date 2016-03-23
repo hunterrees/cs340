@@ -50,17 +50,20 @@ public class BuildCityTest {
         try {
             ArrayList<Line> lines = bs.getModel().getLog().getLines();
             int logBefore = lines.size();
+            int numCities = p.getNumCities();
 
             int before = p.getVictoryPoints();
             bs.setTest(true);
             bs.execute();
             int after = p.getVictoryPoints();
             int logAfter = bs.getModel().getLog().getLines().size();
+            int numCitiesAfter = p.getNumCities();
 
             assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.SouthEast).getNormalizedLocation()).getPiece() != null);
             assertTrue(map.getVerticies().get(new VertexLocation(new HexLocation(0,0), VertexDirection.SouthEast).getNormalizedLocation()).getPiece().getPieceType() == PieceType.CITY);
-            assertTrue(before + 1 == after);
-            assertTrue(logBefore+1 == logAfter);
+            assertTrue(before + 1 == after); // VP +1
+            assertTrue(logBefore+1 == logAfter); //Added something to the log
+            assertTrue(numCities == numCitiesAfter + 1); //city removed from playerpiece list
 
 
 

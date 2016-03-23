@@ -75,6 +75,46 @@ public class Player
 		victoryPoints = 0;
 	}
 	
+	public int getNumCities(){
+		int count = 0;
+		for( int i = 0; i < playerPieces.size(); i++){
+			if(playerPieces.get(i).getPieceType() == PieceType.CITY){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int getNumSettlements(){
+		int count = 0;
+		for( int i = 0; i < playerPieces.size(); i++){
+			if(playerPieces.get(i).getPieceType() == PieceType.SETTLEMENT){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int getNumRoads(){
+		int count = 0;
+		for( int i = 0; i < playerPieces.size(); i++){
+			if(playerPieces.get(i).getPieceType() == PieceType.ROAD){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public void removePiece(PieceType type){
+		for(int i = 0; i < playerPieces.size(); i++){
+			if(playerPieces.get(i).getPieceType() == type){
+				playerPieces.remove(i);
+				return;
+			}
+		}
+	}
+	
+	
 	public void generateStartingPieces(){
 		for(int i = 0; i < 5; i++){
 			playerPieces.add(new Piece(PieceType.SETTLEMENT, null, null, playerID));

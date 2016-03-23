@@ -94,15 +94,17 @@ public class BuildCity extends Command {
 
 			// Get a settlement back
 			p.getPlayerPieces().add(new Piece(PieceType.SETTLEMENT, null, null, playerIndex));
+			p.removePiece(PieceType.CITY);
+			Line line = new Line(p.getName(), p.getName() + " built a city");
+			model.getLog().addLine(line);
+
+			//model.getTracker().setGameStatus(blah);
+			p.addVictoryPoint();
 		}
 
 
 
-		Line line = new Line(p.getName(), p.getName() + " built a city");
-		model.getLog().addLine(line);
-
-		//model.getTracker().setGameStatus(blah);
-		p.addVictoryPoint();
+		
 
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();

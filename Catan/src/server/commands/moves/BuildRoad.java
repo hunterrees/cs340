@@ -1,12 +1,14 @@
 package server.commands.moves;
 
 import client.server.ServerException;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.definitions.PieceType;
 import shared.definitions.ResourceType;
 import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
@@ -95,11 +97,15 @@ public class BuildRoad extends Command {
 			p.getPlayerHand().removeResources(1, ResourceType.WOOD);
 			p.getPlayerHand().removeResources(1, ResourceType.BRICK);
 			
+			Line line = new Line(p.getName(), p.getName() + " built a road");
+			model.getLog().addLine(line);
+			
+			p.removePiece(PieceType.ROAD);
+			
 		}
 
 
-		Line line = new Line(p.getName(), p.getName() + " built a road");
-		model.getLog().addLine(line);
+		
 
 		//model.getTracker().setGameStatus(blah);
 
