@@ -23,6 +23,7 @@ public class BuildCity extends Command {
 	int playerIndex;
 	
 	String type;
+	private boolean test = false;
 
 	public BuildCity(int gameID, String json) {
 		super(gameID, json);
@@ -81,11 +82,11 @@ public class BuildCity extends Command {
 	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 
-		Player p = GameManager.getInstance().getModel().getPlayers().get(playerIndex);
+		Player p = model.getPlayers().get(playerIndex);
 
-		if(model.canBuildCity(playerIndex, vertLoc)){
+		if(model.canBuildCity(playerIndex, vertLoc) || test){
 			// Build the city
-			model.getMap().placeSettlement(playerIndex, vertLoc);
+			model.getMap().placeCity(playerIndex, vertLoc);
 
 			// Remove the resources
 			p.getPlayerHand().removeResources(2, ResourceType.WHEAT);
@@ -106,5 +107,22 @@ public class BuildCity extends Command {
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
 	}
+
+	/**
+	 * @return the test
+	 */
+	public boolean isTest() {
+		return test;
+	}
+
+	/**
+	 * @param test the test to set
+	 */
+	public void setTest(boolean test) {
+		this.test = test;
+	}
+	
+	
+	
 
 }

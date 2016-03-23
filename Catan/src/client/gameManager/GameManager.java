@@ -168,6 +168,7 @@ public class GameManager extends Observable{
 	public String createGame(String name, boolean randomTiles, boolean randomNumbers, boolean randomPorts)throws GameException{
 		if(name != null){
 			try{
+				System.out.println("sending creategame command");
 				return server.createGame(name, randomTiles, randomNumbers, randomPorts);
 			}catch(ServerException e){
 				e.printStackTrace();
@@ -436,6 +437,7 @@ public class GameManager extends Observable{
 			throw new GameException();
 		}*/
 			try{
+				System.out.println("building settlement");
 				GameModel newModel = server.buildSettlment(playerID, vertexLocation, setUp);
 				setModel(newModel);
 			}catch(ServerException e){

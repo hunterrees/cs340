@@ -6,8 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
+
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.ResourceType;
