@@ -47,7 +47,7 @@ public class BuildRoadTest {
         GameModel model = bs.getModel();
         Map map = model.getMap();
         Player p = bs.getModel().getPlayers().get(0);
-
+// sdf
         try {
             ArrayList<Line> lines = bs.getModel().getLog().getLines();
             int logBefore = lines.size();
