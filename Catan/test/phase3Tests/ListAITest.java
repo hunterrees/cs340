@@ -4,15 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import server.commands.games.ListGames;
+import server.commands.game.ListAI;
 
-public class ListGamesTest {
+public class ListAITest {
 
 	@Test
 	public void test() {
-		ListGames list = new ListGames(-1, "");
+		ListAI listAI = new ListAI(-1, "");
 		try{
-			list.execute();
+			listAI.execute();
 		}catch(Exception e){
 			fail();
 		}
