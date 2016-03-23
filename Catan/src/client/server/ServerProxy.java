@@ -105,7 +105,6 @@ public class ServerProxy implements ServerInterface {
 				connection.connect();
 				DataOutputStream output = new DataOutputStream(connection.getOutputStream());
 				output.writeBytes(json);
-				System.out.println(json);
 				if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
 					throw new ServerException(String.format("doPost failed: %s (http code %d) %s",
 							urlPath, connection.getResponseCode(), connection.getResponseMessage()));

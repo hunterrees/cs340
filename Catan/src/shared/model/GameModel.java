@@ -219,7 +219,7 @@ public class GameModel {
 			return false;
 		}
 
-		if(!free) {
+		if(!free  && ((tracker.getGameStatus() != GameState.firstRound) || (tracker.getGameStatus() != GameState.secondRound))) {
 			if (!players.get(playerID).canBuildRoad()) {
 				return false;
 			}
