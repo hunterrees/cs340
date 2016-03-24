@@ -21,7 +21,11 @@ import static org.junit.Assert.* ;
 public class AcceptTradeTest {
     @Test
     public void test() {
-        String json = "";
+        String json = "{\n" +
+                "  \"type\": \"acceptTrade\",\n" +
+                "  \"playerIndex\": \"0\",\n" +
+                "  \"willAccept\": \"true\"\n" +
+                "}";
 
         AcceptTrade command = new AcceptTrade(0, json);
 
@@ -96,11 +100,11 @@ public class AcceptTradeTest {
             assertTrue(beforeWheat1 == afterWheat1);
             assertTrue(beforeWood1 == afterWood1);
 
-            assertTrue(beforeBrick2 == afterBrick1);
-            assertTrue(beforeOre2 == afterOre1);
-            assertTrue(beforeSheep2 == afterSheep1);
-            assertTrue(beforeWheat2 == afterWheat1);
-            assertTrue(beforeWood2 == afterWood1);
+            assertTrue(beforeBrick2 == afterBrick2);
+            assertTrue(beforeOre2 == afterOre2);
+            assertTrue(beforeSheep2 == afterSheep2);
+            assertTrue(beforeWheat2 == afterWheat2);
+            assertTrue(beforeWood2 == afterWood2);
 
 
 
