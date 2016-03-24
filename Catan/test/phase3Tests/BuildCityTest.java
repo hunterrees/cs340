@@ -33,6 +33,7 @@ import static org.junit.Assert.* ;
 public class BuildCityTest {
     @Test
     public void test() {
+    	System.out.println("Testing BuildCity Command");
         String json = "{\n" +
                 "  \"type\": \"buildCity\",\n" +
                 "  \"playerIndex\": 0,\n" +

@@ -30,7 +30,7 @@ import static org.junit.Assert.* ;
 public class BuyDevCardTest {
     @Test
     public void test() {
-
+    	System.out.println("Testing BuyDevCard Command");
         String json = "{\n" +
                 "  \"type\": \"buyDevCard\",\n" +
                 "  \"playerIndex\": 0\n" +

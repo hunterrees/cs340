@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 public class MaritimeTradeTest {
     @Test
     public void test() {
+    	System.out.println("Testing Maritime Trade Command");
         String json = "{\n" +
                 "  \"type\": \"maritimeTrade\",\n" +
                 "  \"playerIndex\": 0,\n" +

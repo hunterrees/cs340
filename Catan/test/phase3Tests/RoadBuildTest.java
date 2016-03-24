@@ -22,7 +22,7 @@ public class RoadBuildTest {
 	
 	@Test
 	public void test() {
-	
+		System.out.println("Testing RoadBuild Command");
 		String json = "{\n"+
 		        "  \"type\": \"Road_Building\",\n"+
 		        "  \"playerIndex\": 0,\n"+

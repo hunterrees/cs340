@@ -58,7 +58,7 @@ public class YearOfPlentyTest {
 	}
 	@Test
 	public void test() {
-	
+		System.out.println("Testing YearOfPlenty Command");
 		int index = ServerManager.getInstance().createGame(createGame(GameState.playing));
 		int index2 = ServerManager.getInstance().createGame(createGame(GameState.rolling));
 		MovesYearOfPlentyTranslator testTranslator = new MovesYearOfPlentyTranslator(0, ResourceType.WOOD, ResourceType.BRICK);

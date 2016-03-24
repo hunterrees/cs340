@@ -68,7 +68,7 @@ public class MonumentTest {
 	}
 	@Test
 	public void test() {
-	
+		System.out.println("Testing Monument Command");
 		int index = ServerManager.getInstance().createGame(createGame(GameState.playing, DevCardType.MONUMENT, 0));
 		int index2 = ServerManager.getInstance().createGame(createGame(GameState.rolling, DevCardType.MONUMENT, 0));
 	    int index3 = ServerManager.getInstance().createGame(createGame(GameState.playing, DevCardType.MONUMENT, 1));

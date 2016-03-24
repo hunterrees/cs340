@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class RobPlayerTest {
     @Test
     public void test() {
+    	System.out.println("Testing RobPlayer Command");
         String json = "{\n" +
                 "  \"type\": \"robPlayer\",\n" +
                 "  \"playerIndex\": 0,\n" +

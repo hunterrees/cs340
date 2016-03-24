@@ -26,6 +26,7 @@ import static org.junit.Assert.*;
 public class SoldierTest {
     @Test
     public void test() {
+    	System.out.println("Testing Soldier Command");
         String json = "{\n" +
                 "  \"type\": \"robPlayer\",\n" +
                 "  \"playerIndex\": 0,\n" +
