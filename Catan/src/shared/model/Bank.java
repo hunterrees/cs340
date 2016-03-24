@@ -103,6 +103,7 @@ public class Bank
 				count++;
 			}
 		}
+		bankResourceCards = theNewOne;
 	}
 	/**
 	 * Remove returns number of resources of type remaining in the bank
