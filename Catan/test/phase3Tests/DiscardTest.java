@@ -3,6 +3,7 @@ package phase3Tests;
 import client.server.ServerException;
 import org.junit.Test;
 import server.commands.moves.DiscardCards;
+import shared.definitions.ResourceType;
 import shared.model.player.Player;
 
 import static org.junit.Assert.* ;
@@ -33,19 +34,19 @@ public class DiscardTest {
         Player p = command.getModel().getPlayers().get(0);
 
         try {
-            int beforeBrick;
-            int beforeOre;
-            int beforeSheep;
-            int beforeWheat;
-            int beforeWood;
+            int beforeBrick = p.getPlayerHand().numResourceOfType(ResourceType.BRICK);
+            int beforeOre= p.getPlayerHand().numResourceOfType(ResourceType.ORE);;
+            int beforeSheep= p.getPlayerHand().numResourceOfType(ResourceType.SHEEP);;
+            int beforeWheat= p.getPlayerHand().numResourceOfType(ResourceType.WHEAT);;
+            int beforeWood= p.getPlayerHand().numResourceOfType(ResourceType.WOOD);;
 
             command.execute();
 
-            int afterBrick;
-            int afterOre;
-            int afterSheep;
-            int afterWheat;
-            int afterWood;
+            int afterBrick= p.getPlayerHand().numResourceOfType(ResourceType.BRICK);;
+            int afterOre= p.getPlayerHand().numResourceOfType(ResourceType.ORE);;
+            int afterSheep= p.getPlayerHand().numResourceOfType(ResourceType.SHEEP);;
+            int afterWheat= p.getPlayerHand().numResourceOfType(ResourceType.WHEAT);;
+            int afterWood= p.getPlayerHand().numResourceOfType(ResourceType.WOOD);;
         } catch (ServerException e) {
             e.printStackTrace();
         }
