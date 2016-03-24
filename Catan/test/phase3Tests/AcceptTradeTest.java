@@ -21,6 +21,7 @@ import static org.junit.Assert.* ;
 public class AcceptTradeTest {
     @Test
     public void test() {
+        System.out.println("Testing AcceptTrade Command");
         String json = "{\n" +
                 "  \"type\": \"acceptTrade\",\n" +
                 "  \"playerIndex\": \"0\",\n" +

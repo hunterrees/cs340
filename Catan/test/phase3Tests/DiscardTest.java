@@ -17,6 +17,8 @@ public class DiscardTest {
 
     @Test
     public void test() {
+        System.out.println("Testing Discard Command");
+
         String json = "{\n" +
                 "  \"type\": \"discardCards\",\n" +
                 "  \"playerIndex\": 0,\n" +
