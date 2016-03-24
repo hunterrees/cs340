@@ -42,8 +42,8 @@ public class AcceptTrade extends Command{
 	private void moveResources()
 	{
 		TradeOffer myOffer = model.getTradeOffer();
-		ArrayList<ResourceType> resourcesOffered = myOffer.getResourceOffered();
-		ArrayList<ResourceType> resourcesDesired = myOffer.getResourceDesired();
+		ArrayList<ResourceType> resourcesOffered = myOffer.getResourceDesired();
+		ArrayList<ResourceType> resourcesDesired = myOffer.getResourceOffered();
 		resourceDesired = resourcesDesired;
 		for (int i = 0; i < resourcesOffered.size(); i++)
 		{

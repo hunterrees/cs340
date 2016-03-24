@@ -36,6 +36,7 @@ public class OfferTrade extends Command{
 	
 	private void addTradeResources(ArrayList<ResourceType> offer, ArrayList<ResourceType> receive, ResourceType type, int amount){
 		if(amount > 0){
+			
 			for(int i = 0; i < amount; i++){
 				receive.add(type);
 			}
