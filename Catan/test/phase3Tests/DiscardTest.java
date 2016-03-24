@@ -3,6 +3,7 @@ package phase3Tests;
 import client.server.ServerException;
 import org.junit.Test;
 import server.commands.moves.DiscardCards;
+import shared.definitions.GameState;
 import shared.definitions.ResourceType;
 import shared.model.player.Player;
 
@@ -31,6 +32,13 @@ public class DiscardTest {
         DiscardCards command = new DiscardCards(0, json);
 
         Player p = command.getModel().getPlayers().get(0);
+        p.getPlayerHand().addResources(10, ResourceType.BRICK);
+        p.getPlayerHand().addResources(10, ResourceType.ORE);
+        p.getPlayerHand().addResources(10, ResourceType.WOOD);
+        p.getPlayerHand().addResources(10, ResourceType.WHEAT);
+        p.getPlayerHand().addResources(10, ResourceType.SHEEP);
+
+
 
         try {
             int beforeBrick = p.getPlayerHand().numResourceOfType(ResourceType.BRICK);
@@ -39,6 +47,7 @@ public class DiscardTest {
             int beforeWheat= p.getPlayerHand().numResourceOfType(ResourceType.WHEAT);;
             int beforeWood= p.getPlayerHand().numResourceOfType(ResourceType.WOOD);;
 
+            command.getModel().getTracker().setGameStatus(GameState.discarding);
             command.execute();
 
             int afterBrick= p.getPlayerHand().numResourceOfType(ResourceType.BRICK);;
@@ -46,6 +55,15 @@ public class DiscardTest {
             int afterSheep= p.getPlayerHand().numResourceOfType(ResourceType.SHEEP);;
             int afterWheat= p.getPlayerHand().numResourceOfType(ResourceType.WHEAT);;
             int afterWood= p.getPlayerHand().numResourceOfType(ResourceType.WOOD);;
+
+            assertTrue(beforeBrick -1== afterBrick);
+            assertTrue(beforeOre -2== afterOre);
+            assertTrue(beforeSheep -3== afterSheep);
+            assertTrue(beforeWheat -4== afterWheat);
+            assertTrue(beforeWood -5== afterWood);
+
+
+
         } catch (ServerException e) {
             e.printStackTrace();
         }
