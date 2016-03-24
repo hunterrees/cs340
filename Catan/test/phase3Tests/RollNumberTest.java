@@ -32,7 +32,7 @@ public class RollNumberTest {
         try {
 			rn.execute();
 		} catch (ServerException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch blocks
 			e.printStackTrace();
 		}
         
