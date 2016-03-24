@@ -1762,5 +1762,11 @@ public class Map {
 
 	}
 
+	public void setPorts(HashMap<VertexLocation, Port> ports) {
+		this.ports = ports;
+	}
 
+	public void setEdgePorts(HashMap<EdgeLocation, PortType> edgePorts) {
+		this.edgePorts = edgePorts;
+	}
 }

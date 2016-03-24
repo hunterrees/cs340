@@ -399,7 +399,7 @@ public class CreateGame extends Command{
 
 
 	public void randomizePorts() {
-		
+		Collections.shuffle(portList);
 
 
 		// Port 1
@@ -490,7 +490,8 @@ public class CreateGame extends Command{
 
 		edgePorts.put(new EdgeLocation(new HexLocation(-1,-1),EdgeDirection.NorthWest),portList.get(8));
 
-
+		map.setEdgePorts(edgePorts);
+		map.setPorts(ports);
 
 
 	}
