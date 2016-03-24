@@ -45,17 +45,17 @@ public class AcceptTradeTest {
 
         TradeOffer trade = new TradeOffer(0, 1, null, null);
 
-        for(int i = 0; i < 1; i++);
-        for(int i = 0; i < 2; i++);
-        for(int i = 0; i < 3; i++);
-        for(int i = 0; i < 4; i++);
-        for(int i = 0; i < 5; i++);
+        for(int i = 0; i < 1; i++) giving.add(new ResourceCard(ResourceType.BRICK));
+        for(int i = 0; i < 2; i++) giving.add(new ResourceCard(ResourceType.ORE));
+        for(int i = 0; i < 3; i++) giving.add(new ResourceCard(ResourceType.WOOD));
+        for(int i = 0; i < 4; i++) giving.add(new ResourceCard(ResourceType.WHEAT));
+        for(int i = 0; i < 5; i++) giving.add(new ResourceCard(ResourceType.SHEEP));
 
-        for(int i = 0; i < 5; i++);
-        for(int i = 0; i < 4; i++);
-        for(int i = 0; i < 3; i++);
-        for(int i = 0; i < 2; i++);
-        for(int i = 0; i < 1; i++);
+        for(int i = 0; i < 5; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
+        for(int i = 0; i < 4; i++) receiving.add(new ResourceCard(ResourceType.ORE));
+        for(int i = 0; i < 3; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
+        for(int i = 0; i < 2; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
+        for(int i = 0; i < 1; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
 
 
 
