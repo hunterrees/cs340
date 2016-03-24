@@ -2,11 +2,15 @@ package phase3Tests;
 
 import client.server.ServerException;
 import org.junit.Test;
+import org.junit.internal.ArrayComparisonFailure;
 import server.commands.moves.AcceptTrade;
+import shared.ResourceCard;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
 import shared.model.player.Player;
 import shared.model.trade.TradeOffer;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.* ;
 
@@ -36,8 +40,22 @@ public class AcceptTradeTest {
         p2.getPlayerHand().addResources(10, ResourceType.SHEEP);
 
 
+        ArrayList<ResourceCard> giving = new ArrayList<>();
+        ArrayList<ResourceCard> receiving = new ArrayList<>();
+
         TradeOffer trade = new TradeOffer(0, 1, null, null);
 
+        for(int i = 0; i < 1; i++);
+        for(int i = 0; i < 2; i++);
+        for(int i = 0; i < 3; i++);
+        for(int i = 0; i < 4; i++);
+        for(int i = 0; i < 5; i++);
+
+        for(int i = 0; i < 5; i++);
+        for(int i = 0; i < 4; i++);
+        for(int i = 0; i < 3; i++);
+        for(int i = 0; i < 2; i++);
+        for(int i = 0; i < 1; i++);
 
 
 
