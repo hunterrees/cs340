@@ -104,7 +104,7 @@ public class Hand
 			if (newDevelopmentCards.get(i).getType() == type)
 			{
 				newDevelopmentCards.remove(i);
-				break;
+				return true;
 			}
 		}
 		return true;

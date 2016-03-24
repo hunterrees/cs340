@@ -55,7 +55,7 @@ public class YearOfPlenty extends Command {
 			default : resource1 = null; break;
 		}
 		JsonPrimitive primResource2 = root.getAsJsonPrimitive("resource2");
-		String resource2String = primResource.getAsString();
+		String resource2String = primResource2.getAsString();
 		switch(resource2String)
 		{
 			case "wood" : resource2 = ResourceType.WOOD; break;
