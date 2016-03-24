@@ -91,9 +91,10 @@ public class OfferTrade extends Command{
 	@Override
 	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
+		translate();
 		playingState();
 		myTurn(playerIndex);
-		translate();
+		
 		model.setTradeOffer(completedOffer);
 		
 		model.updateVersionNumber();

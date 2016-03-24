@@ -60,14 +60,6 @@ public class MonopolyTest {
 		int index2 = ServerManager.getInstance().createGame(createGame(GameState.rolling));
 		MovesMonopolyTranslator testTranslator = new MovesMonopolyTranslator(0, ResourceType.WOOD);
 		String json = testTranslator.translate();
-		if (ServerManager.getInstance().getGame(index).getTracker() == null)
-		{
-			System.out.println("the tracker is null");
-		}
-		else
-		{
-			System.out.println(ServerManager.getInstance().getGame(index).getTracker().getGameStatus().toString());
-		}
 		
 		Monopoly myMonopoly = new Monopoly(index, json);
 		Monopoly myMonopoly2 = new Monopoly(index2, json);
@@ -83,15 +75,11 @@ public class MonopolyTest {
 			myMonopoly.execute();
 			fail("shouldn't be able to use 2 dev cards in 1 turn");
 		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		try {
 			myMonopoly.execute();
 			fail("monopoly threw an exception");
 		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		

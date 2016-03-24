@@ -80,15 +80,11 @@ public class YearOfPlentyTest {
 			myMonopoly.execute();
 			fail("shouldn't be able to use 2 dev cards in 1 turn");
 		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		try {
 			myMonopoly2.execute();
 			fail("year of plenty threw an exception");
 		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		

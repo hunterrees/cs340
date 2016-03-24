@@ -74,14 +74,6 @@ public class MonumentTest {
 	    int index3 = ServerManager.getInstance().createGame(createGame(GameState.playing, DevCardType.MONUMENT, 1));
 		MovesMonopolyTranslator testTranslator = new MovesMonopolyTranslator(0, ResourceType.WOOD);
 		String json = testTranslator.translate();
-		if (ServerManager.getInstance().getGame(index).getTracker() == null)
-		{
-			System.out.println("the tracker is null");
-		}
-		else
-		{
-			System.out.println(ServerManager.getInstance().getGame(index).getTracker().getGameStatus().toString());
-		}
 		
 		Monument myMonopoly = new Monument(index, json);
 		Monument myMonopoly2 = new Monument(index2, json);
@@ -101,8 +93,6 @@ public class MonumentTest {
 			myMonopoly2.execute();
 			fail("monument threw an exception");
 		} catch (ServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		try {
