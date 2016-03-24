@@ -1,12 +1,15 @@
 package server.commands.moves;
 
 import client.server.ServerException;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.DevCardType;
+import shared.definitions.PieceType;
 import shared.locations.EdgeDirection;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -112,7 +115,9 @@ public class RoadBuilding extends Command {
 		model.getMap().placeRoad(playerIndex, edgeLoc2);
 		p.setHasPlayedDevCard(true);
 		p.getPlayerHand().removeOldDevCard(DevCardType.ROAD_BUILD);
-		
+		//remove road pieces
+		p.removePiece(PieceType.ROAD);
+		p.removePiece(PieceType.ROAD);
 		//check for most roads
 		model.updateLongestRoad();
 		//check for victory

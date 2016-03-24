@@ -14,6 +14,7 @@ import shared.model.GameModel;
 import shared.model.Line;
 import shared.model.map.Edge;
 import shared.model.map.Map;
+import shared.model.player.Player;
 
 import java.util.ArrayList;
 
@@ -41,14 +42,17 @@ public class RoadBuildTest {
 		RoadBuilding rb = new RoadBuilding(0, json);
 		GameModel model = rb.getModel();
         Map map = model.getMap();
+        Player p = rb.getModel().getPlayers().get(0);
         
         try {
 			ArrayList<Line> lines = rb.getModel().getLog().getLines();
 			int logBefore = lines.size();
+			int numRoads = p.getNumRoads();
 
 			rb.setTest(true);
 			rb.execute();
 			int logAfter = rb.getModel().getLog().getLines().size();
+			int numRoadsAfter = p.getNumRoads();
 
 			Edge edge = map.getEdges().get(new EdgeLocation(new HexLocation(0,0), EdgeDirection.NorthWest).getNormalizedLocation());
 			assertTrue(edge.getPiece() != null);
@@ -57,6 +61,7 @@ public class RoadBuildTest {
             assertTrue(edge2.getPiece() != null);
             assertTrue(edge2.getPiece().getPieceType() == PieceType.ROAD);
 			assertTrue(logBefore+1 == logAfter); //actually logs a message
+			assertTrue(numRoads == numRoadsAfter + 2); //removed 2 roads from player
 
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block
