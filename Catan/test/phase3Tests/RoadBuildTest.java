@@ -46,7 +46,7 @@ public class RoadBuildTest {
 			ArrayList<Line> lines = rb.getModel().getLog().getLines();
 			int logBefore = lines.size();
 
-
+			rb.setTest(true);
 			rb.execute();
 			int logAfter = rb.getModel().getLog().getLines().size();
 
