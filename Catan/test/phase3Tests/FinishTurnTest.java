@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class FinishTurnTest {
     @Test
     public void test() {
+    	System.out.println("Testing FinishTurn Command");
         String json = "{\n" +
                 "  \"type\": \"finishTurn\",\n" +
                 "  \"playerIndex\": 0\n" +

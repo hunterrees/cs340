@@ -33,6 +33,7 @@ import static org.junit.Assert.* ;
 public class BuildRoadTest {
     @Test
     public void test() {
+    	System.out.println("testing BuildRoad Command");
         BuildRoad bs = new BuildRoad(0, "{\n" +
                 "  \"type\": \"buildRoad\",\n" +
                 "  \"playerIndex\": 0,\n" +

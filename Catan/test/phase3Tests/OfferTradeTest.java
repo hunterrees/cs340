@@ -61,6 +61,7 @@ public class OfferTradeTest {
 	@Test
 	public void test() {
 	
+		System.out.println("Testing OfferTrade Command");
 		int index = ServerManager.getInstance().createGame(createGame(GameState.playing));
 		
 		ArrayList<ResourceType> resourceGive = new ArrayList<ResourceType>();

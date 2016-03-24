@@ -54,7 +54,8 @@ public class MonopolyTest {
 	}
 	@Test
 	public void test() {
-	
+		System.out.println("Testing Monopoly Command");
+		//try pusing again
 		int index = ServerManager.getInstance().createGame(createGame(GameState.playing));
 		int index2 = ServerManager.getInstance().createGame(createGame(GameState.rolling));
 		MovesMonopolyTranslator testTranslator = new MovesMonopolyTranslator(0, ResourceType.WOOD);

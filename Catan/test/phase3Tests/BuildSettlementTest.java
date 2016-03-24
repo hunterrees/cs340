@@ -36,7 +36,7 @@ import static org.junit.Assert.* ;
   public class BuildSettlementTest {
       @Test
       public void test() {
-
+    	 System.out.println("Testing BuildSettlement Command");
          BuildSettlement bs = new BuildSettlement(0, "{\n" +
                  "  \"type\": \"buildSettlement\",\n" +
                  "  \"playerIndex\": 0,\n" +

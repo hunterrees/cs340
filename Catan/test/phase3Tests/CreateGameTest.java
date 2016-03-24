@@ -19,6 +19,7 @@ public class CreateGameTest {
 
     @Test
     public void test() {
+    	System.out.println("Testing CreateGame Command");
         String json = "{\n" +
                 "  \"randomTiles\": true,\n" +
                 "  \"randomNumbers\": true,\n" +
