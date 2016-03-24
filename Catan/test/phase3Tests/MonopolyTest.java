@@ -76,12 +76,21 @@ public class MonopolyTest {
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block
 			fail("monopoly threw an exception");
+			e.printStackTrace();
+		}
+		try {
+			myMonopoly.execute();
+			fail("shouldn't be able to use 2 dev cards in 1 turn");
+		} catch (ServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			myMonopoly.execute();
 			fail("monopoly threw an exception");
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		
