@@ -132,6 +132,10 @@ public class ServerManager {
 		return manager;
 	}
 
+	public void resetManager(){
+		manager = null;
+	}
+	
 	public ArrayList<GameModel> getGames() {
 		return games;
 	}

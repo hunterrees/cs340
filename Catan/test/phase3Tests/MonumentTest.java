@@ -81,7 +81,7 @@ public class MonumentTest {
 		try {
 			myMonopoly.execute();
 			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getVictoryPoints() == 1);
-			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getPlayerHand().numNewDevCardRemaining(DevCardType.MONUMENT) == 0);
+			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getPlayerHand().numOldDevCardRemaining(DevCardType.MONUMENT) == 0);
 			//should be able to monument multiple times
 			myMonopoly.execute();
 		} catch (ServerException e) {
@@ -97,13 +97,12 @@ public class MonumentTest {
 		
 		try {
 			myMonopoly3.execute();
-			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getVictoryPoints() == 1);
+			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getVictoryPoints() == 2);
 		} catch (ServerException e) {
 			// TODO Auto-generated catch block
 			fail("monument threw an exception");
 			e.printStackTrace();
 		}
-		
 	}
 
 }

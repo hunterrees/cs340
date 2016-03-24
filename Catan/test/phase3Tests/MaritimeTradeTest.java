@@ -2,6 +2,8 @@ package phase3Tests;
 
 import client.server.ServerException;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.moves.MaritimeTrade;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
@@ -17,6 +19,7 @@ public class MaritimeTradeTest {
     @Test
     public void test() {
     	System.out.println("Testing Maritime Trade Command");
+    	ServerManager.getInstance().resetManager();
         String json = "{\n" +
                 "  \"type\": \"maritimeTrade\",\n" +
                 "  \"playerIndex\": 0,\n" +

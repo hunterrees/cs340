@@ -79,7 +79,7 @@ public class OfferTradeTest {
 			//check that the input resource is correct
 			assert(ServerManager.getInstance().getGame(index).getTradeOffer().getResourceDesired().contains(ResourceType.ORE));
 			//check that the output resource is correct
-			assert(ServerManager.getInstance().getGame(index).getTradeOffer().getResourceDesired().contains(ResourceType.BRICK));
+			assert(ServerManager.getInstance().getGame(index).getTradeOffer().getResourceOffered().contains(ResourceType.BRICK));
 			
 			//testing
 		} catch (ServerException e) {

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import server.ServerManager;
 import server.commands.moves.RollNumber;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
@@ -17,6 +18,7 @@ public class RollNumberTest {
 
 	@Test
 	public void test6() {
+		ServerManager.getInstance().resetManager();
 		String json = (new MovesRollNumberTranslator(0, 6)).translate();
 		
 		RollNumber rn = new RollNumber(0, json);
