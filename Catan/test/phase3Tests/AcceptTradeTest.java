@@ -90,6 +90,19 @@ public class AcceptTradeTest {
             int afterWheat2= p2.getPlayerHand().numResourceOfType(ResourceType.WHEAT);;
             int afterWood2= p2.getPlayerHand().numResourceOfType(ResourceType.WOOD);;
 
+            assertTrue(beforeBrick1 == afterBrick1);
+            assertTrue(beforeOre1 == afterBrick1);
+            assertTrue(beforeSheep1 == afterBrick1);
+            assertTrue(beforeWheat1 == afterBrick1);
+            assertTrue(beforeWheat1 == afterBrick1);
+
+            assertTrue(beforeBrick2 == afterBrick1);
+            assertTrue(beforeOre2 == afterBrick1);
+            assertTrue(beforeSheep2 == afterBrick1);
+            assertTrue(beforeWheat2 == afterBrick1);
+            assertTrue(beo == afterBrick1);
+
+
 
 
 
