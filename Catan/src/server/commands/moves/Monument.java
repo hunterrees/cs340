@@ -61,6 +61,8 @@ public class Monument extends Command {
 	public Object execute() throws ServerException {
 		// TODO Auto-generated method stub
 		translate();
+		myTurn(playerIndex);
+		playingState();
 		addVictoryPoint();
 		if (!model.getPlayers().get(playerIndex).getPlayerHand().removeNewDevCard(DevCardType.MONUMENT))
 		{
