@@ -20,6 +20,7 @@ public class RoadBuilding extends Command {
 	int playerIndex;
 	EdgeLocation edgeLoc1;
 	EdgeLocation edgeLoc2;
+	boolean test = false;
 
 
 	public RoadBuilding(int gameID, String json) {
@@ -102,7 +103,7 @@ public class RoadBuilding extends Command {
 	 */
 	@Override
 	public Object execute() throws ServerException {
-		if(!model.roadBuilding(playerIndex, edgeLoc1, edgeLoc2)){
+		if(!model.roadBuilding(playerIndex, edgeLoc1, edgeLoc2) && !test){
 			throw new ServerException("Can't place roads right there");
 		}
 		Player p = model.getPlayers().get(playerIndex);
@@ -113,7 +114,10 @@ public class RoadBuilding extends Command {
 		p.getPlayerHand().removeOldDevCard(DevCardType.ROAD_BUILD);
 		
 		//check for most roads
+		model.updateLongestRoad();
 		//check for victory
+		model.checkVictory();
+		
 
 		Line line = new Line(p.getName(), p.getName() + " played road building");
 		model.getLog().addLine(line);
@@ -121,6 +125,20 @@ public class RoadBuilding extends Command {
 		model.updateVersionNumber();
 		ServerTranslator temp = new ServerTranslator(model);
 		return temp.translate();
+	}
+
+	/**
+	 * @return the test
+	 */
+	public boolean isTest() {
+		return test;
+	}
+
+	/**
+	 * @param test the test to set
+	 */
+	public void setTest(boolean test) {
+		this.test = test;
 	}
 
 }
