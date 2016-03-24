@@ -37,7 +37,7 @@ public class AcceptTrade extends Command{
 		playerIndex = root.getAsJsonPrimitive("playerIndex").getAsInt();
 		willAccept = root.getAsJsonPrimitive("willAccept").getAsBoolean();
 	}
-
+//sdf
 	
 	private void moveResources()
 	{
