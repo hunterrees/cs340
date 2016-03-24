@@ -47,7 +47,6 @@ public class AcceptTradeTest {
         ArrayList<ResourceType> giving = new ArrayList<>();
         ArrayList<ResourceType> receiving = new ArrayList<>();
 
-        TradeOffer trade = new TradeOffer(0, 1, giving, receiving);
 
         for(int i = 0; i < 1; i++) giving.add(ResourceType.BRICK);
         for(int i = 0; i < 2; i++) giving.add(ResourceType.ORE);
@@ -61,6 +60,8 @@ public class AcceptTradeTest {
         for(int i = 0; i < 2; i++) receiving.add(ResourceType.WHEAT);
         for(int i = 0; i < 1; i++) receiving.add(ResourceType.SHEEP);
 
+        TradeOffer trade = new TradeOffer(0, 1, giving, receiving);
+        command.getModel().setTradeOffer(trade);
 
 
 
