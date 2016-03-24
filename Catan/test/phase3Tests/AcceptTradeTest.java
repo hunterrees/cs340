@@ -40,22 +40,22 @@ public class AcceptTradeTest {
         p2.getPlayerHand().addResources(10, ResourceType.SHEEP);
 
 
-        ArrayList<ResourceCard> giving = new ArrayList<>();
-        ArrayList<ResourceCard> receiving = new ArrayList<>();
+        ArrayList<ResourceType> giving = new ArrayList<>();
+        ArrayList<ResourceType> receiving = new ArrayList<>();
 
-        TradeOffer trade = new TradeOffer(0, 1, null, null);
+        TradeOffer trade = new TradeOffer()
 
-        for(int i = 0; i < 1; i++) giving.add(new ResourceCard(ResourceType.BRICK));
-        for(int i = 0; i < 2; i++) giving.add(new ResourceCard(ResourceType.ORE));
-        for(int i = 0; i < 3; i++) giving.add(new ResourceCard(ResourceType.WOOD));
-        for(int i = 0; i < 4; i++) giving.add(new ResourceCard(ResourceType.WHEAT));
-        for(int i = 0; i < 5; i++) giving.add(new ResourceCard(ResourceType.SHEEP));
+        for(int i = 0; i < 1; i++) giving.add(ResourceType.BRICK);
+        for(int i = 0; i < 2; i++) giving.add(ResourceType.ORE);
+        for(int i = 0; i < 3; i++) giving.add(ResourceType.WOOD);
+        for(int i = 0; i < 4; i++) giving.add(ResourceType.WHEAT);
+        for(int i = 0; i < 5; i++) giving.add(ResourceType.SHEEP);
 
-        for(int i = 0; i < 5; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
-        for(int i = 0; i < 4; i++) receiving.add(new ResourceCard(ResourceType.ORE));
-        for(int i = 0; i < 3; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
-        for(int i = 0; i < 2; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
-        for(int i = 0; i < 1; i++) receiving.add(new ResourceCard(ResourceType.BRICK));
+        for(int i = 0; i < 5; i++) receiving.add(ResourceType.BRICK);
+        for(int i = 0; i < 4; i++) receiving.add(ResourceType.ORE);
+        for(int i = 0; i < 3; i++) receiving.add(ResourceType.WOOD);
+        for(int i = 0; i < 2; i++) receiving.add(ResourceType.WHEAT);
+        for(int i = 0; i < 1; i++) receiving.add(ResourceType.SHEEP);
 
 
 
