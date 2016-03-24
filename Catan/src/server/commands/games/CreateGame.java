@@ -188,7 +188,7 @@ public class CreateGame extends Command{
 		list.add(loc18);
 		list.add(loc19);
 
-		//Collections.shuffle(list);
+		Collections.shuffle(list);
 
 		ArrayList<TerrainHex> hexList = new ArrayList<>();
 		for(java.util.Map.Entry<HexLocation, TerrainHex> entry: map.getHexes().entrySet()) {
@@ -203,8 +203,13 @@ public class CreateGame extends Command{
 
 				updatedMap.put(list.get(counter), hex);
 
+				if(hex.getType() == HexType.DESERT) {
+					robberLoc = hex.getLocation();
+				}
+
 				counter++;
 			}
+
 
 		}
 

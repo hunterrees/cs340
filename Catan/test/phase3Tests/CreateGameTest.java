@@ -43,10 +43,12 @@ public class CreateGameTest {
             int wheat = 0;
             int ore = 0;
 
+            HexLocation desertLoc = null;
+
             for(java.util.Map.Entry<HexLocation, TerrainHex> entry : map.getHexes().entrySet()) {
                 switch(entry.getValue().getType()) {
                     case WATER: water++;  assertTrue(entry.getValue().getNumber() == -1); break;
-                    case DESERT: desert++; assertTrue(entry.getValue().getNumber() < 1); break;
+                    case DESERT: desert++; assertTrue(entry.getValue().getNumber() < 1); desertLoc = entry.getKey();  break;
                     case WOOD: wood++;     assertTrue(entry.getValue().getNumber() > 1);   break;
                     case BRICK: brick++;   assertTrue(entry.getValue().getNumber() > 1);   break;
                     case SHEEP: sheep++;   assertTrue(entry.getValue().getNumber() > 1);   break;
@@ -64,6 +66,9 @@ public class CreateGameTest {
             assertTrue(sheep == 4);
             assertTrue(wheat == 4);
             assertTrue(ore == 3);
+
+            HexLocation robberLoc = map.getRobberLocation();
+            assertTrue(robberLoc.equals(desertLoc));
 
         } catch (ServerException e) {
             e.printStackTrace();
