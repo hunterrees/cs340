@@ -568,58 +568,53 @@ public class GameModel {
 	}
 
 	public void updateLongestRoad() {
-		int currentLongestIndex = tracker.getLongestRoadplayerID();
-
-		for(Player p : players) {
-			if (currentLongestIndex == -1 && 15 - players.get(p.getPlayerID()).getNumRoads() >= 5) {
-				tracker.setLongestRoadplayerID(currentLongestIndex);
-				return;
+		if(tracker.getLongestRoadplayerID() == -1){
+			for(int i = 0; i < players.size(); i++){
+				if(players.get(i).getNumRoads() <= 10){
+					players.get(i).addVictoryPoint();
+					players.get(i).addVictoryPoint();
+					tracker.setLongestRoadplayerID(i);
+					return;
+				}
+			}
+		}else{
+			int currentLongest = tracker.getLongestRoadplayerID();
+			for(int i = 0; i < players.size(); i++){
+				if((i != currentLongest) && (players.get(i).getNumRoads() < players.get(currentLongest).getNumRoads())){
+					players.get(i).addVictoryPoint();
+					players.get(i).addVictoryPoint();
+					players.get(currentLongest).removeVictoryPoint();
+					players.get(currentLongest).removeVictoryPoint();
+					tracker.setLongestRoadplayerID(i);
+					return;
+				}
 			}
 		}
-		
-		if(currentLongestIndex == -1){
-			return;
-		}
-
-		int playerIndex = -1;
-		for(int i = 0; i < players.size(); i++) {
-			if(15-players.get(getCurrentPlayerIndex()).getNumRoads() > 15-players.get(currentLongestIndex).getNumRoads()) {
-				playerIndex = i;
-			}
-		}
-
-		if(playerIndex != -1) {
-			tracker.setLongestRoadplayerID(playerIndex);
-		}
-
-
 	}
 
 	public void updateLargestArmy() {
-		int currentLargesetIndex = tracker.getLargestArmyPlayerID();
-
-		for(Player p : players) {
-			if (currentLargesetIndex == -1 && players.get(p.getPlayerID()).getSoldiers() >= 3) {
-				tracker.setLargestArmyPlayerID(currentLargesetIndex);
-				return;
+		if(tracker.getLargestArmyPlayerID() == -1){
+			for(int i = 0; i < players.size(); i++){
+				if(players.get(i).getSoldiers() >= 3){
+					players.get(i).addVictoryPoint();
+					players.get(i).addVictoryPoint();	
+					tracker.setLargestArmyPlayerID(i);
+					return;
+				}
+			}
+		}else{
+			int currentLargest = tracker.getLargestArmyPlayerID();
+			for(int i = 0; i < players.size(); i++){
+				if((i != currentLargest) && (players.get(i).getSoldiers() > players.get(currentLargest).getSoldiers())){
+					players.get(i).addVictoryPoint();
+					players.get(i).addVictoryPoint();
+					players.get(currentLargest).removeVictoryPoint();
+					players.get(currentLargest).removeVictoryPoint();
+					tracker.setLargestArmyPlayerID(i);
+					return;
+				}
 			}
 		}
-		
-		if(currentLargesetIndex == -1){
-			return;
-		}
-
-		int playerIndex = -1;
-		for(int i = 0; i < players.size(); i++) {
-			if(players.get(getCurrentPlayerIndex()).getSoldiers() > players.get(currentLargesetIndex).getSoldiers()) {
-				playerIndex = i;
-			}
-		}
-
-		if(playerIndex != -1) {
-			tracker.setLargestArmyPlayerID(playerIndex);
-		}
-
 
 	}
 

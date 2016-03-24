@@ -315,6 +315,10 @@ public class Player
 	{
 		victoryPoints++;
 	}
+	
+	public void removeVictoryPoint(){
+		victoryPoints--;
+	}
 	/**
 	 * return all pieces owned by player
 	 * @return
