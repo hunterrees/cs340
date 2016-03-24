@@ -41,7 +41,7 @@ public class Bank
 		}
 
 		// Generate the starting resources
-		for(int i = 0; i < 15; i++) {
+		for(int i = 0; i < 19; i++) {
 			bankResourceCards.add(new ResourceCard(ResourceType.WOOD));
 			bankResourceCards.add(new ResourceCard(ResourceType.BRICK));
 			bankResourceCards.add(new ResourceCard(ResourceType.SHEEP));
@@ -54,7 +54,16 @@ public class Bank
 	//Needs to generate all the development cards
 	public void generateStartingDevelopmentCards()
 	{
-		bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONOPOLY));
+		for(int i = 0; i < 19; i++){
+			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.SOLDIER));
+		}
+		for(int i = 0; i < 5; i++){
+			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONUMENT));
+		}for(int i = 0; i < 5; i++){
+			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONOPOLY));
+			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.YEAR_OF_PLENTY));
+			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.ROAD_BUILD));
+		}
 	}
 	/**
 	 * add amount of type resources to the bank

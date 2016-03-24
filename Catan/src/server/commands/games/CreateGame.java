@@ -3,8 +3,10 @@ package server.commands.games;
 import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
+import shared.Piece;
 import shared.definitions.GameState;
 import shared.definitions.HexType;
+import shared.definitions.PieceType;
 import shared.definitions.PortType;
 import shared.locations.*;
 import shared.model.*;
@@ -205,6 +207,10 @@ public class CreateGame extends Command{
 
 				if(hex.getType() == HexType.DESERT) {
 					robberLoc = hex.getLocation();
+					updatedMap.get(robberLoc).setPiece(new Piece(PieceType.ROBBER, null, null, -1));
+					map.setRobberLocation(robberLoc);
+				}else{
+					updatedMap.get(hex.getLocation()).setPiece(null);
 				}
 
 				counter++;
