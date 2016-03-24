@@ -17,7 +17,6 @@ public class DiscardTest {
 
     @Test
     public void test() {
-    	System.out.println("Testing Discard Command");
         String json = "{\n" +
                 "  \"type\": \"discardCards\",\n" +
                 "  \"playerIndex\": 0,\n" +
@@ -38,7 +37,6 @@ public class DiscardTest {
         p.getPlayerHand().addResources(10, ResourceType.WOOD);
         p.getPlayerHand().addResources(10, ResourceType.WHEAT);
         p.getPlayerHand().addResources(10, ResourceType.SHEEP);
-
 
 
         try {
