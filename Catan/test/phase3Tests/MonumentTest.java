@@ -2,6 +2,7 @@ package phase3Tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.event.MouseAdapter;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -79,6 +80,7 @@ public class MonumentTest {
 		Monument myMonopoly2 = new Monument(index2, json);
 		Monument myMonopoly3 = new Monument(index3, json);
 		try {
+			//myMonopoly.getModel().getTracker().setGameStatus(GameState.playing);
 			myMonopoly.execute();
 			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getVictoryPoints() == 1);
 			assert(ServerManager.getInstance().getGame(index).getPlayers().get(0).getPlayerHand().numOldDevCardRemaining(DevCardType.MONUMENT) == 0);
