@@ -16,7 +16,7 @@ import shared.model.GameModel;
 import shared.model.Line;
 
 public class Monopoly extends Command {
-	
+	//hopefully fixed
 	private int playerIndex;
 	ResourceType resourceToSteal;
 	
