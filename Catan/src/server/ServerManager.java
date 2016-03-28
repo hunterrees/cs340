@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import client.translators.ModelTranslator;
 import shared.model.GameModel;
+import shared.model.Line;
+import shared.model.Log;
 
 public class ServerManager {
 	
@@ -44,6 +46,7 @@ public class ServerManager {
 		}
 		GameModel defaultGame = translator.getModelfromJSON(defaultJson.toString());
 		defaultGame.setTitle("Default Game");
+		defaultGame.setLog(generateLog());
 		games.add(defaultGame);
 		scanner1.close();
 		
@@ -72,6 +75,59 @@ public class ServerManager {
 			return null;
 		}
 		return games.get(index);
+	}
+	
+	private Log generateLog(){
+		Log log = new Log(new ArrayList<Line>());
+		Line line = new Line("Sam", "Sam built a road");
+		log.addLine(line);
+		line = new Line("Sam", "Sam built a settlement");
+		log.addLine(line);
+		line = new Line("Sam", "Sam's turn just ended");
+		log.addLine(line);
+		line = new Line("Brooke", "Brooke built a road");
+		log.addLine(line);
+		line = new Line("Brooke", "Brooke built a settlement");
+		log.addLine(line);
+		line = new Line("Brooke", "Brooke's turn just ended");
+		log.addLine(line);
+		line = new Line("Pete", "Pete built a road");
+		log.addLine(line);
+		line = new Line("Pete", "Pete built a settlement");
+		log.addLine(line);
+		line = new Line("Pete", "Pete's turn just ended");
+		log.addLine(line);
+		line = new Line("Mark", "Mark built a road");
+		log.addLine(line);
+		line = new Line("Mark", "Mark built a settlement");
+		log.addLine(line);
+		line = new Line("Mark", "Mark's turn just ended");
+		log.addLine(line);
+		line = new Line("Mark", "Mark built a road");
+		log.addLine(line);
+		line = new Line("Mark", "Mark built a settlement");
+		log.addLine(line);
+		line = new Line("Mark", "Mark's turn just ended");
+		log.addLine(line);
+		line = new Line("Pete", "Pete built a road");
+		log.addLine(line);
+		line = new Line("Pete", "Pete built a settlement");
+		log.addLine(line);
+		line = new Line("Pete", "Pete's turn just ended");
+		log.addLine(line);
+		line = new Line("Brooke", "Brooke built a road");
+		log.addLine(line);
+		line = new Line("Brooke", "Brooke built a settlement");
+		log.addLine(line);
+		line = new Line("Brooke", "Brooke's turn just ended");
+		log.addLine(line);
+		line = new Line("Sam", "Sam built a road");
+		log.addLine(line);
+		line = new Line("Sam", "Sam built a settlement");
+		log.addLine(line);
+		line = new Line("Sam", "Sam's turn just ended");
+		log.addLine(line);
+		return log;
 	}
 	
 	/**

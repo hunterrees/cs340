@@ -96,6 +96,9 @@ public class DiscardController extends Controller implements IDiscardController 
 		if(getDiscardView().isModalShowing()){
 			return;
 		}
+		if(getWaitView().isModalShowing() && (GameManager.getInstance().getGameState() != GameState.discarding)){
+			getWaitView().closeModal();
+		}
 		int index = GameManager.getInstance().getPlayerInfo().getPlayerIndex();
 		if(index == -1){
 			return;
@@ -112,6 +115,8 @@ public class DiscardController extends Controller implements IDiscardController 
 			getDiscardView().setDiscardButtonEnabled(false);
 			getDiscardView().setStateMessage(getState());
 			getDiscardView().showModal();
+		}else if(GameManager.getInstance().getGameState() == GameState.discarding && !getWaitView().isModalShowing()){
+			getWaitView().showModal();
 		}
 	}
 	
