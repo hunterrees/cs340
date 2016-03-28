@@ -116,7 +116,7 @@ public class Monopoly extends Command {
 			if (i != playerIndex)
 			{
 				stealAmount += removeResourcesOfType(i, resourceToSteal);
-				model.getPlayers().get(i).getPlayerHand().removeResources(stealAmount, resourceToSteal);
+				//model.getPlayers().get(i).getPlayerHand().removeResources(stealAmount, resourceToSteal);
 			}
 		}
 		model.getPlayers().get(playerIndex).getPlayerHand().addResources(stealAmount, resourceToSteal);
