@@ -62,6 +62,7 @@ public class RobPlayer extends Command {
 
 
 
+
 	}
 
 	public void robPlayer() {
@@ -105,6 +106,18 @@ public class RobPlayer extends Command {
 		// Exchange resources
 		if(victimIndex != -1){
 			robPlayer();
+		} else {
+			Player p = model.getPlayers().get(playerIndex);
+
+			Line line = new Line(p.getName(), p.getName() + " didn't rob from anybody");
+			model.getLog().addLine(line);
+
+			model.updateVersionNumber();
+
+			model.getTracker().setGameStatus(GameState.playing);
+
+			ServerTranslator temp = new ServerTranslator(model);
+			return temp.translate();
 		}
 
 
