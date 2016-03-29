@@ -618,6 +618,14 @@ public class GameModel {
 
 	}
 
+	public HexLocation getRobberLoc() {
+		return robberLoc;
+	}
+
+	public void setRobberLoc(HexLocation robberLoc) {
+		this.robberLoc = robberLoc;
+	}
+
 
 
 

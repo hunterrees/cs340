@@ -100,6 +100,7 @@ public class RobPlayer extends Command {
 
 		// Change robber location
 		model.getMap().setRobberLocation(hexLoc);
+		model.setRobberLoc(hexLoc);
 
 		// Exchange resources
 		if(victimIndex != -1){

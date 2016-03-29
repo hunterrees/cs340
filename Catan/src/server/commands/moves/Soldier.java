@@ -102,6 +102,7 @@ public class Soldier extends Command {
 
 		// Change robber location
 		model.getMap().setRobberLocation(hexLoc);
+		model.setRobberLoc(hexLoc);
 
 		// Update solider number
 		p.setSoldiers(p.getSoldiers()+1);
