@@ -84,6 +84,10 @@ public class MaritimeTrade extends Command {
 		{
 			throw new ServerException("Not enough resources to make the trade");
 		}
+		if (inputResource == outputResource)
+		{
+			throw new ServerException("Cannot trade for same resource");
+		}
 		if (model.getBank().numResourceRemaining(outputResource) == 0)
 		{
 			throw new ServerException("The bank has 0 of this resource");
