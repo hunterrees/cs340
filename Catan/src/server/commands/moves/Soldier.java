@@ -111,7 +111,9 @@ public class Soldier extends Command {
 		p.setHasPlayedDevCard(true);
 
 		// Exchange resources
-		robPlayer();
+		if(victimIndex != -1) {
+			robPlayer();
+		}
 
 		// Check for largest army
 		model.updateLargestArmy();
@@ -122,8 +124,15 @@ public class Soldier extends Command {
 
 
 		model.checkVictory();
+		Line line;
 
-		Line line = new Line(p.getName(), p.getName() + " played a soldier");
+		if(victimIndex != -1) {
+			line = new Line(p.getName(), p.getName() + " played a soldier and robbed " + model.getPlayers().get(victimIndex));
+		} else {
+			line = new Line(p.getName(), p.getName() + " played a soldier and didn't rob from anyone");
+
+		}
+
 		model.getLog().addLine(line);
 
 		model.updateVersionNumber();
