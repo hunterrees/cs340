@@ -64,6 +64,7 @@ public class Bank
 			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.YEAR_OF_PLENTY));
 			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.ROAD_BUILD));
 		}
+		Collections.shuffle(bankDevelopmentCards);
 	}
 	/**
 	 * add amount of type resources to the bank
