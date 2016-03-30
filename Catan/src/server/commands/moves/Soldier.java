@@ -127,7 +127,7 @@ public class Soldier extends Command {
 		Line line;
 
 		if(victimIndex != -1) {
-			line = new Line(p.getName(), p.getName() + " played a soldier and robbed " + model.getPlayers().get(victimIndex));
+			line = new Line(p.getName(), p.getName() + " played a soldier and robbed " + model.getPlayers().get(victimIndex).getName());
 		} else {
 			line = new Line(p.getName(), p.getName() + " played a soldier and didn't rob from anyone");
 

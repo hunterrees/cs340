@@ -59,7 +59,7 @@ public class Bank
 		}
 		for(int i = 0; i < 5; i++){
 			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONUMENT));
-		}for(int i = 0; i < 5; i++){
+		}for(int i = 0; i < 2; i++){
 			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.MONOPOLY));
 			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.YEAR_OF_PLENTY));
 			bankDevelopmentCards.add(new DevelopmentCard(DevCardType.ROAD_BUILD));
