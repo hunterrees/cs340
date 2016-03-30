@@ -58,10 +58,10 @@ public class Monopoly extends Command {
 	 * 					player's hand.
 	 */
 	
-	private int removeResourcesOfType(int playerIndex, ResourceType type)
+	private int removeResourcesOfType(int playerIndex2, ResourceType type)
 	{
 		int numRemoved = 0;
-		ArrayList<ResourceCard> resources = model.getPlayers().get(playerIndex).getPlayerHand().getResourceCards();
+		ArrayList<ResourceCard> resources = model.getPlayers().get(playerIndex2).getPlayerHand().getResourceCards();
 		ArrayList<ResourceType> newList = new ArrayList<ResourceType>();
 		int wood = 0;
 		int sheep = 0;
@@ -94,7 +94,7 @@ public class Monopoly extends Command {
 		{
 			resources.add(new ResourceCard(newList.get(i)));
 		}
-		
+		model.getPlayers().get(playerIndex2).getPlayerHand().setResourceCards(resources);
 		return numRemoved;
 	}
 	
