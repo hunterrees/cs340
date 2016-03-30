@@ -116,23 +116,23 @@ public class MaritimeTradeController extends Controller implements IMaritimeTrad
 	{
 		
 		ArrayList<ResourceType> giveResources = new ArrayList<ResourceType>();
-		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.BRICK) != 0)
+		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.BRICK) != 0 && giveResource != ResourceType.BRICK)
 		{
 			giveResources.add(ResourceType.BRICK);
 		}
-		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.ORE) != 0)
+		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.ORE) != 0 && giveResource != ResourceType.ORE)
 		{
 			giveResources.add(ResourceType.ORE);
 		}
-		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.SHEEP) != 0)
+		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.SHEEP) != 0 && giveResource != ResourceType.SHEEP)
 		{
 			giveResources.add(ResourceType.SHEEP);
 		}
-		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.WHEAT) != 0)
+		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.WHEAT) != 0 && giveResource != ResourceType.WHEAT)
 		{
 			giveResources.add(ResourceType.WHEAT);
 		}
-		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.WOOD) != 0)
+		if(myManager.getModel().getBank().numResourceRemaining(ResourceType.WOOD) != 0 && giveResource != ResourceType.WOOD)
 		{
 			giveResources.add(ResourceType.WOOD);
 		}
