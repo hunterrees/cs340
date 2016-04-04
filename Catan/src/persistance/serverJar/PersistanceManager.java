@@ -1,5 +1,7 @@
 package persistance.serverJar;
 
+import java.sql.Connection;
+
 import persistance.interFaceJar.AbstractFactory;
 import persistance.interFaceJar.GameDAO;
 import persistance.interFaceJar.UserDAO;
@@ -9,10 +11,35 @@ public class PersistanceManager {
 	private AbstractFactory myAbstractFactory;
 	private UserDAO myUserDAO;
 	private GameDAO myGameDAO;
+	private Connection myConnection;
 	
-	public PersistanceManager(String persistanceType)
+	PersistanceManager myPersistanceManager;
+	
+	private PersistanceManager()
 	{
 		//set myAbstractFactory here
+	}
+	
+	/**
+	 * get Singleton instance of PersistanceManager
+	 * @return
+	 */
+	public PersistanceManager getInstance()
+	{
+		if (myPersistanceManager == null)
+		{
+			myPersistanceManager = new PersistanceManager();
+		}
+		return myPersistanceManager;
+	}
+	
+	/**
+	 * Set persistance Type for Game and User Backup
+	 * @param persistanceType
+	 */
+	public void setPersistanceType(String persistanceType)
+	{
+		//set persistanceType here
 	}
 	
 	/**
