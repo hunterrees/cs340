@@ -13,7 +13,7 @@ public class PersistanceManager {
 	private GameDAO myGameDAO;
 	private Connection myConnection;
 	
-	PersistanceManager myPersistanceManager;
+	private static PersistanceManager myPersistanceManager;
 	
 	private PersistanceManager()
 	{
@@ -24,7 +24,7 @@ public class PersistanceManager {
 	 * get Singleton instance of PersistanceManager
 	 * @return
 	 */
-	public PersistanceManager getInstance()
+	public static PersistanceManager getInstance()
 	{
 		if (myPersistanceManager == null)
 		{
