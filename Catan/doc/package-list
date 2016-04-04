@@ -25,6 +25,10 @@ client.translators.moves
 client.translators.user
 client.turntracker
 client.utils
+persistance.dbJar
+persistance.fileJar
+persistance.interFaceJar
+persistance.serverJar
 server
 server.commands
 server.commands.game
