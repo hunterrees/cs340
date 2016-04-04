@@ -54,4 +54,9 @@ public class PersistanceManager {
 	{
 		
 	}
+	
+	public void registerPlugin(String thingToRegister)
+	{
+		
+	}
 }
