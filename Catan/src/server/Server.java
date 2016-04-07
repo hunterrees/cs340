@@ -1,7 +1,14 @@
 package server;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sun.net.httpserver.HttpServer;
 import java.net.*;
+
+import org.apache.commons.io.FileUtils;
+
 import java.io.*;
 
 import server.facades.*;
@@ -80,11 +87,16 @@ public class Server {
 	/**
 	 * Starts the server running
 	 * @param args command line argument for port to run on
+	 * @throws IOException 
 	 */
-	public static void main(String args[]){
+	public static void main(String args[]) throws IOException{
 		if(args.length > 0){
-			PORT = Integer.parseInt(args[0]);
-			System.out.println("running");
+			int numCommands = Integer.parseInt(args[1]);
+			String persistance = args[0];
+			PersistanceManager.getInstance().setCommandNumber(numCommands);
+			if(args.length == 3 && args[2].equals("wipe")){
+				PersistanceManager.getInstance().cleanUp();
+			}
 		}
 		new Server(false).run();
 	}
