@@ -1,5 +1,6 @@
 package server.commands.games;
 
+import server.PersistanceManager;
 import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
@@ -548,6 +549,7 @@ public class CreateGame extends Command{
 		//ServerTranslator temp = new ServerTranslator(model);
 		//return temp.translate();
 		int id = ServerManager.getInstance().createGame(model);
+		PersistanceManager.getInstance().addGame(id);
 		return createJsonString(id);
 	}
 

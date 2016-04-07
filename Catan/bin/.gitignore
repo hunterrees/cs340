@@ -1,4 +1,8 @@
-/shared/
-/server/
-/phase3Tests/
+/canDoTests/
+/client/
 /persistance/
+/phase1tests/
+/phase3Tests/
+/server/
+/serverTests/
+/shared/

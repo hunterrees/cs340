@@ -1,17 +1,21 @@
 package persistance.dbJar;
 
 import persistance.interFaceJar.AbstractFactory;
+import persistance.interFaceJar.GameDAO;
+import persistance.interFaceJar.UserDAO;
 
 public class DBAbstractFactory implements AbstractFactory {
 
 	@Override
-	public void createUserDAO() {
+	public UserDAO createUserDAO() {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void createGameDAO() {
+	public GameDAO createGameDAO() {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

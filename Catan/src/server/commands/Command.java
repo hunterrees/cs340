@@ -1,11 +1,13 @@
 package server.commands;
 
+import java.io.Serializable;
+
 import client.server.ServerException;
 import server.ServerManager;
 import shared.definitions.GameState;
 import shared.model.GameModel;
 
-public abstract class Command {
+public abstract class Command implements Serializable{
 	
 	/**
 	 * Contains the current model so that execute can make changes
@@ -49,6 +51,10 @@ public abstract class Command {
 
 	public GameModel getModel() {
 		return model;
+	}
+
+	public int getGameID() {
+		return gameID;
 	}
 
 	/**

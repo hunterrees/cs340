@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import persistance.interFaceJar.DAOException;
 import persistance.interFaceJar.GameDAO;
-import persistance.serverJar.PersistanceManager;
+import server.PersistanceManager;
 import server.User;
 import server.commands.Command;
 import shared.model.GameModel;

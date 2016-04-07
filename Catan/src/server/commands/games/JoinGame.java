@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import client.server.ServerException;
+import server.PersistanceManager;
 import server.ServerManager;
 import server.User;
 import server.commands.Command;
@@ -59,11 +60,13 @@ public class JoinGame extends Command{
 		for(int i = 0; i < game.getPlayers().size(); i++){
 			if(game.getPlayers().get(i).getName().equals(user.getName())){
 				game.getPlayers().get(i).setPlayerColor(catanColor);
+				PersistanceManager.getInstance().updateGame(gameID);
 				return gameID;
 			}
 		}
 		if(game.getPlayers().size() < 4){
 			game.getPlayers().add(new Player(user.getplayerID(), catanColor, user.getName()));
+			PersistanceManager.getInstance().updateGame(gameID);
 			return gameID;
 		}
 			throw new ServerException("Game is full and user wasn't in gamea already");

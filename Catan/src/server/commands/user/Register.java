@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import client.server.ServerException;
+import server.PersistanceManager;
 import server.ServerManager;
 import server.User;
 import server.commands.Command;
@@ -53,6 +54,7 @@ public class Register extends Command{
 		}
 		user = new User(username, password, ServerManager.getInstance().numUsers());
 		ServerManager.getInstance().addUser(user);
+		PersistanceManager.getInstance().addUser(user);
 		return user.generateCookie();
 	}
 

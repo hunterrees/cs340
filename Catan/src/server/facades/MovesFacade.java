@@ -1,6 +1,7 @@
 package server.facades;
 
 import client.server.ServerException;
+import server.PersistanceManager;
 import server.commands.moves.*;
 
 public class MovesFacade implements MovesFacadeInterface{
@@ -32,103 +33,137 @@ public class MovesFacade implements MovesFacadeInterface{
 	@Override
 	public String sendChat(String json, int gameID) throws ServerException {
 		SendChat sendChatCommand = new SendChat(gameID, json);
-		return (String) sendChatCommand.execute();
+		String result = (String) sendChatCommand.execute();
+		PersistanceManager.getInstance().addCommand(sendChatCommand);
+		return result;
 	}
 
 	@Override
 	public String rollNumber(String json, int gameID) throws ServerException {
 		RollNumber rollNumberCommand = new RollNumber(gameID, json);
-		return (String) rollNumberCommand.execute();
+		String result = (String) rollNumberCommand.execute();
+		PersistanceManager.getInstance().addCommand(rollNumberCommand);
+		return result;
 	}
 
 	@Override
 	public String robPlayer(String json, int gameID) throws ServerException {
 		RobPlayer robPlayerCommand = new RobPlayer(gameID, json);
-		return (String) robPlayerCommand.execute();
+		String result = (String) robPlayerCommand.execute();
+		PersistanceManager.getInstance().addCommand(robPlayerCommand);
+		return result;
 	}
 
 	@Override
 	public String finishTurn(String json, int gameID) throws ServerException {
 		FinishTurn finishTurnCommand = new FinishTurn(gameID, json);
-		return (String) finishTurnCommand.execute();
+		String result = (String) finishTurnCommand.execute();
+		PersistanceManager.getInstance().addCommand(finishTurnCommand);
+		return result;
 	}
 
 	@Override
 	public String buyDevCard(String json, int gameID) throws ServerException {
 		BuyDevCard buyDevCardCommand = new BuyDevCard(gameID, json);
-		return (String) buyDevCardCommand.execute();
+		String result = (String) buyDevCardCommand.execute();
+		PersistanceManager.getInstance().addCommand(buyDevCardCommand);
+		return result;
 	}
 
 	@Override
 	public String yearOfPlenty(String json, int gameID) throws ServerException {
 		YearOfPlenty yearOfPlentyCommand = new YearOfPlenty(gameID, json);
-		return (String) yearOfPlentyCommand.execute();
+		String result = (String) yearOfPlentyCommand.execute();
+		PersistanceManager.getInstance().addCommand(yearOfPlentyCommand);
+		return result;
 	}
 
 	@Override
 	public String roadBuilding(String json, int gameID) throws ServerException {
 		RoadBuilding roadBuildingCommand = new RoadBuilding(gameID, json);
-		return (String) roadBuildingCommand.execute();
+		String result = (String) roadBuildingCommand.execute();
+		PersistanceManager.getInstance().addCommand(roadBuildingCommand);
+		return result;
 	}
 
 	@Override
 	public String soldier(String json, int gameID) throws ServerException {
 		Soldier soldierCommand = new Soldier(gameID, json);
-		return (String) soldierCommand.execute();
+		String result = (String) soldierCommand.execute();
+		PersistanceManager.getInstance().addCommand(soldierCommand);
+		return result;
 	}
 
 	@Override
 	public String monopoly(String json, int gameID) throws ServerException {
 		Monopoly monopolyCommand = new Monopoly(gameID, json);
-		return (String) monopolyCommand.execute();
+		String result = (String) monopolyCommand.execute();
+		PersistanceManager.getInstance().addCommand(monopolyCommand);
+		return result;
 	}
 
 	@Override
 	public String monument(String json, int gameID) throws ServerException {
 		Monument monumentCommand = new Monument(gameID, json);
-		return (String) monumentCommand.execute();
+		String result = (String) monumentCommand.execute();
+		PersistanceManager.getInstance().addCommand(monumentCommand);
+		return result;
 	}
 
 	@Override
 	public String buildRoad(String json, int gameID) throws ServerException {
 		BuildRoad buildRoadCommand = new BuildRoad(gameID, json);
-		return (String) buildRoadCommand.execute();
+		String result = (String) buildRoadCommand.execute();
+		PersistanceManager.getInstance().addCommand(buildRoadCommand);
+		return result;
 	}
 
 	@Override
 	public String buildSettlement(String json, int gameID) throws ServerException {
 		BuildSettlement buildSettlementCommand = new BuildSettlement(gameID, json);
-		return (String) buildSettlementCommand.execute();
+		String result = (String) buildSettlementCommand.execute();
+		PersistanceManager.getInstance().addCommand(buildSettlementCommand);
+		return result;
 	}
 
 	@Override
 	public String buildCity(String json, int gameID) throws ServerException {
 		BuildCity buildCityCommand = new BuildCity(gameID, json);
-		return (String) buildCityCommand.execute();
+		String result = (String) buildCityCommand.execute();
+		PersistanceManager.getInstance().addCommand(buildCityCommand);
+		return result;
 	}
 
 	@Override
 	public String offerTrade(String json, int gameID) throws ServerException {
 		OfferTrade offerTradeCommand = new OfferTrade(gameID, json);
-		return (String) offerTradeCommand.execute();
+		String result = (String) offerTradeCommand.execute();
+		PersistanceManager.getInstance().addCommand(offerTradeCommand);
+		return result;
 	}
 
 	@Override
 	public String acceptTrade(String json, int gameID) throws ServerException {
 		AcceptTrade acceptTradeCommand = new AcceptTrade(gameID, json);
-		return (String) acceptTradeCommand.execute();
+		String result = (String) acceptTradeCommand.execute();
+		PersistanceManager.getInstance().addCommand(acceptTradeCommand);
+		return result;
 	}
 
 	@Override
 	public String maritimeTrade(String json, int gameID) throws ServerException {
 		MaritimeTrade maritimeTradeCommand = new MaritimeTrade(gameID, json);
-		return (String) maritimeTradeCommand.execute();
+		String result = (String) maritimeTradeCommand.execute();
+		PersistanceManager.getInstance().addCommand(maritimeTradeCommand);
+		return result;
 	}
 	
 	@Override
 	public String discardCards(String json, int gameID) throws ServerException {
 		DiscardCards discardCardsCommand = new DiscardCards(gameID, json);
-		return (String) discardCardsCommand.execute();
+		String result = (String) discardCardsCommand.execute();
+		PersistanceManager.getInstance().addCommand(discardCardsCommand);
+		return result;
 	}
 
 

@@ -199,4 +199,12 @@ public class ServerManager {
 	public ArrayList<User> getUsers() {
 		return users;
 	}
+
+	public void setGames(ArrayList<GameModel> games) {
+		this.games = games;
+	}
+
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
+	}
 }

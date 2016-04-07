@@ -2,6 +2,7 @@ package persistance.interFaceJar;
 
 import java.util.ArrayList;
 
+import server.CommandList;
 import shared.model.GameModel;
 
 public interface GameDAO {
@@ -22,10 +23,10 @@ public interface GameDAO {
 	/**
 	 * adds a specified command to storage
 	 */
-	public void addCommands(int gameID, String command) throws DAOException;
+	public void addCommands(CommandList command) throws DAOException;
 	/**
 	 * retrives and returns all commands
 	 * @return
 	 */
-	public ArrayList<String> getCommands(int gameID) throws DAOException;
+	public CommandList getCommands(int gameID) throws DAOException;
 }

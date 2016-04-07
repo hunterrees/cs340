@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 import persistance.interFaceJar.DAOException;
 import persistance.interFaceJar.UserDAO;
-import persistance.serverJar.PersistanceManager;
+import server.PersistanceManager;
 import server.User;
 
 public class DBUserDAO implements UserDAO {

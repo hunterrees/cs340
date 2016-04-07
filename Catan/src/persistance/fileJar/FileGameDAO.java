@@ -3,6 +3,7 @@ package persistance.fileJar;
 import java.util.ArrayList;
 
 import persistance.interFaceJar.GameDAO;
+import server.CommandList;
 import shared.model.GameModel;
 
 public class FileGameDAO implements GameDAO {
@@ -26,13 +27,13 @@ public class FileGameDAO implements GameDAO {
 	}
 
 	@Override
-	public void addCommands(int gameID, String command) {
+	public void addCommands(CommandList command) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public ArrayList<String> getCommands(int gameID) {
+	public CommandList getCommands(int gameID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
