@@ -27,7 +27,7 @@ public class FileGameDAO implements GameDAO {
 	}
 
 	@Override
-	public void addCommands(CommandList command) {
+	public void addCommands(int gameID, CommandList command) {
 		// TODO Auto-generated method stub
 		
 	}

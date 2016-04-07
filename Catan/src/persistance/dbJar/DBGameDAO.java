@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import persistance.interFaceJar.DAOException;
 import persistance.interFaceJar.GameDAO;
+import server.CommandList;
 import server.PersistanceManager;
 import server.User;
 import server.commands.Command;
@@ -123,7 +124,7 @@ public class DBGameDAO implements GameDAO {
 	}
 
 	@Override
-	public void addCommands(int gameID, ArrayList<Command> list) throws DAOException {// needs to pass in an arraylist of commands
+	public void addCommands(int gameID, CommandList list) throws DAOException {// needs to pass in an arraylist of commands
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
@@ -163,11 +164,11 @@ public class DBGameDAO implements GameDAO {
 	}
 
 	@Override
-	public ArrayList<Command> getCommands(int gameID) {
+	public CommandList getCommands(int gameID) {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
-		ArrayList<Command> list;
+		CommandList list = null;
 		try {
 			String query = "Select * from Field where fieldid = ?";
 			stmt = connection.prepareStatement(query);
@@ -180,7 +181,7 @@ public class DBGameDAO implements GameDAO {
 			{
 
 				Blob blob = keyRS.getBlob("Commandlist");
-				list = (ArrayList<Command>)blob;
+				list = (CommandList) blob;
 
 			}
 		} catch (SQLException e)

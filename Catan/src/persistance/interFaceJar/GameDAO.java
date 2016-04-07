@@ -23,7 +23,7 @@ public interface GameDAO {
 	/**
 	 * adds a specified command to storage
 	 */
-	public void addCommands(CommandList command) throws DAOException;
+	public void addCommands(int gameID, CommandList command) throws DAOException;
 	/**
 	 * retrives and returns all commands
 	 * @return
