@@ -79,7 +79,7 @@ public class DBGameDAO implements GameDAO {
 				String name = keyRS.getString("Name");
 				String password = keyRS.getString("Password");
 
-				GameModel game;// = new GameModel(map, bank,)
+				GameModel game = null;// = new GameModel(map, bank,)
 				games.add(game);
 			}
 		} catch (SQLException e) {
