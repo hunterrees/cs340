@@ -1,5 +1,6 @@
 package persistance.dbJar;
 
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,7 +37,22 @@ public class DBGameDAO implements GameDAO {
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			stmt.setInt(1, modelToAdd.getVersion());
 			stmt.setString(2, modelToAdd.getTitle());
-			stmt.setBlob(3, (Blob) modelToAdd);
+			//stmt.setBlob(3, (Blob) modelToAdd);
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			ObjectOutput out = null;
+			Blob blob = null;
+			try {
+				out = new ObjectOutputStream(bos);
+				out.writeObject(modelToAdd);
+
+				byte[] yourBytes = bos.toByteArray();
+
+				blob = connection.createBlob();
+				blob.setBytes(1, yourBytes);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			stmt.setBlob(3, blob);
 
 
 			if(stmt.executeUpdate() == 1) {
@@ -81,8 +97,11 @@ public class DBGameDAO implements GameDAO {
 			{
 				int id = keyRS.getInt("ID");
 				int name = keyRS.getInt("Name");
-				Blob model = keyRS.getBlob("Model");
 
+				Blob model = keyRS.getBlob("Model");
+				byte[] modelAsBytes = model.getBytes(1, (int)model.length());
+				ByteArrayInputStream bais = new ByteArrayInputStream(modelAsBytes);
+				// Add more stuff here
 
 
 				GameModel game = (GameModel)model;
