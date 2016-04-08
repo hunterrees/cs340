@@ -21,7 +21,7 @@ public class DBGameDAO implements GameDAO {
 	}
 
 	@Override
-	public void addGame(GameModel modelToAdd) throws DAOException {
+	public void addGame(GameModel modelToAdd, int gameID) throws DAOException {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;

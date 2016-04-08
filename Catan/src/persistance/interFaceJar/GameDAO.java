@@ -10,7 +10,7 @@ public interface GameDAO {
 	/**
 	 * Adds a game to storage
 	 */
-	public void addGame(GameModel modelToAdd) throws DAOException;
+	public void addGame(GameModel modelToAdd, int GameID) throws DAOException;
 	/**
 	 * Retrieves all games from storage
 	 * @return

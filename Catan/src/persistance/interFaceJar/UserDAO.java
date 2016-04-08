@@ -16,5 +16,5 @@ public interface UserDAO {
 	/**
 	 * Adds a single user to Persistance
 	 */
-	public void addUser(User userToAdd) throws DAOException, SQLException;
+	public void addUser(User userToAdd, int UserID) throws DAOException, SQLException;
 }

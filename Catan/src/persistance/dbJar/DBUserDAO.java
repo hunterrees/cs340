@@ -55,7 +55,7 @@ public class DBUserDAO implements UserDAO {
 	}
 
 	@Override
-	public void addUser(User userToAdd) throws SQLException, DAOException {
+	public void addUser(User userToAdd, int gameID) throws SQLException, DAOException {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
