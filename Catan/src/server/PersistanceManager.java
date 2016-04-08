@@ -1,5 +1,6 @@
 package server;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -67,8 +68,8 @@ public class PersistanceManager {
 				commands.get(command.getGameID()).addCommand(command);
 				gameDAO.addCommands(command.getGameID(), commands.get(command.getGameID()));
 			}else{
+				updateGame(command.getGameID());
 				commands.get(command.getGameID()).clear();
-				gameDAO.updateGame(command.getGameID(), ServerManager.getInstance().getGame(command.getGameID()));
 			}
 			endTransaction(true);
 		}catch(Exception e){
@@ -137,11 +138,35 @@ public class PersistanceManager {
 	}
 	
 	public void cleanUp(){
-		//determine which clean up function to call
+		if(abstractFactory.getType().equals("file")){
+			FilecleanUp();
+		}else{
+			DBcleanUp();
+		}
 	}
 	
 	public void FilecleanUp(){
-		//delete all files
+		File file = new File("fileDB");
+		deleteDirectory(file);
+		new File("fileDB").mkdir();
+		new File("fileDB/users").mkdir();
+		new File("fileDB/games").mkdir();
+		new File("fileDB/commands").mkdir();
+	}
+	
+	private boolean deleteDirectory(File path){
+		if(path.exists()){
+			File[] files = path.listFiles();
+		    for(int i=0; i<files.length; i++){
+		    	if(files[i].isDirectory()){
+		    		deleteDirectory(files[i]);
+		        }
+		        else{
+		        	files[i].delete();
+		        }
+		    }
+		}
+		return(path.delete());
 	}
 	
 	/**

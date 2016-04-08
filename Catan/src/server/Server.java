@@ -3,7 +3,6 @@ package server;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.sun.net.httpserver.HttpServer;
 import java.net.*;
 
@@ -88,14 +87,45 @@ public class Server {
 	 * Starts the server running
 	 * @param args command line argument for port to run on
 	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String args[]) throws IOException{
+	public static void main(String args[]) throws IOException, ClassNotFoundException{
 		if(args.length > 0){
 			int numCommands = Integer.parseInt(args[1]);
-			String persistance = args[0];
 			PersistanceManager.getInstance().setCommandNumber(numCommands);
+			String persistance = args[0];
 			if(args.length == 3 && args[2].equals("wipe")){
 				PersistanceManager.getInstance().cleanUp();
+			}
+			
+			File file = new File("jars.config");
+			//Why can't I find this class?
+			String jsonText = FileUtils.readFileToString(file);
+			Gson gson = new Gson();
+			JsonObject root = null;
+			try{
+				root = gson.fromJson(jsonText, JsonObject.class);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			JsonArray jars = root.get("jars").getAsJsonArray();
+			for(int i = 0; i < jars.size(); i++){
+				JsonObject jar = (JsonObject) jars.get(i);
+				String name = jar.get("key").getAsJsonPrimitive().getAsString();
+				if(name.equals(persistance)){
+					System.out.println("Match " + name);
+					File jarFile = new File("jars/" + jar.get("jar").getAsJsonPrimitive().getAsString());
+					URL url = jarFile.toURI().toURL();
+					URL[] urls = new URL[]{url};
+					
+					ClassLoader loader = new URLClassLoader(urls);
+					Class c = loader.loadClass(jar.get("factory").getAsJsonPrimitive().getAsString());
+					System.out.println(c.getName());
+					//Do I have the right path to the jar?
+					//set abstract factory properly
+					//do I need to the same for the DAOs?
+				}
 			}
 		}
 		new Server(false).run();

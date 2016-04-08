@@ -20,4 +20,7 @@ public class DBAbstractFactory implements AbstractFactory {
 		
 	}
 
+	public String getType(){
+		return "sqlite";
+	}
 }

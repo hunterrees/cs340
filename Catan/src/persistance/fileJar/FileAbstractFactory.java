@@ -17,5 +17,9 @@ public class FileAbstractFactory implements AbstractFactory {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public String getType(){
+		return "file";
+	}
 
 }

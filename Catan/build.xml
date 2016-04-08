@@ -155,7 +155,12 @@
 	<target name="our-server" depends="package" description="compiles, packages, and runs the student server">
 		<java jar="${java.dist}/catan-server.jar" dir="${java.dist}" fork="yes">
 			<sysproperty key="com.sun.management.jmxremote" value=""/>
-			<arg value = "${port}"/>
+			<classpath>
+					<pathelement location="{java.lib.commons-io-2.4.jar}"/>
+			</classpath>
+			<arg value = "${type}"/>
+			<arg value = "${commands}"/>
+			<arg value = "${wipe}"/>
 			<assertions>
 				<enable/>
 			</assertions>

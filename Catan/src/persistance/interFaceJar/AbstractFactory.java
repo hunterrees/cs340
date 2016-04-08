@@ -12,4 +12,6 @@ public interface AbstractFactory {
 	 */
 	public GameDAO createGameDAO();
 	
+	public String getType();
+	
 }
