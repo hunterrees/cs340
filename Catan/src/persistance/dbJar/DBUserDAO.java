@@ -29,7 +29,7 @@ public class DBUserDAO implements UserDAO {
 		ResultSet keyRS = null;
 		try {
 			String query = "select * from User";
-			stmt = connection.prepareStatement(query);
+			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 
 			keyRS = stmt.executeQuery();
 			//While there are rows
@@ -67,14 +67,14 @@ public class DBUserDAO implements UserDAO {
 		int id = -1;
 		try {
 			String query = "insert into User (PlayerID, Name, Password) values (?, ?, ?)";
-			stmt = connection.prepareStatement(query);
+			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			stmt.setInt(1, userToAdd.getplayerID());
 			stmt.setString(2, userToAdd.getName());
 			stmt.setString(3, userToAdd.getPassword());
 
 
 			if(stmt.executeUpdate() == 1) {
-				keyStmt = connection.createStatement();
+				keyStmt = PersistanceManager.getInstance().getConnection().createStatement();
 				keyRS = (keyStmt).executeQuery("select last_insert_rowid()");
 				keyRS.next();
 			}
