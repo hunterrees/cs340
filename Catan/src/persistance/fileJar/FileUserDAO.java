@@ -21,7 +21,7 @@ public class FileUserDAO implements UserDAO {
 		ArrayList<User> users = new ArrayList<User>();
 		try
 		 {
-			File myDirectory = new File("Users");
+			File myDirectory = new File("fileDB/users");
 			for (File file: myDirectory.listFiles())
 				{
 				FileInputStream fileIn = new FileInputStream("fileDB/users/" + file.getName());

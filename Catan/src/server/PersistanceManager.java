@@ -21,7 +21,7 @@ public class PersistanceManager {
 	private GameDAO gameDAO;
 	private Connection connection;
 	private ArrayList<CommandList> commands;
-	public static String DATABASE_URL = "";
+	public static String DATABASE_URL = "jdbc:sqlite:CatanDatabase.sql";
 	private int numCommands;
 	
 	private static PersistanceManager myPersistanceManager;
@@ -29,11 +29,19 @@ public class PersistanceManager {
 	private PersistanceManager()
 	{
 		commands = new ArrayList<CommandList>();
+		try {
+			final String driver = "org.sqlite.JDBC";
+			Class.forName(driver);
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * get Singleton instance of PersistanceManager
 	 * @return
+	 * @throws ClassNotFoundException 
 	 */
 	public static PersistanceManager getInstance()
 	{
@@ -133,6 +141,7 @@ public class PersistanceManager {
 			}
 			endTransaction(true);
 		}catch(Exception e){
+			e.printStackTrace();
 			endTransaction(false);
 		}
 	}

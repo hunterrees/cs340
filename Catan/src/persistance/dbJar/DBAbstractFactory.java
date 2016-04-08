@@ -8,12 +8,22 @@ public class DBAbstractFactory implements AbstractFactory {
 
 	@Override
 	public UserDAO createUserDAO() {
-		return new DBUserDAO();
+		try{
+			return new DBUserDAO();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public GameDAO createGameDAO() {
-		return new DBGameDAO();
+		try{
+			return new DBGameDAO();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String getType(){

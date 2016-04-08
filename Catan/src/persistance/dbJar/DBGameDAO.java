@@ -17,7 +17,11 @@ public class DBGameDAO implements GameDAO {
 	Connection connection;
 
 	public DBGameDAO() {
-		connection = PersistanceManager.getInstance().getConnection();
+		try{
+			connection = PersistanceManager.getInstance().getConnection();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -13,8 +13,12 @@ import server.User;
 public class DBUserDAO implements UserDAO {
 
 	Connection connection;
-	public DBUserDAO() {
-		connection = PersistanceManager.getInstance().getConnection();
+	public DBUserDAO(){
+		try{
+			connection = PersistanceManager.getInstance().getConnection();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override

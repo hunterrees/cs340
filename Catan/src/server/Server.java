@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpServer;
+
+import persistance.dbJar.DBAbstractFactory;
+import persistance.fileJar.FileAbstractFactory;
+
 import java.net.*;
 
 import org.apache.commons.io.FileUtils;
@@ -98,7 +102,7 @@ public class Server {
 				PersistanceManager.getInstance().cleanUp();
 			}
 			
-			File file = new File("jars.config");
+			/*File file = new File("jars.config");
 			//Why can't I find this class?
 			String jsonText = FileUtils.readFileToString(file);
 			Gson gson = new Gson();
@@ -126,7 +130,9 @@ public class Server {
 					//set abstract factory properly
 					//do I need to the same for the DAOs?
 				}
-			}
+			}*/
+			PersistanceManager.getInstance().setPersistanceType(new FileAbstractFactory());
+			PersistanceManager.getInstance().startUp();
 		}
 		new Server(false).run();
 	}
