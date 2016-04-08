@@ -1,6 +1,8 @@
 package shared.model;
 
-public class Line {
+import java.io.Serializable;
+
+public class Line implements Serializable {
 
 	private String message;
 	private String source;

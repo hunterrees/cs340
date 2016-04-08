@@ -1,5 +1,6 @@
 package shared.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,7 +8,7 @@ import shared.*;
 import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 // test
-public class Bank 
+public class Bank implements Serializable
 {
 	/**
 	 * Deck of development cards

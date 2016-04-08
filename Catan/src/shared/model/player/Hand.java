@@ -1,4 +1,5 @@
 package shared.model.player;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import shared.DevelopmentCard;
@@ -6,7 +7,7 @@ import shared.ResourceCard;
 import shared.definitions.DevCardType;
 import shared.definitions.ResourceType;
 
-public class Hand
+public class Hand implements Serializable
 {
 	/**
 	 * Development cards owned by player

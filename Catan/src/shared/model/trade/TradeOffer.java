@@ -1,10 +1,11 @@
 package shared.model.trade;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import shared.definitions.ResourceType;
 
-public class TradeOffer 
+public class TradeOffer implements Serializable
 {
 	//A player attempts to make a domestic Trade. The resource that they are trying to 
 	//trade is checked by the game model. Then, the request is called on the server.

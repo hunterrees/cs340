@@ -1,8 +1,10 @@
 package shared.model;
 
+import java.io.Serializable;
+
 import shared.definitions.GameState;
 
-public class TurnTracker 
+public class TurnTracker implements Serializable
 {
 	int longestRoadplayerID;
 	int largestArmyPlayerID;

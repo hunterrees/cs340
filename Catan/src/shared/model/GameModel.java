@@ -1,5 +1,6 @@
 package shared.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import shared.ResourceCard;
@@ -15,7 +16,7 @@ import shared.model.map.Map;
 import shared.model.player.Player;
 import shared.model.trade.TradeOffer;
 
-public class GameModel {
+public class GameModel implements Serializable {
 	private Map map;
 	private Bank bank;
 	private ArrayList<Player> players;

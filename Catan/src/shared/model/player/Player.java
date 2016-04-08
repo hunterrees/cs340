@@ -1,4 +1,5 @@
 package shared.model.player;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import shared.Piece;
@@ -18,7 +19,7 @@ import shared.model.map.Port;
  * brian
  */
 
-public class Player 
+public class Player implements Serializable
 {
 	/**
 	 * roads, settlements and cities owned by player
