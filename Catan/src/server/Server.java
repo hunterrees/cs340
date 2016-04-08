@@ -131,7 +131,7 @@ public class Server {
 					//do I need to the same for the DAOs?
 				}
 			}*/
-			PersistanceManager.getInstance().setPersistanceType(new FileAbstractFactory());
+			PersistanceManager.getInstance().setPersistanceType(new DBAbstractFactory());
 			PersistanceManager.getInstance().startUp();
 		}
 		new Server(false).run();
