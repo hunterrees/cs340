@@ -1,6 +1,8 @@
 package server;
 
-public class GameInfo {
+import java.io.Serializable;
+
+public class GameInfo implements Serializable{
 
 	private String title;
 	private int id;

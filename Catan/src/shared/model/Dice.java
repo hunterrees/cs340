@@ -1,5 +1,6 @@
 package shared.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Random;
  * Static class used by model to roll dice on each turn
  *
  */
-public class Dice {
+public class Dice implements Serializable{
 	
 	public static Dice DICE = new Dice();
 

@@ -1,5 +1,7 @@
 package shared;
 
+import java.io.Serializable;
+
 import client.gameManager.GameManager;
 import shared.definitions.CatanColor;
 import shared.definitions.PieceType;
@@ -9,7 +11,7 @@ import shared.model.map.Vertex;
 
 
 //Add player ID
-public class Piece 
+public class Piece implements Serializable
 {
 	/**
 	 * enum type of piece

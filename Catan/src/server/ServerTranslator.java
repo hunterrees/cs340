@@ -1,5 +1,6 @@
 package server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -23,7 +24,7 @@ import shared.model.map.*;
 import shared.model.player.*;
 import shared.model.trade.TradeOffer;
 
-public class ServerTranslator {
+public class ServerTranslator implements Serializable{
 	
 	private GameModel model;
 	

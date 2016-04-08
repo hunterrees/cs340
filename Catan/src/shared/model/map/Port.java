@@ -1,5 +1,6 @@
 package shared.model.map;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 import shared.definitions.PortType;
@@ -7,7 +8,7 @@ import shared.locations.VertexLocation;
 
 
 
-public class Port {
+public class Port implements Serializable {
 
 	private PortType type;
 	private VertexLocation loc;

@@ -1,8 +1,10 @@
 package server;
 
+import java.io.Serializable;
+
 import shared.definitions.CatanColor;
 
-public class PlayerInfo {
+public class PlayerInfo implements Serializable{
 	private int id;
 	private String name;
 	private String color;

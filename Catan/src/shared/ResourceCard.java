@@ -1,8 +1,10 @@
 package shared;
 
+import java.io.Serializable;
+
 import shared.definitions.ResourceType;
 
-public class ResourceCard 
+public class ResourceCard implements Serializable
 {
 	/**
 	 * enum type of resource

@@ -1,8 +1,10 @@
 package shared;
 
+import java.io.Serializable;
+
 import shared.definitions.DevCardType;
 
-public class DevelopmentCard 
+public class DevelopmentCard implements Serializable
 {
 	/**
 	 * enum type of development card

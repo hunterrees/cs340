@@ -1,9 +1,11 @@
 package shared.model.map;
 
+import java.io.Serializable;
+
 import shared.Piece;
 import shared.locations.EdgeLocation;
 
-public class Edge {
+public class Edge implements Serializable{
 
 	private Piece piece;
 	private EdgeLocation location;

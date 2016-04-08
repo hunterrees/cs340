@@ -1,9 +1,11 @@
 package shared.model.map;
 
+import java.io.Serializable;
+
 import shared.Piece;
 import shared.locations.VertexLocation;
 
-public class Vertex {
+public class Vertex implements Serializable{
 	
 	private Piece piece;
 	private VertexLocation location;

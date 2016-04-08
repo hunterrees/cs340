@@ -1,5 +1,6 @@
 package shared.model.map;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import shared.Piece;
@@ -8,7 +9,7 @@ import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 
-public class TerrainHex {
+public class TerrainHex implements Serializable{
 
 	
 	
