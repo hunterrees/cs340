@@ -80,11 +80,11 @@ public class PersistanceManager {
 	/**
 	 * Calls DAO to persist User
 	 */
-	public void addUser(User user)
+	public void addUser(User user, int userID)
 	{
 		startTransaction();
 		try{
-			userDAO.addUser(user);
+			userDAO.addUser(user, userID);
 			endTransaction(true);
 		}catch(Exception e){
 			endTransaction(false);
@@ -99,7 +99,7 @@ public class PersistanceManager {
 		startTransaction();
 		try{
 			commands.add(new CommandList());
-			gameDAO.addGame(ServerManager.getInstance().getGame(id));
+			gameDAO.addGame(ServerManager.getInstance().getGame(id), id);
 			endTransaction(true);
 		}catch(Exception e){
 			endTransaction(false);
