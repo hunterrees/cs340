@@ -143,7 +143,7 @@ public class FileGameDAO implements GameDAO {
 	@Override
 	public CommandList getCommands(int gameID) {
 		// TODO Auto-generated method stub
-		CommandList myCommands = null;
+		CommandList myCommands = new CommandList();
 		try
 		 {
 			File myDirectory = new File("fileDB/games");
@@ -173,7 +173,7 @@ public class FileGameDAO implements GameDAO {
 	     }catch(IOException i)
 	     {
 	        i.printStackTrace();
-	        return null;
+	        return myCommands;
 	     }
 		return myCommands;
 	}
