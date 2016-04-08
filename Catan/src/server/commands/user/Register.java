@@ -54,7 +54,7 @@ public class Register extends Command{
 		}
 		user = new User(username, password, ServerManager.getInstance().numUsers());
 		ServerManager.getInstance().addUser(user);
-		PersistanceManager.getInstance().addUser(user, user.getplayerID();
+		PersistanceManager.getInstance().addUser(user, user.getplayerID());
 		return user.generateCookie();
 	}
 
