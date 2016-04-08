@@ -21,7 +21,7 @@ public class PersistanceManager {
 	private GameDAO gameDAO;
 	private Connection connection;
 	private ArrayList<CommandList> commands;
-	public static String DATABASE_URL = "jdbc:sqlite:CatanDatabase.sql";
+	public static String DATABASE_URL = "jdbc:sqlite:CatanDatabase.sqlite";
 	private int numCommands;
 	
 	private static PersistanceManager myPersistanceManager;
