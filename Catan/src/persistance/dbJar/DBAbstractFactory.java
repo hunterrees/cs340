@@ -8,16 +8,12 @@ public class DBAbstractFactory implements AbstractFactory {
 
 	@Override
 	public UserDAO createUserDAO() {
-		return null;
-		// TODO Auto-generated method stub
-		
+		return new DBUserDAO();
 	}
 
 	@Override
 	public GameDAO createGameDAO() {
-		return null;
-		// TODO Auto-generated method stub
-		
+		return new DBGameDAO();
 	}
 
 	public String getType(){
