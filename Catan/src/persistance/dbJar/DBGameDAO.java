@@ -28,6 +28,7 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public void addGame(GameModel modelToAdd, int gameID) throws DAOException {
 		// TODO Auto-generated method stub
+		System.out.println("add game called");
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
 		Statement keyStmt = null;
@@ -45,19 +46,25 @@ public class DBGameDAO implements GameDAO {
 			ByteArrayInputStream bais = null;
 			byte[] yourBytes = new byte[0];
 
+			System.out.println("about to try");
 			try {
 				out = new ObjectOutputStream(bos);
 				out.writeObject(modelToAdd);
-
+				System.out.println("1");
 				yourBytes = bos.toByteArray();
 				bais = new ByteArrayInputStream(yourBytes);
-				blob = connection.createBlob();
+				System.out.println("2");
+				//blob = PersistanceManager.getInstance().getConnection().createBlob();
 				//blob.setBytes(1, yourBytes);
+				System.out.println("done trying");
 			} catch (IOException e) {
 				e.printStackTrace();
+				System.out.println("catch");
 			}
-			stmt.setBinaryStream(3, bais, yourBytes.length);
-
+			stmt.setBytes(3, yourBytes);
+			//(3, bais, yourBytes.length);
+			//stmt.setBlob(3, blob);
+			System.out.println("everything set");
 
 			if(stmt.executeUpdate() == 1) {
 				keyStmt = PersistanceManager.getInstance().getConnection().createStatement();
@@ -77,6 +84,7 @@ public class DBGameDAO implements GameDAO {
 			try {
 				stmt.close();
 				keyRS.close();
+				System.out.println("finally");
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -88,6 +96,7 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public ArrayList<GameModel> getAllGames() {
 		// TODO Auto-generated method stub
+		System.out.println("getAllGames");
 		ArrayList<GameModel> games = new ArrayList<GameModel>();
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
@@ -101,9 +110,9 @@ public class DBGameDAO implements GameDAO {
 			{
 				int id = keyRS.getInt("ID");
 				int name = keyRS.getInt("Name");
-
+				System.out.println("1");
 				byte[] model = keyRS.getBytes("Model");
-
+				
 				ObjectInputStream ois;
 				ByteArrayInputStream bais;
 				GameModel game = null;
@@ -117,8 +126,9 @@ public class DBGameDAO implements GameDAO {
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-
+				
 				games.add(game);
+				
 			}
 		} catch (SQLException e) {
 			System.out.println("Could not Get the Field. " + e);
@@ -128,6 +138,7 @@ public class DBGameDAO implements GameDAO {
 			try {
 				stmt.close();
 				keyRS.close();
+				System.out.println("2");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -164,6 +175,7 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public void addCommands(int gameID, CommandList list) throws DAOException {// needs to pass in an arraylist of commands
 		// TODO Auto-generated method stub
+		System.out.println("adding command");
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
 		Statement keyStmt = null;
@@ -184,13 +196,13 @@ public class DBGameDAO implements GameDAO {
 				out.writeObject(list);
 
 				yourBytes = bos.toByteArray();
-				bais = new ByteArrayInputStream(yourBytes);
-				blob = connection.createBlob();
+				//bais = new ByteArrayInputStream(yourBytes);
+				//blob = connection.createBlob();
 				//blob.setBytes(1, yourBytes);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			stmt.setBinaryStream(2, bais, yourBytes.length);
+			stmt.setBytes(2, yourBytes);
 
 
 
@@ -223,21 +235,25 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public CommandList getCommands(int gameID) {
 		// TODO Auto-generated method stub
+		System.out.println("getCommands");
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
-		CommandList list = null;
+		CommandList list = new CommandList();
 		try {
-			String query = "Select * from Field where fieldid = ?";
+			String query = "Select * from Commands";
+			System.out.println("5");
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
-			stmt.setInt(1, gameID);
-
+			
 			keyRS = stmt.executeQuery();
+			System.out.println("8");
 			boolean hasNext = keyRS.next();
 			//If we found a list
 			if (hasNext)
 			{
-
-				byte[] model = keyRS.getBytes("Model");
+				//stmt.setInt(1, gameID);
+				System.out.println("7");
+				System.out.println("didnt skip");
+				byte[] model = keyRS.getBytes("CommandList");
 
 				ObjectInputStream ois;
 				ByteArrayInputStream bais;
@@ -255,7 +271,7 @@ public class DBGameDAO implements GameDAO {
 			}
 		} catch (SQLException e)
 		{
-			System.out.println("Could not Get the Field. " + e);
+			System.out.println("Could not Get the Game. " + e);
 		}
 		finally {
 
