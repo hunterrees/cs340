@@ -39,20 +39,24 @@ public class DBGameDAO implements GameDAO {
 			stmt.setString(2, modelToAdd.getTitle());
 			//stmt.setBlob(3, (Blob) modelToAdd);
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
 			ObjectOutput out = null;
 			Blob blob = null;
+			ByteArrayInputStream bais = null;
+			byte[] yourBytes = new byte[0];
+
 			try {
 				out = new ObjectOutputStream(bos);
 				out.writeObject(modelToAdd);
 
-				byte[] yourBytes = bos.toByteArray();
-
+				yourBytes = bos.toByteArray();
+				bais = new ByteArrayInputStream(yourBytes);
 				blob = connection.createBlob();
-				blob.setBytes(1, yourBytes);
+				//blob.setBytes(1, yourBytes);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			stmt.setBlob(3, blob);
+			stmt.setBinaryStream(3, bais, yourBytes.length);
 
 
 			if(stmt.executeUpdate() == 1) {
@@ -98,13 +102,22 @@ public class DBGameDAO implements GameDAO {
 				int id = keyRS.getInt("ID");
 				int name = keyRS.getInt("Name");
 
-				Blob model = keyRS.getBlob("Model");
-				byte[] modelAsBytes = model.getBytes(1, (int)model.length());
-				ByteArrayInputStream bais = new ByteArrayInputStream(modelAsBytes);
-				// Add more stuff here
+				byte[] model = keyRS.getBytes("Model");
 
+				ObjectInputStream ois;
+				ByteArrayInputStream bais;
+				GameModel game = null;
+				try {
+					bais = new ByteArrayInputStream(model);
+					ois = new ObjectInputStream(bais);
+					game = (GameModel) ois.readObject();
 
-				GameModel game = (GameModel)model;
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+
 				games.add(game);
 			}
 		} catch (SQLException e) {
@@ -159,7 +172,26 @@ public class DBGameDAO implements GameDAO {
 			String query = "insert into Commands (GameID, CommandList) values (?, ?)";
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			stmt.setInt(1, gameID);
-			stmt.setBlob(2, (Blob) list);//
+			//stmt.setBlob(2, (Blob) list);//
+			ObjectOutput out = null;
+			Blob blob = null;
+			ByteArrayInputStream bais = null;
+			byte[] yourBytes = new byte[0];
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+			try {
+				out = new ObjectOutputStream(bos);
+				out.writeObject(list);
+
+				yourBytes = bos.toByteArray();
+				bais = new ByteArrayInputStream(yourBytes);
+				blob = connection.createBlob();
+				//blob.setBytes(1, yourBytes);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			stmt.setBinaryStream(2, bais, yourBytes.length);
+
 
 
 			if(stmt.executeUpdate() == 1) {
@@ -201,12 +233,24 @@ public class DBGameDAO implements GameDAO {
 
 			keyRS = stmt.executeQuery();
 			boolean hasNext = keyRS.next();
-			//If we found a Batch
+			//If we found a list
 			if (hasNext)
 			{
 
-				Blob blob = keyRS.getBlob("Commandlist");
-				list = (CommandList) blob;
+				byte[] model = keyRS.getBytes("Model");
+
+				ObjectInputStream ois;
+				ByteArrayInputStream bais;
+				try {
+					bais = new ByteArrayInputStream(model);
+					ois = new ObjectInputStream(bais);
+					list = (CommandList) ois.readObject();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
 
 			}
 		} catch (SQLException e)
