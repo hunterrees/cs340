@@ -42,11 +42,11 @@ public class DBUserDAO implements UserDAO {
 				User user = new User(name, password, id);
 				users.add(user);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Could not Get the Field. " + e);
 		}
-		finally {
+		/*finally {
 			// manually closes the connection
 			try {
 				stmt.close();
@@ -54,7 +54,7 @@ public class DBUserDAO implements UserDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 
 		return users;
 	}
