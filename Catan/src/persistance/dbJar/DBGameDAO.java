@@ -75,11 +75,13 @@ public class DBGameDAO implements GameDAO {
 			//While there are rows
 			while (keyRS.next())
 			{
-				int id = keyRS.getInt("PlayerID");
-				String name = keyRS.getString("Name");
-				String password = keyRS.getString("Password");
+				int id = keyRS.getInt("ID");
+				int name = keyRS.getInt("Name");
+				Blob model = keyRS.getBlob("Model");
 
-				GameModel game = null;// = new GameModel(map, bank,)
+
+
+				GameModel game = (GameModel)model;
 				games.add(game);
 			}
 		} catch (SQLException e) {
