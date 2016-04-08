@@ -30,7 +30,7 @@ public class PersistanceManager {
 	{
 		commands = new ArrayList<CommandList>();
 	}
-	//commnet
+	
 	/**
 	 * get Singleton instance of PersistanceManager
 	 * @return
@@ -246,39 +246,6 @@ public class PersistanceManager {
 		if (conn != null) {
 			try {
 				conn.close();
-			}
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	};
-	
-	public static void safeClose(Statement stmt){
-		if (stmt != null) {
-			try {
-				stmt.close();
-			}
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	};
-	
-	public static void safeClose(PreparedStatement stmt){
-		if (stmt != null) {
-			try {
-				stmt.close();
-			}
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	};
-	
-	public static void safeClose(ResultSet rs){
-		if (rs != null) {
-			try {
-				rs.close();
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
