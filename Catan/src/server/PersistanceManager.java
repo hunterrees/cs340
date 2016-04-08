@@ -78,6 +78,7 @@ public class PersistanceManager {
 			}else{
 				updateGame(command.getGameID());
 				commands.get(command.getGameID()).clear();
+				gameDAO.addCommands(command.getGameID(), commands.get(command.getGameID()));
 			}
 			endTransaction(true);
 		}catch(Exception e){
@@ -137,6 +138,7 @@ public class PersistanceManager {
 			ServerManager.getInstance().setGames(gameDAO.getAllGames());
 			for(int i = 0; i < ServerManager.getInstance().getGames().size(); i++){
 				CommandList commandList = gameDAO.getCommands(i);
+				commands.add(commandList);
 				commandList.execute();
 			}
 			endTransaction(true);
