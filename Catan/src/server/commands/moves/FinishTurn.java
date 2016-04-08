@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import client.server.ServerException;
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.GameState;
@@ -55,6 +56,9 @@ public class FinishTurn extends Command {
 	
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		// TODO Auto-generated method stub
 		int playerIndex;
 		Gson gson = new Gson();

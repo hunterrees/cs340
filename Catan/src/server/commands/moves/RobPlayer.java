@@ -4,6 +4,8 @@ import client.server.ServerException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.ResourceCard;
@@ -95,6 +97,9 @@ public class RobPlayer extends Command {
 	 */
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		if(!model.robPlayer(hexLoc, victimIndex)){
 			throw new ServerException("Can't rob player (wrong location or wrong player)");
 		}

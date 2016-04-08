@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.DevCardType;
@@ -106,6 +107,9 @@ public class RoadBuilding extends Command {
 	 */
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		if(!model.roadBuilding(playerIndex, edgeLoc1, edgeLoc2) && !test){
 			throw new ServerException("Can't place roads right there");
 		}

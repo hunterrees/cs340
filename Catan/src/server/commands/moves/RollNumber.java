@@ -5,6 +5,8 @@ import client.server.ServerException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.GameState;
@@ -164,6 +166,9 @@ public class RollNumber extends Command{
 	 */
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		if(!model.rollNumber(playerIndex)){
 			throw new ServerException("Not your turn or not time to roll");
 		}

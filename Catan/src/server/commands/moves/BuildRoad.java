@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import server.Server;
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.definitions.PieceType;
@@ -87,6 +88,9 @@ public class BuildRoad extends Command {
 	 */
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		// TODO Auto-generated method stub
 		Player p = model.getPlayers().get(playerIndex);
 

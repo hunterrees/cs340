@@ -4,6 +4,8 @@ import client.server.ServerException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.model.Chat;
@@ -55,6 +57,9 @@ public class SendChat extends Command{
 	 */
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		Player p = model.getPlayers().get(playerIndex);
 		model.getChat().addLine(new Line(p.getName(), message));
 		model.updateVersionNumber();

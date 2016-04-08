@@ -9,6 +9,7 @@ import com.google.gson.JsonPrimitive;
 import client.server.ServerException;
 import client.translators.ModelTranslator;
 import client.translators.moves.ResourceList;
+import server.ServerManager;
 import server.ServerTranslator;
 import server.commands.Command;
 import shared.ResourceCard;
@@ -90,6 +91,9 @@ public class OfferTrade extends Command{
 	
 	@Override
 	public Object execute() throws ServerException {
+		if(gameID != -1){
+			this.model = ServerManager.getInstance().getGame(gameID);
+		}
 		// TODO Auto-generated method stub
 		translate();
 		playingState();

@@ -72,8 +72,8 @@ public class PersistanceManager {
 	{
 		startTransaction();
 		try{
+			commands.get(command.getGameID()).addCommand(command);
 			if(commands.get(command.getGameID()).size() < numCommands){
-				commands.get(command.getGameID()).addCommand(command);
 				gameDAO.addCommands(command.getGameID(), commands.get(command.getGameID()));
 			}else{
 				updateGame(command.getGameID());
