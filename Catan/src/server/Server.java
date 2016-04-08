@@ -5,8 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpServer;
 
-import persistance.dbJar.DBAbstractFactory;
-import persistance.fileJar.FileAbstractFactory;
+import persistance.interFaceJar.AbstractFactory;
 
 import java.net.*;
 
@@ -98,12 +97,8 @@ public class Server {
 			int numCommands = Integer.parseInt(args[1]);
 			PersistanceManager.getInstance().setCommandNumber(numCommands);
 			String persistance = args[0];
-			if(args.length == 3 && args[2].equals("wipe")){
-				PersistanceManager.getInstance().cleanUp();
-			}
 			
-			/*File file = new File("jars.config");
-			//Why can't I find this class?
+			File file = new File("jars.config");
 			String jsonText = FileUtils.readFileToString(file);
 			Gson gson = new Gson();
 			JsonObject root = null;
@@ -118,21 +113,24 @@ public class Server {
 				JsonObject jar = (JsonObject) jars.get(i);
 				String name = jar.get("key").getAsJsonPrimitive().getAsString();
 				if(name.equals(persistance)){
-					System.out.println("Match " + name);
 					File jarFile = new File("jars/" + jar.get("jar").getAsJsonPrimitive().getAsString());
 					URL url = jarFile.toURI().toURL();
 					URL[] urls = new URL[]{url};
 					
 					ClassLoader loader = new URLClassLoader(urls);
 					Class c = loader.loadClass(jar.get("factory").getAsJsonPrimitive().getAsString());
-					System.out.println(c.getName());
-					//Do I have the right path to the jar?
-					//set abstract factory properly
-					//do I need to the same for the DAOs?
+					try {
+						AbstractFactory factory = (AbstractFactory) c.newInstance();
+						PersistanceManager.getInstance().setPersistanceType(factory);
+						if(args.length == 3 && args[2].equals("wipe")){
+							PersistanceManager.getInstance().cleanUp();
+						}
+						PersistanceManager.getInstance().startUp();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}*/
-			PersistanceManager.getInstance().setPersistanceType(new DBAbstractFactory());
-			PersistanceManager.getInstance().startUp();
+			}
 		}
 		new Server(false).run();
 	}
