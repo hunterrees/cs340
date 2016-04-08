@@ -28,7 +28,7 @@ public class DBUserDAO implements UserDAO {
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
 		try {
-			String query = "select * from User";
+			String query = "select * from Users";
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 
 			keyRS = stmt.executeQuery();
@@ -66,7 +66,7 @@ public class DBUserDAO implements UserDAO {
 		Statement keyStmt = null;
 		int id = -1;
 		try {
-			String query = "insert into User (PlayerID, Name, Password) values (?, ?, ?)";
+			String query = "insert into Users (PlayerID, Name, Password) values (?, ?, ?)";
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			stmt.setInt(1, userToAdd.getplayerID());
 			stmt.setString(2, userToAdd.getName());
