@@ -30,7 +30,7 @@ public class PersistanceManager {
 	{
 		commands = new ArrayList<CommandList>();
 	}
-	
+	//commnet
 	/**
 	 * get Singleton instance of PersistanceManager
 	 * @return

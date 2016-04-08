@@ -1,10 +1,11 @@
 package server;
 
+import java.io.Serializable;
 import java.net.URLEncoder;
 
 import com.google.gson.Gson;
 
-public class User {
+public class User implements Serializable{
 	
 	private String name;
 	private String password;
