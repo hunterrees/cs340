@@ -146,12 +146,12 @@ public class FileGameDAO implements GameDAO {
 		CommandList myCommands = new CommandList();
 		try
 		 {
-			File myDirectory = new File("fileDB/games");
+			File myDirectory = new File("fileDB/commands");
 			for (File file: myDirectory.listFiles())
 				{
 				if (file.getName().contains(Integer.toString(gameID)))
 				{
-					FileInputStream fileIn = new FileInputStream("fileDB/games/" + file.getName());
+					FileInputStream fileIn = new FileInputStream("fileDB/commands/" + file.getName());
 			        ObjectInputStream in = new ObjectInputStream(fileIn);
 			        try {
 						myCommands = (CommandList) in.readObject();
