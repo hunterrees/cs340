@@ -149,7 +149,7 @@ public class PersistanceManager {
 	public void cleanUp(){
 		if(abstractFactory.getType().equals("file")){
 			FilecleanUp();
-		}else{
+		}else if(abstractFactory.getType().equals("sqlite")){
 			DBcleanUp();
 		}
 	}

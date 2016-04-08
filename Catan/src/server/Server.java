@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpServer;
 
 import persistance.interFaceJar.AbstractFactory;
+import persistance.interFaceJar.MockFactory;
 
 import java.net.*;
 
@@ -94,6 +95,7 @@ public class Server {
 	 */
 	public static void main(String args[]) throws IOException, ClassNotFoundException{
 		if(args.length > 0){
+			boolean jarFound = false;
 			int numCommands = Integer.parseInt(args[1]);
 			PersistanceManager.getInstance().setCommandNumber(numCommands);
 			String persistance = args[0];
@@ -113,7 +115,16 @@ public class Server {
 				JsonObject jar = (JsonObject) jars.get(i);
 				String name = jar.get("key").getAsJsonPrimitive().getAsString();
 				if(name.equals(persistance)){
+					jarFound = true;
 					File jarFile = new File("jars/" + jar.get("jar").getAsJsonPrimitive().getAsString());
+					if(!jarFile.exists()){
+						try {
+							throw new Exception("Jar File doesn't exist");
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							System.exit(0);
+						}
+					}
 					URL url = jarFile.toURI().toURL();
 					URL[] urls = new URL[]{url};
 					
@@ -131,7 +142,13 @@ public class Server {
 					}
 				}
 			}
+			if(!jarFound){
+				PersistanceManager.getInstance().setPersistanceType(new MockFactory());
+				PersistanceManager.getInstance().startUp();
+				System.out.println("Jar File doesn't exist");
+			}
 		}
+		
 		new Server(false).run();
 	}
 }

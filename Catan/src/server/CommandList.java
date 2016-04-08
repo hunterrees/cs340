@@ -11,6 +11,7 @@ public class CommandList implements Serializable {
 	private ArrayList<Command> commands;
 	
 	public CommandList(){
+		commands = new ArrayList<Command>();
 	}
 	
 	public void addCommand(Command command){
