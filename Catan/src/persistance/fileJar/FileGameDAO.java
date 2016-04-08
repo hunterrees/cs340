@@ -20,7 +20,7 @@ public class FileGameDAO implements GameDAO {
 	@Override
 	public void addGame(GameModel modelToAdd, int gameID) {
 		// TODO Auto-generated method stub
-		File gamesFile = new File("Games");
+		File gamesFile = new File("fileDB/games");
 		if (!gamesFile.exists())
 		{
 			gamesFile.mkdir();
@@ -28,7 +28,7 @@ public class FileGameDAO implements GameDAO {
 		
 		FileOutputStream myFileOutput = null;
 		try {
-			myFileOutput = new FileOutputStream(new File("/Games/game" + Integer.toString(gameID)));
+			myFileOutput = new FileOutputStream(new File("fileDB/games/game" + Integer.toString(gameID)));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -62,10 +62,10 @@ public class FileGameDAO implements GameDAO {
 		ArrayList<GameModel> games = new ArrayList<GameModel>();
 		try
 		 {
-			File myDirectory = new File("Games");
+			File myDirectory = new File("fileDB/games");
 			for (File file: myDirectory.listFiles())
 				{
-				FileInputStream fileIn = new FileInputStream("Games/" + file.getName());
+				FileInputStream fileIn = new FileInputStream("fileDB/games/" + file.getName());
 		        ObjectInputStream in = new ObjectInputStream(fileIn);
 		        GameModel tempModel = null;
 		        try {
@@ -104,13 +104,78 @@ public class FileGameDAO implements GameDAO {
 	@Override
 	public void addCommands(int gameID, CommandList command) {
 		// TODO Auto-generated method stub
+		File gamesFile = new File("fileDB/commands");
+		if (!gamesFile.exists())
+		{
+			gamesFile.mkdir();
+		}
 		
+		FileOutputStream myFileOutput = null;
+		try {
+			myFileOutput = new FileOutputStream(new File("fileDB/commands/commandsForGame" + Integer.toString(gameID)));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		ObjectOutputStream myObjectOutput = null;
+		try {
+			myObjectOutput  = new ObjectOutputStream(myFileOutput);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			myObjectOutput.writeObject((Object)command);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			myObjectOutput.close();
+			myFileOutput.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public CommandList getCommands(int gameID) {
 		// TODO Auto-generated method stub
-		return null;
+		CommandList myCommands = null;
+		try
+		 {
+			File myDirectory = new File("fileDB/games");
+			for (File file: myDirectory.listFiles())
+				{
+				if (file.getName().contains(Integer.toString(gameID)))
+				{
+					FileInputStream fileIn = new FileInputStream("fileDB/games/" + file.getName());
+			        ObjectInputStream in = new ObjectInputStream(fileIn);
+			        try {
+						myCommands = (CommandList) in.readObject();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			        if (myCommands == null)
+			        {
+			        	in.close();
+				        fileIn.close();
+			        	//throw exception!
+			        }
+			      
+			        in.close();
+			        fileIn.close();
+				}
+			}
+	     }catch(IOException i)
+	     {
+	        i.printStackTrace();
+	        return null;
+	     }
+		return myCommands;
 	}
 
 	

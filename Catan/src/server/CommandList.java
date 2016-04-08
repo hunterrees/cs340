@@ -1,11 +1,12 @@
 package server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import client.server.ServerException;
 import server.commands.Command;
 
-public class CommandList {
+public class CommandList implements Serializable {
 	
 	private ArrayList<Command> commands;
 	

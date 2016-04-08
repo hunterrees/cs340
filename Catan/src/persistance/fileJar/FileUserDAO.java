@@ -24,7 +24,7 @@ public class FileUserDAO implements UserDAO {
 			File myDirectory = new File("Users");
 			for (File file: myDirectory.listFiles())
 				{
-				FileInputStream fileIn = new FileInputStream("Users/" + file.getName());
+				FileInputStream fileIn = new FileInputStream("fileDB/users/" + file.getName());
 		        ObjectInputStream in = new ObjectInputStream(fileIn);
 		        User tempUser = null;
 		        try {
@@ -57,7 +57,7 @@ public class FileUserDAO implements UserDAO {
 	@Override
 	public void addUser(User userToAdd, int userID) {
 		// TODO Auto-generated method stub
-		File usersFile = new File("Users");
+		File usersFile = new File("fileDB/users");
 		if (!usersFile.exists())
 		{
 			usersFile.mkdir();
@@ -65,7 +65,7 @@ public class FileUserDAO implements UserDAO {
 		
 		FileOutputStream myFileOutput = null;
 		try {
-			myFileOutput = new FileOutputStream(new File("/Users/user" + Integer.toString(userID)));
+			myFileOutput = new FileOutputStream(new File("fileDB/users/user" + Integer.toString(userID)));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
