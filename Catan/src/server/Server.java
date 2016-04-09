@@ -9,6 +9,7 @@ import persistance.interFaceJar.AbstractFactory;
 import persistance.interFaceJar.MockFactory;
 
 import java.net.*;
+import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
 
@@ -101,7 +102,14 @@ public class Server {
 			String persistance = args[0];
 			
 			File file = new File("jars.config");
-			String jsonText = FileUtils.readFileToString(file);
+			Scanner scanner = new Scanner(new BufferedReader(new FileReader(file)));
+			StringBuilder json = new StringBuilder();
+			String jsonText;
+			while(scanner.hasNext()){
+				json.append(scanner.next());
+			}
+			scanner.close();
+			jsonText = json.toString();
 			Gson gson = new Gson();
 			JsonObject root = null;
 			try{

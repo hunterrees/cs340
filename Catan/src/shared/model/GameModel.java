@@ -337,7 +337,7 @@ public class GameModel implements Serializable {
      * @return
      */
 	public boolean robPlayer(HexLocation loc, int victimID) {
-		if(robberLoc.equals(loc)) {
+		if(robberLoc == loc) {
 			return false;
 		}
 		if (map.getHexes().get(loc).getType() == HexType.WATER)

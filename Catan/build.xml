@@ -34,6 +34,18 @@
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
+	
+	<path id="lib-classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+		
+	
+	<path id="all-classpath">
+			<path refid="lib-classpath"/>
+			<pathelement location="${build}"/>
+		</path>
 
 	<!-- TARGETS -->
 	<!-- ******* -->
@@ -156,7 +168,7 @@
 		<java jar="${java.dist}/catan-server.jar" dir="${java.dist}" fork="yes">
 			<sysproperty key="com.sun.management.jmxremote" value=""/>
 			<classpath>
-					<pathelement location="{java.lib.commons-io-2.4.jar}"/>
+					<path refid="all-classpath"/>
 			</classpath>
 			<arg value = "${type}"/>
 			<arg value = "${commands}"/>
