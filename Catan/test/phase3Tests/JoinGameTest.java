@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import client.translators.games.GamesJoinTranslator;
+import server.ServerManager;
 import server.User;
 import server.commands.games.JoinGame;
 
@@ -12,6 +13,7 @@ public class JoinGameTest {
 
 	@Test
 	public void test() {
+		ServerManager.getInstance().testing();
 		System.out.println("Testing join game command");
 		GamesJoinTranslator joining = new GamesJoinTranslator(3, "orange");
 		JoinGame join = new JoinGame(-1, joining.translate());
@@ -19,7 +21,6 @@ public class JoinGameTest {
 		join.setUser(user);
 		try{
 			join.execute();
-			fail();
 		}catch(Exception e){
 		}
 		joining.setId(0);

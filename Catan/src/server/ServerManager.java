@@ -39,6 +39,39 @@ public class ServerManager {
 	 * @param index game ID
 	 * @return
 	 */
+	
+	public void testing(){
+		try{
+			translator = new ModelTranslator();
+			users.add(new User("Sam", "sam", 0));
+			users.add(new User("Brooke", "brooke", 1));
+			users.add(new User("Pete", "pete", 2));
+			users.add(new User("Mark", "mark", 3));
+			Scanner scanner1 = new Scanner(new BufferedReader(new FileReader("Games/defaultGame.json")));
+			StringBuilder defaultJson = new StringBuilder();
+			while(scanner1.hasNext()){
+				String inputLine = scanner1.next();
+				defaultJson.append(inputLine);
+			}
+			GameModel defaultGame = translator.getModelfromJSON(defaultJson.toString());
+			defaultGame.setTitle("Default Game");
+			games.add(defaultGame);
+			scanner1.close();
+			
+			Scanner scanner2 = new Scanner(new BufferedReader(new FileReader("Games/setUpGame.json")));
+			StringBuilder setUpJson = new StringBuilder();
+			while(scanner2.hasNext()){
+				String inputLine = scanner2.next();
+				setUpJson.append(inputLine);
+			}
+			GameModel setUpGame = translator.getModelfromJSON(setUpJson.toString());
+			setUpGame.setTitle("Empty Game");
+			games.add(setUpGame);
+			scanner2.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	}
 	public GameModel getGame(int index){
 		if(index >= games.size()){
 			return null;

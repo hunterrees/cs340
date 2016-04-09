@@ -2,6 +2,8 @@ package phase3Tests;
 
 import client.server.ServerException;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.moves.RobPlayer;
 import server.commands.moves.Soldier;
 import shared.Piece;
@@ -26,6 +28,7 @@ import static org.junit.Assert.*;
 public class SoldierTest {
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("Testing Soldier Command");
         String json = "{\n" +
                 "  \"type\": \"robPlayer\",\n" +

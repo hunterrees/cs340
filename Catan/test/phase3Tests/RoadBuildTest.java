@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import client.server.ServerException;
+import server.ServerManager;
 import server.commands.moves.RoadBuilding;
 import shared.definitions.PieceType;
 import shared.locations.EdgeDirection;
@@ -23,6 +24,7 @@ public class RoadBuildTest {
 	
 	@Test
 	public void test() {
+		ServerManager.getInstance().testing();
 		System.out.println("Testing RoadBuild Command");
 		String json = "{\n"+
 		        "  \"type\": \"Road_Building\",\n"+

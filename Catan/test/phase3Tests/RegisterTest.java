@@ -5,12 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import client.translators.user.UserTranslator;
+import server.ServerManager;
 import server.commands.user.Register;
 
 public class RegisterTest {
 
 	@Test
 	public void test() {
+		ServerManager.getInstance().testing();
 		System.out.println("Testing register command");
 		UserTranslator user = new UserTranslator("Sam", "samuel");
 		Register register = new Register(-1, user.translate());

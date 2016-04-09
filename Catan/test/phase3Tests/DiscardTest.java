@@ -2,6 +2,8 @@ package phase3Tests;
 
 import client.server.ServerException;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.moves.DiscardCards;
 import shared.definitions.GameState;
 import shared.definitions.ResourceType;
@@ -17,6 +19,7 @@ public class DiscardTest {
 
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("Testing Discard commmand");
         String json = "{\n" +
                 "  \"type\": \"discardCards\",\n" +

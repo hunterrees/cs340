@@ -54,6 +54,8 @@ public class Server {
 
 	public Server(boolean testing){
 		if(testing){
+			ServerManager.getInstance().resetManager();
+			ServerManager.getInstance().testing();
 			userHandler = new UserHandler(new MockUserFacade());
 			gamesHandler = new GamesHandler(new MockGamesFacade());
 			gameHandler = new GameHandler(new MockGameFacade());

@@ -2,6 +2,8 @@ package phase3Tests;
 
 import client.server.ServerException;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.moves.FinishTurn;
 import shared.definitions.GameState;
 
@@ -14,6 +16,7 @@ import static org.junit.Assert.*;
 public class FinishTurnTest {
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("Testing FinishTurn Command");
         String json = "{\n" +
                 "  \"type\": \"finishTurn\",\n" +

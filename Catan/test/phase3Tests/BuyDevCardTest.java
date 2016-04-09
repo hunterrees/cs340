@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.moves.BuildSettlement;
 import server.commands.moves.BuyDevCard;
 import shared.definitions.PieceType;
@@ -30,6 +32,7 @@ import static org.junit.Assert.* ;
 public class BuyDevCardTest {
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("Testing BuyDevCard Command");
         String json = "{\n" +
                 "  \"type\": \"buyDevCard\",\n" +

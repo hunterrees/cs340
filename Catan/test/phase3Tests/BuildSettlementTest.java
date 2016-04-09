@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import server.ServerManager;
 import server.commands.moves.BuildSettlement;
 import shared.definitions.PieceType;
 import shared.definitions.PortType;
@@ -36,6 +37,7 @@ import static org.junit.Assert.* ;
   public class BuildSettlementTest {
       @Test
       public void test() {
+    	  ServerManager.getInstance().testing();
     	 System.out.println("Testing BuildSettlement Command");
          BuildSettlement bs = new BuildSettlement(0, "{\n" +
                  "  \"type\": \"buildSettlement\",\n" +

@@ -13,6 +13,7 @@ public class SendChatTest {
 
 	@Test
 	public void test() {
+		ServerManager.getInstance().testing();
 		System.out.println("Testing SendChat command");
 		MovesSendChatTranslator send = new MovesSendChatTranslator(0, "hello");
 		SendChat chat = new SendChat(0, send.translate());

@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import server.ServerManager;
 import server.commands.moves.BuildRoad;
 import server.commands.moves.BuildSettlement;
 import shared.definitions.PieceType;
@@ -33,6 +34,7 @@ import static org.junit.Assert.* ;
 public class BuildRoadTest {
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("testing BuildRoad Command");
         BuildRoad bs = new BuildRoad(0, "{\n" +
                 "  \"type\": \"buildRoad\",\n" +

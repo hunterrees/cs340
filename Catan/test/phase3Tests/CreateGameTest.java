@@ -2,6 +2,8 @@ package phase3Tests;
 
 import client.server.ServerException;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.games.CreateGame;
 import shared.locations.HexLocation;
 import shared.model.map.Map;
@@ -19,6 +21,7 @@ public class CreateGameTest {
 
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("Testing CreateGame Command");
         String json = "{\n" +
                 "  \"randomTiles\": true,\n" +

@@ -3,6 +3,8 @@ package phase3Tests;
 import client.server.ServerException;
 import org.junit.Test;
 import org.junit.internal.ArrayComparisonFailure;
+
+import server.ServerManager;
 import server.commands.moves.AcceptTrade;
 import shared.ResourceCard;
 import shared.definitions.GameState;
@@ -21,6 +23,7 @@ import static org.junit.Assert.* ;
 public class AcceptTradeTest {
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
         System.out.println("Testing AcceptTrade Command");
         String json = "{\n" +
                 "  \"type\": \"acceptTrade\",\n" +

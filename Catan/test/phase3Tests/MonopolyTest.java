@@ -54,6 +54,7 @@ public class MonopolyTest {
 	}
 	@Test
 	public void test() {
+		ServerManager.getInstance().testing();
 		System.out.println("Testing Monopoly Command");
 		//try pusing again
 		int index = ServerManager.getInstance().createGame(createGame(GameState.playing));

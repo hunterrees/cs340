@@ -20,6 +20,7 @@ public class MaritimeTradeTest {
     public void test() {
     	System.out.println("Testing Maritime Trade Command");
     	ServerManager.getInstance().resetManager();
+    	ServerManager.getInstance().testing();
         String json = "{\n" +
                 "  \"type\": \"maritimeTrade\",\n" +
                 "  \"playerIndex\": 0,\n" +

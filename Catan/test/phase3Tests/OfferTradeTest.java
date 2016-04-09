@@ -60,7 +60,7 @@ public class OfferTradeTest {
 	}
 	@Test
 	public void test() {
-	
+		ServerManager.getInstance().testing();
 		System.out.println("Testing OfferTrade Command");
 		int index = ServerManager.getInstance().createGame(createGame(GameState.playing));
 		

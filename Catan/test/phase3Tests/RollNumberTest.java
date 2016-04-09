@@ -19,6 +19,7 @@ public class RollNumberTest {
 	@Test
 	public void test6() {
 		ServerManager.getInstance().resetManager();
+		ServerManager.getInstance().testing();
 		String json = (new MovesRollNumberTranslator(0, 6)).translate();
 		
 		RollNumber rn = new RollNumber(0, json);

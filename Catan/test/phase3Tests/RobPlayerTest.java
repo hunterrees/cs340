@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import client.server.ServerException;
 import org.junit.Test;
+
+import server.ServerManager;
 import server.commands.moves.RobPlayer;
 import shared.Piece;
 import shared.ResourceCard;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 public class RobPlayerTest {
     @Test
     public void test() {
+    	ServerManager.getInstance().testing();
     	System.out.println("Testing RobPlayer Command");
         String json = "{\n" +
                 "  \"type\": \"robPlayer\",\n" +

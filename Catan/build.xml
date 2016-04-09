@@ -148,7 +148,7 @@
 			<manifest>
 				<attribute name="Main-Class" value="server.Server"/>
 				<attribute name="Class-Path" 
-					value="lib/gson-2.2.4.jar" />
+					value="lib/gson-2.2.4.jar"/>
 			</manifest>
 		</jar>
 	</target>
@@ -167,8 +167,10 @@
 	<target name="our-server" depends="package" description="compiles, packages, and runs the student server">
 		<java jar="${java.dist}/catan-server.jar" dir="${java.dist}" fork="yes">
 			<sysproperty key="com.sun.management.jmxremote" value=""/>
-			<classpath>
-					<path refid="all-classpath"/>
+			 <classpath>
+			 	<fileset dir="lib">
+			    	<include name="**/*.jar" />
+			    </fileset>
 			</classpath>
 			<arg value = "${type}"/>
 			<arg value = "${commands}"/>

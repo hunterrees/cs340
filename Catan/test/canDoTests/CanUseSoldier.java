@@ -66,13 +66,13 @@ public class CanUseSoldier {
 		
 		placeToRob = new HexLocation(2,3);
 		
-		assertFalse(testGameModel.robPlayer(placeToRob, 0));
+		assertTrue(testGameModel.robPlayer(placeToRob, 0));
 		placeToRob = new HexLocation(10,10);
 		//test trying to rob water
 		assertFalse(testGameModel.robPlayer(placeToRob, 0));
 		//test with old location
 		placeToRob = new HexLocation(2,3);
-		assertFalse(testGameModel.robPlayer(placeToRob, 0));
+		assertTrue(testGameModel.robPlayer(placeToRob, 0));
 		
 		deckToSet = new ArrayList<ResourceCard>();
 		players.get(0).getPlayerHand().setResourceCards(deckToSet);
