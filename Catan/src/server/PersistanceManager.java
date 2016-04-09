@@ -185,6 +185,7 @@ public class PersistanceManager {
 	 * @throws SQLException 
 	 */
 	public void DBcleanUp(){
+		
 		startTransaction();
 		try{
 			PreparedStatement stmt = null;
@@ -225,6 +226,9 @@ public class PersistanceManager {
 	
 	public void startTransaction(){
 		try {
+			if (inTransaction()){
+				return;
+			}
 			connection = DriverManager.getConnection(DATABASE_URL);
 			connection.setAutoCommit(false);
 		} catch (SQLException e) {
@@ -235,6 +239,10 @@ public class PersistanceManager {
 	public void endTransaction(boolean commit){
 		if(connection != null){
 			try {
+				if(!inTransaction()){
+					return;
+				}
+				
 				if (commit) {
 					connection.commit();
 				}
@@ -263,4 +271,8 @@ public class PersistanceManager {
 			}
 		}
 	};
+	public boolean inTransaction(){
+		return (connection != null);
+	}
+	
 }
