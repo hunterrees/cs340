@@ -4,9 +4,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import persistance.interFaceJar.AbstractFactory;
@@ -185,7 +183,6 @@ public class PersistanceManager {
 	 * @throws SQLException 
 	 */
 	public void DBcleanUp(){
-		
 		startTransaction();
 		try{
 			PreparedStatement stmt = null;
@@ -226,12 +223,10 @@ public class PersistanceManager {
 	
 	public void startTransaction(){
 		try {
-			if (inTransaction()){
-				return;
-			}
 			connection = DriverManager.getConnection(DATABASE_URL);
 			connection.setAutoCommit(false);
 		} catch (SQLException e) {
+			endTransaction(false);
 			e.printStackTrace();
 		}
 	}
@@ -239,10 +234,6 @@ public class PersistanceManager {
 	public void endTransaction(boolean commit){
 		if(connection != null){
 			try {
-				if(!inTransaction()){
-					return;
-				}
-				
 				if (commit) {
 					connection.commit();
 				}
@@ -271,8 +262,4 @@ public class PersistanceManager {
 			}
 		}
 	};
-	public boolean inTransaction(){
-		return (connection != null);
-	}
-	
 }

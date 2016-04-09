@@ -1,7 +1,5 @@
 package persistance.fileJar;
 
-import java.io.File;
-
 import persistance.interFaceJar.AbstractFactory;
 import persistance.interFaceJar.GameDAO;
 import persistance.interFaceJar.UserDAO;

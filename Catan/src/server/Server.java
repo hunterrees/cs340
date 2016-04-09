@@ -11,8 +11,6 @@ import persistance.interFaceJar.MockFactory;
 import java.net.*;
 import java.util.Scanner;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.*;
 
 import server.facades.*;

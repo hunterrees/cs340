@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import persistance.interFaceJar.UserDAO;
 import server.User;
-import shared.model.GameModel;
 
 public class FileUserDAO implements UserDAO {
 
