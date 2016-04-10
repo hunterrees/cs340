@@ -1,8 +1,2 @@
-/canDoTests/
-/client/
-/persistance/
-/phase1tests/
-/phase3Tests/
 /server/
-/serverTests/
-/shared/
+/persistance/

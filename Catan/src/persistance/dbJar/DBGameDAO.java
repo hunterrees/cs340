@@ -27,8 +27,6 @@ public class DBGameDAO implements GameDAO {
 
 	@Override
 	public void addGame(GameModel modelToAdd, int gameID) throws DAOException {
-		// TODO Auto-generated method stub
-		System.out.println("add game called");
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
 		Statement keyStmt = null;
@@ -36,7 +34,7 @@ public class DBGameDAO implements GameDAO {
 		try {
 			String query = "insert into Games (ID, Name, Model) values (?, ?, ?)";
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
-			stmt.setInt(1, modelToAdd.getVersion());
+			stmt.setInt(1, gameID);
 			stmt.setString(2, modelToAdd.getTitle());
 			//stmt.setBlob(3, (Blob) modelToAdd);
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -46,25 +44,19 @@ public class DBGameDAO implements GameDAO {
 			ByteArrayInputStream bais = null;
 			byte[] yourBytes = new byte[0];
 
-			System.out.println("about to try");
 			try {
 				out = new ObjectOutputStream(bos);
 				out.writeObject(modelToAdd);
-				System.out.println("1");
 				yourBytes = bos.toByteArray();
 				bais = new ByteArrayInputStream(yourBytes);
-				System.out.println("2");
 				//blob = PersistanceManager.getInstance().getConnection().createBlob();
 				//blob.setBytes(1, yourBytes);
-				System.out.println("done trying");
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("catch");
 			}
 			stmt.setBytes(3, yourBytes);
 			//(3, bais, yourBytes.length);
 			//stmt.setBlob(3, blob);
-			System.out.println("everything set");
 
 			if(stmt.executeUpdate() == 1) {
 				keyStmt = PersistanceManager.getInstance().getConnection().createStatement();
@@ -92,7 +84,6 @@ public class DBGameDAO implements GameDAO {
 			try {
 				stmt.close();
 				keyRS.close();
-				System.out.println("finally");
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -108,12 +99,10 @@ public class DBGameDAO implements GameDAO {
 		String query2 = "insert into Commands (GameID, CommandList) values (?, ?)";
 		stmt2 = PersistanceManager.getInstance().getConnection().prepareStatement(query2);
 		stmt2.setInt(1, gameID);
-		System.out.println("10");
 		CommandList list2 = new CommandList();
 		//stmt.setBlob(2, (Blob) list);//
 		ObjectOutput out2 = null;
 		
-		System.out.println("11");
 		byte[] yourBytes2 = new byte[0];
 		ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
 
@@ -122,7 +111,6 @@ public class DBGameDAO implements GameDAO {
 			out2.writeObject(list2);
 
 			yourBytes2 = bos2.toByteArray();
-			System.out.println("12");
 			//bais = new ByteArrayInputStream(yourBytes);
 			//blob = connection.createBlob();
 			//blob.setBytes(1, yourBytes);
@@ -148,7 +136,6 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public ArrayList<GameModel> getAllGames() {
 		// TODO Auto-generated method stub
-		System.out.println("getAllGames");
 		ArrayList<GameModel> games = new ArrayList<GameModel>();
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
@@ -162,7 +149,6 @@ public class DBGameDAO implements GameDAO {
 			{
 				int id = keyRS.getInt("ID");
 				int name = keyRS.getInt("Name");
-				System.out.println("1");
 				byte[] model = keyRS.getBytes("Model");
 				
 				ObjectInputStream ois;
@@ -190,7 +176,6 @@ public class DBGameDAO implements GameDAO {
 			try {
 				stmt.close();
 				keyRS.close();
-				System.out.println("2");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -204,7 +189,6 @@ public class DBGameDAO implements GameDAO {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
 		try {
-			System.out.println("updating game");
 			String query = "update Games set Model= ? where ID = ?";
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -214,17 +198,13 @@ public class DBGameDAO implements GameDAO {
 			ByteArrayInputStream bais = null;
 			byte[] yourBytes = new byte[0];
 
-			System.out.println("about to try");
 			try {
 				out = new ObjectOutputStream(bos);
 				out.writeObject(modelToAdd);
-				System.out.println("1");
 				yourBytes = bos.toByteArray();
 				bais = new ByteArrayInputStream(yourBytes);
-				System.out.println("2");
 				//blob = PersistanceManager.getInstance().getConnection().createBlob();
 				//blob.setBytes(1, yourBytes);
-				System.out.println("done trying");
 			} catch (IOException e) {
 				e.printStackTrace();
 				System.out.println("catch");
@@ -251,22 +231,18 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public void addCommands(int gameID, CommandList list) throws DAOException {// needs to pass in an arraylist of commands
 		// TODO Auto-generated method stub
-		System.out.println("adding command size of list of commands is now: " + list.size());
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
 		Statement keyStmt = null;
 		int id = -1;
 		try {
-			System.out.println("start try");
 			String query = "update Commands set CommandList = ? where GameID = ?";
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			stmt.setInt(2, gameID);
-			System.out.println("10");
 			//stmt.setBlob(2, (Blob) list);//
 			ObjectOutput out = null;
 			Blob blob = null;
 			ByteArrayInputStream bais = null;
-			System.out.println("11");
 			byte[] yourBytes = new byte[0];
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -275,7 +251,6 @@ public class DBGameDAO implements GameDAO {
 				out.writeObject(list);
 
 				yourBytes = bos.toByteArray();
-				System.out.println("12");
 				//bais = new ByteArrayInputStream(yourBytes);
 				//blob = connection.createBlob();
 				//blob.setBytes(1, yourBytes);
@@ -315,24 +290,19 @@ public class DBGameDAO implements GameDAO {
 	@Override
 	public CommandList getCommands(int gameID) {
 		// TODO Auto-generated method stub
-		System.out.println("getCommands");
 		PreparedStatement stmt = null;
 		ResultSet keyRS = null;
 		CommandList list = new CommandList();
 		try {
 			String query = "Select * from Commands where GameID = ?";
-			System.out.println("5");
 			stmt = PersistanceManager.getInstance().getConnection().prepareStatement(query);
 			stmt.setInt(1, gameID);
 			keyRS = stmt.executeQuery();
-			System.out.println("8");
 			boolean hasNext = keyRS.next();
 			//If we found a list
 			if (hasNext)
 			{
 				//stmt.setInt(1, gameID);
-				System.out.println("7");
-				System.out.println("didnt skip");
 				byte[] model = keyRS.getBytes("CommandList");
 
 				ObjectInputStream ois;
