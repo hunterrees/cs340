@@ -141,7 +141,6 @@ public class PersistanceManager {
 			}
 			endTransaction(true);
 		}catch(Exception e){
-			e.printStackTrace();
 			endTransaction(false);
 		}
 	}
