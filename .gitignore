@@ -1,3 +1,14 @@
+.iml
+canDoTests
+client
+persistance
+server
+shared
+phase1tests
+phase3Tests
+serverTests
+.idea
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
